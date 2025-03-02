@@ -1,0 +1,40 @@
+# 忽略所有 .log 文件
+*.log
+
+# 忽略特定文件夹（如临时文件目录）
+temp/
+build/
+dist/
+__pycache__/
+
+# 忽略敏感文件（如配置文件、密钥）
+.env
+*.key
+*.pem
+secrets/
+
+# 忽略 IDE 配置文件
+.idea/
+.vscode/
+*.suo
+*.user
+
+# 忽略系统文件
+.DS_Store
+Thumbs.db
+
+# 忽略虚拟环境
+venv/
+.env/
+ENV/
+
+# 忽略 Python 编译文件
+*.py[cod]
+__pycache__/
+
+# 忽略 Jupyter Notebook 检查点
+.ipynb_checkpoints/
+
+# 忽略测试覆盖率报告
+.coverage
+htmlcov/
