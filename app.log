@@ -1,0 +1,2239 @@
+2025-02-25 15:53:44,886 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-25 15:53:44,886 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-25 15:53:44,888 - INFO -  * Restarting with stat
+2025-02-25 15:53:45,372 - WARNING -  * Debugger is active!
+2025-02-25 15:53:45,375 - INFO -  * Debugger PIN: 141-449-226
+2025-02-25 16:05:03,269 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-25 16:05:03,269 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-25 16:05:03,270 - INFO -  * Restarting with stat
+2025-02-25 16:05:03,711 - WARNING -  * Debugger is active!
+2025-02-25 16:05:03,714 - INFO -  * Debugger PIN: 141-449-226
+2025-02-25 16:30:50,284 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-25 16:30:50,285 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-25 16:30:50,286 - INFO -  * Restarting with stat
+2025-02-25 16:30:50,716 - WARNING -  * Debugger is active!
+2025-02-25 16:30:50,719 - INFO -  * Debugger PIN: 141-449-226
+2025-02-25 16:31:45,000 - INFO -  * Detected change in 'C:\\Users\\Ã’ÕÚƒ˛\\Desktop\\bishe\\modules\\pdf_generator.py', reloading
+2025-02-25 16:31:45,044 - INFO -  * Restarting with stat
+2025-02-25 16:56:43,659 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-25 16:56:43,659 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-26 01:47:51,048 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-26 01:47:51,050 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-26 01:48:18,569 [INFO] 127.0.0.1 - - [26/Feb/2025 01:48:18] "GET / HTTP/1.1" 200 -
+2025-02-26 01:48:18,615 [INFO] 127.0.0.1 - - [26/Feb/2025 01:48:18] "[33mGET /static/css/main.css HTTP/1.1[0m" 404 -
+2025-02-26 01:48:18,616 [INFO] 127.0.0.1 - - [26/Feb/2025 01:48:18] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-02-26 01:48:18,679 [INFO] 127.0.0.1 - - [26/Feb/2025 01:48:18] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-02-26 01:48:35,580 [INFO] 127.0.0.1 - - [26/Feb/2025 01:48:35] "GET /?textContent= HTTP/1.1" 200 -
+2025-02-26 01:48:35,631 [INFO] 127.0.0.1 - - [26/Feb/2025 01:48:35] "[33mGET /static/css/main.css HTTP/1.1[0m" 404 -
+2025-02-26 01:48:35,634 [INFO] 127.0.0.1 - - [26/Feb/2025 01:48:35] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-02-26 01:50:35,130 [INFO] 192.168.2.44 - - [26/Feb/2025 01:50:35] "GET / HTTP/1.1" 200 -
+2025-02-26 01:50:35,189 [INFO] 192.168.2.44 - - [26/Feb/2025 01:50:35] "[33mGET /static/css/main.css HTTP/1.1[0m" 404 -
+2025-02-26 01:50:35,191 [INFO] 192.168.2.44 - - [26/Feb/2025 01:50:35] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-02-26 01:50:35,256 [INFO] 192.168.2.44 - - [26/Feb/2025 01:50:35] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-02-26 01:50:56,728 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-26 01:50:56,728 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-26 01:52:46,892 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-26 01:52:46,893 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-26 01:56:15,061 [INFO] 127.0.0.1 - - [26/Feb/2025 01:56:15] "GET /?textContent= HTTP/1.1" 200 -
+2025-02-26 01:56:15,094 [INFO] 127.0.0.1 - - [26/Feb/2025 01:56:15] "[33mGET /static/css/main.css HTTP/1.1[0m" 404 -
+2025-02-26 01:56:15,100 [INFO] 127.0.0.1 - - [26/Feb/2025 01:56:15] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-02-26 01:56:21,536 [INFO] 127.0.0.1 - - [26/Feb/2025 01:56:21] "GET /?textContent= HTTP/1.1" 200 -
+2025-02-26 01:56:21,578 [INFO] 127.0.0.1 - - [26/Feb/2025 01:56:21] "[33mGET /static/css/main.css HTTP/1.1[0m" 404 -
+2025-02-26 01:56:21,583 [INFO] 127.0.0.1 - - [26/Feb/2025 01:56:21] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-02-26 01:57:08,652 [INFO] 127.0.0.1 - - [26/Feb/2025 01:57:08] "GET /?textContent= HTTP/1.1" 200 -
+2025-02-26 01:57:08,708 [INFO] 127.0.0.1 - - [26/Feb/2025 01:57:08] "[33mGET /static/css/main.css HTTP/1.1[0m" 404 -
+2025-02-26 01:57:08,714 [INFO] 127.0.0.1 - - [26/Feb/2025 01:57:08] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-02-26 01:57:10,099 [INFO] 127.0.0.1 - - [26/Feb/2025 01:57:10] "GET /?textContent= HTTP/1.1" 200 -
+2025-02-26 01:57:10,135 [INFO] 127.0.0.1 - - [26/Feb/2025 01:57:10] "[33mGET /static/css/main.css HTTP/1.1[0m" 404 -
+2025-02-26 01:57:10,137 [INFO] 127.0.0.1 - - [26/Feb/2025 01:57:10] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-02-26 01:57:10,802 [INFO] 127.0.0.1 - - [26/Feb/2025 01:57:10] "GET /?textContent= HTTP/1.1" 200 -
+2025-02-26 01:57:10,842 [INFO] 127.0.0.1 - - [26/Feb/2025 01:57:10] "[33mGET /static/css/main.css HTTP/1.1[0m" 404 -
+2025-02-26 01:57:10,845 [INFO] 127.0.0.1 - - [26/Feb/2025 01:57:10] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-02-26 02:02:57,813 [INFO] 127.0.0.1 - - [26/Feb/2025 02:02:57] "GET /?textContent= HTTP/1.1" 200 -
+2025-02-26 02:02:57,848 [INFO] 127.0.0.1 - - [26/Feb/2025 02:02:57] "[33mGET /static/css/main.css HTTP/1.1[0m" 404 -
+2025-02-26 02:02:57,850 [INFO] 127.0.0.1 - - [26/Feb/2025 02:02:57] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-02-26 02:02:58,680 [INFO] 127.0.0.1 - - [26/Feb/2025 02:02:58] "GET /?textContent= HTTP/1.1" 200 -
+2025-02-26 02:02:58,721 [INFO] 127.0.0.1 - - [26/Feb/2025 02:02:58] "[33mGET /static/css/main.css HTTP/1.1[0m" 404 -
+2025-02-26 02:02:58,723 [INFO] 127.0.0.1 - - [26/Feb/2025 02:02:58] "[33mGET /static/js/main.js HTTP/1.1[0m" 404 -
+2025-02-26 02:03:45,420 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-26 02:03:45,421 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-26 02:03:54,524 [INFO] 127.0.0.1 - - [26/Feb/2025 02:03:54] "GET / HTTP/1.1" 200 -
+2025-02-26 02:03:54,650 [INFO] 127.0.0.1 - - [26/Feb/2025 02:03:54] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-02-26 02:03:54,706 [INFO] 127.0.0.1 - - [26/Feb/2025 02:03:54] "GET /static/js/script.js HTTP/1.1" 200 -
+2025-02-26 02:04:59,485 [ERROR] Õº∆¨¥¶¿Ì ß∞‹: name 'secure_filename' is not defined
+2025-02-26 02:04:59,486 [ERROR] ¥¶¿Ì ß∞‹: Õº∆¨¥¶¿Ì¥ÌŒÛ
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\Desktop\bishe\modules\image_processor.py", line 21, in process
+    output_path = self._generate_filename()
+  File "C:\Users\Ã’ÕÚƒ˛\Desktop\bishe\modules\image_processor.py", line 42, in _generate_filename
+    safe_name = secure_filename(self.file_stream.filename)
+                ^^^^^^^^^^^^^^^
+NameError: name 'secure_filename' is not defined
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\Desktop\bishe\app.py", line 71, in generate_pdf
+    image_paths.append(processor.process())
+                       ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Ã’ÕÚƒ˛\Desktop\bishe\modules\image_processor.py", line 33, in process
+    raise RuntimeError("Õº∆¨¥¶¿Ì¥ÌŒÛ") from e
+RuntimeError: Õº∆¨¥¶¿Ì¥ÌŒÛ
+2025-02-26 02:04:59,498 [INFO] 127.0.0.1 - - [26/Feb/2025 02:04:59] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 02:05:11,763 [ERROR] Õº∆¨¥¶¿Ì ß∞‹: name 'secure_filename' is not defined
+2025-02-26 02:05:11,764 [ERROR] ¥¶¿Ì ß∞‹: Õº∆¨¥¶¿Ì¥ÌŒÛ
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\Desktop\bishe\modules\image_processor.py", line 21, in process
+    output_path = self._generate_filename()
+  File "C:\Users\Ã’ÕÚƒ˛\Desktop\bishe\modules\image_processor.py", line 42, in _generate_filename
+    safe_name = secure_filename(self.file_stream.filename)
+                ^^^^^^^^^^^^^^^
+NameError: name 'secure_filename' is not defined
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\Desktop\bishe\app.py", line 71, in generate_pdf
+    image_paths.append(processor.process())
+                       ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Ã’ÕÚƒ˛\Desktop\bishe\modules\image_processor.py", line 33, in process
+    raise RuntimeError("Õº∆¨¥¶¿Ì¥ÌŒÛ") from e
+RuntimeError: Õº∆¨¥¶¿Ì¥ÌŒÛ
+2025-02-26 02:05:11,773 [INFO] 127.0.0.1 - - [26/Feb/2025 02:05:11] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 02:05:30,328 [ERROR] Õº∆¨¥¶¿Ì ß∞‹: name 'secure_filename' is not defined
+2025-02-26 02:05:30,328 [ERROR] ¥¶¿Ì ß∞‹: Õº∆¨¥¶¿Ì¥ÌŒÛ
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\Desktop\bishe\modules\image_processor.py", line 21, in process
+    output_path = self._generate_filename()
+  File "C:\Users\Ã’ÕÚƒ˛\Desktop\bishe\modules\image_processor.py", line 42, in _generate_filename
+    safe_name = secure_filename(self.file_stream.filename)
+                ^^^^^^^^^^^^^^^
+NameError: name 'secure_filename' is not defined
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\Desktop\bishe\app.py", line 71, in generate_pdf
+    image_paths.append(processor.process())
+                       ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Ã’ÕÚƒ˛\Desktop\bishe\modules\image_processor.py", line 33, in process
+    raise RuntimeError("Õº∆¨¥¶¿Ì¥ÌŒÛ") from e
+RuntimeError: Õº∆¨¥¶¿Ì¥ÌŒÛ
+2025-02-26 02:05:30,331 [INFO] PDF …˙≥…≥…π¶£∫uploads\temp_20250226020530\output.pdf
+2025-02-26 02:05:30,339 [INFO] 127.0.0.1 - - [26/Feb/2025 02:05:30] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 02:05:30,361 [INFO] 127.0.0.1 - - [26/Feb/2025 02:05:30] "POST /generate-pdf HTTP/1.1" 200 -
+2025-02-26 13:32:40,504 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-26 13:32:40,505 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-26 13:32:47,721 [INFO] 127.0.0.1 - - [26/Feb/2025 13:32:47] "GET / HTTP/1.1" 200 -
+2025-02-26 13:32:47,846 [INFO] 127.0.0.1 - - [26/Feb/2025 13:32:47] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-02-26 13:32:47,869 [INFO] 127.0.0.1 - - [26/Feb/2025 13:32:47] "GET /static/js/script.js HTTP/1.1" 200 -
+2025-02-26 13:33:15,796 [ERROR] Õº∆¨¥¶¿Ì ß∞‹: name 'secure_filename' is not defined
+2025-02-26 13:33:15,797 [ERROR] ¥¶¿Ì ß∞‹: Õº∆¨¥¶¿Ì¥ÌŒÛ
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\modules\image_processor.py", line 21, in process
+    output_path = self._generate_filename()
+  File "C:\Program Files\bishe\modules\image_processor.py", line 42, in _generate_filename
+    safe_name = secure_filename(self.file_stream.filename)
+                ^^^^^^^^^^^^^^^
+NameError: name 'secure_filename' is not defined
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 78, in generate_pdf
+    image_paths.append(processor.process())
+                       ~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\bishe\modules\image_processor.py", line 33, in process
+    raise RuntimeError("Õº∆¨¥¶¿Ì¥ÌŒÛ") from e
+RuntimeError: Õº∆¨¥¶¿Ì¥ÌŒÛ
+2025-02-26 13:33:15,805 [INFO] 127.0.0.1 - - [26/Feb/2025 13:33:15] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 13:34:44,240 [ERROR] Õº∆¨¥¶¿Ì ß∞‹: name 'secure_filename' is not defined
+2025-02-26 13:34:44,241 [ERROR] ¥¶¿Ì ß∞‹: Õº∆¨¥¶¿Ì¥ÌŒÛ
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\modules\image_processor.py", line 21, in process
+    output_path = self._generate_filename()
+  File "C:\Program Files\bishe\modules\image_processor.py", line 42, in _generate_filename
+    safe_name = secure_filename(self.file_stream.filename)
+                ^^^^^^^^^^^^^^^
+NameError: name 'secure_filename' is not defined
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 78, in generate_pdf
+    image_paths.append(processor.process())
+                       ~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\bishe\modules\image_processor.py", line 33, in process
+    raise RuntimeError("Õº∆¨¥¶¿Ì¥ÌŒÛ") from e
+RuntimeError: Õº∆¨¥¶¿Ì¥ÌŒÛ
+2025-02-26 13:34:44,250 [INFO] 127.0.0.1 - - [26/Feb/2025 13:34:44] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 13:34:51,478 [ERROR] Õº∆¨¥¶¿Ì ß∞‹: name 'secure_filename' is not defined
+2025-02-26 13:34:51,478 [ERROR] ¥¶¿Ì ß∞‹: Õº∆¨¥¶¿Ì¥ÌŒÛ
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\modules\image_processor.py", line 21, in process
+    output_path = self._generate_filename()
+  File "C:\Program Files\bishe\modules\image_processor.py", line 42, in _generate_filename
+    safe_name = secure_filename(self.file_stream.filename)
+                ^^^^^^^^^^^^^^^
+NameError: name 'secure_filename' is not defined
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 78, in generate_pdf
+    image_paths.append(processor.process())
+                       ~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\bishe\modules\image_processor.py", line 33, in process
+    raise RuntimeError("Õº∆¨¥¶¿Ì¥ÌŒÛ") from e
+RuntimeError: Õº∆¨¥¶¿Ì¥ÌŒÛ
+2025-02-26 13:34:51,481 [INFO] PDF …˙≥…≥…π¶£∫uploads\temp_20250226133451\output.pdf
+2025-02-26 13:34:51,486 [INFO] 127.0.0.1 - - [26/Feb/2025 13:34:51] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 13:34:51,503 [INFO] 127.0.0.1 - - [26/Feb/2025 13:34:51] "POST /generate-pdf HTTP/1.1" 200 -
+2025-02-26 14:31:19,887 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-26 14:31:19,888 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-26 14:31:24,180 [INFO] 127.0.0.1 - - [26/Feb/2025 14:31:24] "GET / HTTP/1.1" 200 -
+2025-02-26 14:31:24,338 [INFO] 127.0.0.1 - - [26/Feb/2025 14:31:24] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-26 14:31:24,347 [INFO] 127.0.0.1 - - [26/Feb/2025 14:31:24] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-26 14:31:30,777 [ERROR] Õº∆¨¥¶¿Ì ß∞‹: cannot write mode RGBA as JPEG
+2025-02-26 14:31:30,777 [ERROR] ¥¶¿Ì ß∞‹: Õº∆¨¥¶¿Ì¥ÌŒÛ
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\PIL\JpegImagePlugin.py", line 665, in _save
+    rawmode = RAWMODE[im.mode]
+              ~~~~~~~^^^^^^^^^
+KeyError: 'RGBA'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\modules\image_processor.py", line 30, in process
+    img.save(output_path, format='JPEG', quality=85)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\PIL\Image.py", line 2596, in save
+    save_handler(self, fp, filename)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\PIL\JpegImagePlugin.py", line 668, in _save
+    raise OSError(msg) from e
+OSError: cannot write mode RGBA as JPEG
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 78, in generate_pdf
+    image_paths.append(processor.process())
+                       ~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\bishe\modules\image_processor.py", line 35, in process
+    raise RuntimeError("Õº∆¨¥¶¿Ì¥ÌŒÛ") from e
+RuntimeError: Õº∆¨¥¶¿Ì¥ÌŒÛ
+2025-02-26 14:31:30,846 [INFO] 127.0.0.1 - - [26/Feb/2025 14:31:30] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 14:31:41,668 [INFO] PDF …˙≥…≥…π¶£∫uploads\temp_20250226143141\output.pdf
+2025-02-26 14:31:41,669 [ERROR] Õº∆¨¥¶¿Ì ß∞‹: cannot write mode RGBA as JPEG
+2025-02-26 14:31:41,669 [ERROR] ¥¶¿Ì ß∞‹: Õº∆¨¥¶¿Ì¥ÌŒÛ
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\PIL\JpegImagePlugin.py", line 665, in _save
+    rawmode = RAWMODE[im.mode]
+              ~~~~~~~^^^^^^^^^
+KeyError: 'RGBA'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\modules\image_processor.py", line 30, in process
+    img.save(output_path, format='JPEG', quality=85)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\PIL\Image.py", line 2596, in save
+    save_handler(self, fp, filename)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\PIL\JpegImagePlugin.py", line 668, in _save
+    raise OSError(msg) from e
+OSError: cannot write mode RGBA as JPEG
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 78, in generate_pdf
+    image_paths.append(processor.process())
+                       ~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\bishe\modules\image_processor.py", line 35, in process
+    raise RuntimeError("Õº∆¨¥¶¿Ì¥ÌŒÛ") from e
+RuntimeError: Õº∆¨¥¶¿Ì¥ÌŒÛ
+2025-02-26 14:31:41,676 [INFO] 127.0.0.1 - - [26/Feb/2025 14:31:41] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 14:31:41,682 [INFO] 127.0.0.1 - - [26/Feb/2025 14:31:41] "POST /generate-pdf HTTP/1.1" 200 -
+2025-02-26 14:43:22,952 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-26 14:43:22,953 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-26 14:43:26,142 [INFO] 127.0.0.1 - - [26/Feb/2025 14:43:26] "GET / HTTP/1.1" 200 -
+2025-02-26 14:43:26,304 [INFO] 127.0.0.1 - - [26/Feb/2025 14:43:26] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-26 14:43:26,306 [INFO] 127.0.0.1 - - [26/Feb/2025 14:43:26] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-26 14:43:37,278 [ERROR] Õº∆¨¥¶¿Ì ß∞‹: cannot write mode RGBA as JPEG
+2025-02-26 14:43:37,279 [ERROR] ¥¶¿Ì ß∞‹: Õº∆¨¥¶¿Ì¥ÌŒÛ
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\PIL\JpegImagePlugin.py", line 665, in _save
+    rawmode = RAWMODE[im.mode]
+              ~~~~~~~^^^^^^^^^
+KeyError: 'RGBA'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\modules\image_processor.py", line 24, in process
+    img.save(output_path, format='JPEG', quality=85)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\PIL\Image.py", line 2596, in save
+    save_handler(self, fp, filename)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\PIL\JpegImagePlugin.py", line 668, in _save
+    raise OSError(msg) from e
+OSError: cannot write mode RGBA as JPEG
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 78, in generate_pdf
+    image_paths.append(processor.process())
+                       ~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\bishe\modules\image_processor.py", line 29, in process
+    raise RuntimeError("Õº∆¨¥¶¿Ì¥ÌŒÛ") from e
+RuntimeError: Õº∆¨¥¶¿Ì¥ÌŒÛ
+2025-02-26 14:43:37,288 [INFO] 127.0.0.1 - - [26/Feb/2025 14:43:37] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 14:43:56,901 [ERROR] Õº∆¨¥¶¿Ì ß∞‹: cannot write mode RGBA as JPEG
+2025-02-26 14:43:56,901 [ERROR] ¥¶¿Ì ß∞‹: Õº∆¨¥¶¿Ì¥ÌŒÛ
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\PIL\JpegImagePlugin.py", line 665, in _save
+    rawmode = RAWMODE[im.mode]
+              ~~~~~~~^^^^^^^^^
+KeyError: 'RGBA'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\modules\image_processor.py", line 24, in process
+    img.save(output_path, format='JPEG', quality=85)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\PIL\Image.py", line 2596, in save
+    save_handler(self, fp, filename)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\PIL\JpegImagePlugin.py", line 668, in _save
+    raise OSError(msg) from e
+OSError: cannot write mode RGBA as JPEG
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 78, in generate_pdf
+    image_paths.append(processor.process())
+                       ~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\bishe\modules\image_processor.py", line 29, in process
+    raise RuntimeError("Õº∆¨¥¶¿Ì¥ÌŒÛ") from e
+RuntimeError: Õº∆¨¥¶¿Ì¥ÌŒÛ
+2025-02-26 14:43:56,907 [INFO] 127.0.0.1 - - [26/Feb/2025 14:43:56] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 14:44:04,307 [INFO] PDF …˙≥…≥…π¶£∫uploads\temp_20250226144404\output.pdf
+2025-02-26 14:44:04,309 [ERROR] Õº∆¨¥¶¿Ì ß∞‹: cannot write mode RGBA as JPEG
+2025-02-26 14:44:04,309 [ERROR] ¥¶¿Ì ß∞‹: Õº∆¨¥¶¿Ì¥ÌŒÛ
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\PIL\JpegImagePlugin.py", line 665, in _save
+    rawmode = RAWMODE[im.mode]
+              ~~~~~~~^^^^^^^^^
+KeyError: 'RGBA'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\modules\image_processor.py", line 24, in process
+    img.save(output_path, format='JPEG', quality=85)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\PIL\Image.py", line 2596, in save
+    save_handler(self, fp, filename)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\PIL\JpegImagePlugin.py", line 668, in _save
+    raise OSError(msg) from e
+OSError: cannot write mode RGBA as JPEG
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 78, in generate_pdf
+    image_paths.append(processor.process())
+                       ~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\bishe\modules\image_processor.py", line 29, in process
+    raise RuntimeError("Õº∆¨¥¶¿Ì¥ÌŒÛ") from e
+RuntimeError: Õº∆¨¥¶¿Ì¥ÌŒÛ
+2025-02-26 14:44:04,316 [INFO] 127.0.0.1 - - [26/Feb/2025 14:44:04] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 14:44:04,328 [INFO] 127.0.0.1 - - [26/Feb/2025 14:44:04] "POST /generate-pdf HTTP/1.1" 200 -
+2025-02-26 15:03:20,766 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-26 15:03:20,767 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-26 15:03:23,579 [INFO] 127.0.0.1 - - [26/Feb/2025 15:03:23] "GET / HTTP/1.1" 200 -
+2025-02-26 15:03:23,729 [INFO] 127.0.0.1 - - [26/Feb/2025 15:03:23] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-26 15:03:23,741 [INFO] 127.0.0.1 - - [26/Feb/2025 15:03:23] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-26 15:03:32,670 [INFO] PDF …˙≥…≥…π¶£∫uploads\temp_20250226150332\output.pdf
+2025-02-26 15:03:32,671 [INFO] PDF …˙≥…≥…π¶£∫uploads\temp_20250226150332\output.pdf
+2025-02-26 15:03:32,686 [INFO] 127.0.0.1 - - [26/Feb/2025 15:03:32] "POST /generate-pdf HTTP/1.1" 200 -
+2025-02-26 15:03:32,687 [INFO] 127.0.0.1 - - [26/Feb/2025 15:03:32] "POST /generate-pdf HTTP/1.1" 200 -
+2025-02-26 15:03:59,828 [INFO] PDF …˙≥…≥…π¶£∫uploads\temp_20250226150359\output.pdf
+2025-02-26 15:03:59,841 [INFO] 127.0.0.1 - - [26/Feb/2025 15:03:59] "POST /generate-pdf HTTP/1.1" 200 -
+2025-02-26 15:03:59,906 [INFO] PDF …˙≥…≥…π¶£∫uploads\temp_20250226150359\output.pdf
+2025-02-26 15:03:59,924 [INFO] 127.0.0.1 - - [26/Feb/2025 15:03:59] "POST /generate-pdf HTTP/1.1" 200 -
+2025-02-26 15:04:18,957 [INFO] PDF …˙≥…≥…π¶£∫uploads\temp_20250226150418\output.pdf
+2025-02-26 15:04:18,979 [INFO] 127.0.0.1 - - [26/Feb/2025 15:04:18] "POST /generate-pdf HTTP/1.1" 200 -
+2025-02-26 15:05:44,074 [INFO] PDF …˙≥…≥…π¶£∫uploads\temp_20250226150544\output.pdf
+2025-02-26 15:05:44,091 [INFO] 127.0.0.1 - - [26/Feb/2025 15:05:44] "POST /generate-pdf HTTP/1.1" 200 -
+2025-02-26 15:05:44,134 [INFO] PDF …˙≥…≥…π¶£∫uploads\temp_20250226150544\output.pdf
+2025-02-26 15:05:44,155 [INFO] 127.0.0.1 - - [26/Feb/2025 15:05:44] "POST /generate-pdf HTTP/1.1" 200 -
+2025-02-26 15:06:06,850 [INFO] PDF …˙≥…≥…π¶£∫uploads\temp_20250226150606\output.pdf
+2025-02-26 15:06:06,868 [INFO] 127.0.0.1 - - [26/Feb/2025 15:06:06] "POST /generate-pdf HTTP/1.1" 200 -
+2025-02-26 15:06:06,889 [INFO] PDF …˙≥…≥…π¶£∫uploads\temp_20250226150606\output.pdf
+2025-02-26 15:06:06,908 [INFO] 127.0.0.1 - - [26/Feb/2025 15:06:06] "POST /generate-pdf HTTP/1.1" 200 -
+2025-02-26 15:07:57,751 [INFO] PDF …˙≥…≥…π¶£∫uploads\temp_20250226150757\output.pdf
+2025-02-26 15:07:57,769 [INFO] 127.0.0.1 - - [26/Feb/2025 15:07:57] "POST /generate-pdf HTTP/1.1" 200 -
+2025-02-26 15:07:57,797 [INFO] PDF …˙≥…≥…π¶£∫uploads\temp_20250226150757\output.pdf
+2025-02-26 15:07:57,816 [INFO] 127.0.0.1 - - [26/Feb/2025 15:07:57] "POST /generate-pdf HTTP/1.1" 200 -
+2025-02-26 15:20:44,839 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-26 15:20:44,840 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-26 15:20:53,175 [INFO] 127.0.0.1 - - [26/Feb/2025 15:20:53] "GET / HTTP/1.1" 200 -
+2025-02-26 15:20:53,303 [INFO] 127.0.0.1 - - [26/Feb/2025 15:20:53] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-26 15:20:53,317 [INFO] 127.0.0.1 - - [26/Feb/2025 15:20:53] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-26 15:21:00,471 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/simhei.ttf"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/simhei.ttf'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 534, in open_for_read
+    return open_for_read(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/simhei.ttf"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('SimHei', font_path))
+                            ~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/simhei.ttf"
+2025-02-26 15:21:00,566 [INFO] 127.0.0.1 - - [26/Feb/2025 15:21:00] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:21:06,957 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/simhei.ttf"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/simhei.ttf'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/simhei.ttf"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('SimHei', font_path))
+                            ~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/simhei.ttf"
+2025-02-26 15:21:06,973 [INFO] 127.0.0.1 - - [26/Feb/2025 15:21:06] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:21:20,644 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/simhei.ttf"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/simhei.ttf'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/simhei.ttf"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('SimHei', font_path))
+                            ~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/simhei.ttf"
+2025-02-26 15:21:20,663 [INFO] 127.0.0.1 - - [26/Feb/2025 15:21:20] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:21:20,666 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/simhei.ttf"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/simhei.ttf'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/simhei.ttf"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('SimHei', font_path))
+                            ~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/simhei.ttf"
+2025-02-26 15:21:20,682 [INFO] 127.0.0.1 - - [26/Feb/2025 15:21:20] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:21:24,552 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/simhei.ttf"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/simhei.ttf'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/simhei.ttf"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('SimHei', font_path))
+                            ~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/simhei.ttf"
+2025-02-26 15:21:24,567 [INFO] 127.0.0.1 - - [26/Feb/2025 15:21:24] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:21:24,573 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/simhei.ttf"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/simhei.ttf'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/simhei.ttf"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('SimHei', font_path))
+                            ~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/simhei.ttf"
+2025-02-26 15:21:24,588 [INFO] 127.0.0.1 - - [26/Feb/2025 15:21:24] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:30:33,155 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-26 15:30:33,156 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-26 15:30:41,240 [INFO] 127.0.0.1 - - [26/Feb/2025 15:30:41] "GET / HTTP/1.1" 200 -
+2025-02-26 15:30:41,400 [INFO] 127.0.0.1 - - [26/Feb/2025 15:30:41] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-26 15:30:41,402 [INFO] 127.0.0.1 - - [26/Feb/2025 15:30:41] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-26 15:30:45,725 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/SiYuanHeiTi-Regular'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('SimHei', font_path))
+                            ~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular"
+2025-02-26 15:30:45,730 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/SiYuanHeiTi-Regular'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 534, in open_for_read
+    return open_for_read(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('SimHei', font_path))
+                            ~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular"
+2025-02-26 15:30:45,742 [INFO] 127.0.0.1 - - [26/Feb/2025 15:30:45] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:30:45,748 [INFO] 127.0.0.1 - - [26/Feb/2025 15:30:45] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:33:30,245 [INFO] 127.0.0.1 - - [26/Feb/2025 15:33:30] "GET / HTTP/1.1" 200 -
+2025-02-26 15:33:30,291 [INFO] 127.0.0.1 - - [26/Feb/2025 15:33:30] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-26 15:33:30,299 [INFO] 127.0.0.1 - - [26/Feb/2025 15:33:30] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-26 15:33:35,148 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/SiYuanHeiTi-Regular'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('ChineseFont', font_path))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular"
+2025-02-26 15:33:35,148 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/SiYuanHeiTi-Regular'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('ChineseFont', font_path))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular"
+2025-02-26 15:33:35,174 [INFO] 127.0.0.1 - - [26/Feb/2025 15:33:35] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:33:35,183 [INFO] 127.0.0.1 - - [26/Feb/2025 15:33:35] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:33:47,394 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-26 15:33:47,395 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-26 15:33:50,425 [INFO] 127.0.0.1 - - [26/Feb/2025 15:33:50] "GET / HTTP/1.1" 200 -
+2025-02-26 15:33:50,580 [INFO] 127.0.0.1 - - [26/Feb/2025 15:33:50] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-26 15:33:50,580 [INFO] 127.0.0.1 - - [26/Feb/2025 15:33:50] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-26 15:34:02,130 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 534, in open_for_read
+    return open_for_read(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('ChineseFont', font_path))
+                            ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+2025-02-26 15:34:02,131 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('ChineseFont', font_path))
+                            ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+2025-02-26 15:34:02,151 [INFO] 127.0.0.1 - - [26/Feb/2025 15:34:02] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:34:02,160 [INFO] 127.0.0.1 - - [26/Feb/2025 15:34:02] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:34:11,881 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('ChineseFont', font_path))
+                            ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+2025-02-26 15:34:11,897 [INFO] 127.0.0.1 - - [26/Feb/2025 15:34:11] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:34:13,177 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('ChineseFont', font_path))
+                            ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+2025-02-26 15:34:13,193 [INFO] 127.0.0.1 - - [26/Feb/2025 15:34:13] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:34:13,512 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('ChineseFont', font_path))
+                            ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+2025-02-26 15:34:13,527 [INFO] 127.0.0.1 - - [26/Feb/2025 15:34:13] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:34:13,875 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('ChineseFont', font_path))
+                            ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+2025-02-26 15:34:13,888 [INFO] 127.0.0.1 - - [26/Feb/2025 15:34:13] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:34:14,167 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('ChineseFont', font_path))
+                            ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+2025-02-26 15:34:14,184 [INFO] 127.0.0.1 - - [26/Feb/2025 15:34:14] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:34:25,711 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('ChineseFont', font_path))
+                            ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+2025-02-26 15:34:25,726 [INFO] 127.0.0.1 - - [26/Feb/2025 15:34:25] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:34:25,730 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('ChineseFont', font_path))
+                            ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+2025-02-26 15:34:25,745 [INFO] 127.0.0.1 - - [26/Feb/2025 15:34:25] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:34:27,014 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('ChineseFont', font_path))
+                            ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+2025-02-26 15:34:27,033 [ERROR] ¥¶¿Ì ß∞‹: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 523, in open_for_read
+    return open_for_read_by_name(name,mode)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 463, in open_for_read_by_name
+    return open(name,mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Program Files\\bishe\\modules\\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 530, in open_for_read
+    return BytesIO((datareader if name[:5].lower()=='data:' else rlUrlRead)(name))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 476, in rlUrlRead
+    return urlopen(name).read()
+           ~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 489, in open
+    response = self._open(req, data)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 511, in _open
+    return self._call_chain(self.handle_open, 'unknown',
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            'unknown_open', req)
+                            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 1395, in unknown_open
+    raise URLError('unknown url type: %s' % type)
+urllib.error.URLError: <urlopen error unknown url type: c>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 151, in TTFOpenFile
+    f = open_for_read(fn,'rb')
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\lib\utils.py", line 532, in open_for_read
+    raise IOError('Cannot open resource "%s"' % name)
+OSError: Cannot open resource "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 19, in generate
+    pdfmetrics.registerFont(TTFont('ChineseFont', font_path))
+                            ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1192, in __init__
+    self.face = TTFontFace(filename, validate=validate, subfontIndex=subfontIndex)
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 1073, in __init__
+    TTFontFile.__init__(self, filename, validate=validate, subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 439, in __init__
+    TTFontParser.__init__(self, file, validate=validate,subfontIndex=subfontIndex)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 175, in __init__
+    self.readFile(file)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 251, in readFile
+    self.filename, f = TTFOpenFile(f)
+                       ~~~~~~~~~~~^^^
+  File "C:\Users\Ã’ÕÚƒ˛\AppData\Local\Programs\Python\Python313\Lib\site-packages\reportlab\pdfbase\ttfonts.py", line 161, in TTFOpenFile
+    raise TTFError('Can\'t open file "%s"' % fn)
+reportlab.pdfbase.ttfonts.TTFError: Can't open file "C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf"
+2025-02-26 15:34:27,035 [INFO] 127.0.0.1 - - [26/Feb/2025 15:34:27] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:34:27,047 [INFO] 127.0.0.1 - - [26/Feb/2025 15:34:27] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:43:01,959 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-26 15:43:01,960 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-26 15:43:04,594 [INFO] 127.0.0.1 - - [26/Feb/2025 15:43:04] "GET / HTTP/1.1" 200 -
+2025-02-26 15:43:04,722 [INFO] 127.0.0.1 - - [26/Feb/2025 15:43:04] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-26 15:43:04,742 [INFO] 127.0.0.1 - - [26/Feb/2025 15:43:04] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-26 15:43:09,896 [ERROR] ¥¶¿Ì ß∞‹: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 22, in generate
+    raise FileNotFoundError(f"◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫{font_path}")
+FileNotFoundError: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+2025-02-26 15:43:09,897 [ERROR] ¥¶¿Ì ß∞‹: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 22, in generate
+    raise FileNotFoundError(f"◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫{font_path}")
+FileNotFoundError: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+2025-02-26 15:43:09,901 [INFO] 127.0.0.1 - - [26/Feb/2025 15:43:09] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:43:09,902 [INFO] 127.0.0.1 - - [26/Feb/2025 15:43:09] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:43:16,654 [ERROR] ¥¶¿Ì ß∞‹: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 22, in generate
+    raise FileNotFoundError(f"◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫{font_path}")
+FileNotFoundError: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+2025-02-26 15:43:16,654 [ERROR] ¥¶¿Ì ß∞‹: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 22, in generate
+    raise FileNotFoundError(f"◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫{font_path}")
+FileNotFoundError: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+2025-02-26 15:43:16,657 [INFO] 127.0.0.1 - - [26/Feb/2025 15:43:16] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:43:16,659 [INFO] 127.0.0.1 - - [26/Feb/2025 15:43:16] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:43:33,906 [ERROR] ¥¶¿Ì ß∞‹: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 22, in generate
+    raise FileNotFoundError(f"◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫{font_path}")
+FileNotFoundError: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+2025-02-26 15:43:33,906 [ERROR] ¥¶¿Ì ß∞‹: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 22, in generate
+    raise FileNotFoundError(f"◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫{font_path}")
+FileNotFoundError: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+2025-02-26 15:43:33,908 [INFO] 127.0.0.1 - - [26/Feb/2025 15:43:33] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:43:33,910 [INFO] 127.0.0.1 - - [26/Feb/2025 15:43:33] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:43:42,484 [ERROR] ¥¶¿Ì ß∞‹: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 22, in generate
+    raise FileNotFoundError(f"◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫{font_path}")
+FileNotFoundError: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+2025-02-26 15:43:42,487 [INFO] 127.0.0.1 - - [26/Feb/2025 15:43:42] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:43:44,668 [ERROR] ¥¶¿Ì ß∞‹: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 22, in generate
+    raise FileNotFoundError(f"◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫{font_path}")
+FileNotFoundError: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+2025-02-26 15:43:44,671 [INFO] 127.0.0.1 - - [26/Feb/2025 15:43:44] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:43:49,388 [ERROR] ¥¶¿Ì ß∞‹: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 22, in generate
+    raise FileNotFoundError(f"◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫{font_path}")
+FileNotFoundError: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+2025-02-26 15:43:49,390 [INFO] 127.0.0.1 - - [26/Feb/2025 15:43:49] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:44:32,975 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-26 15:44:32,976 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-26 15:44:37,157 [INFO] 127.0.0.1 - - [26/Feb/2025 15:44:37] "GET / HTTP/1.1" 200 -
+2025-02-26 15:44:37,273 [INFO] 127.0.0.1 - - [26/Feb/2025 15:44:37] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-26 15:44:37,300 [INFO] 127.0.0.1 - - [26/Feb/2025 15:44:37] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-26 15:44:45,634 [ERROR] ¥¶¿Ì ß∞‹: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 22, in generate
+    raise FileNotFoundError(f"◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫{font_path}")
+FileNotFoundError: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+2025-02-26 15:44:45,635 [ERROR] ¥¶¿Ì ß∞‹: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 22, in generate
+    raise FileNotFoundError(f"◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫{font_path}")
+FileNotFoundError: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+2025-02-26 15:44:45,638 [INFO] 127.0.0.1 - - [26/Feb/2025 15:44:45] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:44:45,640 [INFO] 127.0.0.1 - - [26/Feb/2025 15:44:45] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:44:55,264 [ERROR] ¥¶¿Ì ß∞‹: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 22, in generate
+    raise FileNotFoundError(f"◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫{font_path}")
+FileNotFoundError: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+2025-02-26 15:44:55,267 [INFO] 127.0.0.1 - - [26/Feb/2025 15:44:55] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 15:45:04,585 [ERROR] ¥¶¿Ì ß∞‹: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+        text_content,
+    ...<2 lines>...
+        page_size='A4'
+    )
+  File "C:\Program Files\bishe\modules\pdf_generator.py", line 22, in generate
+    raise FileNotFoundError(f"◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫{font_path}")
+FileNotFoundError: ◊÷ÃÂŒƒº˛≤ª¥Ê‘⁄£∫C:\Program Files\bishe\modules\fonts/SiYuanHeiTi-Regular/SiYuanHeiTi-Regular-2.otf
+2025-02-26 15:45:04,587 [INFO] 127.0.0.1 - - [26/Feb/2025 15:45:04] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 16:14:00,516 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-26 16:14:00,517 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-26 16:14:03,332 [INFO] 127.0.0.1 - - [26/Feb/2025 16:14:03] "GET / HTTP/1.1" 200 -
+2025-02-26 16:14:03,523 [INFO] 127.0.0.1 - - [26/Feb/2025 16:14:03] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-26 16:14:03,525 [INFO] 127.0.0.1 - - [26/Feb/2025 16:14:03] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-26 16:14:08,908 [ERROR] ¥¶¿Ì ß∞‹: type object 'PDFGenerator' has no attribute 'generate'
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+               ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'PDFGenerator' has no attribute 'generate'
+2025-02-26 16:14:08,908 [ERROR] ¥¶¿Ì ß∞‹: type object 'PDFGenerator' has no attribute 'generate'
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+               ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'PDFGenerator' has no attribute 'generate'
+2025-02-26 16:14:08,911 [INFO] 127.0.0.1 - - [26/Feb/2025 16:14:08] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 16:14:08,913 [INFO] 127.0.0.1 - - [26/Feb/2025 16:14:08] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 16:14:24,169 [ERROR] ¥¶¿Ì ß∞‹: type object 'PDFGenerator' has no attribute 'generate'
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+               ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'PDFGenerator' has no attribute 'generate'
+2025-02-26 16:14:24,172 [INFO] 127.0.0.1 - - [26/Feb/2025 16:14:24] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 16:14:24,209 [ERROR] ¥¶¿Ì ß∞‹: type object 'PDFGenerator' has no attribute 'generate'
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+               ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'PDFGenerator' has no attribute 'generate'
+2025-02-26 16:14:24,212 [INFO] 127.0.0.1 - - [26/Feb/2025 16:14:24] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 16:14:34,596 [ERROR] ¥¶¿Ì ß∞‹: type object 'PDFGenerator' has no attribute 'generate'
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+               ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'PDFGenerator' has no attribute 'generate'
+2025-02-26 16:14:34,600 [INFO] 127.0.0.1 - - [26/Feb/2025 16:14:34] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 16:14:34,614 [ERROR] ¥¶¿Ì ß∞‹: type object 'PDFGenerator' has no attribute 'generate'
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+               ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'PDFGenerator' has no attribute 'generate'
+2025-02-26 16:14:34,616 [INFO] 127.0.0.1 - - [26/Feb/2025 16:14:34] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 16:14:39,516 [ERROR] ¥¶¿Ì ß∞‹: type object 'PDFGenerator' has no attribute 'generate'
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+               ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'PDFGenerator' has no attribute 'generate'
+2025-02-26 16:14:39,520 [INFO] 127.0.0.1 - - [26/Feb/2025 16:14:39] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 16:14:39,531 [ERROR] ¥¶¿Ì ß∞‹: type object 'PDFGenerator' has no attribute 'generate'
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+               ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'PDFGenerator' has no attribute 'generate'
+2025-02-26 16:14:39,533 [INFO] 127.0.0.1 - - [26/Feb/2025 16:14:39] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 16:25:00,593 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-26 16:25:00,594 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-26 16:25:03,292 [INFO] 127.0.0.1 - - [26/Feb/2025 16:25:03] "GET / HTTP/1.1" 200 -
+2025-02-26 16:25:03,440 [INFO] 127.0.0.1 - - [26/Feb/2025 16:25:03] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-26 16:25:03,445 [INFO] 127.0.0.1 - - [26/Feb/2025 16:25:03] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-26 16:25:07,095 [ERROR] ¥¶¿Ì ß∞‹: type object 'PDFGenerator' has no attribute 'generate'
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+               ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'PDFGenerator' has no attribute 'generate'
+2025-02-26 16:25:07,095 [ERROR] ¥¶¿Ì ß∞‹: type object 'PDFGenerator' has no attribute 'generate'
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 81, in generate_pdf
+    pdf_path = PDFGenerator.generate(
+               ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'PDFGenerator' has no attribute 'generate'
+2025-02-26 16:25:07,097 [INFO] 127.0.0.1 - - [26/Feb/2025 16:25:07] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -
+2025-02-26 16:25:07,098 [INFO] 127.0.0.1 - - [26/Feb/2025 16:25:07] "[35m[1mPOST /generate-pdf HTTP/1.1[0m" 500 -

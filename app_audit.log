@@ -1,0 +1,1587 @@
+2025-02-26 17:33:05,714 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-26 17:33:05,715 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-26 17:33:13,138 [ERROR] Exception on / [GET]
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Program Files\bishe\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Program Files\bishe\venv\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "C:\Program Files\bishe\venv\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "C:\Program Files\bishe\app.py", line 68, in security_check
+    if request.content_length > app.config['MAX_CONTENT_LENGTH']:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '>' not supported between instances of 'NoneType' and 'int'
+2025-02-26 17:33:13,145 [INFO] 127.0.0.1 - - [26/Feb/2025 17:33:13] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2025-02-26 17:33:32,342 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-26 17:33:32,343 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-26 17:33:35,955 [ERROR] Exception on / [GET]
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Program Files\bishe\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Program Files\bishe\venv\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "C:\Program Files\bishe\venv\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "C:\Program Files\bishe\app.py", line 68, in security_check
+    if request.content_length > app.config['MAX_CONTENT_LENGTH']:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '>' not supported between instances of 'NoneType' and 'int'
+2025-02-26 17:33:35,961 [INFO] 127.0.0.1 - - [26/Feb/2025 17:33:35] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2025-02-26 20:37:55,745 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-26 20:37:55,746 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-26 20:37:59,794 [ERROR] Exception on / [GET]
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Program Files\bishe\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Program Files\bishe\venv\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "C:\Program Files\bishe\venv\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "C:\Program Files\bishe\app.py", line 68, in security_check
+    if request.content_length > app.config['MAX_CONTENT_LENGTH']:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '>' not supported between instances of 'NoneType' and 'int'
+2025-02-26 20:37:59,801 [INFO] 127.0.0.1 - - [26/Feb/2025 20:37:59] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2025-02-26 20:38:34,256 [ERROR] Exception on / [GET]
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Program Files\bishe\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Program Files\bishe\venv\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "C:\Program Files\bishe\venv\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "C:\Program Files\bishe\app.py", line 68, in security_check
+    if request.content_length > app.config['MAX_CONTENT_LENGTH']:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '>' not supported between instances of 'NoneType' and 'int'
+2025-02-26 20:38:34,260 [INFO] 192.168.2.44 - - [26/Feb/2025 20:38:34] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2025-02-26 20:44:44,050 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-26 20:44:44,050 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-26 20:44:47,107 [INFO] 127.0.0.1 - - [26/Feb/2025 20:44:47] "GET / HTTP/1.1" 200 -
+2025-02-26 20:44:47,282 [INFO] 127.0.0.1 - - [26/Feb/2025 20:44:47] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-26 20:44:47,284 [INFO] 127.0.0.1 - - [26/Feb/2025 20:44:47] "GET /static/js/script.js HTTP/1.1" 200 -
+2025-02-26 20:45:05,062 [INFO] 127.0.0.1 - - [26/Feb/2025 20:45:05] "GET /?textContent= HTTP/1.1" 200 -
+2025-02-26 20:45:05,116 [INFO] 127.0.0.1 - - [26/Feb/2025 20:45:05] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-26 20:45:05,122 [INFO] 127.0.0.1 - - [26/Feb/2025 20:45:05] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-26 20:46:55,030 [INFO] 127.0.0.1 - - [26/Feb/2025 20:46:55] "GET /?textContent=123 HTTP/1.1" 200 -
+2025-02-26 20:46:55,069 [INFO] 127.0.0.1 - - [26/Feb/2025 20:46:55] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-26 20:46:55,071 [INFO] 127.0.0.1 - - [26/Feb/2025 20:46:55] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-26 21:13:04,978 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-26 21:13:04,978 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-26 21:13:12,485 [INFO] 127.0.0.1 - - [26/Feb/2025 21:13:12] "GET / HTTP/1.1" 200 -
+2025-02-26 21:13:12,614 [INFO] 127.0.0.1 - - [26/Feb/2025 21:13:12] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-26 21:13:12,682 [INFO] 127.0.0.1 - - [26/Feb/2025 21:13:12] "GET /static/js/script.js HTTP/1.1" 200 -
+2025-02-26 21:13:23,487 [INFO] 127.0.0.1 - - [26/Feb/2025 21:13:23] "GET /?textContent= HTTP/1.1" 200 -
+2025-02-26 21:13:23,528 [INFO] 127.0.0.1 - - [26/Feb/2025 21:13:23] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-26 21:13:23,531 [INFO] 127.0.0.1 - - [26/Feb/2025 21:13:23] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-26 21:13:28,986 [INFO] 127.0.0.1 - - [26/Feb/2025 21:13:28] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-27 00:28:40,845 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-27 00:28:40,845 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-27 00:28:54,310 [INFO] 127.0.0.1 - - [27/Feb/2025 00:28:54] "GET / HTTP/1.1" 200 -
+2025-02-27 00:28:54,435 [INFO] 127.0.0.1 - - [27/Feb/2025 00:28:54] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-27 00:28:54,451 [INFO] 127.0.0.1 - - [27/Feb/2025 00:28:54] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-27 00:28:54,483 [INFO] 127.0.0.1 - - [27/Feb/2025 00:28:54] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-02-27 00:29:05,126 [INFO] 127.0.0.1 - - [27/Feb/2025 00:29:05] "GET /?textContent= HTTP/1.1" 200 -
+2025-02-27 00:29:05,170 [INFO] 127.0.0.1 - - [27/Feb/2025 00:29:05] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-27 00:29:05,175 [INFO] 127.0.0.1 - - [27/Feb/2025 00:29:05] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-27 00:58:11,144 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5000
+ * Running on https://192.168.2.44:5000
+2025-02-27 00:58:11,144 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-27 01:02:57,014 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-27 01:02:57,014 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-27 01:02:57,017 [INFO]  * Restarting with stat
+2025-02-27 01:02:57,754 [WARNING]  * Debugger is active!
+2025-02-27 01:02:57,758 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:03:08,498 [ERROR] Ä¿Â¼·ÃÎÊ±»¾Ü¾ø£ºC:\Users\ÌÕÍòÄþ\Documents\bishe_fonts
+2025-02-27 01:03:08,507 [INFO] 127.0.0.1 - - [27/Feb/2025 01:03:08] "GET / HTTP/1.1" 200 -
+2025-02-27 01:03:08,674 [INFO] 127.0.0.1 - - [27/Feb/2025 01:03:08] "GET /static/js/script.js HTTP/1.1" 200 -
+2025-02-27 01:03:08,675 [INFO] 127.0.0.1 - - [27/Feb/2025 01:03:08] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-02-27 01:04:53,590 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\modules\\pdf_generator.py', reloading
+2025-02-27 01:04:53,758 [INFO]  * Restarting with stat
+2025-02-27 01:04:54,516 [WARNING]  * Debugger is active!
+2025-02-27 01:04:54,519 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:04:55,643 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\modules\\pdf_generator.py', reloading
+2025-02-27 01:04:55,757 [INFO]  * Restarting with stat
+2025-02-27 01:04:56,475 [WARNING]  * Debugger is active!
+2025-02-27 01:04:56,478 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:05:00,703 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\modules\\pdf_generator.py', reloading
+2025-02-27 01:05:00,817 [INFO]  * Restarting with stat
+2025-02-27 01:05:01,545 [WARNING]  * Debugger is active!
+2025-02-27 01:05:01,549 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:05:03,703 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\modules\\pdf_generator.py', reloading
+2025-02-27 01:05:03,812 [INFO]  * Restarting with stat
+2025-02-27 01:05:04,525 [WARNING]  * Debugger is active!
+2025-02-27 01:05:04,528 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:05:05,641 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\modules\\pdf_generator.py', reloading
+2025-02-27 01:05:05,751 [INFO]  * Restarting with stat
+2025-02-27 01:12:05,448 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-27 01:12:05,449 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-27 01:12:05,452 [INFO]  * Restarting with stat
+2025-02-27 01:12:06,183 [WARNING]  * Debugger is active!
+2025-02-27 01:12:06,187 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:12:19,628 [INFO] 127.0.0.1 - - [27/Feb/2025 01:12:19] "GET / HTTP/1.1" 200 -
+2025-02-27 01:12:19,780 [INFO] 127.0.0.1 - - [27/Feb/2025 01:12:19] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-27 01:12:19,785 [INFO] 127.0.0.1 - - [27/Feb/2025 01:12:19] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-27 01:13:05,986 [INFO] 127.0.0.1 - - [27/Feb/2025 01:13:05] "GET / HTTP/1.1" 200 -
+2025-02-27 01:13:06,037 [INFO] 127.0.0.1 - - [27/Feb/2025 01:13:06] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-27 01:13:06,042 [INFO] 127.0.0.1 - - [27/Feb/2025 01:13:06] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-27 01:15:09,753 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-27 01:15:09,754 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-27 01:15:09,757 [INFO]  * Restarting with stat
+2025-02-27 01:15:10,431 [WARNING]  * Debugger is active!
+2025-02-27 01:15:10,434 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:16:10,797 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\app.py', reloading
+2025-02-27 01:16:10,916 [INFO]  * Restarting with stat
+2025-02-27 01:16:11,671 [WARNING]  * Debugger is active!
+2025-02-27 01:16:11,674 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:16:19,039 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\app.py', reloading
+2025-02-27 01:16:19,161 [INFO]  * Restarting with stat
+2025-02-27 01:16:19,938 [WARNING]  * Debugger is active!
+2025-02-27 01:16:19,940 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:16:24,189 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\app.py', reloading
+2025-02-27 01:16:24,310 [INFO]  * Restarting with stat
+2025-02-27 01:16:25,109 [WARNING]  * Debugger is active!
+2025-02-27 01:16:25,112 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:16:26,233 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\app.py', reloading
+2025-02-27 01:16:26,354 [INFO]  * Restarting with stat
+2025-02-27 01:16:27,100 [WARNING]  * Debugger is active!
+2025-02-27 01:16:27,103 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:16:29,269 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\app.py', reloading
+2025-02-27 01:16:29,392 [INFO]  * Restarting with stat
+2025-02-27 01:16:30,142 [WARNING]  * Debugger is active!
+2025-02-27 01:16:30,145 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:16:37,532 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\app.py', reloading
+2025-02-27 01:16:37,646 [INFO]  * Restarting with stat
+2025-02-27 01:16:38,411 [WARNING]  * Debugger is active!
+2025-02-27 01:16:38,415 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:16:42,675 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\app.py', reloading
+2025-02-27 01:16:42,801 [INFO]  * Restarting with stat
+2025-02-27 01:16:43,603 [WARNING]  * Debugger is active!
+2025-02-27 01:16:43,606 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:16:47,857 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\app.py', reloading
+2025-02-27 01:16:47,973 [INFO]  * Restarting with stat
+2025-02-27 01:16:48,791 [WARNING]  * Debugger is active!
+2025-02-27 01:16:48,794 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:16:57,225 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\app.py', reloading
+2025-02-27 01:16:57,341 [INFO]  * Restarting with stat
+2025-02-27 01:17:59,947 [INFO] 127.0.0.1 - - [27/Feb/2025 01:17:59] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-27 01:19:38,733 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5000
+ * Running on https://192.168.2.44:5000
+2025-02-27 01:19:38,734 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-27 01:24:02,248 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.44:5000
+2025-02-27 01:24:02,248 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-27 01:24:02,251 [INFO]  * Restarting with stat
+2025-02-27 01:25:51,500 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-27 01:25:51,501 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-27 01:25:51,504 [INFO]  * Restarting with stat
+2025-02-27 01:25:52,310 [WARNING]  * Debugger is active!
+2025-02-27 01:25:52,313 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:26:01,027 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:01] "GET / HTTP/1.1" 200 -
+2025-02-27 01:26:01,204 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:01] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-27 01:26:01,218 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:01] "GET /static/js/script.js HTTP/1.1" 200 -
+2025-02-27 01:26:15,229 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:15] "[35m[1mPOST /generate HTTP/1.1[0m" 202 -
+2025-02-27 01:26:16,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:16] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:17,251 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:17] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:18,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:18] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:19,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:19] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:20,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:20] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:21,249 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:21] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:22,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:22] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:23,249 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:23] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:24,246 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:24] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:25,266 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:25] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:26,249 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:26] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:27,249 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:27] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:28,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:28] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:29,249 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:29] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:30,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:30] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:31,253 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:31] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:32,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:32] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:33,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:33] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:34,244 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:34] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:35,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:35] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:36,244 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:36] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:37,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:37] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:38,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:38] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:39,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:39] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:40,244 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:40] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:41,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:41] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:42,244 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:42] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:43,251 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:43] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:44,255 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:44] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:45,246 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:45] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:46,275 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:46] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:47,249 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:47] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:48,255 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:48] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:49,249 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:49] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:50,256 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:50] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:51,249 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:51] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:52,244 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:52] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:53,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:53] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:54,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:54] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:55,243 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:55] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:56,243 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:56] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:57,244 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:57] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:58,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:58] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:26:59,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:26:59] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:00,252 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:00] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:01,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:01] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:02,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:02] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:03,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:03] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:04,243 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:04] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:05,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:05] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:06,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:06] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:07,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:07] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:08,254 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:08] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:09,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:09] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:10,253 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:10] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:11,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:11] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:12,254 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:12] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:13,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:13] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:14,253 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:14] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:15,244 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:15] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:16,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:16] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:17,246 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:17] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:18,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:18] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:19,272 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:19] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:20,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:20] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:21,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:21] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:22,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:22] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:23,251 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:23] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:24,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:24] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:25,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:25] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:26,246 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:26] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:27,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:27] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:28,265 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:28] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:29,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:29] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:30,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:30] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:31,271 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:31] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:32,246 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:32] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:33,249 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:33] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:34,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:34] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:35,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:35] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:36,246 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:36] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:37,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:37] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:38,251 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:38] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:39,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:39] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:40,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:40] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:41,246 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:41] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:42,253 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:42] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:43,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:43] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:44,251 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:44] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:45,256 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:45] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:46,257 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:46] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:47,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:47] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:48,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:48] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:49,244 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:49] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:50,244 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:50] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:51,243 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:51] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:52,275 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:52] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:53,244 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:53] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:54,249 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:54] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:55,255 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:55] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:56,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:56] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:57,254 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:57] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:58,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:58] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:27:59,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:27:59] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:00,244 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:00] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:01,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:01] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:02,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:02] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:03,249 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:03] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:04,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:04] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:05,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:05] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:06,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:06] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:07,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:07] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:08,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:08] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:09,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:09] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:10,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:10] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:11,957 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:11] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:12,949 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:12] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:13,270 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:13] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:14,244 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:14] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:15,269 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:15] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:16,256 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:16] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:17,249 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:17] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:18,253 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:18] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:19,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:19] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:20,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:20] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:21,251 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:21] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:22,256 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:22] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:23,255 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:23] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:24,251 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:24] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:25,246 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:25] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:26,271 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:26] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:27,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:27] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:28,252 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:28] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:29,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:29] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:30,251 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:30] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:31,268 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:31] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:32,251 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:32] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:33,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:33] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:34,246 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:34] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:35,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:35] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:36,251 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:36] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:37,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:37] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:38,265 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:38] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:39,244 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:39] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:40,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:40] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:41,244 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:41] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:42,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:42] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:43,246 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:43] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:44,251 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:44] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:45,252 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:45] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:46,266 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:46] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:47,254 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:47] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:48,249 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:48] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:49,244 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:49] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:50,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:50] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:51,253 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:51] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:52,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:52] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:53,275 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:53] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:54,246 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:54] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:55,255 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:55] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:56,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:56] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:57,256 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:57] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:58,270 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:58] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:28:59,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:28:59] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:00,246 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:00] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:01,255 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:01] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:02,246 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:02] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:03,252 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:03] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:04,249 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:04] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:05,255 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:05] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:06,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:06] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:07,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:07] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:08,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:08] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:09,273 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:09] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:10,261 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:10] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:11,252 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:11] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:12,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:12] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:13,246 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:13] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:14,249 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:14] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:15,244 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:15] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:16,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:16] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:17,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:17] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:18,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:18] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:19,272 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:19] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:20,265 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:20] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:21,253 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:21] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:22,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:22] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:23,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:23] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:24,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:24] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:25,253 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:25] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:26,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:26] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:27,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:27] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:28,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:28] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:29,252 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:29] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:30,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:30] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:31,252 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:31] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:32,265 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:32] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:33,252 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:33] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:34,244 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:34] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:35,254 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:35] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:36,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:36] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:37,251 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:37] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:38,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:38] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:39,264 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:39] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:40,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:40] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:41,251 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:41] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:42,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:42] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:43,246 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:43] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:44,269 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:44] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:45,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:45] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:46,267 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:46] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:47,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:47] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:48,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:48] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:49,250 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:49] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:50,273 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:50] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:51,263 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:51] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:52,255 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:52] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:53,246 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:53] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:54,268 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:54] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:55,249 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:55] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:56,244 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:56] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:57,249 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:57] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:58,256 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:58] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:29:59,249 [INFO] 127.0.0.1 - - [27/Feb/2025 01:29:59] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:00,276 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:00] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:01,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:01] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:02,249 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:02] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:03,255 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:03] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:04,268 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:04] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:05,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:05] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:06,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:06] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:07,254 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:07] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:08,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:08] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:09,266 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:09] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:10,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:10] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:11,251 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:11] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:12,262 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:12] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:13,254 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:13] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:14,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:14] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:15,245 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:15] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:16,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:16] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:17,251 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:17] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:18,248 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:18] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:19,266 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:19] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:20,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:20] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:21,253 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:21] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:30:22,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:30:22] "GET /tasks/93430b0c-e81a-4f53-853c-0b4c2987b4e0 HTTP/1.1" 200 -
+2025-02-27 01:31:17,936 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-27 01:31:17,936 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-27 01:31:17,938 [INFO]  * Restarting with stat
+2025-02-27 01:31:18,762 [WARNING]  * Debugger is active!
+2025-02-27 01:31:18,765 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:31:27,240 [INFO] 127.0.0.1 - - [27/Feb/2025 01:31:27] "GET / HTTP/1.1" 200 -
+2025-02-27 01:31:27,396 [INFO] 127.0.0.1 - - [27/Feb/2025 01:31:27] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-27 01:31:27,398 [INFO] 127.0.0.1 - - [27/Feb/2025 01:31:27] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-27 01:31:43,061 [ERROR] ÇëÇó´¦ÀíÒì³£: cannot identify image file <FileStorage: '' ('application/octet-stream')>
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 99, in handle_generate
+    image_paths = ImageProcessor.process_batch(files, temp_dir)
+  File "C:\Program Files\bishe\modules\image_processor.py", line 25, in process_batch
+    return [future.result() for future in futures]
+            ~~~~~~~~~~~~~^^
+  File "C:\Users\ÌÕÍòÄþ\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py", line 456, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ÌÕÍòÄþ\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\ÌÕÍòÄþ\AppData\Local\Programs\Python\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Program Files\bishe\modules\image_processor.py", line 38, in process
+    with Image.open(file_stream) as img:
+         ~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Program Files\bishe\venv\Lib\site-packages\PIL\Image.py", line 3532, in open
+    raise UnidentifiedImageError(msg)
+PIL.UnidentifiedImageError: cannot identify image file <FileStorage: '' ('application/octet-stream')>
+2025-02-27 01:31:43,089 [INFO] 127.0.0.1 - - [27/Feb/2025 01:31:43] "[35m[1mPOST /generate HTTP/1.1[0m" 500 -
+2025-02-27 01:33:24,888 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\modules\\image_processor.py', reloading
+2025-02-27 01:33:25,028 [INFO]  * Restarting with stat
+2025-02-27 01:33:25,885 [WARNING]  * Debugger is active!
+2025-02-27 01:33:25,889 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:33:33,282 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\modules\\image_processor.py', reloading
+2025-02-27 01:33:33,421 [INFO]  * Restarting with stat
+2025-02-27 01:33:34,231 [WARNING]  * Debugger is active!
+2025-02-27 01:33:34,235 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:33:43,696 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\modules\\image_processor.py', reloading
+2025-02-27 01:33:43,815 [INFO]  * Restarting with stat
+2025-02-27 01:34:39,209 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-27 01:34:39,210 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-27 01:34:39,212 [INFO]  * Restarting with stat
+2025-02-27 01:34:40,019 [WARNING]  * Debugger is active!
+2025-02-27 01:34:40,023 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:34:44,787 [INFO] 127.0.0.1 - - [27/Feb/2025 01:34:44] "GET / HTTP/1.1" 200 -
+2025-02-27 01:34:44,973 [INFO] 127.0.0.1 - - [27/Feb/2025 01:34:44] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-27 01:34:44,985 [INFO] 127.0.0.1 - - [27/Feb/2025 01:34:44] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-27 01:35:03,944 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:03] "[35m[1mPOST /generate HTTP/1.1[0m" 202 -
+2025-02-27 01:35:04,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:04] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:05,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:05] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:06,965 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:06] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:07,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:07] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:08,966 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:08] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:09,968 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:09] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:10,969 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:10] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:11,965 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:11] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:12,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:12] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:13,970 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:13] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:14,969 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:14] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:15,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:15] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:16,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:16] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:17,968 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:17] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:18,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:18] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:19,992 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:19] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:20,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:20] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:21,968 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:21] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:22,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:22] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:23,968 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:23] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:24,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:24] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:25,981 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:25] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:26,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:26] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:27,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:27] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:28,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:28] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:29,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:29] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:30,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:30] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:31,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:31] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:32,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:32] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:33,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:33] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:34,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:34] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:35,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:35] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:36,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:36] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:37,979 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:37] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:38,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:38] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:39,965 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:39] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:40,965 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:40] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:41,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:41] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:42,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:42] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:43,966 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:43] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:44,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:44] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:45,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:45] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:46,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:46] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:47,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:47] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:48,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:48] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:49,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:49] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:50,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:50] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:51,965 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:51] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:52,989 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:52] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:53,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:53] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:54,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:54] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:55,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:55] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:56,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:56] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:57,966 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:57] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:58,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:58] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:35:59,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:35:59] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:00,990 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:00] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:01,965 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:01] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:02,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:02] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:03,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:03] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:04,971 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:04] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:05,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:05] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:06,971 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:06] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:07,988 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:07] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:08,969 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:08] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:09,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:09] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:10,981 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:10] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:11,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:11] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:12,965 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:12] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:13,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:13] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:14,969 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:14] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:15,977 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:15] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:16,970 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:16] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:17,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:17] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:18,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:18] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:19,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:19] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:20,994 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:20] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:21,984 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:21] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:22,968 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:22] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:23,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:23] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:24,981 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:24] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:25,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:25] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:26,970 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:26] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:27,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:27] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:28,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:28] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:29,974 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:29] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:30,993 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:30] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:31,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:31] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:32,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:32] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:33,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:33] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:34,981 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:34] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:35,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:35] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:36,968 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:36] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:37,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:37] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:38,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:38] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:39,973 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:39] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:40,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:40] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:41,973 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:41] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:42,992 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:42] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:43,971 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:43] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:44,966 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:44] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:45,970 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:45] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:46,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:46] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:47,970 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:47] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:48,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:48] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:49,969 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:49] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:50,965 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:50] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:51,992 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:51] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:52,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:52] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:53,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:53] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:54,965 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:54] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:55,970 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:55] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:56,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:56] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:57,984 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:57] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:58,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:58] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:36:59,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:36:59] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:00,965 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:00] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:01,970 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:01] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:02,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:02] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:03,969 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:03] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:04,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:04] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:05,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:05] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:06,966 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:06] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:07,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:07] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:08,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:08] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:09,969 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:09] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:10,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:10] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:11,970 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:11] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:12,988 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:12] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:13,970 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:13] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:14,988 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:14] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:15,970 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:15] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:16,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:16] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:17,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:17] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:18,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:18] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:19,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:19] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:20,965 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:20] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:21,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:21] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:22,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:22] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:23,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:23] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:24,969 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:24] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:25,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:25] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:26,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:26] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:27,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:27] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:28,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:28] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:29,968 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:29] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:30,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:30] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:31,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:31] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:32,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:32] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:33,986 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:33] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:34,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:34] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:35,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:35] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:36,985 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:36] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:37,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:37] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:38,973 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:38] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:39,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:39] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:40,977 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:40] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:41,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:41] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:42,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:42] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:43,979 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:43] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:44,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:44] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:45,966 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:45] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:46,966 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:46] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:47,976 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:47] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:48,982 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:48] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:49,965 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:49] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:50,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:50] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:51,976 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:51] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:52,966 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:52] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:53,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:53] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:54,968 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:54] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:55,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:55] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:56,970 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:56] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:57,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:57] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:58,970 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:58] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:37:59,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:37:59] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:00,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:00] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:01,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:01] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:02,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:02] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:03,988 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:03] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:04,969 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:04] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:05,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:05] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:06,972 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:06] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:07,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:07] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:08,969 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:08] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:09,986 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:09] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:10,969 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:10] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:11,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:11] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:12,969 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:12] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:13,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:13] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:14,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:14] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:15,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:15] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:16,966 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:16] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:17,975 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:17] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:18,983 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:18] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:19,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:19] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:20,969 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:20] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:21,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:21] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:22,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:22] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:23,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:23] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:24,969 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:24] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:25,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:25] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:26,968 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:26] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:27,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:27] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:28,968 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:28] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:29,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:29] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:30,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:30] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:31,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:31] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:32,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:32] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:33,975 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:33] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:34,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:34] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:35,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:35] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:36,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:36] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:37,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:37] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:38,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:38] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:39,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:39] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:40,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:40] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:41,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:41] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:42,988 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:42] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:43,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:43] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:44,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:44] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:45,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:45] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:46,966 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:46] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:47,966 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:47] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:48,968 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:48] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:49,968 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:49] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:50,965 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:50] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:51,972 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:51] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:52,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:52] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:53,993 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:53] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:54,976 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:54] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:55,965 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:55] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:56,984 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:56] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:57,969 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:57] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:58,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:58] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:38:59,980 [INFO] 127.0.0.1 - - [27/Feb/2025 01:38:59] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:00,968 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:00] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:01,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:01] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:02,992 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:02] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:03,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:03] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:04,959 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:04] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:05,970 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:05] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:06,989 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:06] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:07,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:07] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:08,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:08] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:09,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:09] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:10,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:10] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:11,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:11] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:12,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:12] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:13,974 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:13] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:14,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:14] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:15,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:15] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:16,969 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:16] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:17,232 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\modules\\pdf_generator.py', reloading
+2025-02-27 01:39:17,378 [INFO]  * Restarting with stat
+2025-02-27 01:39:18,234 [WARNING]  * Debugger is active!
+2025-02-27 01:39:18,238 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:39:18,434 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:18] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:18,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:18] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:19,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:19] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:20,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:20] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:21,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:21] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:22,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:22] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:23,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:23] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:24,968 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:24] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:25,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:25] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:26,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:26] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:27,788 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\modules\\pdf_generator.py', reloading
+2025-02-27 01:39:27,924 [INFO]  * Restarting with stat
+2025-02-27 01:39:28,745 [WARNING]  * Debugger is active!
+2025-02-27 01:39:28,749 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:39:28,950 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:28] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:28,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:28] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:29,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:29] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:30,968 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:30] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:31,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:31] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:32,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:32] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:33,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:33] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:34,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:34] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:35,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:35] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:36,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:36] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:37,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:37] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:38,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:38] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:39,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:39] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:40,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:40] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:41,969 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:41] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:42,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:42] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:43,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:43] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:44,992 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:44] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:45,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:45] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:46,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:46] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:47,990 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:47] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:48,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:48] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:49,990 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:49] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:50,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:50] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:51,966 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:51] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:52,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:52] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:53,965 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:53] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:54,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:54] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:55,965 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:55] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:56,968 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:56] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:57,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:57] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:58,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:58] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:39:59,987 [INFO] 127.0.0.1 - - [27/Feb/2025 01:39:59] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:00,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:00] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:01,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:01] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:02,965 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:02] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:03,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:03] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:04,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:04] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:05,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:05] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:06,969 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:06] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:07,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:07] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:08,971 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:08] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:09,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:09] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:10,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:10] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:11,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:11] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:12,965 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:12] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:13,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:13] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:14,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:14] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:15,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:15] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:16,965 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:16] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:17,974 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:17] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:18,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:18] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:19,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:19] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:20,988 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:20] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:21,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:21] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:22,969 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:22] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:23,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:23] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:24,970 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:24] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:25,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:25] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:26,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:26] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:27,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:27] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:28,963 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:28] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:29,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:29] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:30,967 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:30] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:31,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:31] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:32,970 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:32] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:33,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:33] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:34,966 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:34] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:35,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:35] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:36,962 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:36] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:37,961 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:37] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:38,964 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:38] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:40:39,960 [INFO] 127.0.0.1 - - [27/Feb/2025 01:40:39] "GET /tasks/ee1b04f2-3384-4101-a365-83f44b02fdd2 HTTP/1.1" 200 -
+2025-02-27 01:42:18,869 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-27 01:42:18,869 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-27 01:42:18,872 [INFO]  * Restarting with stat
+2025-02-27 01:42:19,706 [WARNING]  * Debugger is active!
+2025-02-27 01:42:19,709 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:42:22,817 [INFO] 127.0.0.1 - - [27/Feb/2025 01:42:22] "GET / HTTP/1.1" 200 -
+2025-02-27 01:42:22,952 [INFO] 127.0.0.1 - - [27/Feb/2025 01:42:22] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-27 01:42:22,970 [INFO] 127.0.0.1 - - [27/Feb/2025 01:42:22] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-27 01:42:50,201 [INFO] 127.0.0.1 - - [27/Feb/2025 01:42:50] "[35m[1mPOST /generate HTTP/1.1[0m" 202 -
+2025-02-27 01:42:51,224 [INFO] 127.0.0.1 - - [27/Feb/2025 01:42:51] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:42:52,223 [INFO] 127.0.0.1 - - [27/Feb/2025 01:42:52] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:42:53,225 [INFO] 127.0.0.1 - - [27/Feb/2025 01:42:53] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:42:54,217 [INFO] 127.0.0.1 - - [27/Feb/2025 01:42:54] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:42:55,222 [INFO] 127.0.0.1 - - [27/Feb/2025 01:42:55] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:42:56,219 [INFO] 127.0.0.1 - - [27/Feb/2025 01:42:56] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:42:57,222 [INFO] 127.0.0.1 - - [27/Feb/2025 01:42:57] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:42:58,222 [INFO] 127.0.0.1 - - [27/Feb/2025 01:42:58] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:42:59,222 [INFO] 127.0.0.1 - - [27/Feb/2025 01:42:59] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:00,227 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:00] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:01,221 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:01] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:02,222 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:02] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:03,223 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:03] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:04,224 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:04] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:05,247 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:05] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:06,226 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:06] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:07,220 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:07] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:08,228 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:08] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:09,222 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:09] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:10,222 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:10] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:11,222 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:11] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:12,226 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:12] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:13,223 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:13] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:14,220 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:14] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:15,221 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:15] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:16,220 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:16] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:17,219 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:17] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:18,221 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:18] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:19,216 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:19] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:20,218 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:20] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:21,217 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:21] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:22,217 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:22] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:23,217 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:23] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:24,217 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:24] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:25,217 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:25] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:26,217 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:26] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:43:27,223 [INFO] 127.0.0.1 - - [27/Feb/2025 01:43:27] "GET /tasks/72bbf1b0-544b-41ac-b41d-4c6d0b27e40a HTTP/1.1" 200 -
+2025-02-27 01:53:33,530 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-27 01:53:33,530 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-27 01:53:33,534 [INFO]  * Restarting with stat
+2025-02-27 01:53:34,336 [WARNING]  * Debugger is active!
+2025-02-27 01:53:34,339 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 01:53:37,833 [INFO] 127.0.0.1 - - [27/Feb/2025 01:53:37] "GET / HTTP/1.1" 200 -
+2025-02-27 01:53:37,981 [INFO] 127.0.0.1 - - [27/Feb/2025 01:53:37] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-27 01:53:37,987 [INFO] 127.0.0.1 - - [27/Feb/2025 01:53:37] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-27 01:53:54,115 [INFO] 127.0.0.1 - - [27/Feb/2025 01:53:54] "[35m[1mPOST /generate HTTP/1.1[0m" 202 -
+2025-02-27 01:53:55,136 [INFO] 127.0.0.1 - - [27/Feb/2025 01:53:55] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:53:56,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:53:56] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:53:57,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:53:57] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:53:58,145 [INFO] 127.0.0.1 - - [27/Feb/2025 01:53:58] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:53:59,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:53:59] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:00,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:00] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:01,143 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:01] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:02,147 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:02] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:03,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:03] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:04,143 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:04] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:05,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:05] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:06,144 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:06] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:07,157 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:07] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:08,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:08] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:09,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:09] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:10,154 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:10] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:11,159 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:11] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:12,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:12] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:13,149 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:13] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:14,155 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:14] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:15,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:15] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:16,154 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:16] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:17,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:17] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:18,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:18] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:19,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:19] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:20,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:20] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:21,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:21] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:22,141 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:22] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:23,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:23] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:24,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:24] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:25,158 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:25] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:26,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:26] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:27,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:27] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:28,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:28] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:29,140 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:29] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:30,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:30] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:31,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:31] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:32,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:32] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:33,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:33] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:34,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:34] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:35,158 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:35] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:36,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:36] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:37,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:37] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:38,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:38] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:39,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:39] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:40,153 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:40] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:41,164 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:41] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:42,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:42] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:43,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:43] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:44,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:44] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:45,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:45] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:46,144 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:46] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:47,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:47] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:48,145 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:48] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:49,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:49] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:50,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:50] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:51,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:51] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:52,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:52] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:53,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:53] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:54,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:54] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:55,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:55] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:56,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:56] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:57,154 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:57] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:58,136 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:58] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:54:59,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:54:59] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:00,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:00] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:01,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:01] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:02,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:02] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:03,153 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:03] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:04,145 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:04] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:05,165 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:05] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:06,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:06] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:07,141 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:07] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:08,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:08] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:09,141 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:09] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:10,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:10] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:11,153 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:11] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:12,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:12] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:13,141 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:13] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:14,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:14] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:15,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:15] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:16,155 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:16] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:17,141 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:17] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:18,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:18] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:19,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:19] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:20,159 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:20] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:21,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:21] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:22,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:22] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:23,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:23] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:24,157 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:24] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:25,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:25] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:26,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:26] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:27,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:27] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:28,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:28] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:29,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:29] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:30,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:30] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:31,153 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:31] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:32,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:32] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:33,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:33] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:34,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:34] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:35,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:35] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:36,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:36] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:37,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:37] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:38,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:38] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:39,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:39] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:40,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:40] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:41,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:41] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:42,142 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:42] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:43,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:43] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:44,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:44] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:45,152 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:45] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:46,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:46] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:47,161 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:47] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:48,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:48] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:49,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:49] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:50,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:50] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:51,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:51] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:52,143 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:52] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:53,136 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:53] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:54,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:54] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:55,156 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:55] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:56,142 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:56] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:57,140 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:57] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:58,130 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:58] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:55:59,136 [INFO] 127.0.0.1 - - [27/Feb/2025 01:55:59] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:00,140 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:00] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:01,136 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:01] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:02,157 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:02] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:03,136 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:03] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:04,155 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:04] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:05,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:05] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:06,136 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:06] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:07,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:07] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:08,142 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:08] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:09,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:09] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:10,136 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:10] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:11,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:11] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:12,142 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:12] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:13,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:13] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:14,130 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:14] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:15,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:15] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:16,141 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:16] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:17,136 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:17] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:18,141 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:18] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:19,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:19] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:20,136 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:20] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:21,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:21] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:22,159 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:22] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:23,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:23] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:24,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:24] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:25,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:25] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:26,153 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:26] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:27,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:27] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:28,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:28] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:29,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:29] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:30,161 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:30] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:31,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:31] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:32,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:32] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:33,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:33] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:34,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:34] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:35,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:35] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:36,150 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:36] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:37,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:37] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:38,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:38] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:39,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:39] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:40,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:40] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:41,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:41] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:42,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:42] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:43,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:43] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:44,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:44] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:45,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:45] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:46,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:46] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:47,144 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:47] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:48,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:48] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:49,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:49] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:50,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:50] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:51,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:51] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:52,140 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:52] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:53,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:53] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:54,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:54] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:55,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:55] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:56,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:56] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:57,144 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:57] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:58,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:58] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:56:59,142 [INFO] 127.0.0.1 - - [27/Feb/2025 01:56:59] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:00,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:00] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:01,140 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:01] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:02,136 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:02] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:03,130 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:03] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:04,136 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:04] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:05,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:05] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:06,136 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:06] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:07,150 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:07] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:08,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:08] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:09,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:09] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:10,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:10] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:11,130 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:11] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:12,158 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:12] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:13,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:13] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:14,162 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:14] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:15,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:15] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:16,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:16] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:17,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:17] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:18,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:18] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:19,140 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:19] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:20,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:20] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:21,141 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:21] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:22,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:22] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:23,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:23] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:24,159 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:24] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:25,140 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:25] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:26,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:26] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:27,140 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:27] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:28,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:28] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:29,140 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:29] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:30,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:30] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:31,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:31] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:32,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:32] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:33,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:33] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:34,145 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:34] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:35,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:35] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:36,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:36] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:37,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:37] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:38,160 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:38] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:39,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:39] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:40,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:40] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:41,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:41] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:42,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:42] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:43,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:43] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:44,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:44] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:45,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:45] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:46,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:46] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:47,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:47] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:48,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:48] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:49,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:49] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:50,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:50] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:51,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:51] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:52,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:52] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:53,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:53] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:54,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:54] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:55,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:55] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:56,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:56] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:57,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:57] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:58,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:58] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:57:59,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:57:59] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:00,162 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:00] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:01,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:01] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:02,140 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:02] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:03,151 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:03] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:04,142 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:04] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:05,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:05] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:06,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:06] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:07,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:07] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:08,151 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:08] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:09,136 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:09] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:10,141 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:10] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:11,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:11] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:12,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:12] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:13,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:13] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:14,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:14] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:15,142 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:15] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:16,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:16] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:17,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:17] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:18,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:18] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:19,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:19] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:20,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:20] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:21,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:21] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:22,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:22] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:23,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:23] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:24,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:24] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:25,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:25] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:26,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:26] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:27,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:27] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:28,153 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:28] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:29,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:29] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:30,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:30] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:31,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:31] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:32,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:32] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:33,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:33] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:34,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:34] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:35,155 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:35] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:36,140 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:36] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:37,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:37] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:38,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:38] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:39,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:39] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:40,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:40] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:41,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:41] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:42,158 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:42] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:43,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:43] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:44,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:44] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:45,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:45] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:46,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:46] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:47,130 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:47] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:48,160 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:48] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:49,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:49] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:50,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:50] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:51,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:51] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:52,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:52] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:53,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:53] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:54,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:54] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:55,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:55] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:56,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:56] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:57,143 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:57] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:58,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:58] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:58:59,136 [INFO] 127.0.0.1 - - [27/Feb/2025 01:58:59] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:00,136 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:00] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:01,155 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:01] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:02,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:02] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:03,142 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:03] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:04,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:04] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:05,149 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:05] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:06,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:06] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:07,142 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:07] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:08,136 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:08] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:09,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:09] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:10,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:10] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:11,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:11] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:12,136 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:12] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:13,136 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:13] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:14,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:14] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:15,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:15] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:16,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:16] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:17,163 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:17] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:18,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:18] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:19,140 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:19] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:20,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:20] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:21,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:21] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:22,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:22] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:23,135 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:23] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:24,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:24] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:25,140 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:25] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:26,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:26] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:27,140 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:27] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:28,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:28] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:29,153 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:29] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:30,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:30] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:31,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:31] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:32,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:32] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:33,162 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:33] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:34,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:34] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:35,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:35] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:36,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:36] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:37,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:37] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:38,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:38] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:39,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:39] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:40,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:40] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:41,155 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:41] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:42,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:42] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:43,134 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:43] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:44,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:44] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:45,155 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:45] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:46,143 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:46] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:47,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:47] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:48,132 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:48] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:49,133 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:49] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:50,130 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:50] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:51,138 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:51] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:52,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:52] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:53,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:53] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:54,131 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:54] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:55,156 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:55] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:56,145 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:56] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:57,137 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:57] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:58,139 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:58] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 01:59:59,155 [INFO] 127.0.0.1 - - [27/Feb/2025 01:59:59] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:00,132 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:00] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:01,137 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:01] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:02,136 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:02] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:03,136 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:03] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:04,133 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:04] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:05,148 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:05] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:06,142 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:06] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:07,135 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:07] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:08,142 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:08] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:09,133 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:09] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:10,142 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:10] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:11,134 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:11] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:12,141 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:12] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:13,134 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:13] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:14,141 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:14] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:15,135 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:15] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:16,144 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:16] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:17,135 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:17] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:18,141 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:18] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:19,135 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:19] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:20,139 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:20] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:21,134 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:21] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:22,137 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:22] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:23,134 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:23] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:24,135 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:24] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:25,147 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:25] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:26,139 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:26] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:27,134 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:27] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:28,134 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:28] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:29,156 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:29] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:30,140 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:30] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:31,141 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:31] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:32,131 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:32] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:33,134 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:33] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:34,139 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:34] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:35,131 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:35] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:36,141 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:36] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:37,133 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:37] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:38,133 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:38] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:39,132 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:39] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:40,135 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:40] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:41,159 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:41] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:42,132 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:42] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:43,134 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:43] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:44,131 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:44] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:45,138 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:45] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:46,133 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:46] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:47,134 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:47] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:48,132 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:48] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:49,139 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:49] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:50,157 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:50] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:51,138 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:51] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:52,132 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:52] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:53,138 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:53] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:54,157 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:54] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:55,136 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:55] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:56,140 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:56] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:57,135 [INFO] 127.0.0.1 - - [27/Feb/2025 02:00:57] "GET /tasks/c086bf9d-ada2-4c08-a94d-7732a8473d0e HTTP/1.1" 200 -
+2025-02-27 02:00:58,074 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\app.py', reloading
+2025-02-27 02:00:58,243 [INFO]  * Restarting with stat
+2025-02-27 02:00:59,127 [ERROR] ·þÎñÆ÷Æô¶¯Òì³£: 'UPLOAD_FOLDER'
+Traceback (most recent call last):
+  File "C:\Program Files\bishe\app.py", line 150, in <module>
+    Path(app.config['UPLOAD_FOLDER']).mkdir(parents=True, exist_ok=True)
+         ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'UPLOAD_FOLDER'
+2025-02-27 02:08:21,527 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-27 02:08:21,528 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-27 02:08:21,530 [INFO]  * Restarting with stat
+2025-02-27 02:08:22,436 [WARNING]  * Debugger is active!
+2025-02-27 02:08:22,439 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 02:08:27,215 [INFO] 127.0.0.1 - - [27/Feb/2025 02:08:27] "GET / HTTP/1.1" 200 -
+2025-02-27 02:08:27,375 [INFO] 127.0.0.1 - - [27/Feb/2025 02:08:27] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2025-02-27 02:08:27,376 [INFO] 127.0.0.1 - - [27/Feb/2025 02:08:27] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-27 02:08:43,002 [INFO] ´¦ÀíÁË 0 ÕÅÍ¼Æ¬
+2025-02-27 02:08:43,002 [INFO] ¿ªÊ¼Éú³ÉPDF...
+2025-02-27 02:08:43,204 [INFO] ´´½¨ÈÎÎñ ID: 104be903-447a-475f-b57b-85d7d731ae47
+2025-02-27 02:08:43,205 [INFO] 127.0.0.1 - - [27/Feb/2025 02:08:43] "[35m[1mPOST /generate HTTP/1.1[0m" 202 -
+2025-02-27 02:08:44,226 [INFO] ÈÎÎñ 104be903-447a-475f-b57b-85d7d731ae47 ×´Ì¬: {'status': 'SUCCESS', 'result': 'uploads\\temp_20250227020843\\document_1740593323.pdf', 'message': 'Éú³É³É¹¦£¡'}
+2025-02-27 02:08:44,227 [INFO] 127.0.0.1 - - [27/Feb/2025 02:08:44] "GET /tasks/104be903-447a-475f-b57b-85d7d731ae47 HTTP/1.1" 200 -
+2025-02-27 02:08:44,254 [INFO] 127.0.0.1 - - [27/Feb/2025 02:08:44] "[33mGET /uploads/temp_20250227020843/document_1740593323.pdf HTTP/1.1[0m" 404 -
+2025-02-27 02:11:07,757 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\app.py', reloading
+2025-02-27 02:11:07,911 [INFO]  * Restarting with stat
+2025-02-27 02:11:08,874 [WARNING]  * Debugger is active!
+2025-02-27 02:11:08,877 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 02:11:10,027 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\app.py', reloading
+2025-02-27 02:11:10,150 [INFO]  * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 631-287-915
+INFO:werkzeug: * Detected change in 'C:\\Program Files\\bishe\\app.py', reloading
+2025-02-27 02:11:14,424 [INFO]  * Restarting with stat
+2025-02-27 02:12:49,329 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-27 02:12:49,330 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-27 02:12:49,334 [INFO]  * Restarting with stat
+2025-02-27 02:12:50,160 [WARNING]  * Debugger is active!
+2025-02-27 02:12:50,163 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 02:12:54,508 [INFO] 127.0.0.1 - - [27/Feb/2025 02:12:54] "GET / HTTP/1.1" 200 -
+2025-02-27 02:12:54,637 [INFO] 127.0.0.1 - - [27/Feb/2025 02:12:54] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-27 02:12:54,657 [INFO] 127.0.0.1 - - [27/Feb/2025 02:12:54] "GET /static/js/script.js HTTP/1.1" 200 -
+2025-02-27 02:13:28,243 [INFO] ´¦ÀíÁË 0 ÕÅÍ¼Æ¬
+2025-02-27 02:13:28,243 [INFO] ¿ªÊ¼Éú³ÉPDF...
+2025-02-27 02:13:28,453 [INFO] ´´½¨ÈÎÎñ ID: 60ba7681-2bb5-4cbf-ad78-522f4cb5956c
+2025-02-27 02:13:28,454 [INFO] 127.0.0.1 - - [27/Feb/2025 02:13:28] "[35m[1mPOST /generate HTTP/1.1[0m" 202 -
+2025-02-27 02:13:29,476 [INFO] ÈÎÎñ 60ba7681-2bb5-4cbf-ad78-522f4cb5956c ×´Ì¬: {'status': 'SUCCESS', 'result': 'pdfs\\document_1740593608.pdf', 'message': 'Éú³É³É¹¦£¡'}
+2025-02-27 02:13:29,477 [INFO] 127.0.0.1 - - [27/Feb/2025 02:13:29] "GET /tasks/60ba7681-2bb5-4cbf-ad78-522f4cb5956c HTTP/1.1" 200 -
+2025-02-27 02:13:29,504 [ERROR] ÎÄ¼þÏÂÔØÊ§°Ü: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2025-02-27 02:13:29,506 [INFO] 127.0.0.1 - - [27/Feb/2025 02:13:29] "[33mGET /download/pdfs/document_1740593608.pdf HTTP/1.1[0m" 404 -
+2025-02-27 02:15:09,218 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\modules\\pdf_generator.py', reloading
+2025-02-27 02:15:09,372 [INFO]  * Restarting with stat
+2025-02-27 02:15:10,243 [WARNING]  * Debugger is active!
+2025-02-27 02:15:10,245 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 02:15:13,517 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\modules\\pdf_generator.py', reloading
+2025-02-27 02:15:13,641 [INFO]  * Restarting with stat
+2025-02-27 02:15:14,557 [WARNING]  * Debugger is active!
+2025-02-27 02:15:14,560 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 02:15:15,711 [INFO]  * Detected change in 'C:\\Program Files\\bishe\\modules\\pdf_generator.py', reloading
+2025-02-27 02:15:15,831 [INFO]  * Restarting with stat
+2025-02-27 02:26:04,943 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-02-27 02:26:04,944 [INFO] [33mPress CTRL+C to quit[0m
+2025-02-27 02:26:04,946 [INFO]  * Restarting with stat
+2025-02-27 02:26:05,742 [WARNING]  * Debugger is active!
+2025-02-27 02:26:05,745 [INFO]  * Debugger PIN: 631-287-915
+2025-02-27 02:26:09,034 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:09] "GET / HTTP/1.1" 200 -
+2025-02-27 02:26:09,193 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:09] "GET /static/js/script.js HTTP/1.1" 200 -
+2025-02-27 02:26:09,197 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:09] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-02-27 02:26:26,778 [INFO] ´¦ÀíÁË 0 ÕÅÍ¼Æ¬
+2025-02-27 02:26:26,779 [INFO] ¿ªÊ¼Éú³ÉPDF...
+2025-02-27 02:26:27,009 [INFO] ´´½¨ÈÎÎñ ID: fb9c80a9-2f25-4537-baa6-13ae91d3870e
+2025-02-27 02:26:27,010 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:27] "[35m[1mPOST /generate HTTP/1.1[0m" 202 -
+2025-02-27 02:26:28,032 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:28,034 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:28] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:29,031 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:29,033 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:29] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:30,028 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:30,029 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:30] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:31,030 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:31,031 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:31] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:32,028 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:32,029 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:32] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:33,032 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:33,033 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:33] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:34,036 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:34,037 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:34] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:35,029 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:35,030 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:35] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:36,030 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:36,030 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:36] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:37,029 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:37,030 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:37] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:38,030 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:38,031 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:38] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:39,028 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:39,029 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:39] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:40,028 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:40,029 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:40] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:41,030 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:41,030 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:41] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:42,029 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:42,030 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:42] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:43,033 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:43,033 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:43] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:44,033 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:44,033 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:44] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:45,032 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:45,033 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:45] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:46,028 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:46,029 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:46] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:47,034 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:47,035 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:47] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:48,040 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:48,041 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:48] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:49,036 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:49,037 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:49] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:50,041 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:50,042 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:50] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:51,031 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:51,032 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:51] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:52,040 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:52,041 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:52] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:53,033 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:53,034 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:53] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:54,035 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:54,037 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:54] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:55,039 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:55,040 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:55] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:56,030 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:56,031 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:56] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:57,027 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:57,028 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:57] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:58,029 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:58,030 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:58] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:26:59,036 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:26:59,037 [INFO] 127.0.0.1 - - [27/Feb/2025 02:26:59] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:00,030 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:00,031 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:00] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:01,037 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:01,037 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:01] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:02,027 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:02,028 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:02] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:03,032 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:03,033 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:03] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:04,029 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:04,030 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:04] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:05,027 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:05,028 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:05] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:06,030 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:06,030 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:06] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:07,033 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:07,034 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:07] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:08,028 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:08,033 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:08] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:09,026 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:09,027 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:09] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:10,026 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:10,026 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:10] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:11,036 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:11,036 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:11] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:12,025 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:12,025 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:12] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:13,025 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:13,025 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:13] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:14,039 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:14,040 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:14] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:15,029 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:15,030 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:15] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:16,029 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:16,030 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:16] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:17,031 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:17,032 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:17] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:18,027 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:18,029 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:18] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:19,053 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:19,054 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:19] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:20,027 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:20,029 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:20] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:21,026 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:21,027 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:21] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:22,041 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:22,042 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:22] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:23,030 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:23,031 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:23] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:24,026 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:24,027 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:24] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:25,033 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:25,034 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:25] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:26,027 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:26,028 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:26] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:27,044 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:27,045 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:27] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:28,026 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:28,027 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:28] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:29,034 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:29,034 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:29] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:30,029 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:30,030 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:30] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:31,033 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:31,034 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:31] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:32,052 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:32,053 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:32] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:33,044 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:33,045 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:33] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:34,027 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:34,028 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:34] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:35,031 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:35,033 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:35] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:36,027 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:36,028 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:36] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:37,032 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:37,033 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:37] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:38,046 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:38,046 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:38] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:39,033 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:39,034 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:39] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:40,026 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:40,027 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:40] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:41,032 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:41,033 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:41] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:42,025 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:42,026 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:42] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:43,032 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:43,033 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:43] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:44,026 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:44,027 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:44] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:45,033 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:45,033 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:45] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:46,045 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:46,046 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:46] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:47,032 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:47,033 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:47] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:48,039 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:48,040 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:48] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:49,032 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:49,033 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:49] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:50,029 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:50,030 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:50] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
+2025-02-27 02:27:51,030 [INFO] ÈÎÎñ fb9c80a9-2f25-4537-baa6-13ae91d3870e ×´Ì¬: {'status': 'PENDING', 'current': 0, 'total': 1, 'message': 'ÈÎÎñµÈ´ýÖÐ...'}
+2025-02-27 02:27:51,031 [INFO] 127.0.0.1 - - [27/Feb/2025 02:27:51] "GET /tasks/fb9c80a9-2f25-4537-baa6-13ae91d3870e HTTP/1.1" 200 -
