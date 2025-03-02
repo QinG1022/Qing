@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能文档生成系统</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <!-- 文档图标 -->
+            <span class="material-icons" style="font-size: 36px; vertical-align: middle;"></span>
+            智能文档生成系统
+        </h1>
+        
+        <div class="main-content">
+            <form id="documentForm" enctype="multipart/form-data">
+                <div class="text-section">
+                    <h2>
+                        <!-- 编辑图标 -->
+                        <span class="material-icons" style="vertical-align: middle; font-size: 24px;"></span>
+                        文本编辑区
+                    </h2>
+                    <div class="form-group">
+                        <textarea id="content" name="content" 
+                            placeholder="请在此输入文本内容...&#10;&#10;也可以通过图片识别后自动添加文字。"></textarea>
+                    </div>
+                </div>
+
+                <div class="image-section">
+                    <h2>
+                        <!-- 图片图标 -->
+                        <span class="material-icons" style="vertical-align: middle; font-size: 24px;"></span>
+                        图片处理区
+                    </h2>
+                    
+                    <div class="form-group">
+                        <label for="images" class="file-upload-btn">
+                            <span class="material-icons"></span>
+                            <span class="button-text">选择图片</span>
+                        </label>
+                        <input type="file" id="images" name="images" multiple accept="image/*" style="display: none;">
+                        <div class="hint">支持格式：JPG、PNG、WebP，单个文件不超过20MB</div>
+                    </div>
+                    
+                    <div class="image-options">
+                        <label class="option">
+                            <input type="checkbox" id="enableOCR" checked>
+                            <!-- 扫描图标 -->
+                            <span class="material-icons"></span>
+                            文字识别
+                        </label>
+                        <label class="option">
+                            <input type="checkbox" id="autoMerge" checked>
+                            <!-- 合并图标 -->
+                            <span class="material-icons"></span>
+                            自动合并
+                        </label>
+                        <label class="option">
+                            <input type="checkbox" id="compressImages" checked>
+                            <!-- 压缩图标 -->
+                            <span class="material-icons"></span>
+                            压缩图片
+                        </label>
+                    </div>
+
+                    <div id="preview" class="image-preview"></div>
+                    <div id="ocrResults" class="ocr-results"></div>
+                </div>
+
+                <div class="action-bar">
+                    <button type="button" id="processImagesBtn" class="btn secondary">
+                        <!-- 识别图标 -->
+                        <span class="material-icons"></span>
+                        识别图片文字
+                    </button>
+                    <button type="submit" id="generatePDFBtn" class="btn primary">
+                        <!-- PDF图标 -->
+                        <span class="material-icons"></span>
+                        生成文档并下载
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="status-section">
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <span id="loadingText">正在处理中，请稍候...</span>
+            </div>
+            <div id="status" class="status-message"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

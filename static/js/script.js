@@ -1,3 +1,65 @@
+// 改进的异步处理逻辑
+async function handleSubmit(event) {
+    event.preventDefault();
+    const loading = document.getElementById('loading');
+    loading.style.display = 'block';
+
+    try {
+        const formData = new FormData();
+        formData.append('textContent', document.getElementById('textContent').value);
+        
+        imageFiles.forEach(file => {
+            formData.append('imageUpload', file);
+        });
+
+        const response = await fetch('/generate-pdf', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) throw new Error(await response.text());
+        
+        const { task_id } = await response.json();
+        pollTaskStatus(task_id);
+        
+    } catch (error) {
+        showError(error.message || '请求失败');
+        loading.style.display = 'none';
+    }
+}
+
+// 增强型状态轮询
+async function pollTaskStatus(task_id) {
+    try {
+        const response = await fetch(`/tasks/${task_id}`);
+        const data = await response.json();
+        
+        switch(data.state) {
+            case 'SUCCESS':
+                downloadPDF(data.result);
+                break;
+            case 'FAILURE':
+                showError(data.status || '生成失败');
+                break;
+            default:
+                setTimeout(() => pollTaskStatus(task_id), 1000);
+        }
+    } catch (error) {
+        showError('状态查询失败');
+    }
+}
+
+function downloadPDF(pdfData) {
+    const blob = new Blob([pdfData], { type: 'application/pdf' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `document_${Date.now()}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(link.href);
+}
+// 前端代码需添加请求监听
 document.addEventListener('DOMContentLoaded', function() {
     const mainForm = document.getElementById('documentForm');
     const content = document.getElementById('content');
@@ -5,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const preview = document.getElementById('preview');
     const loading = document.getElementById('loading');
     const status = document.getElementById('status');
-    let ocrTextAdded = false; // 标志用户是否点击了“添加到文本”或“全部合并到文本”按钮
 
     if (!mainForm) {
         console.error('表单元素未找到');
@@ -151,7 +212,6 @@ document.addEventListener('DOMContentLoaded', function() {
         content.value = currentValue + (currentValue ? '\n' : '') + text;
         button.disabled = true;
         button.textContent = '已添加';
-        ocrTextAdded = true; // 设置标志为true
     };
 
     // 合并所有文本
@@ -176,7 +236,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 mergeAllBtn.disabled = true;
                 mergeAllBtn.textContent = '已全部添加';
             }
-            ocrTextAdded = true; // 设置标志为true
         }
     }
 
@@ -373,7 +432,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showConfirmDialog('生成失败: ' + error.message);
         }
     }
-    // 表单提交监听器
+    // 删除所有旧的表单提交监听器，只保留这一个
     mainForm.removeEventListener('submit', null);
     mainForm.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -398,9 +457,8 @@ document.addEventListener('DOMContentLoaded', function() {
             await handleSubmit(true);
             return;
         }
-
-        // 情况3: 如果有文本、OCR结果和图片，且用户点击了“添加到文本”或“全部合并到文本”按钮，显示询问对话框
-        if (hasImages && content && hasOCRResults && ocrTextAdded) {
+        // 情况3: 如果有文本、OCR结果和图片，显示询问对话框
+        if (hasImages && content && hasOCRResults) {
             showConfirmDialog(
                 '检测到将ocr结果放入文本区，是否将图片一起放入文档？\n\n选择"是"：将图片和文字一起生成文档\n选择"否"：仅使用文本生成文档',
                 async () => await handleSubmit(true),  // 确认回调
@@ -426,18 +484,9 @@ document.addEventListener('DOMContentLoaded', function() {
             );
             return;
         }
-
-        // 情况5: 如果有图片、文本和OCR结果，直接生成
-        if (hasImages && content && hasOCRResults) {
-            showConfirmDialog(
-                '检测到将ocr结果放入文本区，是否将图片一起放入文档？\n\n选择"是"：将图片和文字一起生成文档\n选择"否"：仅使用文本生成文档',
-                async () => await handleSubmit(true),  // 确认回调
-                async () => await handleSubmit(false)  // 取消回调
-            );
-            return;
-        }
-
-        // 情况6: 只有文本，直接生成不含图片的文档
+        // 情况5: 只有文本，直接生成不含图片的文档
         await handleSubmit(false);
     });
 });
+
+

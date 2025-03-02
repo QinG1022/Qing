@@ -4,19 +4,39 @@ Flask 主程序
 作者: [您的名字]
 版本: 2.0
 """
+
+# 自定义异常类定义（移到最顶部）
+class SecurityError(Exception):
+    """安全相关异常"""
+    pass
+
+class OCRProcessingError(Exception):
+    """OCR处理异常"""
+    pass
+
+class DocumentGenerationError(Exception):
+    """文档生成异常"""
+    pass
+
+# 标准库导入
 import os
 import logging
 import shutil
 from datetime import datetime
 from pathlib import Path
+
+# 第三方库导入
 from flask import Flask, render_template, request, jsonify, abort, send_from_directory
 from werkzeug.utils import secure_filename
 from celery import Celery
-from modules.image_processor import ImageProcessor
-from modules.pdf_generator import PDFGenerator
 from flask_talisman import Talisman
 from celery.result import AsyncResult
-from tasks import celery, generate_pdf, process_images_task  # 添加process_images_task导入
+import magic
+
+# 本地模块导入
+from modules.image_processor import ImageProcessor
+from modules.pdf_generator import PDFGenerator
+from tasks import celery, generate_pdf, process_images_task
 
 # 定义内容安全策略(CSP)
 csp = {
@@ -147,64 +167,70 @@ def handle_generate():
 
 @app.route('/tasks/<task_id>', methods=['GET'])
 def get_task(task_id):
-    """改进的任务状态查看接口"""
+    """改进的任务状态查看接口（支持OCR类型判断）"""
     try:
         task = AsyncResult(task_id, app=celery)
+        response = {
+            "status": task.state,
+            "task_type": "unknown"
+        }
+
+        # 增加任务有效性检查
+        if not task or not task.state:
+            return jsonify({
+                "status": "ERROR",
+                "error": "无效的任务ID",
+                "task_id": task_id
+            }), 404
+
+        # 获取任务名称（安全处理）
+        task_name = getattr(task, 'name', '') or ''
         
-        if task.state == 'SUCCESS':
-            result = task.result
-            if isinstance(result, dict):  # OCR任务结果
-                response = {
-                    'status': 'SUCCESS',
-                    'result': result,
-                    'message': 'OCR处理完成！'
-                }
-            elif isinstance(result, str):  # PDF生成任务结果
-                if Path(app.config['PDF_FOLDER'] / result).exists():
-                    response = {
-                        'status': 'SUCCESS',
-                        'result': result,
-                        'message': '生成成功！'
-                    }
-                else:
-                    response = {
-                        'status': 'FAILURE',
-                        'error': '文件生成失败',
-                        'message': '生成失败'
-                    }
-            else:
-                response = {
-                    'status': 'FAILURE',
-                    'error': '未知的结果类型',
-                    'message': '处理失败'
-                }
-        else:
-            response = {
-                'status': task.state,
-                'current': 0,
-                'total': 1,
-                'message': '处理中...' if task.state == 'PROCESSING' else '任务等待中...'
-            }
-            if task.state == 'FAILURE':
+        # 根据任务名称处理不同类型的任务
+        if 'process_images_task' in task_name:
+            response["task_type"] = "ocr"
+            if task.successful():
+                result = task.result or {}
                 response.update({
-                    'error': str(task.result),
-                    'message': '处理失败'
+                    "status": "SUCCESS",
+                    "results": result.get('results', []),
+                    "processed_count": len(result.get('results', []))
                 })
-            
-        logging.info(f"任务 {task_id} 状态: {response}")
+            elif task.failed():
+                response.update({
+                    "status": "FAILURE",
+                    "error": str(task.result),
+                    "traceback": task.traceback
+                })
+
+        elif 'generate_pdf' in task_name:
+            response["task_type"] = "pdf"
+            if task.successful():
+                response.update({
+                    "status": "SUCCESS",
+                    "filename": task.result
+                })
+
+        # 补充进度信息（增加空值检查）
+        if task.state == 'PROGRESS' and task.info:
+            try:
+                response.update(task.info)
+            except (TypeError, AttributeError) as e:
+                logging.warning(f"进度信息更新失败: {str(e)}")
+
         return jsonify(response)
-        
+
     except Exception as e:
-        logging.error(f"获取任务状态失败: {str(e)}", exc_info=True)
+        logging.error(f"状态查询失败: {str(e)}", exc_info=True)
         return jsonify({
-            'status': 'ERROR',
-            'error': str(e),
-            'message': '状态查询失败'
+            "status": "ERROR",
+            "error": str(e),
+            "task_id": task_id
         }), 500
 
 @app.route('/download/<filename>')
 def download_file(filename):
-    """改进的文件下载接口"""
+    """文件下载接口"""
     try:
         pdf_dir = app.config['PDF_FOLDER']
         file_path = pdf_dir / filename
@@ -228,36 +254,96 @@ def download_file(filename):
 def process_images():
     """图片OCR处理端点"""
     try:
+        if 'images' not in request.files:
+            raise ValueError("无效的请求格式")
+
         files = request.files.getlist('images')
-        if not files:
-            return jsonify({"error": "未上传图片"}), 400
+        if not files or all(f.filename == '' for f in files):
+            raise ValueError("未检测到有效图片文件")
 
-        # 创建临时目录存储上传的图片
-        temp_dir = app.config['UPLOAD_FOLDER'] / f"ocr_{datetime.now().strftime('%Y%m%d%H%M%S')}"
-        temp_dir.mkdir(parents=True, exist_ok=True)
-
-        # 处理上传的图片
+        # 创建带唯一标识的临时目录
+        temp_dir_name = f"ocr_{datetime.now().strftime('%Y%m%d%H%M%S')}_{os.urandom(4).hex()}"
+        temp_dir = app.config['UPLOAD_FOLDER'] / temp_dir_name
+        
         try:
-            image_paths = ImageProcessor.process_batch(files, temp_dir)
-            if not image_paths:
-                return jsonify({"error": "图片处理失败"}), 400
+            temp_dir.mkdir(parents=True, exist_ok=True, mode=0o755)
+        except PermissionError as e:
+            raise SecurityError(f"目录创建失败: {str(e)}") from e
 
-            # 启动OCR任务
-            task = process_images_task.delay([str(p) for p in image_paths])
+        image_paths = []
+        for file in files:
+            if not file:
+                continue
+                
+            # 读取文件内容进行验证
+            file_content = file.read(1024)  # 读取前1024字节
+            file.seek(0)  # 重置文件指针
             
-            return jsonify({
-                "task_id": task.id,
-                "status_url": f"/tasks/{task.id}",
-                "message": "开始处理图片..."
-            }), 202
+            if not allowed_file(file.filename, file_content):
+                continue
+            
+            filename = secure_filename(file.filename)
+            target_path = temp_dir / filename
+            
+            # 强化路径安全检查
+            try:
+                if not Path(target_path).resolve().parent.samefile(temp_dir.resolve()):
+                    raise SecurityError("检测到路径遍历攻击")
+            except ValueError as e:
+                raise SecurityError("非法文件名") from e
+                
+            file.save(target_path)
+            image_paths.append(str(target_path))
 
-        except Exception as e:
-            logging.error(f"图片处理失败: {str(e)}")
-            return jsonify({"error": str(e)}), 500
+        if not image_paths:
+            raise ValueError("没有有效图片可以处理")
 
+        task = process_images_task.delay(image_paths)
+        return jsonify({
+            "task_id": task.id,
+            "status_url": f"/tasks/{task_id}",
+            "message": "开始处理图片..."
+        }), 202
+
+    except SecurityError as e:
+        logging.error(f"安全违规: {str(e)}")
+        return jsonify({"error": "安全检查失败"}), 403
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
     except Exception as e:
-        logging.error(f"请求处理失败: {str(e)}")
-        return jsonify({"error": str(e)}), 500
+        logging.error(f"处理错误: {str(e)}")
+        return jsonify({"error": "处理请求失败"}), 500
+
+def allowed_file(filename, file_content):
+    """增强的文件类型验证
+    Args:
+        filename: 文件名
+        file_content: 文件内容（字节）
+    """
+    try:
+        # 后缀名检查
+        if '.' not in filename:
+            return False
+        ext = filename.rsplit('.', 1)[1].lower()
+        if ext not in app.config['ALLOWED_EXTENSIONS']:
+            return False
+        
+        # MIME类型检查
+        try:
+            mime_type = magic.from_buffer(file_content, mime=True)
+            if not mime_type.startswith('image/'):
+                logging.warning(f"文件类型不匹配: {filename} -> {mime_type}")
+                return False
+        except Exception as e:
+            logging.error(f"MIME类型检查失败: {str(e)}")
+            # 如果MIME检查失败，仅依赖扩展名检查
+            return True
+        
+        return True
+        
+    except Exception as e:
+        logging.error(f"文件类型验证失败: {str(e)}")
+        return False
 
 if __name__ == '__main__':
     try:
