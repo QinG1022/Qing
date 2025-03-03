@@ -14,6 +14,7 @@ pip install -r requirements.txt
 # - Celery 5.3.6 和 Redis 5.0.1
 # - 图像处理：Pillow 11.1.0, pytesseract 0.3.10
 # - PDF生成：reportlab 4.1.0, fonttools
+# - 测试工具：pytest 8.0.0, pytest-html 4.1.1
 # - 其他工具：python-dotenv, python-magic, pyOpenSSL
 # - Windows专用：pywin32
 
@@ -24,12 +25,63 @@ pip install -r requirements.txt
 # - Add to PATH
 # - Install service
 
-# 5. 安装Tesseract-OCR
+# 6. 安装Tesseract-OCR
 # 下载地址：https://github.com/UB-Mannheim/tesseract/wiki
 # 选择：tesseract-ocr-w64-setup-xxx.exe
 # 安装时：
 # - 记住安装路径（默认：C:\Program Files\Tesseract-OCR）
 # - 添加到系统环境变量Path
+
+# ================ 运行测试 ================
+# 1. 字体检查（必需）
+python font_check.py
+
+# 2. 运行所有测试
+python -m pytest tests/
+
+# 3. 运行特定测试文件
+# 图片处理测试
+python -m pytest tests/test_image_processor.py -v
+
+# PDF生成测试
+python -m pytest tests/test_pdf_generator.py -v
+
+# 集成测试
+python -m pytest tests/test_integration.py -v
+
+# 4. 运行特定测试用例
+# 图片处理单元测试
+python -m pytest tests/test_image_processor.py::test_process_single -v
+python -m pytest tests/test_image_processor.py::test_process_batch -v
+python -m pytest tests/test_image_processor.py::test_empty_batch -v
+python -m pytest tests/test_image_processor.py::test_invalid_image -v
+
+# PDF生成器测试用例
+python -m pytest tests/test_pdf_generator.py::test_basic_pdf_generation -v
+python -m pytest tests/test_pdf_generator.py::test_pdf_with_multiple_images -v
+python -m pytest tests/test_pdf_generator.py::test_pdf_generation_no_images -v
+
+# 集成测试用例
+python -m pytest tests/test_integration.py::test_complete_flow -v
+python -m pytest tests/test_integration.py::test_empty_content -v
+python -m pytest tests/test_integration.py::test_invalid_image -v
+
+# 5. 显示详细输出
+python -m pytest -v tests/
+
+# 6. 生成测试报告（需要安装 pytest-html）
+python -m pytest --html=report.html tests/
+
+# 7. 忽略废弃警告运行PDF测试（推荐）
+python -m pytest tests/test_pdf_generator.py -v -W ignore::DeprecationWarning
+
+# 注意：
+# - 确保先激活虚拟环境：.\venv\Scripts\activate
+# - 先运行字体检查确保字体文件正确
+# - 测试前确保Redis服务已启动
+# - 确保已安装所需字体
+# - 测试可能需要一些时间完成
+# - 查看 report.html 获取详细测试报告
 
 # ================ 启动服务 ================
 # 1. 启动Redis服务
@@ -75,6 +127,12 @@ python app.py
 netstat -ano | findstr 5000
 # 结束进程：
 taskkill /F /PID <进程ID>
+
+# 5. 测试失败
+# - 检查日志文件中的错误信息
+# - 确保所有依赖都已正确安装
+# - 验证配置文件是否正确
+# - 检查系统权限
 
 # ================ 关闭服务 ================
 # 1. 关闭Flask和Celery

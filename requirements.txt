@@ -30,6 +30,7 @@ pyOpenSSL==24.0.0
 
 # 开发工具
 pytest==8.0.0
+pytest-html==4.1.1  # 添加回去以生成 HTML 报告
 celery==5.3.6
 
 # 额外依赖
