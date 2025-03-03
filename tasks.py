@@ -1,8 +1,18 @@
 """
 Celery异步任务模块
-功能: 处理耗时操作，如PDF生成和OCR识别
-作者: [您的名字]
-版本: 1.5
+Version: 1.5
+Last Modified: 2024-03-20
+
+功能描述:
+    - 处理耗时操作
+    - PDF文档生成
+    - OCR文字识别
+    - 异步任务管理
+
+主要组件:
+    - Celery: 分布式任务队列
+    - PDFGenerator: PDF生成器
+    - OCRProcessor: OCR处理器
 """
 import os
 import sys
@@ -10,13 +20,11 @@ from pathlib import Path
 from celery import Celery
 import logging
 
-# 导入自定义异常（从app.py导入）
-from app import SecurityError, OCRProcessingError, DocumentGenerationError
-
-# 配置日志
+# ================ 日志配置 ================
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# ================ Celery配置 ================
 # 创建Celery应用实例
 celery = Celery('bishe')
 celery.config_from_object('celeryconfig')
@@ -30,7 +38,27 @@ from modules.ocr_processor import OCRProcessor
 
 @celery.task(bind=True)
 def generate_pdf(self, text_content, image_paths, output_dir):
-    """异步PDF生成任务"""
+    """
+    异步PDF生成任务
+    
+    功能:
+        1. 验证输入参数
+        2. 处理文本和图片
+        3. 生成PDF文档
+    
+    参数:
+        self: Celery任务实例
+        text_content (str): 文本内容
+        image_paths (list): 图片路径列表
+        output_dir (str): 输出目录路径
+    
+    返回:
+        str: 生成的PDF文件名
+    
+    异常:
+        ValueError: 参数验证失败
+        Exception: PDF生成过程错误
+    """
     try:
         logger.info(f"开始生成PDF - 文本长度: {len(text_content) if text_content else 0}, 图片数量: {len(image_paths)}")
         logger.info(f"图片路径: {image_paths}")
@@ -73,48 +101,72 @@ def generate_pdf(self, text_content, image_paths, output_dir):
 
 @celery.task(bind=True)
 def process_images_task(self, image_paths):
-    """改进的OCR处理任务（包含进度跟踪）"""
-    total = len(image_paths)
+    """
+    处理图片OCR任务
     
-    def update_progress(current, text):
-        self.update_state(
-            state='PROGRESS',
-            meta={
-                'current': current,
-                'total': total,
-                'status': text
-            }
-        )
+    功能:
+        1. 更新任务状态
+        2. 验证图片路径
+        3. 批量OCR处理
+        4. 处理识别结果
     
+    参数:
+        self: Celery任务实例
+        image_paths (list): 待处理图片路径列表
+    
+    返回:
+        dict: {
+            'status': 'success',
+            'results': [
+                {
+                    'text': str,      # 识别文本
+                    'path': str,      # 图片路径
+                    'confidence': float # 置信度
+                },
+                ...
+            ]
+        }
+    
+    异常:
+        ValueError: 无效的图片路径或OCR结果
+        Exception: OCR处理过程错误
+    """
     try:
-        results = []
-        update_progress(0, "初始化OCR引擎")
+        # 更新任务状态
+        self.update_state(state='PROCESSING', meta={
+            'message': '正在进行OCR识别...'
+        })
         
-        # 首次运行时检查Tesseract
-        if not OCRProcessor.is_ready():
-            OCRProcessor.initialize()
-        
-        for i, path in enumerate(image_paths):
-            try:
-                update_progress(i+1, f"处理图片 {i+1}/{total}")
-                result = OCRProcessor.process_image(path)
-                if result:
-                    results.append(result)
-            except Exception as e:
-                logging.warning(f"图片处理失败 {path}: {str(e)}")
-                continue
+        # 验证图片路径
+        valid_paths = []
+        for path in image_paths:
+            if os.path.exists(path):
+                valid_paths.append(path)
+            else:
+                logger.warning(f"图片不存在: {path}")
 
+        # 批量OCR处理
+        results = OCRProcessor.process_batch(valid_paths)
+        
+        if not results:
+            raise ValueError("OCR处理未返回有效结果")
+
+        # 处理识别结果
+        processed_results = []
+        for result in results:
+            if result and result.get('text'):
+                processed_results.append({
+                    'text': result['text'].strip(),
+                    'path': result['image_path'],
+                    'confidence': result.get('confidence')
+                })
+
+        logger.info(f"成功处理 {len(processed_results)} 张图片的OCR")
         return {
             'status': 'success',
-            'processed_count': len(results),
-            'results': results,
-            'timestamp': datetime.now().isoformat()
+            'results': processed_results
         }
         
     except Exception as e:
-        logging.error(f"OCR任务失败: {str(e)}")
-        return {
-            'status': 'error',
-            'error': str(e),
-            'traceback': traceback.format_exc()
-        }
+        logger.error(f"OCR处理失败: {str(e)}", exc_info=True)
+        raise

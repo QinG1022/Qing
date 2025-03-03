@@ -1,0 +1,88 @@
+# ================ Windows环境准备 ================
+# 1. Python环境 (建议Python 3.8+)
+# 检查Python版本
+python --version
+
+# 2. 创建虚拟环境
+python -m venv venv
+.\venv\Scripts\activate
+
+# 3. 安装项目依赖
+pip install -r requirements.txt
+# 主要依赖包括：
+# - Flask 3.0.2 及相关组件 (Flask-Talisman, Werkzeug)
+# - Celery 5.3.6 和 Redis 5.0.1
+# - 图像处理：Pillow 11.1.0, pytesseract 0.3.10
+# - PDF生成：reportlab 4.1.0, fonttools
+# - 其他工具：python-dotenv, python-magic, pyOpenSSL
+# - Windows专用：pywin32
+
+# 4. 安装Redis for Windows
+# 下载地址：https://github.com/microsoftarchive/redis/releases
+# 选择：Redis-x64-xxx.msi
+# 安装时勾选：
+# - Add to PATH
+# - Install service
+
+# 5. 安装Tesseract-OCR
+# 下载地址：https://github.com/UB-Mannheim/tesseract/wiki
+# 选择：tesseract-ocr-w64-setup-xxx.exe
+# 安装时：
+# - 记住安装路径（默认：C:\Program Files\Tesseract-OCR）
+# - 添加到系统环境变量Path
+
+# ================ 启动服务 ================
+# 1. 启动Redis服务
+# 方法1：Windows服务（推荐）
+net start Redis
+
+# 方法2：命令行启动
+redis-server
+
+# 2. 验证Redis
+redis-cli ping  # 应返回PONG
+
+# 3. 清理日志文件（可选）
+python log_cleaner.py
+
+# 4. 启动Celery（新终端）
+# 注意：Windows必须使用 --pool=solo
+.\venv\Scripts\activate
+celery -A tasks worker --loglevel=INFO --pool=solo
+
+# 5. 启动Flask（新终端）
+.\venv\Scripts\activate
+python app.py
+
+# ================ 常见问题 ================
+# 1. Redis服务无法启动
+# - 检查服务是否已安装：services.msc
+# - 检查端口占用：netstat -ano | findstr 6379
+# - 重新安装Redis
+
+# 2. Celery报错
+# - 确保使用 --pool=solo
+# - 检查Redis连接
+# - 查看是否激活虚拟环境
+
+# 3. OCR无法使用
+# - 检查环境变量Path是否包含Tesseract路径
+# - 重启终端或电脑
+# - 测试命令：tesseract --version
+
+# 4. 端口被占用
+# 查找占用端口的进程：
+netstat -ano | findstr 5000
+# 结束进程：
+taskkill /F /PID <进程ID>
+
+# ================ 关闭服务 ================
+# 1. 关闭Flask和Celery
+# 在对应终端按 Ctrl+C
+# 或使用任务管理器结束python.exe进程
+
+# 2. 关闭Redis
+net stop Redis
+
+# 3. 清理日志文件（可选）
+python log_cleaner.py
