@@ -46,7 +46,12 @@ csp = {
     ],
     'style-src': [                     # 样式源策略
         '\'self\'',                    # - 允许同源
-        '\'unsafe-inline\''            # - 允许内联样式
+        '\'unsafe-inline\'',            # - 允许内联样式
+        'https://fonts.googleapis.com'  # - 允许从Google Fonts加载样式
+    ],
+    'font-src': [                      # 字体源策略
+        '\'self\'',                    # - 允许同源
+        'https://fonts.gstatic.com'    # - 允许从Google Fonts加载字体
     ]
 }
 
