@@ -13,7 +13,7 @@ pip install -r requirements.txt
 # - Flask 3.0.2 及相关组件 (Flask-Talisman, Werkzeug)
 # - Celery 5.3.6 和 Redis 5.0.1
 # - 图像处理：Pillow 11.1.0, pytesseract 0.3.10
-# - PDF生成：reportlab 4.1.0, fonttools PyPDF2
+# - PDF生成：reportlab 4.1.0, fonttools，PyPDF2
 # - 测试工具：pytest 8.0.0, pytest-html 4.1.1
 # - 其他工具：python-dotenv, python-magic, pyOpenSSL
 # - Windows专用：pywin32
@@ -70,7 +70,10 @@ python -m pytest tests/test_integration.py::test_invalid_image -v
 python -m pytest -v tests/
 
 # 6. 生成测试报告（需要安装 pytest-html）
+#下载 pip install pytest-html 
 python -m pytest --html=report.html tests/
+#删除测试报告
+python tools/clean_test_reports.py
 
 # 7. 忽略废弃警告运行PDF测试（推荐）
 python -m pytest tests/test_pdf_generator.py -v -W ignore::DeprecationWarning
@@ -94,15 +97,12 @@ redis-server
 # 2. 验证Redis
 redis-cli ping  # 应返回PONG
 
-# 3. 清理日志文件（可选）
-python log_cleaner.py
-
-# 4. 启动Celery（新终端）
+# 3. 启动Celery（新终端）
 # 注意：Windows必须使用 --pool=solo
 .\venv\Scripts\activate
 celery -A tasks worker --loglevel=INFO --pool=solo
 
-# 5. 启动Flask（新终端）
+# 4. 启动Flask（新终端）
 .\venv\Scripts\activate
 python app.py
 

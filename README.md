@@ -27,7 +27,8 @@
 ### 安装步骤
 1. 克隆代码库：
 ```bash
-git clone <repository-url>
+git clone https://github.com/QinG1022/Qing.git
+#进入项目目录
 cd <project-directory>
 ```
 
@@ -106,11 +107,21 @@ flask run
 - `Fonts/`: 字体文件目录
 - `config/`: 配置文件目录
 - `tests/`: 测试用例
+- `tools/`: 工具脚本
+  - `clean_test_reports.py`: 清理测试报告的工具
 
-## 开发者指南
-- 遵循PEP 8编码规范
-- 使用pytest进行单元测试
-- 新功能请提交到feature分支
+### 测试与报告
+1. 运行单元测试：
+```bash
+python -m pytest tests/
+```
 
-## 许可协议
-[指定您的许可协议类型] 
+2. 生成HTML测试报告：
+```bash
+python -m pytest --html=report.html tests/
+```
+
+3. 清理测试报告：
+```bash
+python tools/clean_test_reports.py
+```
