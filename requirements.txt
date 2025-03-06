@@ -14,6 +14,7 @@ pytesseract>=0.3.0
 # PDF生成
 reportlab>=3.6.0
 fonttools>=4.28.0
+PyPDF2>=3.0.0
 
 # 工具类
 python-dateutil>=2.8.0
@@ -30,7 +31,6 @@ pyOpenSSL==24.0.0
 
 # 开发工具
 pytest==8.0.0
-pytest-html==4.1.1
 celery==5.3.6
 
 # 额外依赖

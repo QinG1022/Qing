@@ -6,7 +6,6 @@ import logging
 from PIL import Image
 from io import BytesIO
 import shutil
-import time
 
 # 添加项目根目录到 Python 路径
 project_root = Path(__file__).parent.parent
@@ -34,9 +33,9 @@ def client():
         # 使用 shutil.rmtree 递归删除目录
         for folder in [app.config['PDF_FOLDER'], app.config['UPLOAD_FOLDER']]:
             if folder.exists():
-                shutil.rmtree(folder)
+                shutil.rmtree(folder, ignore_errors=True)
     except Exception as e:
-        logging.error(f"清理测试目录失败: {str(e)}")
+        logging.warning(f"清理测试目录失败: {e}")
 
 @pytest.fixture(autouse=True)
 def cleanup_files():
@@ -59,12 +58,12 @@ def cleanup_files():
 
 @pytest.fixture
 def test_image():
-    """创建一个测试图片"""
-    img = Image.new('RGB', (1000, 1000), color='red')
-    img_byte_arr = BytesIO()
-    img.save(img_byte_arr, format='JPEG')
-    img_byte_arr.seek(0)
-    return img_byte_arr
+    """创建测试用图片"""
+    img = Image.new('RGB', (100, 100), color='red')
+    img_io = BytesIO()
+    img.save(img_io, 'JPEG')
+    img_io.seek(0)
+    return img_io
 
 def test_complete_flow(client, test_image):
     """测试完整的文档生成流程"""
@@ -77,36 +76,47 @@ def test_complete_flow(client, test_image):
         },
         content_type='multipart/form-data'
     )
-
+    
     assert response.status_code == 202
-
-    # 2. 获取任务ID
-    task_id = response.json['task_id']
-    assert task_id is not None
-
-    # 3. 轮询任务状态
-    task_status_url = response.json['status_url']
-    for _ in range(10):
-        response = client.get(task_status_url)
-        if response.json['status'] == 'SUCCESS':
-            break
+    data = response.get_json()
+    assert 'task_id' in data
+    task_id = data['task_id']
+    
+    # 2. 轮询任务状态
+    max_retries = 10
+    while max_retries > 0:
+        status_response = client.get(f'/tasks/{task_id}')
+        assert status_response.status_code == 200
+        status_data = status_response.get_json()
+        
+        if status_data['status'] == 'SUCCESS':
+            # 3. 下载生成的PDF
+            pdf_name = status_data['result']
+            download_response = client.get(f'/download/{pdf_name}')
+            assert download_response.status_code == 200
+            assert download_response.mimetype == 'application/pdf'
+            assert len(download_response.data) > 0
+            return
+            
+        elif status_data['status'] == 'FAILURE':
+            pytest.fail(f"任务失败: {status_data.get('error')}")
+            
+        max_retries -= 1
+        import time
         time.sleep(1)
     
-    assert response.json['status'] == 'SUCCESS'
-    assert 'result' in response.json
+    pytest.fail("任务超时")
 
 def test_empty_content(client):
-    """测试空内容处理"""
+    """测试空内容错误处理"""
     response = client.post(
         '/generate',
         data={'content': ''},
         content_type='multipart/form-data'
     )
-    # 修改期望的状态码为 202
-    assert response.status_code == 202
-    # 可以添加任务状态检查
-    response_data = response.get_json()
-    assert 'task_id' in response_data
+    assert response.status_code == 400
+    data = response.get_json()
+    assert 'error' in data
 
 def test_invalid_image(client):
     """测试无效图片处理"""
@@ -120,3 +130,12 @@ def test_invalid_image(client):
         content_type='multipart/form-data'
     )
     assert response.status_code == 202  # 应该接受请求但不处理无效图片
+
+def test_images_only(client, test_image):
+    """测试仅上传图片（无文字内容）的成功场景""" 
+    response = client.post(
+        '/generate',
+        data={'images': (test_image, 'test.jpg')}, 
+        content_type='multipart/form-data'
+    )
+    assert response.status_code == 202 

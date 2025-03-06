@@ -64,18 +64,22 @@ class OCRProcessor:
                 
                 # 处理识别结果
                 text = text.strip()
-                if not text:
-                    return None
                 
+                # 即使文本为空也返回结果，不再返回None
                 return {
                     'image_path': str(image_path),
-                    'text': text,
+                    'text': text if text else "图片未能识别出文字",  # 如果文本为空，提供默认值
                     'confidence': None  # TODO: 添加置信度
                 }
 
         except Exception as e:
             logging.error(f"OCR处理失败: {str(e)}")
-            return None
+            # 返回错误信息而不是None
+            return {
+                'image_path': str(image_path) if image_path else "未知路径",
+                'text': f"图片处理错误: {str(e)}",
+                'confidence': 0
+            }
 
     @classmethod
     def process_batch(cls, image_paths):
@@ -84,9 +88,16 @@ class OCRProcessor:
         for path in image_paths:
             try:
                 result = cls.process_image(path)
-                if result:
-                    results.append(result)
+                # 所有结果都添加到结果列表中，不再检查result是否为None
+                # 因为process_image现在总是返回一个字典
+                results.append(result)
+                logging.info(f"处理图片 {path} 完成")
             except Exception as e:
                 logging.error(f"处理图片失败 {path}: {str(e)}")
-                continue
+                # 添加错误信息到结果列表
+                results.append({
+                    'image_path': str(path),
+                    'text': f"处理失败: {str(e)}",
+                    'confidence': 0
+                })
         return results

@@ -1,27 +1,37 @@
 """
-PDF生成器核心模块
-功能：处理文档生成，支持文本和图片混排，自动处理字体和页面布局
-作者：[您的名字]
-版本：2.0
+PDF文档生成器模块
+功能: 根据文本和图片生成格式化PDF文档
+作者: [您的名字]
+版本: 1.8
 """
 import os
+import logging
+import threading
+import time
 import shutil
 from pathlib import Path
+from datetime import datetime
+from io import BytesIO
+from concurrent.futures import ThreadPoolExecutor
+
+# 导入PIL组件
+from PIL import Image
+
+# 导入ReportLab组件
+from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.pdfgen import canvas
-from fontTools.ttLib import TTFont as FontToolsFont
-import logging
-import time
-from PIL import Image
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.platypus import SimpleDocTemplate, Paragraph, PageBreak, Image as PlatypusImage
+from reportlab.platypus import SimpleDocTemplate, Paragraph, PageBreak, Image as PlatypusImage, Spacer
 from reportlab.lib.units import inch
-from io import BytesIO
-import threading
-from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime
+from reportlab.platypus.flowables import KeepTogether
+
+# 导入字体工具
+from fontTools.ttLib import TTFont as FontToolsFont
+
+# 导入PDF处理工具
+from PyPDF2 import PdfReader, PdfWriter
 
 class PDFGenerator:
     """PDF文档生成器类
@@ -115,8 +125,9 @@ class PDFGenerator:
         """
         # A4页面可用区域（考虑页边距）
         POINTS_PER_INCH = 72
-        PAGE_WIDTH = A4[0] - 2 * POINTS_PER_INCH  # 减去左右边距
-        PAGE_HEIGHT = A4[1] - 2 * POINTS_PER_INCH  # 减去上下边距
+        page_width, page_height = A4
+        PAGE_WIDTH = page_width - 2 * POINTS_PER_INCH  # 减去左右边距
+        PAGE_HEIGHT = page_height - 2 * POINTS_PER_INCH  # 减去上下边距
         
         # 计算最大安全尺寸（页面尺寸的80%）
         MAX_WIDTH = int(PAGE_WIDTH * 0.8)
@@ -152,10 +163,6 @@ class PDFGenerator:
             filename = f"document_{timestamp}.pdf"
             output_path = output_dir / filename
             
-            # 创建PDF文档
-            c = canvas.Canvas(str(output_path), pagesize=A4)
-            page_width, page_height = A4
-            
             # 注册字体
             font_path = cls._validate_font()
             with cls._font_lock:
@@ -163,80 +170,211 @@ class PDFGenerator:
                     pdfmetrics.registerFont(TTFont(cls.REGISTERED_NAME, str(font_path)))
                     cls._fonts_registered = True
             
-            # 设置字体
-            c.setFont(cls.REGISTERED_NAME, cls.FONT_SIZE)
-            
-            # 处理文本
-            y_position = page_height - 50  # 起始位置
+            # 处理文本内容
             if text_content and text_content.strip():
+                # 创建文本样式
+                normal_style = ParagraphStyle(
+                    'CustomNormal',
+                    fontName=cls.REGISTERED_NAME,
+                    fontSize=cls.FONT_SIZE,
+                    leading=cls.LEADING,  # 行间距
+                    wordWrap='CJK',  # 支持中文换行
+                    allowWidows=0,
+                    allowOrphans=0
+                )
+                
+                # 创建段落对象
+                paragraphs = []
                 for line in text_content.split('\n'):
                     if line.strip():
-                        c.drawString(50, y_position, line.strip())
-                        y_position -= 20
-                y_position -= 20  # 文本和图片之间的间距
+                        paragraphs.append(Paragraph(line.strip(), normal_style))
+                        paragraphs.append(Spacer(1, 5))  # 段落间距
+                
+                # 使用临时PDF存储文本内容
+                temp_text_pdf = str(Path(output_dir) / f"temp_text_{timestamp}.pdf")
+                doc = SimpleDocTemplate(
+                    temp_text_pdf,
+                    pagesize=A4,
+                    leftMargin=50,
+                    rightMargin=50,
+                    topMargin=50,
+                    bottomMargin=50
+                )
+                
+                # 构建文档
+                doc.build(paragraphs)
+                
+                # 准备合并PDF
+                writer = PdfWriter()
+                
+                # 添加文本PDF页面
+                temp_reader = PdfReader(temp_text_pdf)
+                for page in temp_reader.pages:
+                    writer.add_page(page)
+                
+                # 处理图片
+                if image_paths:
+                    # 创建图片PDF
+                    img_pdf = str(Path(output_dir) / f"temp_img_{timestamp}.pdf")
+                    c_img = canvas.Canvas(img_pdf, pagesize=A4)
+                    page_width, page_height = A4
+                    y_position = page_height - 50
+                    
+                    has_image_content = False
+                    
+                    for img_path in image_paths:
+                        try:
+                            img_path = Path(img_path)
+                            if img_path.exists():
+                                with Image.open(img_path) as img:
+                                    # RGB转换
+                                    if img.mode in ('RGBA', 'P'):
+                                        background = Image.new('RGB', img.size, (255, 255, 255))
+                                        if img.mode == 'RGBA':
+                                            background.paste(img, mask=img.split()[3])
+                                        else:
+                                            background.paste(img)
+                                        img = background
+                                    elif img.mode != 'RGB':
+                                        img = img.convert('RGB')
 
-            # 处理图片
-            has_content = bool(text_content and text_content.strip())
-            
-            for img_path in image_paths:
+                                    # 计算图片尺寸
+                                    img_width, img_height = img.size
+                                    scale = min(
+                                        (page_width - 100) / img_width,
+                                        (page_height - 100) / img_height,
+                                        1.0
+                                    )
+                                    width = img_width * scale
+                                    height = img_height * scale
+
+                                    # 如果当前页空间不够，创建新页面
+                                    if y_position - height < 50:
+                                        c_img.showPage()
+                                        c_img.setFont(cls.REGISTERED_NAME, cls.FONT_SIZE)
+                                        y_position = page_height - 50
+
+                                    # 居中显示图片
+                                    x_position = (page_width - width) / 2
+                                    y_position -= height
+
+                                    # 直接绘制图片
+                                    c_img.drawImage(
+                                        str(img_path),
+                                        x_position,
+                                        y_position,
+                                        width=width,
+                                        height=height
+                                    )
+                                    has_image_content = True
+                                    y_position -= 20
+                                    logging.info(f"成功添加图片到PDF: {img_path}")
+                        except Exception as e:
+                            logging.error(f"处理图片失败 {img_path}: {e}", exc_info=True)
+                            continue
+
+                    # 保存图片PDF
+                    if has_image_content:
+                        c_img.save()
+                        
+                        # 添加图片页面到主PDF
+                        img_reader = PdfReader(img_pdf)
+                        for page in img_reader.pages:
+                            writer.add_page(page)
+                        
+                        # 清理临时图片PDF
+                        try:
+                            os.remove(img_pdf)
+                        except:
+                            pass
+                
+                # 写入最终PDF
+                with open(str(output_path), 'wb') as f:
+                    writer.write(f)
+                
+                # 清理临时PDF
                 try:
-                    img_path = Path(img_path)
-                    if img_path.exists():
-                        with Image.open(img_path) as img:
-                            # RGB转换
-                            if img.mode in ('RGBA', 'P'):
-                                background = Image.new('RGB', img.size, (255, 255, 255))
-                                if img.mode == 'RGBA':
-                                    background.paste(img, mask=img.split()[3])
-                                else:
-                                    background.paste(img)
-                                img = background
-                            elif img.mode != 'RGB':
-                                img = img.convert('RGB')
+                    os.remove(temp_text_pdf)
+                except:
+                    pass
+                
+                logging.info(f"成功生成包含完整文本和图片的PDF文件: {output_path}")
+                return filename
+            
+            # 只处理图片的情况
+            elif image_paths:
+                # 创建PDF文档
+                c = canvas.Canvas(str(output_path), pagesize=A4)
+                page_width, page_height = A4
+                
+                # 设置字体
+                c.setFont(cls.REGISTERED_NAME, cls.FONT_SIZE)
+                
+                # 处理图片
+                y_position = page_height - 50
+                has_content = False
+                
+                for img_path in image_paths:
+                    try:
+                        img_path = Path(img_path)
+                        if img_path.exists():
+                            with Image.open(img_path) as img:
+                                # RGB转换
+                                if img.mode in ('RGBA', 'P'):
+                                    background = Image.new('RGB', img.size, (255, 255, 255))
+                                    if img.mode == 'RGBA':
+                                        background.paste(img, mask=img.split()[3])
+                                    else:
+                                        background.paste(img)
+                                    img = background
+                                elif img.mode != 'RGB':
+                                    img = img.convert('RGB')
 
-                            # 计算图片尺寸
-                            img_width, img_height = img.size
-                            scale = min(
-                                (page_width - 100) / img_width,
-                                (page_height - 100) / img_height,
-                                1.0
-                            )
-                            width = img_width * scale
-                            height = img_height * scale
+                                # 计算图片尺寸
+                                img_width, img_height = img.size
+                                scale = min(
+                                    (page_width - 100) / img_width,
+                                    (page_height - 100) / img_height,
+                                    1.0
+                                )
+                                width = img_width * scale
+                                height = img_height * scale
 
-                            # 如果当前页空间不够，创建新页面
-                            if y_position - height < 50:
-                                c.showPage()
-                                c.setFont(cls.REGISTERED_NAME, cls.FONT_SIZE)
-                                y_position = page_height - 50
+                                # 如果当前页空间不够，创建新页面
+                                if y_position - height < 50:
+                                    c.showPage()
+                                    c.setFont(cls.REGISTERED_NAME, cls.FONT_SIZE)
+                                    y_position = page_height - 50
 
-                            # 居中显示图片
-                            x_position = (page_width - width) / 2
-                            y_position -= height
+                                # 居中显示图片
+                                x_position = (page_width - width) / 2
+                                y_position -= height
 
-                            # 直接绘制图片
-                            c.drawImage(
-                                str(img_path),
-                                x_position,
-                                y_position,
-                                width=width,
-                                height=height
-                            )
-                            has_content = True
-                            y_position -= 20
-                            logging.info(f"成功添加图片到PDF: {img_path}")
-                            
-                except Exception as e:
-                    logging.error(f"处理图片失败 {img_path}: {e}", exc_info=True)
-                    continue
+                                # 直接绘制图片
+                                c.drawImage(
+                                    str(img_path),
+                                    x_position,
+                                    y_position,
+                                    width=width,
+                                    height=height
+                                )
+                                has_content = True
+                                y_position -= 20
+                                logging.info(f"成功添加图片到PDF: {img_path}")
+                                
+                    except Exception as e:
+                        logging.error(f"处理图片失败 {img_path}: {e}", exc_info=True)
+                        continue
 
-            if not has_content:
+                if not has_content:
+                    raise ValueError("没有有效的文本或图片内容")
+
+                # 保存PDF
+                c.save()
+                logging.info(f"成功生成PDF文件: {output_path}")
+                return filename
+            else:
                 raise ValueError("没有有效的文本或图片内容")
-
-            # 保存PDF
-            c.save()
-            logging.info(f"成功生成PDF文件: {output_path}")
-            return filename
 
         except Exception as e:
             logging.error(f"PDF生成失败: {str(e)}", exc_info=True)
