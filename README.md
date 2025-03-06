@@ -14,7 +14,7 @@
 - **Web框架**: Flask
 - **任务队列**: Celery + Redis
 - **图像处理**: Pillow, pytesseract (OCR功能)
-- **PDF生成**: ReportLab, PyPDF2
+- **PDF处理**: ReportLab, PyPDF2, PyMuPDF
 - **安全防护**: Flask-Talisman
 
 ## 安装说明
@@ -95,6 +95,12 @@ flask run
 4. 提交处理请求
 5. 下载处理结果
 
+### PDF文本提取
+1. 在处理选项中选择"PDF文本提取"
+2. 上传需要处理的PDF文件
+3. 提交处理请求
+4. 查看或下载提取的文本内容
+
 ## 目录结构
 - `app.py`: 主应用入口
 - `modules/`: 功能模块目录
@@ -109,6 +115,10 @@ flask run
 - `Fonts/`: 字体文件目录
 - `config/`: 配置文件目录
 - `tests/`: 测试用例
+  - `test_image_processor.py`: 图像处理测试
+  - `test_pdf_generator.py`: PDF生成测试
+  - `test_pdf_extractor.py`: PDF文本提取测试
+  - `test_integration.py`: 集成测试
 - `tools/`: 工具脚本
   - `clean_test_reports.py`: 清理测试报告的工具
 
@@ -126,4 +136,19 @@ python -m pytest --html=report.html tests/
 3. 清理测试报告：
 ```bash
 python tools/clean_test_reports.py
+```
+
+4. 运行特定模块测试：
+```bash
+# 图像处理测试
+python -m pytest tests/test_image_processor.py -v
+
+# PDF生成测试
+python -m pytest tests/test_pdf_generator.py -v
+
+# PDF提取器测试
+python -m pytest tests/test_pdf_extractor.py -v
+
+# 集成测试
+python -m pytest tests/test_integration.py -v
 ```

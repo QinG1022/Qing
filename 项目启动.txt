@@ -13,7 +13,7 @@ pip install -r requirements.txt
 # - Flask 3.0.2 及相关组件 (Flask-Talisman, Werkzeug)
 # - Celery 5.3.6 和 Redis 5.0.1
 # - 图像处理：Pillow 11.1.0, pytesseract 0.3.10
-# - PDF生成：reportlab 4.1.0, fonttools，PyPDF2
+# - PDF处理：reportlab 4.1.0, fonttools，PyPDF2, PyMuPDF (fitz)
 # - 测试工具：pytest 8.0.0, pytest-html 4.1.1
 # - 其他工具：python-dotenv, python-magic, pyOpenSSL
 # - Windows专用：pywin32
@@ -46,6 +46,9 @@ python -m pytest tests/test_image_processor.py -v
 # PDF生成测试
 python -m pytest tests/test_pdf_generator.py -v
 
+# PDF提取器测试
+python -m pytest tests/test_pdf_extractor.py -v
+
 # 集成测试
 python -m pytest tests/test_integration.py -v
 
@@ -60,6 +63,12 @@ python -m pytest tests/test_image_processor.py::test_invalid_image -v
 python -m pytest tests/test_pdf_generator.py::test_basic_pdf_generation -v
 python -m pytest tests/test_pdf_generator.py::test_pdf_with_multiple_images -v
 python -m pytest tests/test_pdf_generator.py::test_pdf_generation_no_images -v
+
+# PDF提取器测试用例
+python -m pytest tests/test_pdf_extractor.py::test_extract_text_valid_pdf -v
+python -m pytest tests/test_pdf_extractor.py::test_extract_text_nonexistent_pdf -v
+python -m pytest tests/test_pdf_extractor.py::test_process_batch -v
+python -m pytest tests/test_pdf_extractor.py::test_process_batch_empty_list -v
 
 # 集成测试用例
 python -m pytest tests/test_integration.py::test_complete_flow -v
@@ -77,6 +86,7 @@ python tools/clean_test_reports.py
 
 # 7. 忽略废弃警告运行PDF测试（推荐）
 python -m pytest tests/test_pdf_generator.py -v -W ignore::DeprecationWarning
+python -m pytest tests/test_pdf_extractor.py -v -W ignore::DeprecationWarning
 
 # 注意：
 # - 确保先激活虚拟环境：.\venv\Scripts\activate
