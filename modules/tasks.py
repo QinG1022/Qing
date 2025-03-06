@@ -19,9 +19,10 @@ celery = Celery('bishe')
 celery.config_from_object('celeryconfig')
 
 # 确保可以导入自定义模块
-project_root = Path(__file__).parent
+project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
+# 导入模块 (相对路径调整)
 from modules.pdf_generator import PDFGenerator
 from modules.ocr_processor import OCRProcessor
 from modules.pdf_extractor import PDFExtractor

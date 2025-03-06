@@ -12,7 +12,7 @@ project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
 from app import app
-from tasks import celery, generate_pdf
+from modules.tasks import celery, generate_pdf
 
 @pytest.fixture
 def client():

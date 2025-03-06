@@ -68,7 +68,7 @@ redis-server
 
 2. 启动Celery工作进程：
 ```bash
-celery -A tasks worker --loglevel=info
+celery -A modules.tasks worker --loglevel=info
 ```
 
 3. 启动Flask应用：
@@ -97,11 +97,13 @@ flask run
 
 ## 目录结构
 - `app.py`: 主应用入口
-- `tasks.py`: Celery异步任务定义
-- `celeryconfig.py`: Celery配置
 - `modules/`: 功能模块目录
+  - `tasks.py`: Celery异步任务定义
   - `image_processor.py`: 图像处理模块
   - `pdf_generator.py`: PDF生成模块
+  - `pdf_extractor.py`: PDF文本提取模块
+  - `ocr_processor.py`: OCR处理模块
+- `celeryconfig.py`: Celery配置
 - `templates/`: HTML模板
 - `static/`: 静态资源文件
 - `Fonts/`: 字体文件目录

@@ -100,7 +100,7 @@ redis-cli ping  # 应返回PONG
 # 3. 启动Celery（新终端）
 # 注意：Windows必须使用 --pool=solo
 .\venv\Scripts\activate
-celery -A tasks worker --loglevel=INFO --pool=solo
+celery -A modules.tasks worker --loglevel=INFO --pool=solo
 
 # 4. 启动Flask（新终端）
 .\venv\Scripts\activate

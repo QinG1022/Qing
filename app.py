@@ -16,7 +16,7 @@ from modules.image_processor import ImageProcessor
 from modules.pdf_generator import PDFGenerator
 from flask_talisman import Talisman
 from celery.result import AsyncResult
-from tasks import celery, generate_pdf, process_images_task, extract_pdf_text  # 添加extract_pdf_text导入
+from modules.tasks import celery, generate_pdf, process_images_task, extract_pdf_text  # 更新导入路径
 import time
 
 # 定义内容安全策略(CSP)
