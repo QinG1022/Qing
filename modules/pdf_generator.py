@@ -3,6 +3,8 @@ PDF文档生成器模块
 功能: 根据文本和图片生成格式化PDF文档
 作者: [您的名字]
 版本: 1.8
+最后更新: 2024-03-06
+描述: 该模块提供PDF文档的生成功能，支持文本排版、图片嵌入、字体管理和页面布局
 """
 import os
 import logging
@@ -34,7 +36,8 @@ from fontTools.ttLib import TTFont as FontToolsFont
 from PyPDF2 import PdfReader, PdfWriter
 
 class PDFGenerator:
-    """PDF文档生成器类
+    """
+    PDF文档生成器类
     
     负责处理PDF文档的生成，包括：
     1. 文本内容排版
@@ -48,11 +51,11 @@ class PDFGenerator:
     FONT_NAME = "simkai.ttf"  # 默认使用楷体
     REGISTERED_NAME = "SimKai"  # 字体注册名
     CACHE_DIR = Path(__file__).parent.parent / "cache"  # 缓存目录
-    IMAGE_MAX_WIDTH = 400  # 图片最大宽度
-    IMAGE_MAX_HEIGHT = 600  # 图片最大高度
-    IMAGE_QUALITY = 85  # JPEG压缩质量
-    FONT_SIZE = 12  # 默认字号
-    LEADING = 14  # 行间距
+    IMAGE_MAX_WIDTH = 400  # 图片最大宽度（像素）
+    IMAGE_MAX_HEIGHT = 600  # 图片最大高度（像素）
+    IMAGE_QUALITY = 85  # JPEG压缩质量（百分比）
+    FONT_SIZE = 12  # 默认字号（磅）
+    LEADING = 14  # 行间距（磅）
 
     # 线程安全控制
     _font_lock = threading.Lock()
@@ -60,7 +63,20 @@ class PDFGenerator:
 
     @classmethod
     def _validate_font(cls):
-        """简化的字体验证"""
+        """
+        验证和初始化字体设置
+        
+        功能:
+            1. 检查字体文件是否存在
+            2. 尝试从系统复制字体文件
+            3. 验证字体文件权限和格式
+            
+        返回:
+            Path/None: 字体文件路径，失败时使用备用字体返回None
+            
+        异常:
+            RuntimeError: 字体初始化失败且无法使用备用字体时抛出
+        """
         try:
             # 确保字体目录存在
             cls.FONT_DIR.mkdir(parents=True, exist_ok=True)
@@ -115,13 +131,22 @@ class PDFGenerator:
 
     @classmethod
     def _calculate_image_size(cls, img):
-        """计算图片在PDF中的安全显示尺寸
+        """
+        计算图片在PDF中的最佳显示尺寸
         
-        Args:
-            img: PIL.Image对象
+        功能:
+            根据原始图片尺寸和页面大小计算最佳显示尺寸
             
-        Returns:
-            tuple: (width, height) 新的尺寸
+        参数:
+            img (PIL.Image): PIL图像对象
+            
+        返回:
+            tuple: (width, height) 新的尺寸（单位：点）
+            
+        说明:
+            - 保持图片原始纵横比
+            - 不会放大小图片，只会缩小大图片
+            - 考虑A4页面大小和边距限制
         """
         # A4页面可用区域（考虑页边距）
         POINTS_PER_INCH = 72
@@ -139,7 +164,7 @@ class PDFGenerator:
         # 计算缩放比例
         width_ratio = MAX_WIDTH / orig_width
         height_ratio = MAX_HEIGHT / orig_height
-        ratio = min(width_ratio, height_ratio, 1.0)  # 不放大图片
+        ratio = min(width_ratio, height_ratio, 1.0)  # 不放大图片，只缩小
         
         # 计算新尺寸
         new_width = int(orig_width * ratio)
@@ -154,7 +179,29 @@ class PDFGenerator:
 
     @classmethod
     def generate(cls, text_content, image_paths, output_dir):
-        """生成PDF文档"""
+        """
+        生成PDF文档
+        
+        功能:
+            根据文本内容和图片生成格式化的PDF文档
+            
+        参数:
+            text_content (str): 要添加到PDF的文本内容
+            image_paths (list): 图片文件路径列表
+            output_dir (str/Path): PDF输出目录
+            
+        返回:
+            str: 生成的PDF文件名
+            
+        异常:
+            ValueError: 当文本和图片都为空时抛出
+            
+        处理流程:
+            1. 注册并验证字体
+            2. 处理文本内容排版
+            3. 处理图片布局和嵌入
+            4. 合并所有内容到一个PDF文件
+        """
         try:
             output_dir = Path(output_dir)
             output_dir.mkdir(parents=True, exist_ok=True)
@@ -227,7 +274,7 @@ class PDFGenerator:
                             img_path = Path(img_path)
                             if img_path.exists():
                                 with Image.open(img_path) as img:
-                                    # RGB转换
+                                    # RGB转换，处理透明通道
                                     if img.mode in ('RGBA', 'P'):
                                         background = Image.new('RGB', img.size, (255, 255, 255))
                                         if img.mode == 'RGBA':
@@ -258,7 +305,7 @@ class PDFGenerator:
                                     x_position = (page_width - width) / 2
                                     y_position -= height
 
-                                    # 直接绘制图片
+                                    # 绘制图片到页面
                                     c_img.drawImage(
                                         str(img_path),
                                         x_position,
@@ -267,7 +314,7 @@ class PDFGenerator:
                                         height=height
                                     )
                                     has_image_content = True
-                                    y_position -= 20
+                                    y_position -= 20  # 图片之间的间距
                                     logging.info(f"成功添加图片到PDF: {img_path}")
                         except Exception as e:
                             logging.error(f"处理图片失败 {img_path}: {e}", exc_info=True)
@@ -319,7 +366,7 @@ class PDFGenerator:
                         img_path = Path(img_path)
                         if img_path.exists():
                             with Image.open(img_path) as img:
-                                # RGB转换
+                                # RGB转换，处理透明通道
                                 if img.mode in ('RGBA', 'P'):
                                     background = Image.new('RGB', img.size, (255, 255, 255))
                                     if img.mode == 'RGBA':
@@ -350,7 +397,7 @@ class PDFGenerator:
                                 x_position = (page_width - width) / 2
                                 y_position -= height
 
-                                # 直接绘制图片
+                                # 绘制图片到页面
                                 c.drawImage(
                                     str(img_path),
                                     x_position,
@@ -359,7 +406,7 @@ class PDFGenerator:
                                     height=height
                                 )
                                 has_content = True
-                                y_position -= 20
+                                y_position -= 20  # 图片之间的间距
                                 logging.info(f"成功添加图片到PDF: {img_path}")
                                 
                     except Exception as e:
@@ -382,12 +429,28 @@ class PDFGenerator:
 
     @classmethod
     def _process_image(cls, img_path):
-        """优化的图片处理"""
+        """
+        优化图片处理
+        
+        功能:
+            处理图片并优化其在PDF中的显示
+            
+        参数:
+            img_path (str/Path): 图片文件路径
+            
+        返回:
+            PlatypusImage/None: 处理后的图片对象，失败时返回None
+            
+        说明:
+            - 使用缓存减少重复处理
+            - 调整图片尺寸以适应PDF
+            - 优化图片质量和格式
+        """
         try:
             cache_key = f"img_{hash(str(img_path))}.jpg"
             cache_path = cls.CACHE_DIR / cache_key
             
-            # 检查缓存
+            # 检查缓存，如果已处理过则直接返回
             if cache_path.exists():
                 return PlatypusImage(str(cache_path))
                 
@@ -402,7 +465,7 @@ class PDFGenerator:
                     new_size = (int(img_width*ratio), int(img_height*ratio))
                     img = img.resize(new_size, Image.Resampling.LANCZOS)
                 
-                # 保存到缓存
+                # 保存到缓存目录
                 img.save(
                     cache_path, 
                     'JPEG', 

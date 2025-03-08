@@ -1,3 +1,10 @@
+"""
+应用集成测试模块
+功能: 测试整个应用的端到端流程
+版本: 1.0
+最后更新: 2024-03-06
+描述: 通过HTTP请求测试应用各个端点的功能集成，验证完整业务流程的正确性
+"""
 import pytest
 import os
 import sys
@@ -16,7 +23,23 @@ from modules.tasks import celery, generate_pdf
 
 @pytest.fixture
 def client():
-    """创建测试客户端"""
+    """
+    创建Flask测试客户端
+    
+    功能:
+        配置一个用于测试的Flask客户端环境
+        
+    配置内容:
+        - 启用测试模式
+        - 设置测试专用的PDF和上传文件目录
+        - 确保测试目录存在
+        
+    清理行为:
+        测试结束后自动清理所有测试目录
+        
+    返回:
+        FlaskClient: Flask测试客户端对象
+    """
     app.config['TESTING'] = True
     app.config['PDF_FOLDER'] = Path("test_pdfs")
     app.config['UPLOAD_FOLDER'] = Path("test_uploads")
@@ -39,7 +62,20 @@ def client():
 
 @pytest.fixture(autouse=True)
 def cleanup_files():
-    """每次测试后清理临时文件"""
+    """
+    每次测试后自动清理临时文件
+    
+    功能:
+        确保测试完成后清理所有临时文件和目录
+        
+    作用:
+        - 防止测试间的状态污染
+        - 减少磁盘空间占用
+        - 确保每次测试从干净的环境开始
+        
+    清理对象:
+        所有测试生成的临时目录和文件
+    """
     yield
     # 清理可能遗留的临时文件
     temp_dirs = [
@@ -58,7 +94,15 @@ def cleanup_files():
 
 @pytest.fixture
 def test_image():
-    """创建测试用图片"""
+    """
+    创建测试用图片
+    
+    功能:
+        生成一个用于测试的简单红色JPEG图片
+        
+    返回:
+        BytesIO: 内存中的图片数据流，可直接用于模拟文件上传
+    """
     img = Image.new('RGB', (100, 100), color='red')
     img_io = BytesIO()
     img.save(img_io, 'JPEG')
@@ -66,7 +110,22 @@ def test_image():
     return img_io
 
 def test_complete_flow(client, test_image):
-    """测试完整的文档生成流程"""
+    """
+    测试完整的文档生成流程
+    
+    测试步骤:
+        1. 提交包含文本和图片的生成请求
+        2. 检查异步任务创建是否成功
+        3. 轮询任务状态直到完成
+        4. 获取并验证生成的PDF文件
+        
+    验证内容:
+        - 请求创建成功 (HTTP 202)
+        - 获取任务ID成功
+        - 任务最终完成 (SUCCESS状态)
+        - 能够下载生成的PDF文件
+        - PDF文件有实际内容
+    """
     # 1. 提交生成请求
     response = client.post(
         '/generate',
@@ -77,25 +136,25 @@ def test_complete_flow(client, test_image):
         content_type='multipart/form-data'
     )
     
-    assert response.status_code == 202
+    assert response.status_code == 202, "请求应返回202 Accepted状态码"
     data = response.get_json()
-    assert 'task_id' in data
+    assert 'task_id' in data, "响应应包含任务ID"
     task_id = data['task_id']
     
     # 2. 轮询任务状态
     max_retries = 10
     while max_retries > 0:
         status_response = client.get(f'/tasks/{task_id}')
-        assert status_response.status_code == 200
+        assert status_response.status_code == 200, "状态查询应返回200状态码"
         status_data = status_response.get_json()
         
         if status_data['status'] == 'SUCCESS':
             # 3. 下载生成的PDF
             pdf_name = status_data['result']
             download_response = client.get(f'/download/{pdf_name}')
-            assert download_response.status_code == 200
-            assert download_response.mimetype == 'application/pdf'
-            assert len(download_response.data) > 0
+            assert download_response.status_code == 200, "PDF下载应返回200状态码"
+            assert download_response.mimetype == 'application/pdf', "下载的文件应为PDF类型"
+            assert len(download_response.data) > 0, "PDF文件不应为空"
             return
             
         elif status_data['status'] == 'FAILURE':
@@ -105,21 +164,39 @@ def test_complete_flow(client, test_image):
         import time
         time.sleep(1)
     
-    pytest.fail("任务超时")
+    pytest.fail("任务超时，未能在规定时间内完成")
 
 def test_empty_content(client):
-    """测试空内容错误处理"""
+    """
+    测试空内容错误处理
+    
+    测试目标:
+        验证当提交空内容时应用能正确返回错误
+        
+    预期结果:
+        - 返回400错误状态码
+        - 响应中包含错误信息
+    """
     response = client.post(
         '/generate',
         data={'content': ''},
         content_type='multipart/form-data'
     )
-    assert response.status_code == 400
+    assert response.status_code == 400, "空内容应返回400错误"
     data = response.get_json()
-    assert 'error' in data
+    assert 'error' in data, "响应中应包含错误信息"
 
 def test_invalid_image(client):
-    """测试无效图片处理"""
+    """
+    测试无效图片处理
+    
+    测试目标:
+        验证当上传无效图片时系统的容错能力
+        
+    预期结果:
+        - 请求应被接受（状态码202）
+        - 系统应忽略无效图片而不是完全失败
+    """
     invalid_image = BytesIO(b'not an image')
     response = client.post(
         '/generate',
@@ -129,13 +206,22 @@ def test_invalid_image(client):
         },
         content_type='multipart/form-data'
     )
-    assert response.status_code == 202  # 应该接受请求但不处理无效图片
+    assert response.status_code == 202, "即使图片无效，请求也应被接受"
 
 def test_images_only(client, test_image):
-    """测试仅上传图片（无文字内容）的成功场景""" 
+    """
+    测试仅上传图片（无文字内容）的成功场景
+    
+    测试目标:
+        验证系统可以处理只有图片没有文本的情况
+        
+    预期结果:
+        - 请求被成功接受（状态码202）
+        - 系统应创建只包含图片的PDF
+    """ 
     response = client.post(
         '/generate',
         data={'images': (test_image, 'test.jpg')}, 
         content_type='multipart/form-data'
     )
-    assert response.status_code == 202 
+    assert response.status_code == 202, "仅包含图片的请求应被接受" 

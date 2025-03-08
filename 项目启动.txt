@@ -52,6 +52,10 @@ python -m pytest tests/test_pdf_extractor.py -v
 # 集成测试
 python -m pytest tests/test_integration.py -v
 
+# 历史记录功能测试
+python -m pytest tests/test_history.py -v
+python -m pytest tests/test_history_integration.py -v
+
 # 4. 运行特定测试用例
 # 图片处理单元测试
 python -m pytest tests/test_image_processor.py::test_process_single -v
@@ -74,6 +78,16 @@ python -m pytest tests/test_pdf_extractor.py::test_process_batch_empty_list -v
 python -m pytest tests/test_integration.py::test_complete_flow -v
 python -m pytest tests/test_integration.py::test_empty_content -v
 python -m pytest tests/test_integration.py::test_invalid_image -v
+
+# 历史记录测试用例
+python -m pytest tests/test_history.py::test_empty_history -v
+python -m pytest tests/test_history.py::test_add_history_record -v
+python -m pytest tests/test_history.py::test_delete_history_record -v
+python -m pytest tests/test_history.py::test_clear_history -v
+python -m pytest tests/test_history.py::test_history_limit -v
+python -m pytest tests/test_history_integration.py::test_ocr_adds_to_history -v
+python -m pytest tests/test_history_integration.py::test_pdf_extract_adds_to_history -v
+python -m pytest tests/test_history_integration.py::test_text_input_adds_to_history -v
 
 # 5. 显示详细输出
 python -m pytest -v tests/
@@ -116,6 +130,33 @@ celery -A modules.tasks worker --loglevel=INFO --pool=solo
 .\venv\Scripts\activate
 python app.py
 
+# ================ 功能使用指南 ================
+# 1. 图片OCR处理
+# - 选择"文档生成与图片处理"标签页
+# - 上传图片文件
+# - 勾选"对图片进行文字识别"
+# - 点击"处理图片"
+# - 查看识别结果，可以合并到文本区
+
+# 2. PDF文本提取
+# - 选择"提取PDF文本"标签页
+# - 上传PDF文件
+# - 点击"提取文本"
+# - 查看提取结果，可以复制全部文本
+
+# 3. 文档生成
+# - 在文本区域输入内容
+# - 点击"生成文档"
+# - 等待处理完成后下载生成的PDF
+
+# 4. 历史记录功能
+# - 系统自动保存最近6条处理结果
+# - 可通过"刷新"按钮更新历史记录
+# - 点击单个记录右上角的删除按钮可删除该记录
+# - 点击"清空"按钮可清空所有历史记录
+# - 点击"复制"按钮可复制内容到剪贴板
+# - 点击"插入"按钮可将内容插入到文本编辑区
+
 # ================ 常见问题 ================
 # 1. Redis服务无法启动
 # - 检查服务是否已安装：services.msc
@@ -143,6 +184,11 @@ taskkill /F /PID <进程ID>
 # - 确保所有依赖都已正确安装
 # - 验证配置文件是否正确
 # - 检查系统权限
+
+# 6. 历史记录不显示
+# - 确认已执行过OCR或PDF提取操作
+# - 检查浏览器控制台是否有错误
+# - 手动点击"刷新"按钮更新历史记录
 
 # ================ 关闭服务 ================
 # 1. 关闭Flask和Celery
