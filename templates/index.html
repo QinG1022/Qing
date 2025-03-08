@@ -129,6 +129,28 @@
 
         <div class="results-grid" id="resultsGrid"></div>
 
+        <!-- 历史记录区域 -->
+        <div class="history-section">
+            <div class="history-header">
+                <h2><span class="material-icons">历史记录</span>  <span class="history-count" id="historyCount">(共0/6条内容)</span></h2>
+                <div class="history-actions-header">
+                    <button id="clearHistoryBtn" class="clear-btn">
+                        <span class="material-icons">清空</span> 
+                    </button>
+                    <button id="refreshHistoryBtn" class="refresh-btn">
+                        <span class="material-icons">刷新</span> 
+                    </button>
+                </div>
+            </div>
+            <div class="history-container" id="historyContainer">
+                <!-- 历史记录内容将通过JS动态加载 -->
+                <div class="loading-history">
+                    <div class="mini-spinner"></div>
+                    <div>加载中...</div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal-overlay" id="modalOverlay">
             <div class="modal-dialog">
                 <div class="modal-content">

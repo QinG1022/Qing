@@ -18,6 +18,7 @@ from flask_talisman import Talisman
 from celery.result import AsyncResult
 from modules.tasks import celery, generate_pdf, process_images_task, extract_pdf_text  # 更新导入路径
 import time
+from collections import deque  # 添加导入双端队列
 
 # 定义内容安全策略(CSP)
 csp = {
@@ -37,12 +38,16 @@ app.config.update(
     MAX_CONTENT_LENGTH=20 * 1024 * 1024,  # 最大上传限制：20MB
     ALLOWED_EXTENSIONS={'png', 'jpg', 'jpeg', 'webp', 'pdf'},  # 允许的格式，添加了pdf
     CELERY_BROKER_URL='redis://localhost:6379/0',  # Celery消息队列
-    CELERY_RESULT_BACKEND='redis://localhost:6379/0'  # Celery结果存储
+    CELERY_RESULT_BACKEND='redis://localhost:6379/0',  # Celery结果存储
+    MAX_HISTORY_ITEMS=6  # 历史记录最大保存条数
 )
+
+# 创建一个双端队列用于存储历史记录
+history_records = deque(maxlen=app.config['MAX_HISTORY_ITEMS'])
 
 # 高级日志配置
 logging.basicConfig(
-    level=logging.WARNING,  # 将 INFO 改为 WARNING
+    level=logging.INFO,  # 将 WARNING 改为 INFO，便于调试
     format='%(asctime)s [%(levelname)s] %(message)s',
     handlers=[
         logging.FileHandler('app_audit.log'),
@@ -52,6 +57,12 @@ logging.basicConfig(
 
 # 修改Werkzeug日志级别
 logging.getLogger('werkzeug').setLevel(logging.ERROR)  # 添加这行
+
+# 程序启动日志
+logging.info("="*50)
+logging.info("应用程序启动")
+logging.info("历史记录功能已初始化，最大容量: %d", app.config['MAX_HISTORY_ITEMS'])
+logging.info("="*50)
 
 @app.before_request
 def security_check():
@@ -99,6 +110,27 @@ def handle_generate():
         
         process_type = request.form.get('processType', 'direct')
         
+        # 如果有文本内容，添加到历史记录
+        if text_content:
+            # 为来源添加一些描述性信息
+            source = '用户输入文本'
+            if len(text_content) > 50:
+                # 为长文本添加一部分预览
+                preview = text_content[:50].replace('\n', ' ') + '...'
+                source = f'用户输入：{preview}'
+            else:
+                source = f'用户输入：{text_content}'
+                
+            history_item = {
+                'id': 'text_' + datetime.now().strftime('%Y%m%d%H%M%S'),
+                'type': 'TEXT',
+                'content': text_content,
+                'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                'source': source
+            }
+            history_records.appendleft(history_item)
+            logging.info(f"添加用户输入文本到历史记录，ID: {history_item['id']}")
+            
         image_paths = []
         if files and any(f.filename for f in files):  # 确保有实际的文件
             # 创建唯一的临时目录
@@ -154,14 +186,53 @@ def get_task(task_id):
         
         if task.state == 'SUCCESS':
             result = task.result
-            if isinstance(result, dict):  # OCR任务结果
+            if isinstance(result, dict):  # OCR任务或PDF文本提取任务
                 # 处理不同的状态码
                 status = result.get('status', 'UNKNOWN')
                 if status == 'success':
+                    # 判断任务类型并添加到历史记录
+                    if 'results' in result and len(result['results']) > 0:
+                        # 确定任务类型
+                        task_type = 'UNKNOWN'
+                        source = '未知来源'
+                        content_text = ''
+                        
+                        # OCR任务结果处理 - 每个结果项都有text字段
+                        if all(isinstance(item, dict) and 'text' in item and 'confidence' in item for item in result['results']):
+                            task_type = 'OCR'
+                            source = '图片识别'
+                            # 合并所有OCR文本
+                            content_text = '\n\n'.join([item.get('text', '') for item in result['results'] if item.get('text')])
+                        
+                        # PDF提取任务结果处理 - 结果中有pages和filename字段
+                        elif len(result['results']) == 1 and 'pages' in result['results'][0] and 'filename' in result['results'][0]:
+                            task_type = 'PDF'
+                            filename = result['results'][0].get('filename', '未知文件')
+                            source = f'PDF提取：{filename}'
+                            pdf_result = result['results'][0]
+                            # 合并所有页面文本
+                            if 'pages' in pdf_result and pdf_result['pages']:
+                                content_text = '\n\n'.join([f"第{page.get('page_num')}页:\n{page.get('text', '')}" 
+                                                     for page in pdf_result['pages'] if page.get('text')])
+                            else:
+                                content_text = pdf_result.get('text', '')
+                        
+                        # 添加到历史记录中
+                        if content_text and task_type != 'UNKNOWN':
+                            history_item = {
+                                'id': task_id,
+                                'type': task_type,
+                                'content': content_text,
+                                'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                                'source': source
+                            }
+                            history_records.appendleft(history_item)
+                            logging.info(f"添加{task_type}历史记录成功，来源：{source}，任务ID: {task_id}")
+                    
                     response = {
                         'status': 'SUCCESS',
                         'result': result,
-                        'message': 'OCR处理完成！'
+                        'message': 'OCR处理完成！' if 'text' in result else 'PDF文本提取完成！'
                     }
                 elif status == 'warning':
                     response = {
@@ -327,6 +398,64 @@ def extract_pdf():
 
     except Exception as e:
         logging.error(f"请求处理失败: {str(e)}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/history', methods=['GET'])
+def get_history():
+    """获取历史记录"""
+    try:
+        # 将deque转换为列表返回
+        history_list = list(history_records)
+        logging.info(f"获取历史记录，总数: {len(history_list)}")
+        return jsonify({
+            "status": "success",
+            "history": history_list,
+            "count": len(history_list),
+            "max_count": app.config['MAX_HISTORY_ITEMS']
+        })
+    except Exception as e:
+        logging.error(f"获取历史记录失败: {str(e)}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/history/<record_id>', methods=['DELETE'])
+def delete_history_record(record_id):
+    """删除单条历史记录"""
+    try:
+        # 查找并删除指定ID的历史记录
+        found = False
+        for i, record in enumerate(history_records):
+            if record.get('id') == record_id:
+                logging.info(f"删除历史记录，ID: {record_id}")
+                del history_records[i]
+                found = True
+                break
+        
+        if found:
+            return jsonify({
+                "status": "success", 
+                "message": "历史记录已删除",
+                "count": len(history_records)
+            })
+        else:
+            return jsonify({"error": "未找到指定的历史记录"}), 404
+            
+    except Exception as e:
+        logging.error(f"删除历史记录失败: {str(e)}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/history', methods=['DELETE'])
+def clear_history():
+    """清空所有历史记录"""
+    try:
+        # 清空历史记录
+        history_records.clear()
+        logging.info("清空所有历史记录")
+        return jsonify({
+            "status": "success", 
+            "message": "所有历史记录已清空"
+        })
+    except Exception as e:
+        logging.error(f"清空历史记录失败: {str(e)}")
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':

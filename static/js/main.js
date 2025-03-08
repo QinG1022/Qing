@@ -21,10 +21,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalConfirm = document.getElementById('modalConfirm');
     const modalCancel = document.getElementById('modalCancel');
     const modalClose = document.getElementById('modalClose');
+    const historyContainer = document.getElementById('historyContainer');
+    const refreshHistoryBtn = document.getElementById('refreshHistoryBtn');
+    const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+    const historyCount = document.getElementById('historyCount');
     let ocrTextAdded = false; // 标志用户是否点击了"添加到文本"或"全部合并到文本"按钮
 
     // 初始化加载状态为隐藏
     loadingOverlay.classList.add('hidden');
+    
+    // 初始化加载历史记录
+    loadHistory();
+
+    // 为刷新历史记录按钮添加事件监听器
+    if (refreshHistoryBtn) {
+        refreshHistoryBtn.addEventListener('click', loadHistory);
+    }
+    
+    // 为清空历史记录按钮添加事件监听器
+    if (clearHistoryBtn) {
+        clearHistoryBtn.addEventListener('click', clearHistory);
+    }
 
     // 标签页切换功能
     const tabButtons = document.querySelectorAll('.tab-button');
@@ -219,6 +236,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     hideLoading();
                     handleOCRResults(data.result.results);
                     processImagesBtn.disabled = false;
+                    
+                    // 处理成功后刷新历史记录
+                    console.log("OCR处理完成，刷新历史记录");
+                    setTimeout(loadHistory, 500);
                 } else if (data.status === 'FAILURE') {
                     clearInterval(intervalId);
                     hideLoading();
@@ -318,9 +339,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // 处理表单提交
     async function handleSubmit(includeImages) {
         try {
+            // 检查文本内容是否为空
+            const textContent = contentTextarea.value.trim();
+            if (!textContent && (!includeImages || !imagesInput.files.length)) {
+                showToast('请输入文本内容或上传图片');
+                return;
+            }
+            
             showLoading('生成文档中...');
             const formData = new FormData();
-            formData.append('content', contentTextarea.value.trim());
+            formData.append('content', textContent);
             
             if (includeImages) {
                 Array.from(imagesInput.files).forEach(file => {
@@ -339,6 +367,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             if (data.task_id) {
+                // 如果有文本内容，则刷新历史记录
+                if (textContent) {
+                    console.log("文本内容已提交，刷新历史记录");
+                    setTimeout(loadHistory, 500);
+                }
                 pollTaskStatus(data.task_id);
             } else {
                 throw new Error('未收到任务ID');
@@ -508,34 +541,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 轮询PDF提取任务状态
     function pollPDFExtractionStatus(taskId) {
-        showLoading('正在提取PDF文本...');
+        showLoading('提取PDF文本中...');
         
         const intervalId = setInterval(async () => {
             try {
                 const response = await fetch(`/tasks/${taskId}`);
-                if (!response.ok) {
-                    throw new Error('服务器响应错误');
-                }
+                const data = await response.json();
                 
-                const result = await response.json();
-                
-                if (result.status === 'SUCCESS') {
+                if (data.status === 'SUCCESS') {
                     clearInterval(intervalId);
                     hideLoading();
-                    handlePDFResults(result.result);
-                } else if (result.status === 'FAILURE') {
+                    handlePDFResults(data.result);
+                    extractPdfBtn.disabled = false;
+                    
+                    // 处理成功后刷新历史记录
+                    console.log("PDF处理完成，刷新历史记录");
+                    setTimeout(loadHistory, 500);
+                } else if (data.status === 'FAILURE') {
                     clearInterval(intervalId);
                     hideLoading();
-                    setStatusMessage(`处理失败: ${result.error || '未知错误'}`, true);
-                } else if (result.status === 'PENDING' || result.status === 'STARTED') {
-                    const progress = result.current / result.total * 100;
-                    document.getElementById('loadingText').textContent = `任务进行中: ${Math.round(progress)}%`;
+                    setStatusMessage(`PDF处理失败: ${data.error || '未知错误'}`, true);
+                    extractPdfBtn.disabled = false;
+                } else {
+                    document.getElementById('loadingText').textContent = data.message || '提取中...';
                 }
             } catch (error) {
-                console.error('获取任务状态失败:', error);
                 clearInterval(intervalId);
                 hideLoading();
-                setStatusMessage(`获取任务状态失败: ${error.message}`, true);
+                setStatusMessage('状态查询失败', true);
+                extractPdfBtn.disabled = false;
             }
         }, 1000);
     }
@@ -623,5 +657,194 @@ document.addEventListener('DOMContentLoaded', function() {
         textarea.select();
         document.execCommand('copy');
         document.body.removeChild(textarea);
+    }
+
+    // 历史记录相关函数
+    async function loadHistory() {
+        try {
+            console.log("正在获取历史记录...");
+            const response = await fetch('/history');
+            
+            if (!response.ok) {
+                throw new Error('获取历史记录失败，状态码: ' + response.status);
+            }
+            
+            const data = await response.json();
+            console.log("历史记录数据:", data);
+            
+            // 更新历史记录计数
+            if (historyCount) {
+                historyCount.textContent = `(共${data.count}/${data.max_count}条内容)`;
+            }
+            
+            if (data.status === 'success' && historyContainer) {
+                // 清空历史记录容器
+                historyContainer.innerHTML = '';
+                
+                if (data.history && data.history.length > 0) {
+                    console.log(`加载 ${data.history.length} 条历史记录`);
+                    // 添加所有历史记录项
+                    data.history.forEach(item => {
+                        const historyItem = document.createElement('div');
+                        historyItem.className = 'history-item';
+                        historyItem.dataset.id = item.id;
+                        
+                        // 获取历史记录类型的显示名称
+                        let typeName = '';
+                        
+                        switch(item.type) {
+                            case 'OCR':
+                                typeName = '图片OCR识别';
+                                break;
+                            case 'PDF':
+                                typeName = 'PDF文本提取';
+                                break;
+                            case 'TEXT':
+                                typeName = '用户输入文本';
+                                break;
+                            default:
+                                typeName = '未知类型';
+                        }
+                        
+                        // 创建历史记录项的内容，使用item.source来显示来源信息
+                        historyItem.innerHTML = `
+                            <button class="delete-history-btn" title="删除此记录">
+                                <span class="material-icons">删除</span>
+                            </button>
+                            <div class="history-item-header">
+                                <div class="history-type">
+                                    <span class="material-icons">${typeName}</span>
+                                </div>
+                                <div class="history-timestamp">${item.timestamp}</div>
+                            </div>
+                            <div class="history-source">${item.source || typeName}</div>
+                            <div class="history-content">${item.content || '(无内容)'}</div>
+                            <div class="history-actions">
+                                <button class="copy-history-btn">
+                                    <span class="material-icons">复制</span> 
+                                </button>
+                                <button class="insert-history-btn">
+                                    <span class="material-icons">插入</span> 
+                                </button>
+                            </div>
+                        `;
+                        
+                        // 为删除按钮添加事件监听器
+                        const deleteBtn = historyItem.querySelector('.delete-history-btn');
+                        deleteBtn.addEventListener('click', () => {
+                            deleteHistoryRecord(item.id);
+                        });
+                        
+                        // 为复制按钮添加事件监听器
+                        const copyBtn = historyItem.querySelector('.copy-history-btn');
+                        copyBtn.addEventListener('click', () => {
+                            copyToClipboard(item.content || '(无内容)');
+                            showToast('已复制到剪贴板');
+                        });
+                        
+                        // 为插入到编辑器按钮添加事件监听器
+                        const insertBtn = historyItem.querySelector('.insert-history-btn');
+                        insertBtn.addEventListener('click', () => {
+                            if (contentTextarea) {
+                                const currentText = contentTextarea.value;
+                                if (currentText) {
+                                    contentTextarea.value = currentText + '\n\n' + (item.content || '(无内容)');
+                                } else {
+                                    contentTextarea.value = item.content || '(无内容)';
+                                }
+                                showToast('文本已插入到编辑器');
+                                
+                                // 切换到第一个标签页并滚动到文本区域
+                                const firstTabBtn = document.querySelector('.tab-button[data-tab="tab1"]');
+                                if (firstTabBtn) {
+                                    firstTabBtn.click();
+                                    contentTextarea.scrollIntoView({ behavior: 'smooth' });
+                                    setTimeout(() => {
+                                        contentTextarea.focus();
+                                    }, 300);
+                                }
+                            }
+                        });
+                        
+                        // 添加到容器中
+                        historyContainer.appendChild(historyItem);
+                    });
+                } else {
+                    console.log("没有历史记录");
+                    // 没有历史记录时显示提示
+                    historyContainer.innerHTML = '<div class="empty-history">暂无历史记录</div>';
+                }
+                
+                // 触发历史记录加载完成事件
+                document.dispatchEvent(new Event('historyLoaded'));
+            }
+        } catch (error) {
+            console.error('获取历史记录出错:', error);
+            // 显示错误信息
+            if (historyContainer) {
+                historyContainer.innerHTML = `<div class="empty-history error">获取历史记录失败: ${error.message}</div>`;
+            }
+            showToast('获取历史记录失败: ' + error.message);
+        }
+    }
+    
+    // 删除单条历史记录
+    async function deleteHistoryRecord(recordId) {
+        try {
+            showLoading('删除中...');
+            const response = await fetch(`/history/${recordId}`, {
+                method: 'DELETE'
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                // 刷新历史记录
+                await loadHistory();
+                showToast('历史记录已删除');
+            } else {
+                throw new Error(data.error || '删除失败');
+            }
+            
+            hideLoading();
+        } catch (error) {
+            console.error('删除历史记录失败:', error);
+            hideLoading();
+            showToast('删除历史记录失败: ' + error.message);
+        }
+    }
+    
+    // 清空全部历史记录
+    async function clearHistory() {
+        try {
+            // 显示确认对话框
+            showConfirmDialog('确定要清空所有历史记录吗？此操作不可撤销。', async () => {
+                try {
+                    showLoading('清空中...');
+                    const response = await fetch('/history', {
+                        method: 'DELETE'
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        // 刷新历史记录
+                        await loadHistory();
+                        showToast('所有历史记录已清空');
+                    } else {
+                        throw new Error(data.error || '清空失败');
+                    }
+                    
+                    hideLoading();
+                } catch (error) {
+                    console.error('清空历史记录失败:', error);
+                    hideLoading();
+                    showToast('清空历史记录失败: ' + error.message);
+                }
+            });
+        } catch (error) {
+            console.error('清空历史记录错误:', error);
+            showToast('操作失败: ' + error.message);
+        }
     }
 });
