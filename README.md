@@ -155,8 +155,6 @@
 - `static/`: 静态资源文件
   - `css/`: 样式文件
   - `js/`: JavaScript文件
-- `fonts/`: 字体文件目录
-  - `font_check.py`:字体配置检查工具
 - `tests/`: 测试用例
   - `test_image_processor.py`: 图像处理测试
   - `test_pdf_generator.py`: PDF生成测试
