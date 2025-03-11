@@ -527,6 +527,34 @@ button:disabled {
     position: relative; /* 相对定位 */
     padding-bottom: 30px; /* 下边距 */
 }
+
+/* 左右排版布局 */
+#tab1 {
+    display: none; /* 默认隐藏 */
+}
+
+#tab1.active {
+    display: flex !important; /* 使用弹性盒子布局并强制优先级 */
+    flex-wrap: wrap; /* 允许换行 */
+    gap: 20px; /* 区域之间的间距 */
+}
+
+#tab1 .text-section {
+    flex: 1; /* 弹性增长 */
+    min-width: 45%; /* 最小宽度 */
+    margin-right: 10px; /* 右边距 */
+}
+
+#tab1 .image-section {
+    flex: 1; /* 弹性增长 */
+    min-width: 45%; /* 最小宽度 */
+}
+
+#tab1 .action-bar {
+    width: 100%; /* 按钮区域占满宽度 */
+    margin-top: 20px; /* 上边距 */
+}
+
 /* 图片选项样式 */
 .image-options {
     display: flex; /* 显示为弹性盒子 */
@@ -712,6 +740,18 @@ button:disabled {
     
     .container {
         width: 95%; /* 宽度 */
+    }
+    
+    /* 在小屏幕上恢复为上下布局 */
+    #tab1.active {
+        flex-direction: column; /* 垂直排列 */
+        display: flex !important; /* 强制保持flex布局 */
+    }
+    
+    #tab1 .text-section,
+    #tab1 .image-section {
+        min-width: 100%; /* 占满宽度 */
+        margin-right: 0; /* 移除右边距 */
     }
     
     .btn {
