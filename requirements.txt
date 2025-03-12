@@ -1,0 +1,42 @@
+# Web框架
+Flask>=2.0.0
+Flask-Talisman>=0.8.0
+Werkzeug>=2.0.0
+
+# 异步任务
+celery>=5.2.0
+redis>=4.0.0
+
+# 图像处理
+Pillow>=9.0.0
+pytesseract>=0.3.0
+
+# PDF生成
+reportlab>=3.6.0
+fonttools>=4.28.0
+PyPDF2>=3.0.0
+PyMuPDF>=1.18.0
+
+# 工具类
+python-dateutil>=2.8.0
+
+# 核心依赖
+Flask==3.0.2
+reportlab==4.1.0 
+Pillow==11.1.0
+python-dotenv==1.0.0
+python-magic==0.4.27
+redis==5.0.1
+flask-talisman==1.1.0
+pyOpenSSL==24.0.0
+
+# 开发工具
+pytest==8.0.0
+celery==5.3.6
+pytest-html==4.1.1
+
+# 额外依赖
+pywin32>=308; sys_platform == 'win32'
+
+# OCR依赖
+pytesseract==0.3.10
