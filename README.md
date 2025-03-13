@@ -1,7 +1,7 @@
 # 文档处理Web服务
 
 ## 📌 项目概述
-这是一个基于Flask的Web应用程序，提供智能文档处理服务，包括图像处理和PDF文档生成功能。该应用支持异步任务处理、图像优化、文本提取以及历史记录管理等功能，可用于文档数字化和管理场景。
+这是一个基于Flask的Web应用程序，提供智能文档处理服务，包括图像处理、PDF文档生成功能和AI对话功能。该应用支持异步任务处理、图像优化、文本提取以及历史记录管理等功能，可用于文档数字化和管理场景。
 
 ## 🚀 主要功能
 - 📄 PDF文档生成与下载
@@ -11,6 +11,7 @@
 - 📜 历史记录管理（保存处理结果）
 - 🔤 字体管理与检查
 - ⏱️ 基于Celery的异步任务处理
+- 🤖 AI对话（基于DeepSeek API）
 
 ## 🛠️ 技术栈
 - **Web框架**: Flask
@@ -26,6 +27,7 @@
 - Python 3.8+
 - Redis服务器
 - Tesseract OCR引擎（用于OCR功能）
+- DeepSeek API密钥（用于AI对话功能）
 
 ### Windows环境安装步骤
 1. **克隆代码库**:
@@ -150,6 +152,8 @@
   - `pdf_generator.py`: PDF生成模块
   - `pdf_extractor.py`: PDF文本提取模块
   - `ocr_processor.py`: OCR处理模块
+  - `ai_routes.py`: AI对话路由模块
+  - `deepseek_client.py`: DeepSeek API客户端
 - `celeryconfig.py`: Celery配置
 - `templates/`: HTML模板
 - `static/`: 静态资源文件
@@ -193,3 +197,14 @@
 ## 🛑 关闭服务
   - 在Flask和Celery终端按 Ctrl+C
   - 关闭Redis: `net stop Redis`
+
+### AI对话
+1. 选择"AI对话"标签页
+2. 在输入框中输入您的问题
+3. 点击发送按钮
+4. 等待AI助手回复
+
+5. **AI对话无响应**
+   - 检查.env文件中是否正确配置DeepSeek API密钥
+   - 确认网络连接正常
+   - 查看浏览器控制台是否有错误信息

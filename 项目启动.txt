@@ -14,6 +14,7 @@ pip install -r requirements.txt
 # - Celery 5.3.6 和 Redis 5.0.1
 # - 图像处理：Pillow 11.1.0, pytesseract 0.3.10
 # - PDF处理：reportlab 4.1.0, fonttools，PyPDF2, PyMuPDF (fitz)
+# - AI对话：openai (用于DeepSeek API调用), python-dotenv
 # - 测试工具：pytest 8.0.0, pytest-html 4.1.1
 # - 其他工具：python-dotenv, python-magic, pyOpenSSL
 # - Windows专用：pywin32
@@ -130,6 +131,14 @@ celery -A modules.tasks worker --loglevel=INFO --pool=solo
 .\venv\Scripts\activate
 python app.py
 
+# ================ 环境变量配置 ================
+# 1. 创建.env文件
+# 在项目根目录创建.env文件，添加以下内容：
+# DEEPSEEK_API_KEY=your_api_key_here
+
+# 2. 验证配置
+# 启动应用后访问AI对话功能验证
+
 # ================ 功能使用指南 ================
 # 1. 图片OCR处理
 # - 选择"文档生成与图片处理"标签页
@@ -197,3 +206,57 @@ taskkill /F /PID <进程ID>
 
 # 2. 关闭Redis
 net stop Redis
+
+# 5. AI对话功能
+# - 选择"AI对话"标签页
+# - 在输入框中输入问题
+# - 点击发送按钮
+# - 等待AI助手回复
+# - 支持连续对话，保持上下文
+
+# ================ 常见问题 ================
+# 1. Redis服务无法启动
+# - 检查服务是否已安装：services.msc
+# - 检查端口占用：netstat -ano | findstr 6379
+# - 重新安装Redis
+
+# 2. Celery报错
+# - 确保使用 --pool=solo
+# - 检查Redis连接
+# - 查看是否激活虚拟环境
+
+# 3. OCR无法使用
+# - 检查环境变量Path是否包含Tesseract路径
+# - 重启终端或电脑
+# - 测试命令：tesseract --version
+
+# 4. 端口被占用
+# 查找占用端口的进程：
+netstat -ano | findstr 5000
+# 结束进程：
+taskkill /F /PID <进程ID>
+
+# 5. 测试失败
+# - 检查日志文件中的错误信息
+# - 确保所有依赖都已正确安装
+# - 验证配置文件是否正确
+# - 检查系统权限
+
+# 6. 历史记录不显示
+# - 确认已执行过OCR或PDF提取操作
+# - 检查浏览器控制台是否有错误
+# - 手动点击"刷新"按钮更新历史记录
+
+# ================ 关闭服务 ================
+# 1. 关闭Flask和Celery
+# 在对应终端按 Ctrl+C
+# 或使用任务管理器结束python.exe进程
+
+# 2. 关闭Redis
+net stop Redis
+
+# 7. AI对话功能无响应
+# - 检查.env文件中是否正确配置DeepSeek API密钥
+# - 确认网络连接正常
+# - 查看浏览器控制台是否有错误信息
+# - 检查API调用限制和配额

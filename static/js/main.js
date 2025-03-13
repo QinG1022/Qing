@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {                      
                     div.className = 'pdf-preview-item'; // 设置PDF预览元素的类名    
                     div.innerHTML = `
                         <div class="pdf-icon">
-                            <span class="material-icons">PDF</span>
+                            <span class="s">PDF</span>
                         </div>
                         <div class="file-info">
                             <div>${file.name}</div>
