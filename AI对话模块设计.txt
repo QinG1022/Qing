@@ -1,0 +1,99 @@
+# modules/deepseek_client.py
+
+from openai import OpenAI
+from flask import Response, stream_with_context
+import json
+
+class DeepSeekClient:
+    def __init__(self, api_key, model="deepseek-chat", base_url="https://api.deepseek.com"):
+        self.client = OpenAI(api_key=api_key, base_url=base_url)
+        self.model = model
+        self.messages = [{"role": "system", "content": "You are a helpful assistant."}]
+    
+    def add_message(self, role, content):
+        """添加对话历史"""
+        self.messages.append({"role": role, "content": content})
+    
+    def generate_response(self, stream=False, **kwargs):
+        """生成响应（支持流式/非流式）"""
+        try:
+            response = self.client.chat.completions.create(
+                model=self.model,
+                messages=self.messages,
+                stream=stream,
+                **kwargs  # 可扩展参数：temperature, max_tokens等
+            )
+            return response
+        except Exception as e:
+            return {"error": str(e)}
+
+    def stream_response(self, response):
+        """流式响应处理"""
+        for chunk in response:
+            if chunk.choices:
+                content = chunk.choices[0].delta.content or ""
+                yield f"data: {json.dumps({'content': content})}\n\n"
+        yield "data: [DONE]\n\n"
+
+    def format_response(self, response):
+        """非流式响应处理"""
+        if "error" in response:
+            return response
+        return response.choices[0].message.content
+
+# Flask路由示例
+from flask import Blueprint, request
+from .deepseek_client import DeepSeekClient
+
+ai_bp = Blueprint('ai', __name__)
+client = DeepSeekClient(api_key="your_api_key_here")  # 从环境变量读取更安全
+
+@ai_bp.route('/chat', methods=['POST'])
+def chat():
+    data = request.json
+    user_input = data.get('message')
+    stream_mode = data.get('stream', False)
+    
+    # 添加用户消息
+    client.add_message("user", user_input)
+    
+    # 获取响应
+    response = client.generate_response(stream=stream_mode)
+    
+    # 错误处理
+    if isinstance(response, dict) and "error" in response:
+        return {"error": response["error"]}, 500
+    
+    # 流式输出
+    if stream_mode:
+        def generate():
+            for data_chunk in client.stream_response(response):
+                yield data_chunk
+        return Response(stream_with_context(generate()), mimetype='text/event-stream')
+    
+  # 非流式输出
+    assistant_response = client.format_response(response)
+    client.add_message("assistant", assistant_response)
+    return {"response": assistant_response}
+    
+    核心功能说明
+1、模块化设计
+
+    DeepSeekClient 类封装了API调用、对话历史管理、流式处理逻辑，便于复用
+
+    通过 stream 参数动态切换流式模式，支持扩展其他模型参数（如 temperature、max_tokens）。
+
+2、流式输出实现
+
+    使用Flask的 stream_with_context 和 Response 对象实现服务器推送（Server-Sent Events）11。
+
+    前端可通过 EventSource 接收实时数据块，示例前端代码：
+
+    const eventSource = new EventSource('/chat?stream=true');
+    eventSource.onmessage = (e) => {
+            if (e.data === '[DONE]') eventSource.close();
+            else console.log(JSON.parse(e.data).content);
+        };
+
+
+    API密钥应通过环境变量注入（如 os.getenv("DEEPSEEK_API_KEY")），避免硬编码

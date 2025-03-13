@@ -23,6 +23,9 @@
                 <button class="tab-button" data-tab="tab2">
                     <span class="material-icons">提取PDF文本</span>
                 </button>
+                <button class="tab-button" data-tab="tab3">
+                    <span class="material-icons">AI对话</span>
+                </button>
             </div>
 
             <div class="tab-pane active" id="tab1"><!--当前激活的标签页-->
@@ -122,6 +125,23 @@
                         <span class="material-icons">复制全部文本</span> 
                     </button>
                 </div>
+            </div>
+            <!-- AI对话窗口 -->
+            <div class="tab-pane" id="tab3">
+                <section class="chat-section">
+                    <h2><span class="material-icons">AI对话</span></h2>
+                    <div class="chat-container">
+                        <div class="chat-messages" id="chatMessages">
+                            <!-- 消息内容将通过JS动态加载 -->
+                        </div>
+                        <div class="chat-input-container">
+                            <textarea id="chatInput" placeholder="请输入您的问题..."></textarea>
+                            <button id="sendMessageBtn" class="btn primary">
+                                <span class="material-icons">发送</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
 

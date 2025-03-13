@@ -11,6 +11,11 @@ import logging
 import shutil
 from datetime import datetime
 from pathlib import Path
+from dotenv import load_dotenv
+
+# 加载.env文件中的环境变量
+load_dotenv()
+
 from flask import Flask, render_template, request, jsonify, abort, send_from_directory
 from werkzeug.utils import secure_filename
 from celery import Celery
@@ -19,6 +24,7 @@ from modules.pdf_generator import PDFGenerator
 from flask_talisman import Talisman
 from celery.result import AsyncResult
 from modules.tasks import celery, generate_pdf, process_images_task, extract_pdf_text
+from modules.ai_routes import ai_bp  # 导入AI对话模块的Blueprint
 import time
 from collections import deque
 
@@ -66,6 +72,10 @@ logging.info("="*50)
 logging.info("应用程序启动")
 logging.info("历史记录功能已初始化，最大容量: %d", app.config['MAX_HISTORY_ITEMS'])
 logging.info("="*50)
+
+# 注册AI对话模块蓝图
+app.register_blueprint(ai_bp, url_prefix='/ai')
+logging.info("AI对话模块已注册，访问路径: /ai")
 
 @app.before_request
 def security_check():
@@ -594,3 +604,5 @@ if __name__ == '__main__':
     except Exception as e:
         print(f"启动失败: {str(e)}")
         logging.error(f"服务器启动异常: {str(e)}", exc_info=True)
+        # 注册蓝图
+        app.register_blueprint(ai_bp, url_prefix='/ai')
