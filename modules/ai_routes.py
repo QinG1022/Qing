@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 from .deepseek_client import DeepSeekClient
 import logging
+from werkzeug.exceptions import BadRequest
 
 # 加载.env文件中的环境变量
 load_dotenv()
@@ -40,7 +41,15 @@ def chat():
         return jsonify({"error": "AI服务未正确配置，请检查API密钥"}), 500
         
     try:
-        data = request.json
+        # 检查请求数据是否为JSON格式
+        if not request.is_json:
+            return jsonify({"error": "无效的请求数据"}), 400
+            
+        try:
+            data = request.get_json()
+        except BadRequest:
+            return jsonify({"error": "无效的请求数据"}), 400
+            
         if not data:
             return jsonify({"error": "无效的请求数据"}), 400
             
