@@ -1,0 +1,94 @@
+/* --------------------------------------
+ * OCR处理相关样式
+ * -------------------------------------- */
+.ocr-results {
+    margin-top: 25px;
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    transition: all 0.4s ease;
+    overflow: hidden;
+    max-height: 1000px;
+    opacity: 1;
+}
+
+.ocr-results.hidden {
+    display: none;
+    max-height: 0;
+    opacity: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+.ocr-results:not(.hidden) {
+    animation: slideDown 0.4s ease forwards;
+}
+
+@keyframes slideDown {
+    from {
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        max-height: 1000px;
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ocr-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.ocr-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--primary-color);
+}
+
+.ocr-item {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 3px var(--shadow-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    transition: transform 0.2s;
+}
+
+.ocr-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px var(--shadow-color);
+}
+
+.ocr-text {
+    flex: 1;
+    margin-right: 15px;
+    margin-bottom: 0;
+    white-space: pre-line;
+}
+
+.ocr-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.ocr-actions button {
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+.ocr-actions button:disabled {
+    background-color: #cccccc;
+}

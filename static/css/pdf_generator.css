@@ -1,0 +1,115 @@
+/* 
+ * PDF生成器样式
+ * 版本: 1.0
+ * 最后更新: 2024-03-06
+ * 描述: 定义PDF生成相关的样式
+ */
+
+/* PDF生成器容器 */
+.pdf-generator {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+/* PDF生成选项 */
+.pdf-options {
+    margin: 15px 0;
+    padding: 15px;
+    background-color: var(--background-color);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+/* PDF生成选项组 */
+.pdf-option-group {
+    margin-bottom: 15px;
+}
+
+/* PDF生成选项标签 */
+.pdf-option-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+/* PDF生成选项输入框 */
+.pdf-option-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--card-background);
+    transition: border-color var(--transition-speed);
+}
+
+.pdf-option-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+}
+
+/* PDF生成预览区域 */
+.pdf-preview {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: var(--background-color);
+    border-radius: 8px;
+    border: 1px dashed var(--border-color);
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* PDF生成预览为空时的提示 */
+.pdf-preview:empty::before {
+    content: "预览区域 - 生成PDF后将显示在此处";
+    color: var(--light-text);
+    font-style: italic;
+}
+
+/* PDF生成进度条容器 */
+.pdf-progress {
+    margin: 15px 0;
+    background-color: var(--background-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* PDF生成进度条 */
+.pdf-progress-bar {
+    height: 4px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+/* PDF生成状态消息 */
+.pdf-status {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* PDF生成成功状态 */
+.pdf-status.success {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* PDF生成错误状态 */
+.pdf-status.error {
+    background-color: var(--error-color);
+    color: white;
+}
+
+/* PDF生成警告状态 */
+.pdf-status.warning {
+    background-color: var(--warning-color);
+    color: var(--text-color);
+}

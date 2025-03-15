@@ -20,6 +20,11 @@
 - **PDF处理**: ReportLab, PyPDF2, PyMuPDF
 - **安全防护**: Flask-Talisman
 - **数据结构**: Collections.deque (历史记录)
+- **前端架构**: 模块化JavaScript和CSS
+  - 图像处理模块 (image_processor.js/css)
+  - PDF提取模块 (pdf_extractor.js/css)
+  - AI对话模块 (ai_chat.js/css)
+  - OCR处理模块 (ocr_processor.css)
 
 ## 📋 安装说明
 
@@ -146,6 +151,13 @@
 
 ## 📁 目录结构
 - `app.py`: 主应用入口
+- `config/`: 配置文件目录
+  - `celeryconfig.py`: Celery配置文件，包含：
+    - Redis连接配置（broker和backend）
+    - 任务序列化设置（JSON格式）
+    - 时区设置（Asia/Shanghai）
+    - 任务执行参数（最大执行时间、任务跟踪等）
+    - Windows兼容设置（solo池）
 - `modules/`: 功能模块目录
   - `tasks.py`: Celery异步任务定义
   - `image_processor.py`: 图像处理模块
@@ -154,11 +166,20 @@
   - `ocr_processor.py`: OCR处理模块
   - `ai_routes.py`: AI对话路由模块
   - `deepseek_client.py`: DeepSeek API客户端
-- `celeryconfig.py`: Celery配置
 - `templates/`: HTML模板
 - `static/`: 静态资源文件
   - `css/`: 样式文件
+    - `ai_chat.css`: AI对话界面样式
+    - `image_processor.css`: 图像处理界面样式
+    - `ocr_processor.css`: OCR处理界面样式
+    - `pdf_extractor.css`: PDF提取界面样式
+    - `pdf_generator.css`: PDF生成界面样式
+    - `style.css`: 全局样式
   - `js/`: JavaScript文件
+    - `ai_chat.js`: AI对话功能
+    - `image_processor.js`: 图像处理功能
+    - `main.js`: 主要功能和工具
+    - `pdf_extractor.js`: PDF提取功能
 - `tests/`: 测试用例
   - `test_image_processor.py`: 图像处理测试
   - `test_pdf_generator.py`: PDF生成测试

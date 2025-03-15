@@ -16,13 +16,18 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# 创建Celery应用实例并设置名称
-celery = Celery('bishe')
-celery.config_from_object('celeryconfig')   # 从celeryconfig.py导入配置
-
 # 确保可以导入自定义模块
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
+
+# 确保Celery可以找到配置文件
+config_path = project_root / 'config'
+if config_path.exists():
+    sys.path.insert(0, str(config_path))
+
+# 创建Celery应用实例并设置名称
+celery = Celery('bishe')
+celery.config_from_object('celeryconfig')   # 从celeryconfig.py导入配置
 
 # 导入项目内部模块
 from modules.pdf_generator import PDFGenerator
