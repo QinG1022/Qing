@@ -9,9 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {                      
     /**
      * DOM元素引用 - 获取页面中所有需要操作的元素
      */
-    const chatInput = document.getElementById('chatInput');
-    const sendMessageBtn = document.getElementById('sendMessageBtn');
-    const chatMessages = document.getElementById('chatMessages');
     const contentTextarea = document.getElementById('content');                 // 获取内容文本区域
     const generateBtn = document.getElementById('generate-btn');                // 获取生成按钮
     const imagesInput = document.getElementById('images');                      // 获取图片输入框
@@ -172,9 +169,74 @@ document.addEventListener('DOMContentLoaded', function() {                      
         statusSection.classList.remove('visible'); // 移除可见类
     }
 
-    // 图片处理和OCR相关功能已移至 image_processor.js
+    /**
+     * 图片预览处理
+     * 当用户选择图片文件时，显示预览并启用处理按钮
+     */
+    if (imagesInput) {//如果图片输入存在
+        imagesInput.addEventListener('change', function(e) {//为图片输入添加事件监听器      
+            // 隐藏OCR结果区域
+            const ocrResults = document.querySelector('.ocr-results'); // 获取OCR结果区域
+            ocrResults.classList.add('hidden'); // 添加隐藏类   
+            
+            // 图片预览逻辑
+            imagePreview.innerHTML = '';
+            if (this.files.length > 0) {//如果文件存在      
+                processImagesBtn.disabled = false; // 启用处理图片按钮
+                
+                // 为每个图片创建预览元素
+                Array.from(this.files).forEach(file => {
+                    if (file.type.startsWith('image/')) { // 检查文件类型是否为图片
+                        const reader = new FileReader(); // 创建FileReader对象
+                        const div = document.createElement('div'); // 创建预览元素
+                        div.className = 'preview-item'; // 设置预览元素的类名
+                        
+                        reader.onload = e => { // 当文件读取完成时，设置预览元素的HTML内容
+                            div.innerHTML = `
+                                <img src="${e.target.result}" alt="${file.name}">
+                                <div class="file-info">
+                                    <span>${file.name}</span>
+                                    <span>${(file.size / 1024).toFixed(1)} KB</span>
+                                </div>
+                            `;
+                        };
+                        
+                        reader.readAsDataURL(file); // 读取文件内容并转换为Data URL
+                        imagePreview.appendChild(div); // 将预览元素添加到图片预览区域
+                    }
+                });
+            } else {//如果文件不存在    
+                processImagesBtn.disabled = true; // 禁用处理图片按钮
+            }
+        });
+    }
 
-    // PDF文本提取相关功能已移至 pdf_extractor.js
+    // PDF预览处理
+    if (pdfInput) {//如果PDF输入存在
+        pdfInput.addEventListener('change', function(e) {//为PDF输入添加事件监听器  
+            pdfPreview.innerHTML = ''; // 清空PDF预览区域
+            if (this.files.length > 0) {//如果文件存在  
+                extractPdfBtn.disabled = false; // 启用提取PDF按钮
+                const file = this.files[0]; // 获取第一个文件
+                if (file.type === 'application/pdf') { // 检查文件类型是否为PDF
+                    const div = document.createElement('div'); // 创建PDF预览元素
+                    div.className = 'pdf-preview-item'; // 设置PDF预览元素的类名    
+                    div.innerHTML = `
+                        <div class="pdf-icon">
+                            <span class="material-icons">PDF</span>
+                        </div>
+                        <div class="file-info">
+                            <div>${file.name}</div>
+                            <div>${(file.size / (1024*1024)).toFixed(2)} MB</div>
+                        </div>
+                    `;
+                    pdfPreview.appendChild(div); // 将PDF预览元素添加到PDF预览区域
+                }
+            } else {
+                extractPdfBtn.disabled = true; // 禁用提取PDF按钮
+            }
+        });
+    }
 
     /**
      * 轮询任务状态
@@ -932,6 +994,4 @@ document.addEventListener('DOMContentLoaded', function() {                      
             showToast('操作失败: ' + error.message);//显示错误信息
         }
     }
-
-    // AI对话相关功能已移至 ai_chat.js
 });

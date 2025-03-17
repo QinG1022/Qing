@@ -39,3 +39,5 @@ pdfs/
 # 其他临时文件
 *.tmp
 *.bak
+
+ai_module/

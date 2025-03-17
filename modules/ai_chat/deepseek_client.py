@@ -53,14 +53,26 @@ class DeepSeekClient:
 
     def stream_response(self, response):
         """流式响应处理"""
-        for chunk in response:
-            if chunk.choices:
-                content = chunk.choices[0].delta.content or ""
-                yield f"data: {json.dumps({'content': content})}\n\n"
-        yield "data: [DONE]\n\n"
+        if isinstance(response, dict) and "error" in response:
+            yield f"data: {json.dumps({'content': f'错误: {response['error']}', 'error': True})}\n\n"
+            yield "data: [DONE]\n\n"
+            return
+            
+        try:
+            for chunk in response:
+                if chunk.choices:
+                    content = chunk.choices[0].delta.content or ""
+                    yield f"data: {json.dumps({'content': content})}\n\n"
+            yield "data: [DONE]\n\n"
+        except Exception as e:
+            yield f"data: {json.dumps({'content': f'流式输出错误: {str(e)}', 'error': True})}\n\n"
+            yield "data: [DONE]\n\n"
 
     def format_response(self, response):
         """非流式响应处理"""
         if isinstance(response, dict) and "error" in response:
             return response
-        return response.choices[0].message.content
+        try:
+            return response.choices[0].message.content
+        except Exception as e:
+            return {"error": f"格式化响应失败: {str(e)}"}

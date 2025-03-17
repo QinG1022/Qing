@@ -7,11 +7,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap"><!--引入Noto Sans SC字体-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><!--引入Material Icons字体-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"><!--引入样式表-->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/ai_chat.css') }}"><!--引入AI对话样式-->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/pdf_extractor.css') }}"><!--引入PDF提取样式-->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/pdf_generator.css') }}"><!--引入PDF生成样式-->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/image_processor.css') }}"><!--引入图片处理样式-->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/ocr_processor.css') }}"><!--引入OCR处理样式-->
 </head>
 <body>
     <div class="container">
@@ -27,9 +22,6 @@
                 </button>
                 <button class="tab-button" data-tab="tab2">
                     <span class="material-icons">提取PDF文本</span>
-                </button>
-                <button class="tab-button" data-tab="tab3">
-                    <span class="material-icons">AI对话</span>
                 </button>
             </div>
 
@@ -131,24 +123,6 @@
                     </button>
                 </div>
             </div>
-            <!-- AI对话窗口 -->
-            <div class="tab-pane" id="tab3">
-                <section class="chat-section">
-                    <h2><span class="material-icons">AI对话</span></h2>
-                    <p class="hint">模型：deepseek-ai/DeepSeek-R1-Distill-Qwen-7B</p>
-                    <div class="chat-container">
-                        <div class="chat-messages" id="chatMessages">
-                            <!-- 消息内容将通过JS动态加载 -->
-                        </div>
-                        <div class="chat-input-container">
-                            <textarea id="chatInput" placeholder="请输入您的问题..."></textarea>
-                            <button id="sendMessageBtn" class="btn primary">
-                                <span class="material-icons">发送</span>
-                            </button>
-                        </div>
-                    </div>
-                </section>
-            </div>
         </div>
 
         <!-- 状态区域 -->    
@@ -195,6 +169,24 @@
             </div>
         </div>
 
+        // 流式结果处理示例
+function handleAIStream(taskId) {
+    const eventSource = new EventSource(`/tasks/${taskId}`);
+    
+    eventSource.onmessage = (e) => {
+        const data = JSON.parse(e.data);
+        if (data.status === 'SUCCESS') {
+            // 处理流式数据
+            const result = data.result;
+            if (result.type === 'pdf_summary') {
+                result.stream.forEach(chunk => {
+                    document.getElementById('summary-output').innerHTML += chunk;
+                });
+            }
+            eventSource.close();
+        }
+    };
+}
         <!-- 底部 -->    
         <footer class="app-footer">
             <p>© 2025 智能文档处理系统 - 提高您的文档处理效率</p>
@@ -209,9 +201,6 @@
         <div id="loadingText">处理中，请稍候...</div>
     </div>
 
-    <script src="{{ url_for('static', filename='js/ai_chat.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/pdf_extractor.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/image_processor.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

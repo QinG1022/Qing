@@ -16,18 +16,13 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# 确保可以导入自定义模块
-project_root = Path(__file__).parent.parent
-sys.path.insert(0, str(project_root))
-
-# 确保Celery可以找到配置文件
-config_path = project_root / 'config'
-if config_path.exists():
-    sys.path.insert(0, str(config_path))
-
 # 创建Celery应用实例并设置名称
 celery = Celery('bishe')
 celery.config_from_object('celeryconfig')   # 从celeryconfig.py导入配置
+
+# 确保可以导入自定义模块
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
 
 # 导入项目内部模块
 from modules.pdf_generator import PDFGenerator
@@ -268,3 +263,21 @@ def extract_pdf_text(self, pdf_paths):              # 处理PDF文本提取任�
             'message': f'PDF处理异常: {str(e)}',    # 打印PDF处理异常信息  
             'results': []                           # 返回空列表  
         }
+from modules.ai_processor import AIProcessor
+from celery import shared_task
+
+@shared_task(bind=True)
+def process_chat_task(self, prompt: str):
+    try:
+        stream = AIProcessor.generate_chat_response(prompt)
+        return {
+            "status": "success",
+            "type": "chat",
+            "stream": [chunk.choices[0].delta.content for chunk in stream]
+        }
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+@shared_task(bind=True)
+def process_summary_task(self, pdf_path: str):
+    return AIProcessor.process_pdf_summary(pdf_path)

@@ -1,0 +1,322 @@
+# Qwen/Qwen1.5-0.5B-Chat 模型：
+
+# 这里提供了一个代码片段，向您展示如何加载分词器和模型以及如何生成内容
+from transformers import AutoModelForCausalLM, AutoTokenizer
+device = "cuda" # the device to load the model onto
+
+model = AutoModelForCausalLM.from_pretrained(
+    "Qwen/Qwen1.5-0.5B-Chat",
+    torch_dtype="auto",
+    device_map="auto"
+)
+tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen1.5-0.5B-Chat")
+
+prompt = "Give me a short introduction to large language model."
+messages = [
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": prompt}
+]
+text = tokenizer.apply_chat_template(
+    messages,
+    tokenize=False,
+    add_generation_prompt=True
+)
+model_inputs = tokenizer([text], return_tensors="pt").to(device)
+
+generated_ids = model.generate(
+    model_inputs.input_ids,
+    max_new_tokens=512
+)
+generated_ids = [
+    output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
+]
+
+response = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
+
+
+
+# deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B 模型：
+
+#   在 Transformers 库中使用 deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B 模型时，可按以下步骤操作：
+#一、基础加载方法
+#1. 安装依赖
+#   pip install transformers accelerate bitsandbytes  # 必需组件
+
+#   2. 最小化代码示例
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model = AutoModelForCausalLM.from_pretrained(
+    "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
+    trust_remote_code=True,  # 必须启用（因架构未原生支持）
+    device_map="auto",       # 自动分配设备（CPU/GPU）
+    torch_dtype="auto"       # 自动选择精度（FP32/FP16）
+)
+
+tokenizer = AutoTokenizer.from_pretrained(
+    "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
+    trust_remote_code=True   # 同样需要此参数
+)
+
+# 生成示例
+inputs = tokenizer("北京的著名景点有：", return_tensors="pt").to(model.device)
+outputs = model.generate(
+    **inputs,
+    max_new_tokens=100,
+    do_sample=True,
+    temperature=0.7
+)
+print(tokenizer.decode(outputs[0], skip_special_tokens=True))
+
+#   二、关键配置详解
+#   1. 量化加载（低资源环境必选）
+from transformers import BitsAndBytesConfig
+
+# 4-bit 量化配置（显存需求降至 2GB 以下）
+bnb_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_use_double_quant=True,
+    bnb_4bit_quant_type="nf4",
+    bnb_4bit_compute_dtype=torch.float16
+)
+
+model = AutoModelForCausalLM.from_pretrained(
+    "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
+    quantization_config=bnb_config,  # 应用量化
+    trust_remote_code=True
+)
+#   2. 性能优化参数
+outputs = model.generate(
+    **inputs,
+    max_new_tokens=200,           # 最大生成长度
+    do_sample=True,               # 启用随机采样
+    temperature=0.5,              # 控制多样性（值越低越确定）
+    top_p=0.92,                   # Nucleus 采样阈值
+    top_k=50,                     # Top-K 采样
+    repetition_penalty=1.15,      # 抑制重复内容
+    num_return_sequences=2        # 生成多个候选结果
+)
+
+#   三、对话格式处理
+#   若需实现类 ChatGPT 的对话交互，需按模型要求的模板格式化输入：
+#   1. 单轮对话
+query = "如何做西红柿炒鸡蛋？"
+prompt = f"<|im_start|>user\n{query}<|im_end|>\n<|im_start|>assistant\n"
+
+inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
+#   2. 多轮对话
+conversation = [
+    {"role": "user", "content": "推荐一部科幻电影"},
+    {"role": "assistant", "content": "《星际穿越》非常经典。"},
+    {"role": "user", "content": "这部电影的主题曲是什么？"}
+]
+
+# 使用 apply_chat_template 自动格式化
+inputs = tokenizer.apply_chat_template(
+    conversation,
+    tokenize=True,
+    return_tensors="pt"
+).to(model.device)
+
+#   四、常见问题解决方案
+#   问题1：RuntimeError: CUDA out of memory
+#   解决方法：
+# 启用 8-bit 量化
+model = AutoModelForCausalLM.from_pretrained(
+    model_name,
+    load_in_8bit=True,
+    device_map="auto"
+)
+
+# 或限制生成长度
+outputs = model.generate(..., max_new_tokens=50)
+#   问题2：生成结果不连贯
+#   调参建议：
+
+outputs = model.generate(
+    ...,
+    temperature=0.3,  # 降低随机性
+    top_p=0.85,
+    do_sample=False   # 改用贪婪搜索
+)
+
+#   问题3：中文输出乱码
+#   修正方法：
+tokenizer = AutoTokenizer.from_pretrained(
+    "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
+    use_fast=False  # 强制使用慢速分词器（兼容性更好）
+)
+#   五、完整工作流示例
+from transformers import AutoModelForCausalLM, AutoTokenizer
+import torch
+
+# 加载模型与分词器
+model = AutoModelForCausalLM.from_pretrained(
+    "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
+    trust_remote_code=True,
+    device_map="auto",
+    torch_dtype=torch.float16
+)
+tokenizer = AutoTokenizer.from_pretrained(
+    "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
+    trust_remote_code=True
+)
+
+# 定义生成函数
+def generate_response(text: str) -> str:
+    inputs = tokenizer(
+        f"<|im_start|>user\n{text}<|im_end|>\n<|im_start|>assistant\n",
+        return_tensors="pt"
+    ).to(model.device)
+    
+    outputs = model.generate(
+        **inputs,
+        max_new_tokens=150,
+        temperature=0.6,
+        top_p=0.9,
+        repetition_penalty=1.1
+    )
+    
+    return tokenizer.decode(
+        outputs[0][inputs.input_ids.shape[-1]:], 
+        skip_special_tokens=True
+    )
+
+# 测试对话
+print(generate_response("量子计算的基本原理是什么？"))
+
+#   六、进阶技巧
+#   Flash Attention 加速（需 GPU 支持）：
+
+model = AutoModelForCausalLM.from_pretrained(
+    "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
+    attn_implementation="flash_attention_2",  # 启用 Flash Attention
+    torch_dtype=torch.float16
+)
+#   流式输出：
+from transformers import TextIteratorStreamer
+from threading import Thread
+
+streamer = TextIteratorStreamer(tokenizer)
+inputs = tokenizer("法国的首都是", return_tensors="pt").to(model.device)
+
+generation_kwargs = dict(
+    **inputs,
+    streamer=streamer,
+    max_new_tokens=200
+)
+
+thread = Thread(target=model.generate, kwargs=generation_kwargs)
+thread.start()
+
+for new_text in streamer:
+    print(new_text, end="", flush=True)
+
+
+#使用建议
+#   我们建议在使用 DeepSeek-R1 系列模型时遵循以下配置，包括基准测试，以实现预期的性能：
+#   1、将温度设置在 0.5-0.7 （推荐 0.6） 的范围内，以防止无休止的重复或不连贯的输出。
+#   2、避免添加系统提示符;所有说明都应包含在用户提示符中。
+#   3、对于数学问题，建议在提示中包含一条指令，例如：“请逐步推理，并将您的最终答案放在 \boxed{} 中。
+#   4、在评估模型性能时，建议进行多次测试并平均结果。
+#   此外，我们观察到 DeepSeek-R1 系列模型在响应某些查询时往往会绕过思维模式（即输出 “<think>\n\n</think>”），
+#   这可能会对模型的性能产生不利影响。为了确保模型进行彻底的推理，我们建议强制模型在每次输出的开头以 “<think>\n” 启动响应
+
+
+
+
+<think> 步骤分析： 1. 需要基于现有代码结构实现DeepSeek专属对话格式。
+    2. 修改模型提示模板以引导思考过程 。
+    3. 添加前端样式支持思考过程的展示 。
+    4. 保持与其他模型的兼容性 </think>
+# 修改local_model_client.py中的_format_prompt方法（DeepSeek部分）
+def _format_prompt(self):
+    """根据模型类型格式化对话提示"""
+    if self.model_type == "deepseek":
+        prompt = "你是一个严谨的AI助手，请按以下格式回答问题：\n"
+        prompt += "<think>\n在这里进行逐步推理\n</think>\n"
+        prompt += "<answer>\n最终答案在这里\n</answer>\n\n"
+        
+        for msg in self.messages:
+            if msg["role"] == "system":
+                continue
+            elif msg["role"] == "user":
+                prompt += f"用户：{msg['content']}\n"
+            elif msg["role"] == "assistant":
+                prompt += f"助手：{msg['content']}\n"
+        
+        # 添加当前对话提示
+        prompt += "助手："
+        return prompt
+    else: 
+        # 保持原有Qwen逻辑...
+
+# 修改generate_response方法中的后处理
+def generate_response(self, stream=True, **kwargs):
+    try:
+        # ...原有生成逻辑...
+        
+        if self.model_type == "deepseek":
+            # 提取思考和答案部分
+            import re
+            think_match = re.search(r'<think>(.*?)</think>', output_text, re.DOTALL)
+            answer_match = re.search(r'<answer>(.*?)</answer>', output_text, re.DOTALL)
+            
+            think = think_match.group(1).strip() if think_match else "未提供推理过程"
+            answer = answer_match.group(1).strip() if answer_match else output_text
+            
+            # 组合成结构化响应
+            structured_response = {
+                "think": think,
+                "answer": answer,
+                "raw": output_text
+            }
+            return structured_response
+        else:
+            # 其他模型保持原逻辑...
+html
+<!-- 修改前端展示部分 -->
+<div class="message bot-message">
+    <strong>Assistant:</strong>
+    <div class="thinking-section">
+        <h4>推理过程：</h4>
+        <pre>{{ response.think }}</pre>
+    </div>
+    <div class="answer-section">
+        <h4>最终答案：</h4>
+        <p>{{ response.answer }}</p>
+    </div>
+</div>
+
+<style>
+    .thinking-section {
+        background: #fff3d4;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 10px 0;
+    }
+    .answer-section {
+        background: #e8f4ff;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    pre {
+        white-space: pre-wrap;
+        font-family: inherit;
+    }
+</style>
+
+# 修改ai_routes.py中的响应处理
+@ai_bp.route('/chat', methods=['POST'])
+def chat():
+    # ...原有逻辑...
+    
+    # 非流式输出
+    if model_name == 'deepseek':
+        response_data = {
+            "think": response['think'],
+            "answer": response['answer']
+        }
+    else:
+        response_data = {"response": assistant_response}
+    
+    return jsonify(response_data)
