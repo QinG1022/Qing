@@ -130,6 +130,8 @@ document.addEventListener('DOMContentLoaded', function() {
             ocrResults.classList.remove('hidden');
         } else {
             setStatusMessage('未识别到任何文本', true);
+            // 确保在没有识别结果时保持结果区域隐藏
+            ocrResults.classList.add('hidden');
         }
     }
 

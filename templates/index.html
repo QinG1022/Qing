@@ -8,10 +8,10 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><!--引入Material Icons字体-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"><!--引入样式表-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/ai_chat.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/image_processing.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/ocr_results.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/image_processor.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ocr_processor.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/pdf_extractor.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/pdf_processing.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pdf_generator.css') }}">
 
 </head>
 <body>
@@ -221,7 +221,7 @@
     </div>
 
     <script src="{{ url_for('static', filename='js/ai_chat.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/image_processing.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/image_processor.js') }}"></script>
     <script src="{{ url_for('static', filename='js/pdf_extractor.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
