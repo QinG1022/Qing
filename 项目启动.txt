@@ -1,262 +1,140 @@
-# ================ Windows环境准备 ================
-# 1. Python环境 (建议Python 3.8+)
-# 检查Python版本
-python --version
+# 智能文档处理系统 - 启动指南
+
+## 一、环境准备
+
+### 1. 基础环境
+- Python 3.8+
+- Redis 服务器
+- Tesseract OCR 引擎
+- CUDA 环境（可选，用于 GPU 加速）
+
+### 2. 安装步骤
+```bash
+# 1. 克隆项目
+git clone https://github.com/QinG1022/Qing.git
+cd Qing
 
 # 2. 创建虚拟环境
 python -m venv venv
 .\venv\Scripts\activate
 
-# 3. 安装项目依赖
+# 3. 安装依赖
 pip install -r requirements.txt
-# 主要依赖包括：
-# - Flask 3.0.2 及相关组件 (Flask-Talisman, Werkzeug)
-# - Celery 5.3.6 和 Redis 5.0.1
-# - 图像处理：Pillow 11.1.0, pytesseract 0.3.10
-# - PDF处理：reportlab 4.1.0, fonttools，PyPDF2, PyMuPDF (fitz)
-# - AI对话：openai (用于DeepSeek API调用), python-dotenv
-# - 测试工具：pytest 8.0.0, pytest-html 4.1.1
-# - 其他工具：python-dotenv, python-magic, pyOpenSSL
-# - Windows专用：pywin32
 
-# 4. 安装Redis for Windows
-# 下载地址：https://github.com/microsoftarchive/redis/releases
-# 选择：Redis-x64-xxx.msi
-# 安装时勾选：
-# - Add to PATH
-# - Install service
+# 4. 创建必要目录
+mkdir -p uploads pdfs log
+```
 
-# 6. 安装Tesseract-OCR
-# 下载地址：https://github.com/UB-Mannheim/tesseract/wiki
-# 选择：tesseract-ocr-w64-setup-xxx.exe
-# 安装时：
-# - 记住安装路径（默认：C:\Program Files\Tesseract-OCR）
-# - 添加到系统环境变量Path
+### 3. 组件安装
+- Redis: [下载地址](https://github.com/microsoftarchive/redis/releases)
+- Tesseract-OCR: [下载地址](https://github.com/UB-Mannheim/tesseract/wiki)
+- AI 模型（可选）:
+  - [DeepSeek-R1](https://huggingface.co/deepseek-ai/deepseek-coder-1.3b-base)
+  - [Qwen1.5](https://huggingface.co/Qwen/Qwen1.5-0.5B-Chat)
 
-# ================ 运行测试 ================
-# 1. 字体检查（必需）
+## 二、运行测试
+
+### 1. 基础测试
+```bash
+# 字体检查
 python fonts/font_check.py
 
-# 2. 运行所有测试
+# 运行所有测试
 python -m pytest tests/
 
-# 3. 运行特定测试文件
+# 生成测试报告
+python -m pytest --html=report.html tests/
+```
+
+### 2. 特定测试
+```bash
 # 图片处理测试
 python -m pytest tests/test_image_processor.py -v
 
-# PDF生成测试
-python -m pytest tests/test_pdf_generator.py -v
-
-# PDF提取器测试
-python -m pytest tests/test_pdf_extractor.py -v
-
-# 集成测试
-python -m pytest tests/test_integration.py -v
-
-# 历史记录功能测试
-python -m pytest tests/test_history.py -v
-python -m pytest tests/test_history_integration.py -v
-
-# 4. 运行特定测试用例
-# 图片处理单元测试
-python -m pytest tests/test_image_processor.py::test_process_single -v
-python -m pytest tests/test_image_processor.py::test_process_batch -v
-python -m pytest tests/test_image_processor.py::test_empty_batch -v
-python -m pytest tests/test_image_processor.py::test_invalid_image -v
-
-# PDF生成器测试用例
-python -m pytest tests/test_pdf_generator.py::test_basic_pdf_generation -v
-python -m pytest tests/test_pdf_generator.py::test_pdf_with_multiple_images -v
-python -m pytest tests/test_pdf_generator.py::test_pdf_generation_no_images -v
-
-# PDF提取器测试用例
-python -m pytest tests/test_pdf_extractor.py::test_extract_text_valid_pdf -v
-python -m pytest tests/test_pdf_extractor.py::test_extract_text_nonexistent_pdf -v
-python -m pytest tests/test_pdf_extractor.py::test_process_batch -v
-python -m pytest tests/test_pdf_extractor.py::test_process_batch_empty_list -v
-
-# 集成测试用例
-python -m pytest tests/test_integration.py::test_complete_flow -v
-python -m pytest tests/test_integration.py::test_empty_content -v
-python -m pytest tests/test_integration.py::test_invalid_image -v
-
-# 历史记录测试用例
-python -m pytest tests/test_history.py::test_empty_history -v
-python -m pytest tests/test_history.py::test_add_history_record -v
-python -m pytest tests/test_history.py::test_delete_history_record -v
-python -m pytest tests/test_history.py::test_clear_history -v
-python -m pytest tests/test_history.py::test_history_limit -v
-python -m pytest tests/test_history_integration.py::test_ocr_adds_to_history -v
-python -m pytest tests/test_history_integration.py::test_pdf_extract_adds_to_history -v
-python -m pytest tests/test_history_integration.py::test_text_input_adds_to_history -v
-
-# 5. 显示详细输出
-python -m pytest -v tests/
-
-# 6. 生成测试报告（需要安装 pytest-html）
-#下载 pip install pytest-html 
-python -m pytest --html=report.html tests/
-#删除测试报告
-python tools/clean_test_reports.py
-
-# 7. 忽略废弃警告运行PDF测试（推荐）
+# PDF 测试
 python -m pytest tests/test_pdf_generator.py -v -W ignore::DeprecationWarning
 python -m pytest tests/test_pdf_extractor.py -v -W ignore::DeprecationWarning
 
-# 注意：
-# - 确保先激活虚拟环境：.\venv\Scripts\activate
-# - 先运行字体检查确保字体文件正确
-# - 测试前确保Redis服务已启动
-# - 确保已安装所需字体
-# - 测试可能需要一些时间完成
-# - 查看 report.html 获取详细测试报告
+# 集成测试
+python -m pytest tests/test_integration.py -v
+```
 
-# ================ 启动服务 ================
-# 1. 启动Redis服务
-# 方法1：Windows服务（推荐）
+## 三、启动服务
+
+### 1. 启动 Redis
+```bash
+# 启动 Redis 服务
 net start Redis
 
-# 方法2：命令行启动
-redis-server
+# 验证连接
+redis-cli ping  # 应返回 PONG
+```
 
-# 2. 验证Redis
-redis-cli ping  # 应返回PONG
-
-# 3. 启动Celery（新终端）
-# 注意：Windows必须使用 --pool=solo
-.\venv\Scripts\activate
+### 2. 启动 Celery
+```bash
+# Windows 环境必须使用 --pool=solo
 celery -A modules.tasks worker --loglevel=INFO --pool=solo
+```
 
-# 4. 启动Flask（新终端）
-.\venv\Scripts\activate
+### 3. 启动 Flask
+```bash
 python app.py
+```
 
-# ================ 环境变量配置 ================
-# 1. 创建.env文件
-# 在项目根目录创建.env文件，添加以下内容：
-# DEEPSEEK_API_KEY=your_api_key_here
+### 4. 访问系统
+打开浏览器访问 http://localhost:5000
 
-# 2. 验证配置
-# 启动应用后访问AI对话功能验证
+## 四、环境配置
 
-# ================ 功能使用指南 ================
-# 1. 图片OCR处理
-# - 选择"文档生成与图片处理"标签页
-# - 上传图片文件
-# - 勾选"对图片进行文字识别"
-# - 点击"处理图片"
-# - 查看识别结果，可以合并到文本区
+### 1. 创建 .env 文件
+```env
+# DeepSeek API 配置
+DEEPSEEK_API_KEY=your_api_key_here
 
-# 2. PDF文本提取
-# - 选择"提取PDF文本"标签页
-# - 上传PDF文件
-# - 点击"提取文本"
-# - 查看提取结果，可以复制全部文本
+# 本地模型配置（可选）
+DEEPSEEK_LOCAL_MODEL_PATH=D:/path/to/DeepSeek-R1-Distill-1.5B
+QWEN_LOCAL_MODEL_PATH=D:/path/to/Qwen1.5-0.5B-Chat
+```
 
-# 3. 文档生成
-# - 在文本区域输入内容
-# - 点击"生成文档"
-# - 等待处理完成后下载生成的PDF
+## 五、常见问题
 
-# 4. 历史记录功能
-# - 系统自动保存最近6条处理结果
-# - 可通过"刷新"按钮更新历史记录
-# - 点击单个记录右上角的删除按钮可删除该记录
-# - 点击"清空"按钮可清空所有历史记录
-# - 点击"复制"按钮可复制内容到剪贴板
-# - 点击"插入"按钮可将内容插入到文本编辑区
+### 1. 服务启动问题
+- Redis 服务无法启动
+  ```bash
+  # 检查服务状态
+  services.msc
+  
+  # 检查端口占用
+  netstat -ano | findstr 6379
+  ```
 
-# ================ 常见问题 ================
-# 1. Redis服务无法启动
-# - 检查服务是否已安装：services.msc
-# - 检查端口占用：netstat -ano | findstr 6379
-# - 重新安装Redis
+- 端口被占用
+  ```bash
+  # 查找占用端口的进程
+  netstat -ano | findstr 5000
+  
+  # 结束进程
+  taskkill /F /PID <进程ID>
+  ```
 
-# 2. Celery报错
-# - 确保使用 --pool=solo
-# - 检查Redis连接
-# - 查看是否激活虚拟环境
+### 2. 组件问题
+- Celery 错误
+  - 确认使用 `--pool=solo`
+  - 检查 Redis 连接
+  - 验证虚拟环境
 
-# 3. OCR无法使用
-# - 检查环境变量Path是否包含Tesseract路径
-# - 重启终端或电脑
-# - 测试命令：tesseract --version
+- OCR 问题
+  - 检查环境变量
+  - 验证安装路径
+  - 测试命令：`tesseract --version`
 
-# 4. 端口被占用
-# 查找占用端口的进程：
-netstat -ano | findstr 5000
-# 结束进程：
-taskkill /F /PID <进程ID>
+### 3. AI 模型问题
+- 模型加载失败
+  - 验证模型路径
+  - 检查 CUDA 配置
+  - 确认系统资源
+  - 尝试使用较小的模型版本
 
-# 5. 测试失败
-# - 检查日志文件中的错误信息
-# - 确保所有依赖都已正确安装
-# - 验证配置文件是否正确
-# - 检查系统权限
-
-# 6. 历史记录不显示
-# - 确认已执行过OCR或PDF提取操作
-# - 检查浏览器控制台是否有错误
-# - 手动点击"刷新"按钮更新历史记录
-
-# ================ 关闭服务 ================
-# 1. 关闭Flask和Celery
-# 在对应终端按 Ctrl+C
-# 或使用任务管理器结束python.exe进程
-
-# 2. 关闭Redis
-net stop Redis
-
-# 5. AI对话功能
-# - 选择"AI对话"标签页
-# - 在输入框中输入问题
-# - 点击发送按钮
-# - 等待AI助手回复
-# - 支持连续对话，保持上下文
-
-# ================ 常见问题 ================
-# 1. Redis服务无法启动
-# - 检查服务是否已安装：services.msc
-# - 检查端口占用：netstat -ano | findstr 6379
-# - 重新安装Redis
-
-# 2. Celery报错
-# - 确保使用 --pool=solo
-# - 检查Redis连接
-# - 查看是否激活虚拟环境
-
-# 3. OCR无法使用
-# - 检查环境变量Path是否包含Tesseract路径
-# - 重启终端或电脑
-# - 测试命令：tesseract --version
-
-# 4. 端口被占用
-# 查找占用端口的进程：
-netstat -ano | findstr 5000
-# 结束进程：
-taskkill /F /PID <进程ID>
-
-# 5. 测试失败
-# - 检查日志文件中的错误信息
-# - 确保所有依赖都已正确安装
-# - 验证配置文件是否正确
-# - 检查系统权限
-
-# 6. 历史记录不显示
-# - 确认已执行过OCR或PDF提取操作
-# - 检查浏览器控制台是否有错误
-# - 手动点击"刷新"按钮更新历史记录
-
-# ================ 关闭服务 ================
-# 1. 关闭Flask和Celery
-# 在对应终端按 Ctrl+C
-# 或使用任务管理器结束python.exe进程
-
-# 2. 关闭Redis
-net stop Redis
-
-# 7. AI对话功能无响应
-# - 检查.env文件中是否正确配置DeepSeek API密钥
-# - 确认网络连接正常
-# - 查看浏览器控制台是否有错误信息
-# - 检查API调用限制和配额
+## 六、关闭服务
+1. 停止 Flask 和 Celery（Ctrl+C）
+2. 关闭 Redis：`net stop Redis`

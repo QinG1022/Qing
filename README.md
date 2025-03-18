@@ -1,231 +1,156 @@
-# 文档处理Web服务
+# 智能文档处理系统
 
-## 📌 项目概述
-这是一个基于Flask的Web应用程序，提供智能文档处理服务，包括图像处理、PDF文档生成功能和AI对话功能。该应用支持异步任务处理、图像优化、文本提取以及历史记录管理等功能，可用于文档数字化和管理场景。
+## 📌 项目简介
+这是一个基于 Flask 的智能文档处理系统，提供图像处理、PDF文档生成和 AI 对话等功能。系统采用异步任务处理架构，支持图像优化、文本提取和历史记录管理，适用于文档数字化和管理场景。
 
-## 🚀 主要功能
-- 📄 PDF文档生成与下载
+## 🚀 核心功能
+### 文档处理
+- 📄 PDF 文档生成与下载
+- 📝 PDF 文本内容提取
+- 📜 历史记录管理（最近6条）
+
+### 图像处理
 - 🖼️ 图像批量处理与优化
-- 🔍 OCR图像文字识别
-- 📝 PDF文本内容提取
-- 📜 历史记录管理（保存处理结果）
-- 🔤 字体管理与检查
-- ⏱️ 基于Celery的异步任务处理
-- 🤖 AI对话（基于DeepSeek API）
+- 🔍 OCR 图像文字识别
 
-## 🛠️ 技术栈
+### AI 对话
+- 🤖 支持多种 AI 模型
+  - DeepSeek API（在线）
+  - DeepSeek-R1（本地）
+  - Qwen1.5（本地）
+
+## 🛠️ 技术架构
+### 后端技术
 - **Web框架**: Flask
 - **任务队列**: Celery + Redis
-- **图像处理**: Pillow, pytesseract (OCR功能)
+- **图像处理**: Pillow, pytesseract
 - **PDF处理**: ReportLab, PyPDF2, PyMuPDF
 - **安全防护**: Flask-Talisman
-- **数据结构**: Collections.deque (历史记录)
-- **前端架构**: 模块化JavaScript和CSS
-  - 图像处理模块 (image_processor.js/css)
-  - PDF提取模块 (pdf_extractor.js/css)
-  - AI对话模块 (ai_chat.js/css)
-  - OCR处理模块 (ocr_processor.css)
+- **数据结构**: Collections.deque
 
-## 📋 安装说明
+### AI 模型支持
+- DeepSeek API
+- 本地部署的 DeepSeek-R1 模型
+- 本地部署的 Qwen1.5 模型
 
-### 前置要求
+### 前端架构
+- 模块化 JavaScript 和 CSS
+  - 图像处理模块
+  - PDF 处理模块
+  - AI 对话模块
+  - OCR 处理模块
+
+## 📋 快速开始
+
+### 环境要求
 - Python 3.8+
-- Redis服务器
-- Tesseract OCR引擎（用于OCR功能）
-- DeepSeek API密钥（用于AI对话功能）
+- Redis 服务器
+- Tesseract OCR 引擎
+- CUDA 环境（可选，用于 GPU 加速）
+- 本地 AI 模型（可选）
 
-### Windows环境安装步骤
-1. **克隆代码库**:
+### 安装步骤
+1. **克隆项目**
    ```bash
    git clone https://github.com/QinG1022/Qing.git
    cd Qing
    ```
 
-2. **创建并激活虚拟环境**:
+2. **配置虚拟环境**
    ```bash
    python -m venv venv
    .\venv\Scripts\activate
-   ```
-
-3. **安装依赖**:
-   ```bash
    pip install -r requirements.txt
    ```
 
-4. **安装Redis for Windows**:
-   - 下载地址：https://github.com/microsoftarchive/redis/releases
-   - 选择：Redis-x64-xxx.msi
-   - 安装时勾选"Add to PATH"和"Install service"
+3. **安装必要组件**
+   - Redis: [下载地址](https://github.com/microsoftarchive/redis/releases)
+   - Tesseract-OCR: [下载地址](https://github.com/UB-Mannheim/tesseract/wiki)
+   - 本地 AI 模型（可选）:
+     - [DeepSeek-R1](https://huggingface.co/deepseek-ai/deepseek-coder-1.3b-base)
+     - [Qwen1.5](https://huggingface.co/Qwen/Qwen1.5-0.5B-Chat)
 
-5. **安装Tesseract-OCR**:
-   - 下载地址：https://github.com/UB-Mannheim/tesseract/wiki
-   - 选择：tesseract-ocr-w64-setup-xxx.exe
-   - 添加到系统环境变量Path
-
-6. **创建必要的目录**:
+4. **创建必要目录**
    ```bash
    mkdir -p uploads pdfs log
    ```
 
-## 🚀 启动应用
-1. **启动Redis服务**:
+### 启动服务
+1. **启动 Redis**
    ```bash
-   # 方法1: Windows服务（推荐）
    net start Redis
-   
-   # 方法2: 命令行启动
-   redis-server
-   
-   # 验证Redis连接
-   redis-cli ping  # 应返回PONG
+   redis-cli ping  # 验证连接
    ```
 
-2. **启动Celery工作进程**:
+2. **启动 Celery**
    ```bash
-   # Windows环境必须使用--pool=solo
-   .\venv\Scripts\activate
    celery -A modules.tasks worker --loglevel=info --pool=solo
    ```
 
-3. **启动Flask应用**:
+3. **启动 Flask**
    ```bash
-   # 新开一个终端
-   .\venv\Scripts\activate
    python app.py
    ```
 
-4. **访问应用**:
-   浏览器打开 http://localhost:5000
+4. **访问系统**
+   打开浏览器访问 http://localhost:5000
 
 ## 📖 使用指南
 
-### PDF文档生成
-1. 访问主页
-2. 上传需要处理的图片或输入文本内容
-3. 设置生成参数
-4. 提交任务
-5. 等待处理完成后下载生成的文件
+### 文档处理
+1. 上传图片或输入文本
+2. 设置生成参数
+3. 提交任务
+4. 下载生成的文件
 
-### 图像处理与OCR
-1. 选择"文档生成与图片处理"标签页
-2. 上传需要处理的图片
-3. 勾选"对图片进行文字识别"选项
-4. 点击"处理图片"按钮
-5. 查看识别结果，可选择合并到文本编辑区
+### 图像处理
+1. 上传图片
+2. 选择处理选项
+3. 查看处理结果
 
-### PDF文本提取
-1. 选择"提取PDF文本"标签页
-2. 上传需要处理的PDF文件
-3. 点击"提取文本"按钮
-4. 查看或复制提取的文本内容
+### PDF 提取
+1. 上传 PDF 文件
+2. 点击提取按钮
+3. 查看提取结果
 
-### 历史记录功能
-- 系统自动保存最近6条处理结果
-- 点击"复制"按钮复制内容
-- 点击"插入"按钮将内容插入到文本编辑区
-- 点击单条记录右上角的删除按钮删除该记录
-- 点击"清空"按钮清空所有历史记录
+### AI 对话
+1. 选择 AI 模型
+2. 输入问题
+3. 等待回复
 
-## 🧪 测试与验证
+## 🧪 测试
+```bash
+# 字体检查
+python fonts/font_check.py
 
-1. **字体检查**（必需）:
-   ```bash
-   python fonts/font_check.py
-   ```
+# 运行测试
+python -m pytest tests/
 
-2. **运行所有测试**:
-   ```bash
-   python -m pytest tests/
-   ```
-
-3. **生成HTML测试报告**:
-   ```bash
-   python -m pytest --html=report.html tests/
-   ```
-
-4. **忽略废弃警告运行PDF测试**（推荐）:
-   ```bash
-   python -m pytest tests/test_pdf_generator.py -v -W ignore::DeprecationWarning
-   python -m pytest tests/test_pdf_extractor.py -v -W ignore::DeprecationWarning
-   ```
-
-## 📁 目录结构
-- `app.py`: 主应用入口
-- `config/`: 配置文件目录
-  - `celeryconfig.py`: Celery配置文件，包含：
-    - Redis连接配置（broker和backend）
-    - 任务序列化设置（JSON格式）
-    - 时区设置（Asia/Shanghai）
-    - 任务执行参数（最大执行时间、任务跟踪等）
-    - Windows兼容设置（solo池）
-- `modules/`: 功能模块目录
-  - `tasks.py`: Celery异步任务定义
-  - `image_processor.py`: 图像处理模块
-  - `pdf_generator.py`: PDF生成模块
-  - `pdf_extractor.py`: PDF文本提取模块
-  - `ocr_processor.py`: OCR处理模块
-  - `ai_routes.py`: AI对话路由模块
-  - `deepseek_client.py`: DeepSeek API客户端
-- `templates/`: HTML模板
-- `static/`: 静态资源文件
-  - `css/`: 样式文件
-    - `ai_chat.css`: AI对话界面样式
-    - `image_processor.css`: 图像处理界面样式
-    - `ocr_processor.css`: OCR处理界面样式
-    - `pdf_extractor.css`: PDF提取界面样式
-    - `pdf_generator.css`: PDF生成界面样式
-    - `style.css`: 全局样式
-  - `js/`: JavaScript文件
-    - `ai_chat.js`: AI对话功能
-    - `image_processor.js`: 图像处理功能
-    - `main.js`: 主要功能和工具
-    - `pdf_extractor.js`: PDF提取功能
-- `tests/`: 测试用例
-  - `test_image_processor.py`: 图像处理测试
-  - `test_pdf_generator.py`: PDF生成测试
-  - `test_pdf_extractor.py`: PDF文本提取测试
-  - `test_integration.py`: 集成测试
-  - `test_history.py`: 历史记录功能单元测试
-  - `test_history_integration.py`: 历史记录功能集成测试
-- `tools/`: 工具脚本
-  - `clean_test_reports.py`: 清理测试报告的工具
+# 生成测试报告
+python -m pytest --html=report.html tests/
+```
 
 ## ❓ 常见问题
+1. **Redis 服务问题**
+   - 检查服务状态
+   - 验证端口占用
+   - 重新安装服务
 
-1. **Redis服务无法启动**
-   - 检查服务是否已安装：services.msc
-   - 检查端口占用：`netstat -ano | findstr 6379`
-   - 重新安装Redis
+2. **Celery 错误**
+   - 确认使用 `--pool=solo`
+   - 检查 Redis 连接
+   - 验证虚拟环境
 
-2. **Celery报错**
-   - 确保使用 `--pool=solo`（Windows环境必需）
-   - 检查Redis连接
-   - 查看是否已激活虚拟环境
+3. **OCR 问题**
+   - 检查环境变量
+   - 验证安装路径
+   - 测试 Tesseract
 
-3. **OCR无法使用**
-   - 检查环境变量Path是否包含Tesseract路径
-   - 重启终端或电脑
-   - 测试命令：`tesseract --version`
-
-4. **端口被占用**
-   ```bash
-   # 查找占用端口的进程
-   netstat -ano | findstr 5000
-   # 结束进程
-   taskkill /F /PID <进程ID>
-   ```
+4. **AI 模型问题**
+   - 验证模型路径
+   - 检查 CUDA 配置
+   - 确认系统资源
 
 ## 🛑 关闭服务
-  - 在Flask和Celery终端按 Ctrl+C
-  - 关闭Redis: `net stop Redis`
-
-### AI对话
-1. 选择"AI对话"标签页
-2. 在输入框中输入您的问题
-3. 点击发送按钮
-4. 等待AI助手回复
-
-5. **AI对话无响应**
-   - 检查.env文件中是否正确配置DeepSeek API密钥
-   - 确认网络连接正常
-   - 查看浏览器控制台是否有错误信息
+1. 停止 Flask 和 Celery（Ctrl+C）
+2. 关闭 Redis：`net stop Redis`

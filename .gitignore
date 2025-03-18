@@ -40,4 +40,5 @@ pdfs/
 *.tmp
 *.bak
 
+# 模型文件
 ai_module/

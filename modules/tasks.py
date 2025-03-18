@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 # 创建Celery应用实例并设置名称
 celery = Celery('bishe')
-celery.config_from_object('celeryconfig')   # 从celeryconfig.py导入配置
+celery.config_from_object('config.celeryconfig')   # 从celeryconfig.py导入配置
 
 # 确保可以导入自定义模块
 project_root = Path(__file__).parent.parent
@@ -263,21 +263,49 @@ def extract_pdf_text(self, pdf_paths):              # 处理PDF文本提取任�
             'message': f'PDF处理异常: {str(e)}',    # 打印PDF处理异常信息  
             'results': []                           # 返回空列表  
         }
-from modules.ai_processor import AIProcessor
+
 from celery import shared_task
+
+class AIProcessor:
+    """AI处理器，处理聊天功能"""
+    
+    @staticmethod
+    def generate_chat_response(prompt: str):
+        """生成聊天回复"""
+        from .ai_chat.ai_routes import ai_clients, default_model
+        client = ai_clients.get(default_model)
+        if not client:
+            raise ValueError(f"默认AI模型 {default_model} 不可用")
+        
+        # 添加用户消息
+        client.add_message("user", prompt)
+        
+        # 生成响应
+        response = client.generate_response(stream=False)
+        
+        # 处理响应
+        return response
 
 @shared_task(bind=True)
 def process_chat_task(self, prompt: str):
     try:
-        stream = AIProcessor.generate_chat_response(prompt)
+        response = AIProcessor.generate_chat_response(prompt)
+        
+        # 错误处理
+        if isinstance(response, dict) and "error" in response:
+            return {"status": "error", "message": response["error"]}
+            
+        from .ai_chat.ai_routes import ai_clients, default_model
+        client = ai_clients.get(default_model)
+        
+        # 格式化响应
+        result = client.format_response(response)
+        client.add_message("assistant", result)
+        
         return {
             "status": "success",
             "type": "chat",
-            "stream": [chunk.choices[0].delta.content for chunk in stream]
+            "content": result
         }
     except Exception as e:
         return {"status": "error", "message": str(e)}
-
-@shared_task(bind=True)
-def process_summary_task(self, pdf_path: str):
-    return AIProcessor.process_pdf_summary(pdf_path)

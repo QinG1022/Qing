@@ -18,9 +18,10 @@ from modules.image_processor import ImageProcessor
 from modules.pdf_generator import PDFGenerator
 from flask_talisman import Talisman
 from celery.result import AsyncResult
-from modules.tasks import celery, generate_pdf, process_images_task, extract_pdf_text
+from modules.tasks import celery, generate_pdf, process_images_task, extract_pdf_text, process_chat_task
 import time
 from collections import deque
+from modules.ai_chat.ai_routes import ai_bp
 
 # 定义内容安全策略(CSP)
 csp = {
@@ -33,6 +34,9 @@ csp = {
 
 app = Flask(__name__)
 Talisman(app, force_https=False, content_security_policy=csp)  # 添加安全头，但不强制HTTPS
+
+# 注册AI蓝图
+app.register_blueprint(ai_bp, url_prefix='/ai')
 
 # 应用配置
 app.config.update(
@@ -565,38 +569,12 @@ def clear_history():
         logging.error(f"清空历史记录失败: {str(e)}")
         return jsonify({"error": str(e)}), 500
 
-@app.route('/api/ai/chat', methods=['POST'])
-def ai_chat():
-    data = request.json
-    if not (prompt := data.get('message')):
-        return jsonify({"error": "需要消息内容"}), 400
-    
-    task = process_chat_task.delay(prompt)
-    return jsonify({
-        "task_id": task.id,
-        "status_url": f"/tasks/{task.id}"
-    }), 202
-
-@app.route('/api/ai/summarize', methods=['POST'])
-def ai_summarize():
-    file = request.files.get('pdf')
-    if not file:
-        return jsonify({"error": "需要PDF文件"}), 400
-    
-    # 保存上传文件
-    pdf_path = save_uploaded_file(file)  # 需要实现文件保存逻辑
-    
-    task = process_summary_task.delay(pdf_path)
-    return jsonify({
-        "task_id": task.id,
-        "status_url": f"/tasks/{task.id}"
-    }), 202
-
 @app.route('/api/ai/history', methods=['GET'])
 def ai_history():
     """获取AI相关历史记录"""
     # 可从现有history_records中筛选AI类型记录
-    return jsonify({"history": []})
+    ai_history_records = [record for record in history_records if record.get('type') in ['AI_CHAT']]
+    return jsonify({"history": ai_history_records})
 
 if __name__ == '__main__':
     try:
