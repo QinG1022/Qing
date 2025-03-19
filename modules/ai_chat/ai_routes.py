@@ -247,3 +247,106 @@ def reset_conversation():
     except Exception as e:
         logging.error(f"重置对话历史失败: {str(e)}", exc_info=True)
         return jsonify({"error": str(e)}), 500
+
+@ai_bp.route('/analyze', methods=['POST'])
+def analyze_file():
+    """
+    文件分析接口
+    功能：接收用户上传的文件内容和指令，调用AI模型进行分析
+    请求方法：POST
+    参数：
+        - content: 用户指令/问题
+        - file_content: 文件内容（文本）
+        - model: 使用的模型 (字符串，可选值: 'deepseek_api', 'deepseek', 'qwen'，默认为'deepseek_api')
+        - stream: 是否使用流式输出 (布尔值，默认True)
+    返回：
+        - 流式模式：SSE格式的流式响应
+        - 非流式模式：JSON格式的完整响应
+    """
+    try:
+        # 检查请求数据是否为JSON格式
+        if not request.is_json:
+            return jsonify({"error": "无效的请求数据"}), 400
+            
+        try:
+            data = request.get_json()
+        except BadRequest:
+            return jsonify({"error": "无效的请求数据"}), 400
+            
+        if not data:
+            return jsonify({"error": "无效的请求数据"}), 400
+        
+        # 获取请求的模型名称，始终尊重用户的选择
+        model_name = data.get('model', default_model)
+        
+        # 检查模型是否存在
+        if model_name not in ai_clients:
+            return jsonify({"error": f"不支持的模型: {model_name}"}), 400
+        
+        # 获取对应的客户端
+        client = ai_clients[model_name]
+        
+        # 检查客户端是否正确初始化
+        if client is None:
+            return jsonify({"error": f"{model_name}模型服务未正确配置"}), 500
+            
+        # 获取用户指令和文件内容
+        user_instruction = data.get('content', '')
+        file_content = data.get('file_content', '')
+        
+        if not file_content:
+            return jsonify({"error": "文件内容为空"}), 400
+            
+        # 构建完整的提示信息
+        if user_instruction:
+            prompt = f"以下是文件内容：\n\n{file_content}\n\n用户指令：{user_instruction}"
+        else:
+            prompt = f"以下是文件内容，请分析并提供摘要：\n\n{file_content}"
+            
+        # 默认使用流式输出
+        stream_mode = data.get('stream', True)
+        
+        # 获取可选参数
+        params = {}
+        for param in ['temperature', 'max_tokens', 'top_p', 'frequency_penalty', 'presence_penalty', 'repetition_penalty']:
+            if param in data:
+                params[param] = data[param]
+        
+        # 添加用户消息到对话历史
+        client.add_message("user", prompt)
+        
+        # 生成响应
+        logging.info(f"处理文件分析请求，使用模型: {model_name}，流式模式: {stream_mode}")
+        response = client.generate_response(stream=stream_mode, **params)
+        
+        # 错误处理
+        if isinstance(response, dict) and "error" in response:
+            logging.error(f"AI响应生成失败: {response['error']}")
+            return jsonify({"error": response["error"]}), 500
+        
+        # 流式输出
+        if stream_mode:
+            def generate():
+                try:
+                    for data_chunk in client.stream_response(response):
+                        yield data_chunk
+                except Exception as e:
+                    logging.error(f"流式响应处理失败: {str(e)}")
+                    yield f"data: {json.dumps({'content': f'流式输出错误: {str(e)}', 'error': True})}\n\n"
+                    yield "data: [DONE]\n\n"
+                    
+            return Response(stream_with_context(generate()), mimetype='text/event-stream')
+        
+        # 非流式输出
+        try:
+            assistant_response = client.format_response(response)
+            client.add_message("assistant", assistant_response)
+            logging.info("AI文件分析响应生成成功")
+            return jsonify({"response": assistant_response})
+        except Exception as e:
+            logging.error(f"格式化AI响应失败: {str(e)}")
+            return jsonify({"error": f"处理AI响应失败: {str(e)}"}), 500
+        
+    except Exception as e:
+        logging.error(f"处理文件分析请求失败: {str(e)}", exc_info=True)
+        return jsonify({"error": str(e)}), 500

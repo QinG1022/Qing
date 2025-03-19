@@ -139,6 +139,16 @@
                 <section class="chat-section">
                     <h2><span class="material-icons">AI对话</span></h2>
                     
+                    <!-- 新增文件上传区域 -->
+                    <div class="file-upload-container">
+                        <label for="chat-file" class="file-upload-btn">
+                            <span class="material-icons">attach_file</span>
+                            <span class="button-text">上传文件（TXT/PDF）</span>
+                        </label>
+                        <input type="file" id="chat-file" accept=".txt,.pdf">
+                        <span class="file-info" id="fileInfo"></span>
+                    </div>
+
                     <div class="model-selector">
                         <label for="model-select">选择AI模型：</label>
                         <select id="model-select" class="model-select">
@@ -148,10 +158,19 @@
                     
                     <div class="chat-container">
                         <div class="chat-messages" id="chatMessages">
+                            <!-- 新增文件上传状态提示 -->
+                            <div class="message-system hidden" id="uploadStatus">
+                                <span class="material-icons">info</span>
+                                <span>文件已上传，请输入分析指令...</span>
+                            </div>
                             <!-- 消息内容将通过JS动态加载 -->
                         </div>
                         <div class="chat-input-container">
-                            <textarea id="chatInput" placeholder="请输入您的问题..."></textarea>
+                            <!-- 在输入区域添加上传图标 -->
+                            <button class="file-upload-mini" id="triggerUpload">
+                                <span class="material-icons">attach_file</span>
+                            </button>
+                            <textarea id="chatInput" placeholder="请输入您的问题或分析指令..."></textarea>
                             <button id="sendMessageBtn" class="btn primary">
                                 <span class="material-icons">发送</span>
                             </button>

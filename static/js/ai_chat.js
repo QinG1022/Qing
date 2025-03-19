@@ -10,8 +10,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const sendMessageBtn = document.getElementById('sendMessageBtn');
     const chatMessages = document.getElementById('chatMessages');
     const modelSelect = document.getElementById('model-select');
+    // 新增文件上传相关元素
+    const chatFileInput = document.getElementById('chat-file');
+    const fileInfoElement = document.getElementById('fileInfo');
+    const uploadStatusElement = document.getElementById('uploadStatus');
+    const triggerUploadBtn = document.getElementById('triggerUpload');
+    
     let controller = null;
     let currentModel = 'deepseek';  // 默认模型，将在初始化时更新
+    // 新增文件内容变量
+    let currentFileContent = null;  // 存储上传文件的内容
     
     // 可用的模型信息
     let availableModels = {};
@@ -86,73 +94,18 @@ document.addEventListener('DOMContentLoaded', function() {
             chatMessages.innerHTML = '';
             
             // 添加欢迎消息
-            let welcomeMsg = `欢迎使用AI对话助手！当前使用的是`;
-            switch(currentModel) {
-                case 'deepseek_api':
-                    welcomeMsg += `DeepSeek API在线模型。`;
-                    break;
-                case 'deepseek':
-                    welcomeMsg += `DeepSeek本地模型。`;
-                    break;
-                case 'qwen':
-                    welcomeMsg += `Qwen本地模型。`;
-                    break;
-                default:
-                    welcomeMsg += `${currentModel}模型。`;
-            }
-            appendMessage(welcomeMsg, false);
+            appendMessage('您好，我是AI助手，有什么可以帮助您的吗？', false);
             
         } catch (error) {
             console.error('初始化模型失败:', error);
-            appendMessage(`初始化模型失败: ${error.message}`, false);
-            
-            // 离线模式下默认使用本地模型
-            if (!navigator.onLine) {
-                updateModelSelectForOffline();
-            }
+            appendMessage(`初始化AI模型失败: ${error.message}`, false);
         }
-    }
-    
-    // 离线模式下更新模型选择
-    function updateModelSelectForOffline() {
-        modelSelect.innerHTML = '';
-        
-        // 添加本地模型选项
-        const deepseekOption = document.createElement('option');
-        deepseekOption.value = 'deepseek';
-        deepseekOption.textContent = 'DeepSeek-R1-Distill-Qwen-1.5B (本地)';
-        modelSelect.appendChild(deepseekOption);
-        
-        const qwenOption = document.createElement('option');
-        qwenOption.value = 'qwen';
-        qwenOption.textContent = 'Qwen1.5-0.5B-Chat (本地)';
-        modelSelect.appendChild(qwenOption);
-        
-        // 禁用在线API选项
-        const apiOption = document.createElement('option');
-        apiOption.value = 'deepseek_api';
-        apiOption.textContent = 'DeepSeek API (离线状态不可用)';
-        apiOption.disabled = true;
-        modelSelect.appendChild(apiOption);
-        
-        // 默认选择本地模型
-        modelSelect.value = 'deepseek';
-        currentModel = 'deepseek';
-    }
-
-    // 添加消息到对话框
-    function appendMessage(content, isUser = false) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${isUser ? 'user-message' : 'ai-message'}`;
-        messageDiv.innerHTML = `<div class="message-content">${content}</div>`;
-        chatMessages.appendChild(messageDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
     // 处理发送消息
     async function handleSendMessage() {
         const message = chatInput.value.trim();
-        if (!message) return;
+        if (!message && !currentFileContent) return;
 
         // 禁用输入和发送按钮
         chatInput.disabled = true;
@@ -160,35 +113,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // 显示用户消息
         appendMessage(message, true);
-
+        
         try {
             // 检查网络连接状态和当前选择的模型
             if (!navigator.onLine && currentModel === 'deepseek_api') {
                 throw new Error('网络连接已断开，无法使用DeepSeek API，请切换到本地模型或检查网络后重试');
             }
             
-            // 如果是离线状态且用户选择了本地模型，添加提示信息
-            if (!navigator.onLine && (currentModel === 'deepseek' || currentModel === 'qwen')) {
-                appendMessage(`当前处于离线状态，正在使用本地${currentModel}模型...`, false);
-            }
-
             // 创建新的AbortController
             controller = new AbortController();
 
             // 获取当前选择的模型
             currentModel = modelSelect.value;
             
+            // 确定API端点和请求数据
+            let endpoint = '/ai/chat';
+            let requestData = {
+                message: message,
+                stream: true,
+                model: currentModel
+            };
+            
+            // 如果有文件内容，使用分析接口
+            if (currentFileContent) {
+                endpoint = '/ai/analyze';
+                requestData = {
+                    content: message,
+                    file_content: currentFileContent,
+                    stream: true,
+                    model: currentModel
+                };
+                
+                // 添加文件分析提示
+                appendMessage(`正在分析文件内容，请稍候...`, false);
+            }
+            
             // 发送请求到服务器
-            const response = await fetch('/ai/chat', {
+            const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    message: message,
-                    stream: true,
-                    model: currentModel
-                }),
+                body: JSON.stringify(requestData),
                 signal: controller.signal
             });
 
@@ -232,6 +198,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             }
+            
+            // 分析完成后清除文件内容
+            if (currentFileContent) {
+                currentFileContent = null;
+                fileInfoElement.textContent = '';
+                uploadStatusElement.classList.add('hidden');
+                chatFileInput.value = '';
+            }
+            
         } catch (error) {
             if (error.name === 'AbortError') {
                 appendMessage('消息已取消发送', false);
@@ -250,6 +225,94 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // 新增：处理文件上传
+    async function handleFileUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        
+        // 验证文件类型
+        if (!file.name.toLowerCase().endsWith('.txt') && !file.name.toLowerCase().endsWith('.pdf')) {
+            appendMessage('仅支持TXT和PDF文件', false);
+            chatFileInput.value = '';
+            return;
+        }
+        
+        try {
+            // 显示文件处理中状态
+            appendMessage(`正在处理文件: ${file.name}`, false);
+            
+            // 显示加载状态
+            document.getElementById('loadingOverlay').classList.remove('hidden');
+            document.getElementById('loadingText').textContent = '文件处理中...';
+            
+            // 处理不同类型的文件
+            if (file.name.toLowerCase().endsWith('.pdf')) {
+                // 使用PDF提取模块处理PDF文件
+                const formData = new FormData();
+                formData.append('pdfs', file);
+                
+                const response = await fetch('/extract-pdf', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error('PDF处理失败');
+                }
+                
+                const result = await response.json();
+                const taskId = result.task_id;
+                
+                // 轮询任务状态
+                let taskComplete = false;
+                while (!taskComplete) {
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    
+                    const statusResponse = await fetch(`/tasks/${taskId}`);
+                    const statusResult = await statusResponse.json();
+                    
+                    if (statusResult.status === 'SUCCESS') {
+                        // 提取PDF文本
+                        if (statusResult.result && statusResult.result.results && statusResult.result.results.length > 0) {
+                            currentFileContent = statusResult.result.results[0].text;
+                            taskComplete = true;
+                        }
+                    } else if (statusResult.status === 'FAILURE') {
+                        throw new Error('PDF处理失败: ' + (statusResult.error || '未知错误'));
+                    }
+                }
+            } else {
+                // 处理TXT文件
+                currentFileContent = await file.text();
+            }
+            
+            // 隐藏加载状态
+            document.getElementById('loadingOverlay').classList.add('hidden');
+            
+            // 更新UI显示
+            fileInfoElement.textContent = `已上传: ${file.name}`;
+            uploadStatusElement.classList.remove('hidden');
+            appendMessage(`文件 ${file.name} 已上传，请输入分析指令...`, false);
+            
+        } catch (error) {
+            // 隐藏加载状态
+            document.getElementById('loadingOverlay').classList.add('hidden');
+            
+            appendMessage(`文件处理失败: ${error.message}`, false);
+            console.error('文件处理错误:', error);
+            chatFileInput.value = '';
+        }
+    }
+
+    // 添加消息到对话框
+    function appendMessage(content, isUser = false) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${isUser ? 'user-message' : 'ai-message'}`;
+        messageDiv.innerHTML = `<div class="message-content">${content}</div>`;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
     // 绑定事件监听器
     sendMessageBtn.addEventListener('click', handleSendMessage);
     chatInput.addEventListener('keypress', function(e) {
@@ -258,13 +321,25 @@ document.addEventListener('DOMContentLoaded', function() {
             handleSendMessage();
         }
     });
+    
+    // 新增：文件上传事件
+    if (chatFileInput) {
+        chatFileInput.addEventListener('change', handleFileUpload);
+    }
+    
+    // 新增：触发文件上传按钮
+    if (triggerUploadBtn) {
+        triggerUploadBtn.addEventListener('click', () => {
+            chatFileInput.click();
+        });
+    }
 
     // 监听模型选择变化
     modelSelect.addEventListener('change', function() {
         currentModel = this.value;
-        appendMessage(`已切换到${this.options[this.selectedIndex].text}`, false);
+        appendMessage(`已切换到${this.options[this.selectedIndex].textContent}`, false);
     });
 
-    // 初始化
+    // 初始化模型
     initializeModels();
 });

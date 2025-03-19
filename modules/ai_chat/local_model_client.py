@@ -71,6 +71,9 @@ class LocalModelClient:
         if query:
             # 单轮对话处理
             if self.model_type == "deepseek":
+                # 检查是否是文件分析请求
+                if "以下是文件内容：" in query:
+                    return f"<|im_start|>user\n{query}<|im_end|>\n<|im_start|>assistant\n<think>\n1. 分析用户提供的文件内容\n2. 理解用户的分析指令\n3. 组织分析结果...\n</think>\n"
                 return f"<|im_start|>user\n{query}<|im_end|>\n<|im_start|>assistant\n<think>\n1. 分析用户问题：{query}\n2. 确认我的角色：一个专业的AI助手\n3. 组织回答思路...\n<think>\n"
             return self.tokenizer.apply_chat_template(
                 [{"role": "user", "content": query}],
