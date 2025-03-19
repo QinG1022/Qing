@@ -6,7 +6,9 @@ from .local_model_client import LocalModelClient
 import logging
 from werkzeug.exceptions import BadRequest
 import json
-
+import io
+import PyPDF2
+from werkzeug.utils import secure_filename
 # 加载.env文件中的环境变量
 load_dotenv()
 

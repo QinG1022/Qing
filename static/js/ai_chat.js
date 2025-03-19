@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 for (const line of lines) {
                     if (line.startsWith('data: ')) {
                         const data = line.slice(5);
-                        if (data === '[DONE]') break;
+                        if (data.trim() === '[DONE]') continue;
 
                         try {
                             const parsed = JSON.parse(data);

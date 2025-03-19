@@ -51,7 +51,7 @@ app.config.update(
 
 # 创建一个双端队列用于存储历史记录，maxlen参数限制队列最大长度
 history_records = deque(maxlen=app.config['MAX_HISTORY_ITEMS'])
-
+         
 # 高级日志配置
 logging.basicConfig(
     level=logging.INFO,  # 日志级别：INFO，记录所有信息、警告和错误
