@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const imagePreview = document.querySelector('.image-preview');
     const processImagesBtn = document.getElementById('process-images-btn');
     const contentTextarea = document.getElementById('content');
-    let ocrTextAdded = false;
+    window.ocrTextAdded = false;
 
     /**
      * 图片预览处理
@@ -55,12 +55,57 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /**
+     * 处理图片OCR按钮点击事件
+     */
+    if (processImagesBtn) {
+        processImagesBtn.addEventListener('click', async function() {
+            if (!imagesInput.files.length) {
+                window.showToast('请先选择图片');
+                return;
+            }
+
+            const formData = new FormData();
+            Array.from(imagesInput.files).forEach(file => {
+                formData.append('images', file);
+            });
+            
+            processImagesBtn.disabled = true;
+            window.showLoading('上传图片中...');
+            
+            try {
+                const response = await fetch('/process-images', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error('服务器响应错误');
+                }
+                
+                const result = await response.json();
+                
+                if (result.task_id) {
+                    pollOCRStatus(result.task_id);
+                } else {
+                    throw new Error('未能获取任务ID');
+                }
+            } catch (error) {
+                console.error('提交OCR任务失败:', error);
+                window.hideLoading();
+                window.setStatusMessage(`OCR提交失败: ${error.message}`, true);
+                processImagesBtn.disabled = false;
+            }
+        });
+    }
+
+    /**
      * 处理图片OCR任务状态
      * 
      * @param {string} taskId - OCR任务ID
      */
     function pollOCRStatus(taskId) {
-        showLoading('识别图片文字中...');
+        window.showLoading('识别图片文字中...');
+        
         const intervalId = setInterval(async () => {
             try {
                 const response = await fetch(`/tasks/${taskId}`);
@@ -68,25 +113,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (data.status === 'SUCCESS') {
                     clearInterval(intervalId);
-                    hideLoading();
+                    window.hideLoading();
                     handleOCRResults(data.result.results);
                     processImagesBtn.disabled = false;
                     
                     // 处理成功后刷新历史记录
                     console.log("OCR处理完成，刷新历史记录");
-                    setTimeout(loadHistory, 500);
+                    setTimeout(window.loadHistory, 500);
                 } else if (data.status === 'FAILURE') {
                     clearInterval(intervalId);
-                    hideLoading();
-                    setStatusMessage(`OCR处理失败: ${data.error || '未知错误'}`, true);
+                    window.hideLoading();
+                    window.setStatusMessage(`OCR处理失败: ${data.error || '未知错误'}`, true);
                     processImagesBtn.disabled = false;
                 } else {
                     document.getElementById('loadingText').textContent = data.message || '识别中...';
                 }
             } catch (error) {
                 clearInterval(intervalId);
-                hideLoading();
-                setStatusMessage('状态查询失败', true);
+                window.hideLoading();
+                window.setStatusMessage('状态查询失败', true);
                 processImagesBtn.disabled = false;
             }
         }, 1000);
@@ -105,8 +150,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (results && results.length > 0) {
             const mergeAllBtn = ocrResults.querySelector('.merge-all-btn');
             mergeAllBtn.disabled = false;
+            
+            // 移除旧的事件监听器，防止重复绑定
+            mergeAllBtn.removeEventListener('click', mergeAllText);
             mergeAllBtn.addEventListener('click', mergeAllText);
             
+            // 为每个OCR结果创建展示元素
             results.forEach(result => {
                 const div = document.createElement('div');
                 div.className = 'ocr-item';
@@ -119,6 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 `;
                 
+                // 添加单个合并按钮事件
                 const mergeBtn = div.querySelector('.merge-btn');
                 mergeBtn.addEventListener('click', function() {
                     mergeText(result.text, this);
@@ -127,9 +177,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 ocrContent.appendChild(div);
             });
             
+            // 显示OCR结果区域
             ocrResults.classList.remove('hidden');
         } else {
-            setStatusMessage('未识别到任何文本', true);
+            window.setStatusMessage('未识别到任何文本', true);
             // 确保在没有识别结果时保持结果区域隐藏
             ocrResults.classList.add('hidden');
         }
@@ -145,18 +196,32 @@ document.addEventListener('DOMContentLoaded', function() {
         if (text && contentTextarea) {
             const currentValue = contentTextarea.value;
             
+            // 如果文本区已有内容，则添加换行符再添加新文本
             if (currentValue) {
-                contentTextarea.value = currentValue + "\n\n" + text;
+                contentTextarea.value = currentValue + '\n\n' + text;
             } else {
                 contentTextarea.value = text;
             }
             
-            button.disabled = true;
-            button.textContent = '已添加';
-            button.style.backgroundColor = '#ccc';
+            // 设置标志，表示用户已添加OCR文本
+            window.ocrTextAdded = true;
             
-            ocrTextAdded = true;
-            showToast('内容已添加到文本区');
+            // 更改按钮状态和提示
+            button.disabled = true;
+            button.querySelector('span').textContent = '已添加';
+            
+            // 显示提示并切换到文本编辑标签页
+            window.showToast('OCR文本已添加到编辑器');
+            
+            // 切换到文本编辑标签页
+            const firstTabBtn = document.querySelector('.tab-button[data-tab="tab1"]');
+            if (firstTabBtn) {
+                firstTabBtn.click();
+                contentTextarea.scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => {
+                    contentTextarea.focus();
+                }, 300);
+            }
         }
     }
 
@@ -166,87 +231,40 @@ document.addEventListener('DOMContentLoaded', function() {
     function mergeAllText() {
         const ocrItems = document.querySelectorAll('.ocr-item .ocr-text');
         if (ocrItems.length > 0 && contentTextarea) {
-            let allText = '';
-            ocrItems.forEach(item => {
-                if (item.textContent) {
-                    allText += item.textContent + "\n\n";
-                }
+            const texts = Array.from(ocrItems).map(item => item.textContent);
+            const newText = texts.join('\n\n');
+            
+            const currentValue = contentTextarea.value;
+            if (currentValue) {
+                contentTextarea.value = currentValue + '\n\n' + newText;
+            } else {
+                contentTextarea.value = newText;
+            }
+            
+            // 设置标志，表示用户已添加OCR文本
+            window.ocrTextAdded = true;
+            
+            // 禁用所有"添加"按钮
+            document.querySelectorAll('.ocr-item .merge-btn').forEach(btn => {
+                btn.disabled = true;
+                btn.querySelector('span').textContent = '已添加';
             });
             
-            if (allText) {
-                const currentValue = contentTextarea.value;
-                if (currentValue) {
-                    contentTextarea.value = currentValue + "\n\n" + allText.trim();
-                } else {
-                    contentTextarea.value = allText.trim();
-                }
-                
-                document.querySelectorAll('.merge-btn').forEach(btn => {
-                    btn.disabled = true;
-                    btn.textContent = '已添加';
-                    btn.style.backgroundColor = '#ccc';
-                });
-                
-                const mergeAllBtn = document.querySelector('.merge-all-btn');
-                if (mergeAllBtn) {
-                    mergeAllBtn.disabled = true;
-                    mergeAllBtn.textContent = '已合并全部';
-                    mergeAllBtn.style.backgroundColor = '#ccc';
-                }
-                
-                ocrTextAdded = true;
-                showToast('所有内容已添加到文本区');
+            // 禁用"全部合并"按钮
+            document.querySelector('.merge-all-btn').disabled = true;
+            
+            // 显示提示并切换到文本编辑标签页
+            window.showToast('所有OCR文本已添加到编辑器');
+            
+            // 切换到文本编辑标签页
+            const firstTabBtn = document.querySelector('.tab-button[data-tab="tab1"]');
+            if (firstTabBtn) {
+                firstTabBtn.click();
+                contentTextarea.scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => {
+                    contentTextarea.focus();
+                }, 300);
             }
         }
-    }
-
-    /**
-     * 处理图片按钮点击事件
-     */
-    if (processImagesBtn) {
-        processImagesBtn.addEventListener('click', async function() {
-            if (!imagesInput.files.length) {
-                showToast('请先选择图片');
-                return;
-            }
-
-            if (!document.getElementById('enableOCR').checked) {
-                showToast('请勾选"对图片进行文字识别"选项');
-                return;
-            }
-
-            this.disabled = true;
-            
-            const ocrResults = document.querySelector('.ocr-results');
-            ocrResults.classList.add('hidden');
-            
-            const formData = new FormData();
-            Array.from(imagesInput.files).forEach(file => {
-                formData.append('images', file);
-            });
-
-            try {
-                showLoading('处理图片中，识别文字...');
-                const response = await fetch('/process-images', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                if (!response.ok) {
-                    throw new Error('处理失败');
-                }
-                
-                const data = await response.json();
-                if (data.task_id) {
-                    pollOCRStatus(data.task_id);
-                } else {
-                    throw new Error('未能获取任务ID');
-                }
-            } catch (error) {
-                hideLoading();
-                showToast('图片处理失败: ' + error.message);
-                this.disabled = false;
-            }
-        });
     }
 });
