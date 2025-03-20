@@ -8,14 +8,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class DeepSeekClient:
-    def __init__(self, model="deepseek-ai/DeepSeek-R1-Distill-Qwen-7B", base_url="https://api.siliconflow.cn/v1"):
+    def __init__(self):
+        self.base_url = os.getenv("DEEPSEEK_BASE_URL") 
+        self.model = os.getenv("DEEPSEEK_MODEL")
         # 只从环境变量获取API密钥
         self.api_key = os.getenv("DEEPSEEK_API_KEY")
         if not self.api_key:
             raise ValueError("DeepSeek API密钥未提供，请在.env文件中设置DEEPSEEK_API_KEY环境变量")
-            
-        self.client = OpenAI(api_key=self.api_key, base_url=base_url)
-        self.model = model
+        self.client = OpenAI(api_key=self.api_key, base_url=self.base_url)#
         self.messages = [{"role": "system", "content": "You are a helpful assistant."}]
     
     def add_message(self, role, content):

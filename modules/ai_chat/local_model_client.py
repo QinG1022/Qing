@@ -63,9 +63,7 @@ class LocalModelClient:
             trust_remote_code=True,
             torch_dtype=torch.float16 if "cuda" in self.device else torch.float32,
             device_map="auto",
-            # 指定使用传统的"eager"模式实现注意力机制，而不是默认的 SDPA 实现
-           attn_implementation="eager",     # 使用eager实现而非sdpa
-           sliding_window=None,             # 禁用 Sliding Window Attention
+            
         ).eval()
 
     def _format_prompt(self, query: str = None) -> str:
