@@ -18,7 +18,7 @@ from modules.image_processor import ImageProcessor
 from modules.pdf_generator import PDFGenerator
 from flask_talisman import Talisman
 from celery.result import AsyncResult
-from modules.tasks import celery, generate_pdf, process_images_task, extract_pdf_text, process_chat_task
+from modules.tasks import celery, generate_pdf, process_images_task, extract_pdf_text
 import time
 from collections import deque
 from modules.ai_chat.ai_routes import ai_bp

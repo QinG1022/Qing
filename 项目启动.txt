@@ -10,18 +10,14 @@
 
 ### 2. 安装步骤
 ```bash
-# 1. 克隆项目
-git clone https://github.com/QinG1022/Qing.git
-cd Qing
-
-# 2. 创建虚拟环境
+# 1. 创建虚拟环境
 python -m venv venv
 .\venv\Scripts\activate
 
-# 3. 安装依赖
+# 2. 安装依赖
 pip install -r requirements.txt
 
-# 4. 创建必要目录
+# 3. 创建必要目录
 mkdir -p uploads pdfs log
 ```
 
@@ -100,6 +96,7 @@ python app.py
 DEEPSEEK_BASE_URL=模型网址（如硅基流动：https://api.siliconflow.cn/v1）
 DEEPSEEK_MODEL=模型名称（如硅基流动的模型名称：deepseek-ai/DeepSeek-R1-Distill-Qwen-7B）
 DEEPSEEK_API_KEY=api密钥
+  后续仅需修改相关配置既可更换其他ai模型
 
 # 本地模型配置（可选）
 DEEPSEEK_LOCAL_MODEL_PATH=D:/path/to/DeepSeek-R1-Distill-1.5B

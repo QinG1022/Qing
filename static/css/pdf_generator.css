@@ -1,10 +1,6 @@
-/* 
- * PDF生成器样式
- * 版本: 1.0
- * 最后更新: 2024-03-06
- * 描述: 定义PDF生成相关的样式
- */
-
+/* --------------------------------------
+ * PDF生成相关样式
+ * -------------------------------------- */
 /* PDF生成器容器 */
 .pdf-generator {
     background-color: var(--card-background);
@@ -67,7 +63,7 @@
 
 /* PDF生成预览为空时的提示 */
 .pdf-preview:empty::before {
-    content: "预览区域 - 生成PDF后将显示在此处";
+    content: "预览区域 - 上传PDF后将显示在此处";
     color: var(--light-text);
     font-style: italic;
 }

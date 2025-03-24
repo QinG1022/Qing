@@ -59,27 +59,22 @@
 - 本地 AI 模型（可选）
 
 ### 安装步骤
-1. **克隆项目**
-   ```bash
-   git clone https://github.com/QinG1022/Qing.git
-   cd Qing
-   ```
 
-2. **配置虚拟环境**
+1. **配置虚拟环境**
    ```bash
    python -m venv venv
    .\venv\Scripts\activate
    pip install -r requirements.txt
    ```
 
-3. **安装必要组件**
+2. **安装必要组件**
    - Redis: [下载地址](https://github.com/microsoftarchive/redis/releases)
    - Tesseract-OCR: [下载地址](https://github.com/UB-Mannheim/tesseract/wiki)
    - 本地 AI 模型（可选）:
      - [DeepSeek-R1](https://huggingface.co/deepseek-ai/deepseek-coder-1.3b-base)
      - [Qwen1.5](https://huggingface.co/Qwen/Qwen1.5-0.5B-Chat)
 
-4. **创建必要目录**
+3. **创建必要目录**
    ```bash
    mkdir -p uploads pdfs log
    ```

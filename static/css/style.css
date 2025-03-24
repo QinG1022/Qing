@@ -162,11 +162,6 @@ input[type="file"] {
     text-align: center; /* 文本居中 */
 }
 
-/* 这部分样式已移动到image_processor.css */
-
-
-/* 这部分样式已移动到image_processor.css */
-
 /* --------------------------------------
  * 8. 按钮样式
  * -------------------------------------- */
@@ -759,8 +754,6 @@ button:disabled {
     from { opacity: 0; /}
     to { opacity: 1; }
 }
-
-/* 这部分样式已移动到pdf_extractor.css */
 
 /* --------------------------------------
  * 28. 复制按钮样式
