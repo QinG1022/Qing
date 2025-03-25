@@ -13,12 +13,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/pdf_extractor.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/pdf_generator.css') }}">
 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 <body>
     <div class="container">
         <header class="app-header">
-            <h1><span class="material-icons">智能文档处理系统</span></h1><!--标题-->
-            <div class="header-subtitle">高效处理文档，提取信息，生成报告</div><!--副标题-->    
+            <h1><span class="material-icons">智能文档处理与AI交互系统</span></h1><!--标题-->
+            <div class="header-subtitle">高效处理文档，提取信息，生成报告，ai畅聊</div><!--副标题-->
+                <!-- 登录按钮 -->
+            <button id="loginBtn" class="login-btn">
+                <span class="material-icons">person</span>
+                <span>登录</span>
+            </button>
         </header>
 
         <div class="main-content"><!--主内容区域-->
@@ -49,10 +55,10 @@
                     <h2><span class="material-icons">图片处理</span></h2>
                     <label for="images" class="file-upload-btn">
                         <span class="material-icons"></span>
-                        <span class="button-text">选择图片文件</span>
+                        <span class="button-text">选择图片</span>
                     </label>
                     <input type="file" id="images" multiple accept="image/*"><!--上传图片文件-->    
-                    <p class="hint">支持JPG, PNG, BMP等常见图片格式的简单处理 <br>尽量使上传图片内容清晰，内容太多可能无法识别</p>
+                    <p class="hint">支持JPG, PNG, BMP等常见图片格式的简单处理 <br>若出现识别失败或识别不全，可以将图片直接生成</p>
 
                     <div class="image-preview"></div><!--图片预览-->    
 
@@ -225,9 +231,74 @@
             </div>
         </div>
 
+            <!-- 登录模态框 -->
+        <div class="login-modal-overlay" id="loginModalOverlay">
+            <div class="login-modal-dialog">
+                <div class="login-modal-content">
+                    <button class="modal-close" id="loginModalClose">×</button>
+                    <h2>用户登录</h2>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="username">用户名：</label>
+                            <input type="text" id="username" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">密码：</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        <div class="login-modal-buttons">
+                            <button type="button" class="modal-btn secondary" id="loginCancel">取消</button>
+                            <button type="submit" class="modal-btn primary" id="loginSubmit">登录</button>
+                        </div>
+                        <div class="form-footer">
+                            <a href="#" id="registerLink">没有账号？立即注册</a>
+                        <a href="#" id="forgotPasswordLink">忘记密码？</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 在登录模态框后面添加注册模态框 -->
+        <div class="register-modal-overlay" id="registerModalOverlay">
+            <div class="register-modal-dialog">
+                <div class="register-modal-content">
+                    <button class="modal-close" id="registerModalClose">×</button>
+                    <h2>用户注册</h2>
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <label for="registerUsername">用户名：</label>
+                            <input type="text" id="registerUsername" name="username" required>
+                            <small class="form-tip">用户名长度为4-20个字符</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerEmail">邮箱：</label>
+                            <input type="email" id="registerEmail" name="email" required>
+                            <small class="form-tip">请输入有效的邮箱地址</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword">密码：</label>
+                            <input type="password" id="registerPassword" name="password" required>
+                            <small class="form-tip">密码长度至少8位，包含字母和数字</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">确认密码：</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        </div>
+                        <div class="register-modal-buttons">
+                            <button type="button" class="modal-btn secondary" id="registerCancel">取消</button>
+                            <button type="submit" class="modal-btn primary" id="registerSubmit">注册</button>
+                        </div>
+                            <div class="form-footer">
+                            <a href="#" id="backToLoginLink">已有账号？返回登录</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <!-- 底部 -->    
         <footer class="app-footer">
-            <p>© 2025 智能文档处理系统 - 提高您的文档处理效率</p>
+            <p>© 2025 智能文档处理与AI交互系统 - 提高您的文档处理效率</p>
         </footer>
     </div>
 
@@ -243,5 +314,6 @@
     <script src="{{ url_for('static', filename='js/ai_chat.js') }}"></script>
     <script src="{{ url_for('static', filename='js/image_processor.js') }}"></script>
     <script src="{{ url_for('static', filename='js/pdf_extractor.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
 </body>
 </html>

@@ -14,6 +14,7 @@ from pathlib import Path
 from flask import Flask, render_template, request, jsonify, abort, send_from_directory
 from werkzeug.utils import secure_filename
 from celery import Celery
+from modules.user_manager import UserManager
 from modules.image_processor import ImageProcessor
 from modules.pdf_generator import PDFGenerator
 from flask_talisman import Talisman
@@ -54,7 +55,7 @@ history_records = deque(maxlen=app.config['MAX_HISTORY_ITEMS'])
          
 # 高级日志配置
 logging.basicConfig(
-    level=logging.INFO,  # 日志级别：INFO，记录所有信息、警告和错误
+    level=logging.WARNING,  # 日志级别：INFO，记录所有信息、警告和错误，WARNING，记录警告和错误
     format='%(asctime)s [%(levelname)s] %(message)s',  # 日志格式：时间 [级别] 消息
     handlers=[
         logging.FileHandler('log/app_audit.log'),  # 文件处理器：记录到log/app_audit.log
@@ -66,10 +67,7 @@ logging.basicConfig(
 logging.getLogger('werkzeug').setLevel(logging.ERROR)
 
 # 程序启动日志
-logging.info("="*50)
-logging.info("应用程序启动")
-logging.info("历史记录功能已初始化，最大容量: %d", app.config['MAX_HISTORY_ITEMS'])
-logging.info("="*50)
+logging.warning("应用程序启动 - 历史记录容量: %d", app.config['MAX_HISTORY_ITEMS'])
 
 @app.before_request
 def security_check():
@@ -576,8 +574,104 @@ def ai_history():
     ai_history_records = [record for record in history_records if record.get('type') in ['AI_CHAT']]
     return jsonify({"history": ai_history_records})
 
+# 添加用户接口路由
+@app.route('/api/register', methods=['POST'])
+def register():
+    """
+    用户注册接口
+    功能：处理新用户注册请求
+    请求方法：POST
+    参数：
+        - username: 用户名
+        - email: 邮箱
+        - password: 密码
+    返回：
+        - 成功：注册成功消息（HTTP 200）
+        - 失败：错误信息（HTTP 400）
+    """
+    try:
+        # 获取注册表单数据
+        data = request.get_json()
+        if not data:
+            return jsonify({"success": False, "message": "无效的请求数据"}), 400
+        
+        username = data.get('username')
+        email = data.get('email')
+        password = data.get('password')
+        
+        # 数据验证
+        if not all([username, email, password]):
+            return jsonify({"success": False, "message": "请填写所有必填字段"}), 400
+        
+        # 用户名验证
+        if len(username) < 4 or len(username) > 20:
+            return jsonify({"success": False, "message": "用户名长度必须在4-20个字符之间"}), 400
+        
+        # 密码验证
+        if len(password) < 8:
+            return jsonify({"success": False, "message": "密码长度必须至少为8个字符"}), 400
+        
+        # 邮箱格式验证（简单验证）
+        if '@' not in email or '.' not in email:
+            return jsonify({"success": False, "message": "请输入有效的邮箱地址"}), 400
+        
+        # 注册用户
+        result = UserManager.register_user(username, email, password)
+        if result["success"]:
+            logging.info(f"用户注册成功: {username}")
+            return jsonify(result), 200
+        else:
+            logging.warning(f"用户注册失败: {username}, 原因: {result['message']}")
+            return jsonify(result), 400
+            
+    except Exception as e:
+        logging.error(f"注册请求处理失败: {str(e)}", exc_info=True)
+        return jsonify({"success": False, "message": "服务器处理请求时出错"}), 500
+
+@app.route('/api/login', methods=['POST'])
+def login():
+    """
+    用户登录接口
+    功能：处理用户登录请求
+    请求方法：POST
+    参数：
+        - username: 用户名
+        - password: 密码
+    返回：
+        - 成功：登录成功消息和用户信息（HTTP 200）
+        - 失败：错误信息（HTTP 401）
+    """
+    try:
+        # 获取登录表单数据
+        data = request.get_json()
+        if not data:
+            return jsonify({"success": False, "message": "无效的请求数据"}), 400
+        
+        username = data.get('username')
+        password = data.get('password')
+        
+        # 数据验证
+        if not all([username, password]):
+            return jsonify({"success": False, "message": "请填写用户名和密码"}), 400
+        
+        # 验证用户
+        result = UserManager.authenticate_user(username, password)
+        if result["success"]:
+            logging.info(f"用户登录成功: {username}")
+            return jsonify(result), 200
+        else:
+            logging.warning(f"用户登录失败: {username}")
+            return jsonify(result), 401
+            
+    except Exception as e:
+        logging.error(f"登录请求处理失败: {str(e)}", exc_info=True)
+        return jsonify({"success": False, "message": "服务器处理请求时出错"}), 500
+
 if __name__ == '__main__':
     try:
+        # 初始化用户管理模块
+        UserManager.initialize()
+        logging.info("用户管理模块已初始化")
         # 确保目录存在并有正确权限
         pdf_dir = app.config['PDF_FOLDER']
         pdf_dir.mkdir(parents=True, exist_ok=True)
@@ -587,6 +681,11 @@ if __name__ == '__main__':
         upload_dir.mkdir(parents=True, exist_ok=True)
         os.chmod(str(upload_dir), 0o755)
         
+        # 确保用户数据目录存在
+        data_dir = Path("data")
+        data_dir.mkdir(parents=True, exist_ok=True)
+        os.chmod(str(data_dir), 0o755)
+
         # 添加服务器启动提示信息
         host = '127.0.0.1'
         port = 5000

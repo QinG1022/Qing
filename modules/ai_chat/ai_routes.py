@@ -6,6 +6,16 @@ from .local_model_client import LocalModelClient
 import logging
 from werkzeug.exceptions import BadRequest
 import json
+import warnings
+
+# 设置更高的日志级别，抑制不必要的日志
+logging.getLogger('accelerate').setLevel(logging.ERROR)  # 将accelerate的日志级别设为ERROR
+logging.getLogger('transformers').setLevel(logging.ERROR)  # 同时抑制transformers的日志
+logging.getLogger('modules.ai_chat').setLevel(logging.WARNING)  # 将ai_chat的日志级别设为WARNING
+
+# 抑制特定的警告信息
+warnings.filterwarnings("ignore", message="Sliding Window Attention is enabled")
+warnings.filterwarnings("ignore", message="Some parameters are on the meta device")
 # 加载.env文件中的环境变量
 load_dotenv()
 
