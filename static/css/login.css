@@ -154,3 +154,66 @@
     margin-top: 4px;
     display: none;
 }
+
+/* 用户菜单样式 */
+.user-menu {
+    position: absolute;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 200px;
+    z-index: 1000;
+    overflow: hidden;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.user-menu-header {
+    padding: 15px;
+    background-color: #f5f8ff;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-menu-header .material-icons {
+    color: #4285f4;
+    font-size: 24px;
+}
+
+.user-menu-header .user-name {
+    font-weight: 500;
+    color: #333;
+}
+
+.user-menu-item {
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.user-menu-item:hover {
+    background-color: #f5f8ff;
+}
+
+.user-menu-item .material-icons {
+    font-size: 20px;
+    color: #757575;
+}
+
+#logoutBtn {
+    border-top: 1px solid #e0e0e0;
+    color: #ea4335;
+}
+
+#logoutBtn .material-icons {
+    color: #ea4335;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

@@ -11,7 +11,7 @@ import logging
 import shutil
 from datetime import datetime
 from pathlib import Path
-from flask import Flask, render_template, request, jsonify, abort, send_from_directory
+from flask import Flask, render_template, request, jsonify, abort, send_from_directory, session
 from werkzeug.utils import secure_filename
 from celery import Celery
 from modules.user_manager import UserManager
@@ -34,6 +34,7 @@ csp = {
 }
 
 app = Flask(__name__)
+app.secret_key = 'qing_secret_key_for_session'  # 添加密钥用于session
 Talisman(app, force_https=False, content_security_policy=csp)  # 添加安全头，但不强制HTTPS
 
 # 注册AI蓝图
@@ -630,42 +631,50 @@ def register():
 
 @app.route('/api/login', methods=['POST'])
 def login():
-    """
-    用户登录接口
-    功能：处理用户登录请求
-    请求方法：POST
-    参数：
-        - username: 用户名
-        - password: 密码
-    返回：
-        - 成功：登录成功消息和用户信息（HTTP 200）
-        - 失败：错误信息（HTTP 401）
-    """
+    """处理用户登录请求"""
     try:
-        # 获取登录表单数据
         data = request.get_json()
-        if not data:
-            return jsonify({"success": False, "message": "无效的请求数据"}), 400
-        
         username = data.get('username')
         password = data.get('password')
         
-        # 数据验证
-        if not all([username, password]):
-            return jsonify({"success": False, "message": "请填写用户名和密码"}), 400
+        # 验证用户名和密码
+        auth_result = UserManager.authenticate_user(username, password)
         
-        # 验证用户
-        result = UserManager.authenticate_user(username, password)
-        if result["success"]:
-            logging.info(f"用户登录成功: {username}")
-            return jsonify(result), 200
-        else:
-            logging.warning(f"用户登录失败: {username}")
-            return jsonify(result), 401
+        if auth_result['success']:
+            # 登录成功，将用户信息存储在session中
+            user = auth_result['user']
+            session['user_id'] = user['id']
+            session['username'] = user['username']
             
+            return jsonify(auth_result)
+        else:
+            # 登录失败
+            return jsonify(auth_result)
     except Exception as e:
-        logging.error(f"登录请求处理失败: {str(e)}", exc_info=True)
-        return jsonify({"success": False, "message": "服务器处理请求时出错"}), 500
+        print(f"登录错误: {str(e)}")
+        return jsonify({
+            'success': False,
+            'message': str(e)
+        })
+
+@app.route('/api/logout', methods=['POST'])
+def logout():
+    """处理用户退出登录请求"""
+    try:
+        # 清除会话中的用户信息
+        session.pop('user_id', None)
+        session.pop('username', None)
+        
+        return jsonify({
+            'success': True,
+            'message': '退出登录成功'
+        })
+    except Exception as e:
+        print(f"退出登录错误: {str(e)}")
+        return jsonify({
+            'success': False,
+            'message': str(e)
+        })
 
 if __name__ == '__main__':
     try:

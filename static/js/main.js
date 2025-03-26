@@ -53,12 +53,57 @@ document.addEventListener('DOMContentLoaded', function() {
     
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabPanes.forEach(pane => pane.classList.remove('active')); 
+            const tabId = button.getAttribute('data-tab');
             
-            button.classList.add('active');  
-            const targetTab = button.dataset.tab; 
-            document.getElementById(targetTab).classList.add('active'); 
+            // 移除所有active类
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabPanes.forEach(pane => pane.classList.remove('active'));
+            
+            // 添加active类到当前标签
+            button.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+
+    // 添加"立即使用"按钮功能
+    const featureButtons = document.querySelectorAll('.feature-btn');
+    const tabContainer = document.getElementById('tabContainer');
+    const backToHomeContainer = document.getElementById('backToHomeContainer');
+    const backToHomeBtn = document.getElementById('backToHomeBtn');
+    
+    // 返回主页功能
+    if (backToHomeBtn) {
+        backToHomeBtn.addEventListener('click', () => {
+            // 隐藏标签栏和返回按钮
+            tabContainer.style.display = 'none';
+            backToHomeContainer.style.display = 'none';
+            
+            // 显示主界面，直接激活tab0（主页）
+            tabPanes.forEach(pane => pane.classList.remove('active'));
+            const homeTab = document.getElementById('tab0');
+            if (homeTab) homeTab.classList.add('active');
+        });
+    }
+    
+    featureButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const tabId = button.getAttribute('data-tab');
+            
+            // 显示标签栏和返回按钮
+            tabContainer.style.display = 'flex';
+            backToHomeContainer.style.display = 'block';
+            
+            // 找到对应的标签按钮并激活
+            const targetTabButton = document.querySelector(`.tab-button[data-tab="${tabId}"]`);
+            if (targetTabButton) {
+                // 移除所有active类
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabPanes.forEach(pane => pane.classList.remove('active'));
+                
+                // 添加active类到目标标签
+                targetTabButton.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            }
         });
     });
 

@@ -9,18 +9,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"><!--引入样式表-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/ai_chat.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/image_processor.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/ocr_processor.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/pdf_extractor.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/pdf_generator.css') }}">
-
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 <body>
     <div class="container">
         <header class="app-header">
-            <h1><span class="material-icons">智能文档处理与AI交互系统</span></h1><!--标题-->
-            <div class="header-subtitle">高效处理文档，提取信息，生成报告，ai畅聊</div><!--副标题-->
-                <!-- 登录按钮 -->
+            <div class="logo-title">
+                <h1><span class="material-icons">智能文档处理与AI交互系统</span></h1><!--标题-->
+                <div class="header-subtitle">高效处理文档，提取信息，生成报告，ai畅聊</div><!--副标题-->
+            </div>
+            <!-- 登录按钮 -->
             <button id="loginBtn" class="login-btn">
                 <span class="material-icons">person</span>
                 <span>登录</span>
@@ -28,19 +27,105 @@
         </header>
 
         <div class="main-content"><!--主内容区域-->
-            <div class="tab-container"><!--标签容器-->
-                <button class="tab-button active" data-tab="tab1"><!--当前激活的标签页-->
-                    <span class="material-icons">文档生成与图片处理</span>
+            <div class="tab-container" id="tabContainer" style="display: none;"><!--标签容器，默认隐藏-->
+                <button class="tab-button" data-tab="tab1">
+                    <span class="material-icons">description</span>
+                    <span>文档生成与图片处理</span>
                 </button>
                 <button class="tab-button" data-tab="tab2">
-                    <span class="material-icons">提取PDF文本</span>
+                    <span class="material-icons">picture_as_pdf</span>
+                    <span>提取PDF文本</span>
                 </button>
                 <button class="tab-button" data-tab="tab3">
-                    <span class="material-icons">AI聊天</span>
+                    <span class="material-icons">chat</span>
+                    <span>AI聊天</span>
+                </button>
+            </div>
+            
+            <!-- 返回主页按钮，默认隐藏 -->
+            <div id="backToHomeContainer" class="back-to-home-container" style="display: none;">
+                <button id="backToHomeBtn" class="back-to-home-btn">
+                    <span class="material-icons">arrow_back</span>
+                    <span>返回主页</span>
                 </button>
             </div>
 
-            <div class="tab-pane active" id="tab1"><!--当前激活的标签页-->
+            <div class="tab-pane active" id="tab0">
+                <section class="home-section fullscreen">
+                    <div class="welcome-container">
+                        <div class="welcome-header">
+                            <div class="welcome-icon">
+                                <span class="material-icons">auto_awesome</span>
+                            </div>
+                            <h2>欢迎使用智能文档处理与AI交互系统</h2>
+                            <p class="welcome-subtitle">一站式解决您的文档处理、信息提取和AI交互需求</p>
+                        </div>
+                        
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <span class="material-icons">description</span>
+                                </div>
+                                <h3>文档生成</h3>
+                                <p>从文本和图片快速生成格式统一的PDF文档，提高工作效率</p>
+                                <button class="feature-btn" data-tab="tab1">
+                                    <span>立即使用</span>
+                                    <span class="material-icons">arrow_forward</span>
+                                </button>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <span class="material-icons">image</span>
+                                </div>
+                                <h3>图片处理</h3>
+                                <p>智能识别图片文字，批量处理图片内容，自动合并提取信息</p>
+                                <button class="feature-btn" data-tab="tab1">
+                                    <span>立即使用</span>
+                                    <span class="material-icons">arrow_forward</span>
+                                </button>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <span class="material-icons">picture_as_pdf</span>
+                                </div>
+                                <h3>PDF文本提取</h3>
+                                <p>一键提取PDF文档中的所有文字内容，支持复制</p>
+                                <button class="feature-btn" data-tab="tab2">
+                                    <span>立即使用</span>
+                                    <span class="material-icons">arrow_forward</span>
+                                </button>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <span class="material-icons">chat</span>
+                                </div>
+                                <h3>AI智能对话</h3>
+                                <p>与先进的AI模型交流，获取信息分析、文本处理和创意建议</p>
+                                <button class="feature-btn" data-tab="tab3">
+                                    <span>立即使用</span>
+                                    <span class="material-icons">arrow_forward</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="quick-start">
+                            <h3><span class="material-icons">rocket_launch</span> 快速开始</h3>
+                            <ol class="start-steps">
+                                <li>点击上方任意功能卡片的"立即使用"按钮</li>
+                                <li>根据界面提示上传文件或输入文本</li>
+                                <li>配置处理选项并点击相应按钮</li>
+                                <li>获取处理结果，可一键下载或分享</li>
+                                <li>随时可以点击左上角的"返回主页"回到此界面</li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="tab-pane" id="tab1"><!--不再是激活的标签页-->
                 <!-- 文本编辑区 -->
                 <section class="text-section"><!--文本处理区-->
                     <h2><span class="material-icons">文本处理</span></h2>
@@ -74,7 +159,8 @@
                         <div class="ocr-header"><!--OCR识别结果头部-->  
                             <h3><span class="material-icons">识别结果</span></h3>
                             <button class="merge-all-btn" disabled><!--合并全部按钮-->
-                                <span class="material-icons">合并全部</span> 
+                                <span class="material-icons">merge_type</span> 
+                                <span>合并全部</span>
                             </button>
                         </div>
                         <div id="ocrContent"></div><!--OCR识别结果-->   
@@ -89,6 +175,28 @@
                     <button id="generate-btn" class="btn primary"><!--生成文档按钮-->
                         <span class="material-icons">生成文档(PDF)</span> 
                     </button>
+                </div>
+                
+                <!-- 历史记录部分，移动到文档生成标签页 -->
+                <div class="history-section">
+                    <div class="history-header"><!--历史记录头部--> 
+                        <h2><span class="material-icons">历史记录</span>  <span class="history-count" id="historyCount">(共0/6条内容)</span></h2>
+                        <div class="history-actions-header">
+                            <button id="clearHistoryBtn" class="clear-btn">
+                                <span class="material-icons">清空</span> 
+                            </button>
+                            <button id="refreshHistoryBtn" class="refresh-btn">
+                                <span class="material-icons">刷新</span> 
+                            </button>
+                        </div>
+                    </div>
+                    <div class="history-container" id="historyContainer">
+                        <!-- 历史记录内容将通过JS动态加载 -->
+                        <div class="loading-history">
+                            <div class="mini-spinner"></div>
+                            <div>加载中...</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -195,28 +303,6 @@
         <!-- 结果网格 -->    
         <div class="results-grid" id="resultsGrid"></div>
 
-        <!-- 历史记录区域 -->
-        <div class="history-section">
-            <div class="history-header"><!--历史记录头部--> 
-                <h2><span class="material-icons">历史记录</span>  <span class="history-count" id="historyCount">(共0/6条内容)</span></h2>
-                <div class="history-actions-header">
-                    <button id="clearHistoryBtn" class="clear-btn">
-                        <span class="material-icons">清空</span> 
-                    </button>
-                    <button id="refreshHistoryBtn" class="refresh-btn">
-                        <span class="material-icons">刷新</span> 
-                    </button>
-                </div>
-            </div>
-            <div class="history-container" id="historyContainer">
-                <!-- 历史记录内容将通过JS动态加载 -->
-                <div class="loading-history">
-                    <div class="mini-spinner"></div>
-                    <div>加载中...</div>
-                </div>
-            </div>
-        </div>
-
         <!-- 模态框 -->    
         <div class="modal-overlay" id="modalOverlay">
             <div class="modal-dialog">
@@ -259,7 +345,7 @@
             </div>
         </div>
 
-        <!-- 在登录模态框后面添加注册模态框 -->
+        <!-- 注册模态框 -->
         <div class="register-modal-overlay" id="registerModalOverlay">
             <div class="register-modal-dialog">
                 <div class="register-modal-content">

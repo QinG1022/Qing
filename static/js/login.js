@@ -14,10 +14,101 @@ document.addEventListener('DOMContentLoaded', function() {
     const registerForm = document.getElementById('registerForm');
     const backToLoginLink = document.getElementById('backToLoginLink');
 
-    // 打开登录模态框
-    loginBtn.addEventListener('click', function() {
-        loginModalOverlay.style.display = 'flex';
+    // 用户是否已登录的标志
+    let isUserLoggedIn = false;
+    let currentUser = null;
+
+    // 创建用户菜单元素
+    const userMenu = document.createElement('div');
+    userMenu.className = 'user-menu';
+    userMenu.style.display = 'none';
+    userMenu.innerHTML = `
+        <div class="user-menu-header">
+            <span class="material-icons">account_circle</span>
+            <span class="user-name">用户名</span>
+        </div>
+        <div class="user-menu-item" id="viewProfileBtn">
+            <span class="material-icons">person</span>
+            <span>个人信息</span>
+        </div>
+        <div class="user-menu-item" id="logoutBtn">
+            <span class="material-icons">logout</span>
+            <span>退出登录</span>
+        </div>
+    `;
+    document.body.appendChild(userMenu);
+
+    // 打开登录模态框或用户菜单
+    loginBtn.addEventListener('click', function(e) {
+        e.stopPropagation(); // 阻止事件冒泡
+        
+        if (isUserLoggedIn) {
+            // 已登录，显示用户菜单
+            const btnRect = loginBtn.getBoundingClientRect();
+            userMenu.style.position = 'absolute';
+            userMenu.style.top = (btnRect.bottom + window.scrollY) + 'px';
+            userMenu.style.right = (window.innerWidth - btnRect.right) + 'px';
+            userMenu.style.display = 'block';
+        } else {
+            // 未登录，显示登录对话框
+            loginModalOverlay.style.display = 'flex';
+        }
     });
+
+    // 点击页面其他区域关闭用户菜单
+    document.addEventListener('click', function(e) {
+        if (userMenu.style.display === 'block' && !userMenu.contains(e.target) && e.target !== loginBtn) {
+            userMenu.style.display = 'none';
+        }
+    });
+
+    // 用户菜单项点击事件
+    document.getElementById('viewProfileBtn').addEventListener('click', function() {
+        userMenu.style.display = 'none';
+        // 显示用户资料，可以根据需要实现
+        showToast('用户资料功能开发中...');
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+        userMenu.style.display = 'none';
+        // 登出操作
+        logout();
+    });
+
+    // 登出函数
+    function logout() {
+        // 显示加载状态
+        document.getElementById('loadingOverlay').classList.remove('hidden');
+        document.getElementById('loadingText').textContent = '退出登录中...';
+        
+        fetch('/api/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // 隐藏加载状态
+            document.getElementById('loadingOverlay').classList.add('hidden');
+            if (data.success) {
+                isUserLoggedIn = false;
+                currentUser = null;
+                localStorage.removeItem('user');
+                // 恢复登录按钮状态
+                loginBtn.innerHTML = `<span class="material-icons">person</span><span>登录</span>`;
+                showToast('已成功退出登录');
+            } else {
+                showToast('退出登录失败: ' + data.message);
+            }
+        })
+        .catch(error => {
+            // 隐藏加载状态
+            document.getElementById('loadingOverlay').classList.add('hidden');
+            showToast('退出登录请求错误');
+            console.error('退出登录错误:', error);
+        });
+    }
 
     // 关闭登录模态框
     function closeLoginModal() {
@@ -63,9 +154,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 // 登录成功
                 showToast('登录成功');
                 closeLoginModal();
-                // 可以更新UI显示已登录状态
-                const user = data.user;
+                // 更新登录状态
+                isUserLoggedIn = true;
+                currentUser = data.user;
+                // 将用户信息存储到localStorage
+                localStorage.setItem('user', JSON.stringify(data.user || {username: username}));
+                // 更新UI显示已登录状态
                 loginBtn.innerHTML = `<span class="material-icons">person</span><span>${username}</span>`;
+                // 更新用户菜单中的用户名
+                userMenu.querySelector('.user-name').textContent = username;
             } else {
                 // 登录失败
                 showToast('登录失败：' + data.message);
@@ -230,7 +327,11 @@ function checkLoginStatus() {
         try {
             const user = JSON.parse(storedUser);
             // 更新界面为已登录状态
+            isUserLoggedIn = true;
+            currentUser = user;
             loginBtn.innerHTML = `<span class="material-icons">person</span><span>${user.username}</span>`;
+            // 更新用户菜单中的用户名
+            userMenu.querySelector('.user-name').textContent = user.username;
         } catch (e) {
             console.error('解析用户数据失败:', e);
             localStorage.removeItem('user');

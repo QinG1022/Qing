@@ -162,15 +162,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 div.innerHTML = `
                     <div class="ocr-text">${result.text}</div>
                     <div class="ocr-actions">
-                        <button class="merge-btn">
-                            <span class="material-icons">添加到文本</span>    
+                        <button class="add-to-text-btn">
+                            <span class="material-icons">add</span>
+                            <span>添加到文本</span>
                         </button>
                     </div>
                 `;
                 
                 // 添加单个合并按钮事件
-                const mergeBtn = div.querySelector('.merge-btn');
-                mergeBtn.addEventListener('click', function() {
+                const addToTextBtn = div.querySelector('.add-to-text-btn');
+                addToTextBtn.addEventListener('click', function() {
                     mergeText(result.text, this);
                 });
                 
@@ -208,10 +209,16 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // 更改按钮状态和提示
             button.disabled = true;
-            button.querySelector('span').textContent = '已添加';
+            button.innerHTML = '<span class="material-icons">check</span><span>已添加</span>';
             
             // 显示提示并切换到文本编辑标签页
             window.showToast('OCR文本已添加到编辑器');
+            
+            // 禁用所有"添加"按钮
+            document.querySelectorAll('.ocr-item .add-to-text-btn').forEach(btn => {
+                btn.disabled = true;
+                btn.innerHTML = '<span class="material-icons">check</span><span>已添加</span>';
+            });
             
             // 切换到文本编辑标签页
             const firstTabBtn = document.querySelector('.tab-button[data-tab="tab1"]');
@@ -245,9 +252,9 @@ document.addEventListener('DOMContentLoaded', function() {
             window.ocrTextAdded = true;
             
             // 禁用所有"添加"按钮
-            document.querySelectorAll('.ocr-item .merge-btn').forEach(btn => {
+            document.querySelectorAll('.ocr-item .add-to-text-btn').forEach(btn => {
                 btn.disabled = true;
-                btn.querySelector('span').textContent = '已添加';
+                btn.innerHTML = '<span class="material-icons">check</span><span>已添加</span>';
             });
             
             // 禁用"全部合并"按钮
