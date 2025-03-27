@@ -42,3 +42,12 @@ pdfs/
 
 # 模型文件
 ai_module/
+
+.cursorrules
+
+# 数据文件
+/data/
+
+# 会话文件
+/session/
+*.db

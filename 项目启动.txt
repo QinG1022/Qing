@@ -1,4 +1,4 @@
-# 智能文档处理系统 - 启动指南
+# 智能文档处理与AI交互系统 - 启动指南
 
 ## 一、环境准备
 
@@ -6,6 +6,7 @@
 - Python 3.8+
 - Redis 服务器
 - Tesseract OCR 引擎
+- SQLite 数据库支持
 - CUDA 环境（可选，用于 GPU 加速）
 
 ### 2. 安装步骤
@@ -18,7 +19,7 @@ python -m venv venv
 pip install -r requirements.txt
 
 # 3. 创建必要目录
-mkdir -p uploads pdfs log
+mkdir -p uploads pdfs log data session
 ```
 
 ### 3. 组件安装
@@ -27,6 +28,21 @@ mkdir -p uploads pdfs log
 - AI 模型（可选）:
   - [DeepSeek-R1](https://huggingface.co/deepseek-ai/deepseek-coder-1.3b-base)
   - [Qwen1.5](https://huggingface.co/Qwen/Qwen1.5-0.5B-Chat)
+
+### 4. 数据库设置
+SQLite数据库会在首次运行时自动创建，但需要确保以下条件：
+- `data`目录存在且有写入权限
+- Python环境中已安装`Flask-SQLAlchemy`和`Flask-Login`
+- 会话文件存储的`session`目录存在且有写入权限
+
+```bash
+# 检查数据库相关依赖
+pip install Flask-SQLAlchemy Flask-Login Flask-Session
+
+# 确保目录权限正确
+icacls data /grant Users:F
+icacls session /grant Users:F
+```
 
 ## 二、运行测试
 
@@ -50,6 +66,10 @@ python -m pytest tests/test_image_processor.py -v
 # PDF 测试
 python -m pytest tests/test_pdf_generator.py -v -W ignore::DeprecationWarning
 python -m pytest tests/test_pdf_extractor.py -v -W ignore::DeprecationWarning
+
+# 数据库与用户系统测试
+python -m pytest tests/test_database.py -v
+python -m pytest tests/test_history.py -v
 
 # 集成测试
 python -m pytest tests/test_integration.py -v
@@ -80,7 +100,18 @@ python app.py
 ### 4. 访问系统
 打开浏览器访问 http://localhost:5000
 
-### 5. 使用AI文件分析功能
+### 5. 首次使用用户系统
+```
+1. 点击右上角的"登录"按钮
+2. 点击"注册"链接，创建新用户账号
+   • 用户名：4-20个字符
+   • 密码：至少8位，包含字母和数字
+   • 邮箱：有效的邮箱格式
+3. 注册成功后，使用刚创建的账号登录
+4. 登录后，您的历史记录将与账号关联并持久保存
+```
+
+### 6. 使用AI文件分析功能
 ```bash
 # 在AI聊天标签页中
 1. 点击"上传文件(TXT/PDF)"按钮选择文件
@@ -101,6 +132,34 @@ DEEPSEEK_API_KEY=api密钥
 # 本地模型配置（可选）
 DEEPSEEK_LOCAL_MODEL_PATH=D:/path/to/DeepSeek-R1-Distill-1.5B
 QWEN_LOCAL_MODEL_PATH=D:/path/to/Qwen1.5-0.5B-Chat
+```
+
+### 2. 数据库配置（高级）
+系统默认使用SQLite数据库，如需定制配置，可修改`modules/database.py`文件：
+
+```python
+# 数据库文件路径
+DB_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'app.db')
+
+# 初始化数据库
+def init_db(app):
+    # 配置SQLAlchemy
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_FILE}'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    
+    # ... 其他配置 ...
+```
+
+### 3. 会话持久化配置
+会话配置位于app.py文件中，默认使用文件系统存储：
+
+```python
+# 会话配置
+app.config['SESSION_TYPE'] = 'filesystem'  # 使用文件系统存储会话
+app.config['SESSION_PERMANENT'] = True  # 使会话持久化
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)  # 会话有效期为7天
+app.config['SESSION_USE_SIGNER'] = True  # 使用签名保护会话
+app.config['SESSION_FILE_DIR'] = Path('session')  # 会话文件存储目录
 ```
 
 ## 五、常见问题
@@ -124,24 +183,104 @@ QWEN_LOCAL_MODEL_PATH=D:/path/to/Qwen1.5-0.5B-Chat
   taskkill /F /PID <进程ID>
   ```
 
-### 2. 组件问题
+### 2. 数据库问题
+- 数据库创建错误
+  ```bash
+  # 检查data目录权限
+  icacls data
+  
+  # 手动删除现有数据库文件以重新初始化
+  del data\app.db
+  ```
+
+- 用户表结构错误
+  ```bash
+  # 如果遇到表结构错误，可尝试删除数据库重建
+  del data\app.db
+  # 重启应用程序让其自动创建新数据库
+  ```
+
+- 会话持久化问题
+  ```bash
+  # 清除会话文件
+  del /Q session\*
+  
+  # 检查会话目录权限
+  icacls session
+  ```
+
+### 3. 用户系统问题
+- 登录状态丢失
+  ```
+  • 确保浏览器允许Cookie
+  • 检查SESSION_TYPE配置是否为'filesystem'
+  • 验证session目录权限是否正确
+  ```
+
+- 注册失败
+  ```
+  • 确认用户名未被占用
+  • 密码必须至少8位包含字母和数字
+  • 检查数据库连接和写入权限
+  ```
+
+- 历史记录不显示
+  ```
+  • 确认用户已正确登录
+  • 检查数据库连接是否正常
+  • 验证用户ID是否正确关联到历史记录
+  ```
+
+### 4. 组件问题
 - Celery 错误
-  - 确认使用 `--pool=solo`
+  - 确认使用 `--pool=solo`（Windows环境必须）
   - 检查 Redis 连接
-  - 验证虚拟环境
+  - 验证虚拟环境是否正确激活
 
 - OCR 问题
-  - 检查环境变量
-  - 验证安装路径
-  - 测试命令：`tesseract --version`
+  - 检查环境变量TESSDATA_PREFIX
+  - 验证tesseract.exe路径是否正确
+  - 确认中文语言包chi_sim已正确安装
+  - 测试命令：`tesseract --version`和`tesseract --list-langs`
 
-### 3. AI 模型问题
+### 5. AI 模型问题
 - 模型加载失败
-  - 验证模型路径
+  - 验证模型路径是否正确
   - 检查 CUDA 配置
-  - 确认系统资源
+  - 确认系统资源是否足够
   - 尝试使用较小的模型版本
 
-## 六、关闭服务
+## 六、数据管理
+
+### 1. 备份数据
+```bash
+# 备份数据库
+copy data\app.db data\app_backup_%date:~0,4%%date:~5,2%%date:~8,2%.db
+
+# 备份用户会话
+xcopy session session_backup_%date:~0,4%%date:~5,2%%date:~8,2% /E /I
+```
+
+### 2. 数据恢复
+```bash
+# 恢复数据库
+copy data\app_backup_YYYYMMDD.db data\app.db
+
+# 恢复用户会话
+del /Q session\*
+xcopy session_backup_YYYYMMDD session /E /I
+```
+
+### 3. 清除数据
+```bash
+# 仅清除历史记录但保留用户账号
+sqlite3 data\app.db "DELETE FROM history;"
+
+# 完全重置系统
+del data\app.db
+del /Q session\*
+```
+
+## 七、关闭服务
 1. 停止 Flask 和 Celery（Ctrl+C）
 2. 关闭 Redis：`net stop Redis`

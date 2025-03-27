@@ -9,12 +9,11 @@ Flask 主程序
 import os
 import logging
 import shutil
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
-from flask import Flask, render_template, request, jsonify, abort, send_from_directory, session
+from flask import Flask, render_template, request, jsonify, abort, send_from_directory, session, flash
 from werkzeug.utils import secure_filename
 from celery import Celery
-from modules.user_manager import UserManager
 from modules.image_processor import ImageProcessor
 from modules.pdf_generator import PDFGenerator
 from flask_talisman import Talisman
@@ -23,6 +22,15 @@ from modules.tasks import celery, generate_pdf, process_images_task, extract_pdf
 import time
 from collections import deque
 from modules.ai_chat.ai_routes import ai_bp
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from flask_session import Session
+import re
+import json
+import uuid
+import random
+import hashlib
+import threading
+from modules.database import db, User, History, init_db, add_history_record, delete_history_record, clear_user_history, get_user_history
 
 # 定义内容安全策略(CSP)
 csp = {
@@ -39,6 +47,17 @@ Talisman(app, force_https=False, content_security_policy=csp)  # 添加安全头
 
 # 注册AI蓝图
 app.register_blueprint(ai_bp, url_prefix='/ai')
+
+# 会话配置
+app.config['SESSION_TYPE'] = 'filesystem'  # 使用文件系统存储会话
+app.config['SESSION_PERMANENT'] = True  # 使会话持久化
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)  # 会话有效期为7天
+app.config['SESSION_USE_SIGNER'] = True  # 使用签名保护会话
+app.config['SESSION_FILE_DIR'] = Path('session')  # 会话文件存储目录
+Path('session').mkdir(exist_ok=True)  # 确保会话目录存在
+
+# 初始化Flask-Session
+Session(app)
 
 # 应用配置
 app.config.update(
@@ -69,6 +88,19 @@ logging.getLogger('werkzeug').setLevel(logging.ERROR)
 
 # 程序启动日志
 logging.warning("应用程序启动 - 历史记录容量: %d", app.config['MAX_HISTORY_ITEMS'])
+
+# 初始化Flask-Login
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login_page'
+
+# 初始化SQLite数据库
+init_db(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    """加载用户，供Flask-Login使用"""
+    return User.query.get(int(user_id))
 
 @app.before_request
 def security_check():
@@ -113,6 +145,11 @@ def index():
     """
     return render_template('index.html')
 
+@app.route('/login')
+def login_page():
+    """登录页面"""
+    return render_template('login.html')
+
 @app.route('/generate', methods=['POST'])
 def handle_generate():
     """
@@ -154,15 +191,40 @@ def handle_generate():
             else:
                 source = f'用户输入：{text_content}'
                 
-            history_item = {
-                'id': 'text_' + datetime.now().strftime('%Y%m%d%H%M%S'),    # 生成唯一ID  
-                'type': 'TEXT',                 # 历史记录类型  
-                'content': text_content,        # 文本内容  
-                'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),  # 时间戳  
-                'source': source                # 来源  
-            }
-            history_records.appendleft(history_item)    # 添加到队列前端
-            logging.info(f"添加用户输入文本到历史记录，ID: {history_item['id']}")
+            # 生成唯一ID    
+            record_id = f"text_{datetime.now().strftime('%Y%m%d%H%M%S')}"
+            
+            # 保存到历史记录
+            user_id = current_user.id if current_user.is_authenticated else None
+            
+            if user_id:
+                # 已登录用户，保存到数据库
+                add_history_record(
+                    record_id=record_id,
+                    record_type='TEXT',
+                    content=text_content,
+                    source=source,
+                    user_id=user_id
+                )
+            else:
+                # 匿名用户，保存到会话
+                anonymous_history = session.get('anonymous_history', [])
+                history_item = {
+                    'id': record_id,
+                    'type': 'TEXT',
+                    'content': text_content,
+                    'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                    'source': source
+                }
+                anonymous_history.insert(0, history_item)  # 添加到列表前端
+                
+                # 保持历史记录不超过最大限制
+                if len(anonymous_history) > app.config['MAX_HISTORY_ITEMS']:
+                    anonymous_history = anonymous_history[:app.config['MAX_HISTORY_ITEMS']]
+                
+                session['anonymous_history'] = anonymous_history
+            
+            logging.info(f"添加用户输入文本到历史记录，ID: {record_id}")
             
         image_paths = []                                # 图片路径列表  
         if files and any(f.filename for f in files):    # 确保有实际的文件
@@ -266,14 +328,39 @@ def get_task(task_id):
                         
                         # 添加到历史记录中
                         if content_text and task_type != 'UNKNOWN':
-                            history_item = {
-                                'id': task_id,
-                                'type': task_type,
-                                'content': content_text,
-                                'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-                                'source': source
-                            }
-                            history_records.appendleft(history_item)
+                            # 生成唯一ID
+                            record_id = f"{task_type.lower()}_{datetime.now().strftime('%Y%m%d%H%M%S')}"
+                            
+                            # 保存到历史记录
+                            user_id = current_user.id if current_user.is_authenticated else None
+                            
+                            if user_id:
+                                # 已登录用户，保存到数据库
+                                add_history_record(
+                                    record_id=record_id,
+                                    record_type=task_type,
+                                    content=content_text,
+                                    source=source,
+                                    user_id=user_id
+                                )
+                            else:
+                                # 匿名用户，保存到会话
+                                anonymous_history = session.get('anonymous_history', [])
+                                history_item = {
+                                    'id': record_id,
+                                    'type': task_type,
+                                    'content': content_text,
+                                    'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                                    'source': source
+                                }
+                                anonymous_history.insert(0, history_item)  # 添加到列表前端
+                                
+                                # 保持历史记录不超过最大限制
+                                if len(anonymous_history) > app.config['MAX_HISTORY_ITEMS']:
+                                    anonymous_history = anonymous_history[:app.config['MAX_HISTORY_ITEMS']]
+                                
+                                session['anonymous_history'] = anonymous_history
+                            
                             logging.info(f"添加{task_type}历史记录成功，来源：{source}，任务ID: {task_id}")
                     
                     response = {
@@ -498,8 +585,15 @@ def get_history():
         - 失败：错误信息（HTTP 500）
     """
     try:
-        # 将deque转换为列表返回
-        history_list = list(history_records)
+        history_list = []
+        if current_user.is_authenticated:
+            # 获取登录用户的历史记录
+            history_list = get_user_history(current_user.id, app.config['MAX_HISTORY_ITEMS'])
+        else:
+            # 获取匿名用户的历史记录（从会话中）
+            session_histories = session.get('anonymous_history', [])
+            history_list = session_histories[:app.config['MAX_HISTORY_ITEMS']]
+        
         logging.info(f"获取历史记录，总数: {len(history_list)}")
         return jsonify({
             "status": "success",
@@ -512,7 +606,7 @@ def get_history():
         return jsonify({"error": str(e)}), 500
 
 @app.route('/history/<record_id>', methods=['DELETE'])
-def delete_history_record(record_id):
+def delete_history_record_route(record_id):
     """
     删除单条历史记录接口
     功能：删除指定ID的历史记录
@@ -524,20 +618,29 @@ def delete_history_record(record_id):
         - 失败：错误信息（HTTP 404/500）
     """
     try:
-        # 查找并删除指定ID的历史记录
-        found = False
-        for i, record in enumerate(history_records):
-            if record.get('id') == record_id:
-                logging.info(f"删除历史记录，ID: {record_id}")
-                del history_records[i]
-                found = True
-                break
+        if current_user.is_authenticated:
+            # 删除数据库中的记录
+            success = delete_history_record(record_id)
+        else:
+            # 删除会话中的匿名记录
+            found = False
+            session_histories = session.get('anonymous_history', [])
+            for i, record in enumerate(session_histories):
+                if record.get('id') == record_id:
+                    del session_histories[i]
+                    session['anonymous_history'] = session_histories
+                    found = True
+                    success = True
+                    break
+            if not found:
+                success = False
         
-        if found:
+        if success:
+            logging.info(f"删除历史记录，ID: {record_id}")
             return jsonify({
                 "status": "success", 
                 "message": "历史记录已删除",
-                "count": len(history_records)
+                "count": len(get_user_history(current_user.id) if current_user.is_authenticated else session.get('anonymous_history', []))
             })
         else:
             return jsonify({"error": "未找到指定的历史记录"}), 404
@@ -557,8 +660,13 @@ def clear_history():
         - 失败：错误信息（HTTP 500）
     """
     try:
-        # 清空历史记录
-        history_records.clear()
+        if current_user.is_authenticated:
+            # 清空数据库中当前用户的历史记录
+            clear_user_history(current_user.id)
+        else:
+            # 清空会话中的匿名历史记录
+            session['anonymous_history'] = []
+        
         logging.info("清空所有历史记录")
         return jsonify({
             "status": "success", 
@@ -616,17 +724,32 @@ def register():
         if '@' not in email or '.' not in email:
             return jsonify({"success": False, "message": "请输入有效的邮箱地址"}), 400
         
-        # 注册用户
-        result = UserManager.register_user(username, email, password)
-        if result["success"]:
-            logging.info(f"用户注册成功: {username}")
-            return jsonify(result), 200
-        else:
-            logging.warning(f"用户注册失败: {username}, 原因: {result['message']}")
-            return jsonify(result), 400
+        # 检查用户名是否存在
+        if User.query.filter_by(username=username).first():
+            return jsonify({"success": False, "message": "用户名已存在"}), 400
+        
+        # 检查邮箱是否存在
+        if User.query.filter_by(email=email).first():
+            return jsonify({"success": False, "message": "邮箱已被使用"}), 400
+        
+        # 创建新用户
+        hashed_password = hashlib.sha256(password.encode()).hexdigest()
+        new_user = User(
+            username=username,
+            email=email,
+            password=hashed_password
+        )
+        
+        # 保存到数据库
+        db.session.add(new_user)
+        db.session.commit()
+        
+        logging.info(f"用户注册成功: {username}")
+        return jsonify({"success": True, "message": "注册成功"}), 200
             
     except Exception as e:
         logging.error(f"注册请求处理失败: {str(e)}", exc_info=True)
+        db.session.rollback()
         return jsonify({"success": False, "message": "服务器处理请求时出错"}), 500
 
 @app.route('/api/login', methods=['POST'])
@@ -636,20 +759,54 @@ def login():
         data = request.get_json()
         username = data.get('username')
         password = data.get('password')
+        remember = data.get('remember', True)  # 默认记住用户
         
-        # 验证用户名和密码
-        auth_result = UserManager.authenticate_user(username, password)
+        # 哈希密码
+        hashed_password = hashlib.sha256(password.encode()).hexdigest()
         
-        if auth_result['success']:
-            # 登录成功，将用户信息存储在session中
-            user = auth_result['user']
-            session['user_id'] = user['id']
-            session['username'] = user['username']
+        # 查询用户
+        user = User.query.filter_by(username=username).first()
+        
+        if user and user.password == hashed_password:
+            # 更新最后登录时间
+            user.last_login = datetime.now()
+            db.session.commit()
             
-            return jsonify(auth_result)
+            # 登录用户，设置remember参数为True，保持会话持久化
+            login_user(user, remember=remember)
+            
+            # 设置会话为永久
+            session.permanent = True
+            
+            # 将匿名历史记录转移给已登录用户
+            anonymous_history = session.get('anonymous_history', [])
+            if anonymous_history:
+                for item in anonymous_history:
+                    add_history_record(
+                        record_id=item['id'],
+                        record_type=item['type'],
+                        content=item['content'],
+                        source=item['source'],
+                        user_id=user.id
+                    )
+                # 清空匿名历史
+                session['anonymous_history'] = []
+            
+            return jsonify({
+                'success': True,
+                'message': '登录成功',
+                'user': {
+                    'id': user.id,
+                    'username': user.username,
+                    'email': user.email
+                }
+            })
         else:
             # 登录失败
-            return jsonify(auth_result)
+            return jsonify({
+                'success': False,
+                'message': '用户名或密码错误'
+            })
     except Exception as e:
         print(f"登录错误: {str(e)}")
         return jsonify({
@@ -659,28 +816,126 @@ def login():
 
 @app.route('/api/logout', methods=['POST'])
 def logout():
-    """处理用户退出登录请求"""
+    """处理用户登出请求"""
+    logout_user()
+    session.pop('anonymous_history', None)  # 清空匿名历史
+    return jsonify({
+        'success': True,
+        'message': '已成功登出'
+    })
+
+# 添加PDF文本提取任务回调处理器
+@app.route('/api/callback/pdf-extract/<task_id>', methods=['POST'])
+def handle_pdf_extract_callback(task_id):
+    """
+    处理PDF文本提取任务的回调
+    """
     try:
-        # 清除会话中的用户信息
-        session.pop('user_id', None)
-        session.pop('username', None)
-        
+        data = request.get_json()
+        status = data.get('status')
+        if status == 'SUCCESS':
+            # 任务成功完成
+            result = data.get('result', {})
+            
+            # 取第一个文件的文本（简化处理，实际应用可能需要处理多个文件）
+            if result.get('status') == 'success' and result.get('results'):
+                pdf_result = result['results'][0]  # 获取第一个PDF结果
+                
+                # 构建历史记录数据
+                source = f"PDF提取：{pdf_result['filename']}"
+                record_id = str(uuid.uuid4())
+                
+                # 保存到历史记录
+                user_id = current_user.id if current_user.is_authenticated else None
+                
+                if user_id:
+                    # 已登录用户，保存到数据库
+                    add_history_record(
+                        record_id=record_id,
+                        record_type='PDF',
+                        content=pdf_result['text'],
+                        source=source,
+                        user_id=user_id
+                    )
+                else:
+                    # 匿名用户，保存到会话
+                    anonymous_history = session.get('anonymous_history', [])
+                    history_item = {
+                        'id': record_id,
+                        'type': 'PDF',
+                        'content': pdf_result['text'],
+                        'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                        'source': source
+                    }
+                    anonymous_history.insert(0, history_item)  # 添加到列表前端
+                    
+                    # 保持历史记录不超过最大限制
+                    if len(anonymous_history) > app.config['MAX_HISTORY_ITEMS']:
+                        anonymous_history = anonymous_history[:app.config['MAX_HISTORY_ITEMS']]
+                    
+                    session['anonymous_history'] = anonymous_history
+                
+                logging.info(f"添加PDF历史记录成功，来源：{source}，任务ID: {task_id}")
+            
+            return jsonify({"status": "success", "message": "PDF文本提取完成！"})
+        else:
+            # 任务失败
+            error_message = data.get('error', '未知错误')
+            logging.error(f"PDF提取任务失败，任务ID: {task_id}, 错误: {error_message}")
+            return jsonify({"status": "error", "message": f"PDF文本提取失败: {error_message}"})
+            
+    except Exception as e:
+        logging.error(f"处理PDF提取回调时出错: {str(e)}")
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+@app.route('/api/check-auth', methods=['GET'])
+def check_auth():
+    """检查用户登录状态"""
+    try:
+        if current_user.is_authenticated:
+            # 确保用户对象有效
+            user = User.query.get(current_user.id)
+            if user:
+                return jsonify({
+                    'authenticated': True,
+                    'user': {
+                        'id': user.id,
+                        'username': user.username,
+                        'email': user.email
+                    }
+                })
+            else:
+                # 如果用户ID无效，清除登录状态
+                logout_user()
+                
+        # 如果未登录，检查flash消息
+        if session.get('_flashes'):
+            flash_messages = session.get('_flashes', [])
+            logging.info(f"Flash messages: {flash_messages}")
+            
         return jsonify({
-            'success': True,
-            'message': '退出登录成功'
+            'authenticated': False
         })
     except Exception as e:
-        print(f"退出登录错误: {str(e)}")
+        logging.error(f"检查认证状态出错: {str(e)}", exc_info=True)
+        # 出错时也返回未认证状态
         return jsonify({
-            'success': False,
-            'message': str(e)
+            'authenticated': False,
+            'error': str(e)
         })
+
+@app.after_request
+def add_cache_control(response):
+    """添加缓存控制头"""
+    # 阻止浏览器缓存登录状态相关的请求
+    if request.path.startswith('/api/'):
+        response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+        response.headers['Pragma'] = 'no-cache'
+        response.headers['Expires'] = '0'
+    return response
 
 if __name__ == '__main__':
     try:
-        # 初始化用户管理模块
-        UserManager.initialize()
-        logging.info("用户管理模块已初始化")
         # 确保目录存在并有正确权限
         pdf_dir = app.config['PDF_FOLDER']
         pdf_dir.mkdir(parents=True, exist_ok=True)

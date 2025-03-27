@@ -42,17 +42,49 @@ document.addEventListener('DOMContentLoaded', function() {
     loginBtn.addEventListener('click', function(e) {
         e.stopPropagation(); // 阻止事件冒泡
         
-        if (isUserLoggedIn) {
-            // 已登录，显示用户菜单
-            const btnRect = loginBtn.getBoundingClientRect();
-            userMenu.style.position = 'absolute';
-            userMenu.style.top = (btnRect.bottom + window.scrollY) + 'px';
-            userMenu.style.right = (window.innerWidth - btnRect.right) + 'px';
-            userMenu.style.display = 'block';
-        } else {
-            // 未登录，显示登录对话框
+        // 先检查服务器端登录状态，再决定显示登录窗口还是用户菜单
+        fetch('/api/check-auth', {
+            method: 'GET',
+            credentials: 'include'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.authenticated) {
+                // 服务器确认用户已登录，显示用户菜单
+                if (!isUserLoggedIn) {
+                    // 更新本地状态
+                    isUserLoggedIn = true;
+                    currentUser = data.user;
+                    loginBtn.innerHTML = `<span class="material-icons">person</span><span>${data.user.username}</span>`;
+                    userMenu.querySelector('.user-name').textContent = data.user.username;
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                }
+                
+                // 显示用户菜单
+                const btnRect = loginBtn.getBoundingClientRect();
+                userMenu.style.position = 'absolute';
+                userMenu.style.top = (btnRect.bottom + window.scrollY) + 'px';
+                userMenu.style.right = (window.innerWidth - btnRect.right) + 'px';
+                userMenu.style.display = 'block';
+            } else {
+                // 服务器认为用户未登录，显示登录对话框
+                if (isUserLoggedIn) {
+                    // 清除本地状态
+                    isUserLoggedIn = false;
+                    currentUser = null;
+                    localStorage.removeItem('user');
+                    loginBtn.innerHTML = `<span class="material-icons">person</span><span>登录</span>`;
+                }
+                
+                // 显示登录对话框
+                loginModalOverlay.style.display = 'flex';
+            }
+        })
+        .catch(error => {
+            console.error('验证登录状态失败:', error);
+            // 出错时，假设未登录
             loginModalOverlay.style.display = 'flex';
-        }
+        });
     });
 
     // 点击页面其他区域关闭用户菜单
@@ -322,19 +354,59 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 // 检查登录状态
 function checkLoginStatus() {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-        try {
-            const user = JSON.parse(storedUser);
-            // 更新界面为已登录状态
-            isUserLoggedIn = true;
-            currentUser = user;
-            loginBtn.innerHTML = `<span class="material-icons">person</span><span>${user.username}</span>`;
-            // 更新用户菜单中的用户名
-            userMenu.querySelector('.user-name').textContent = user.username;
-        } catch (e) {
-            console.error('解析用户数据失败:', e);
-            localStorage.removeItem('user');
+    // 显示微小的加载状态
+    loginBtn.innerHTML = `<span class="material-icons">hourglass_empty</span><span>加载中</span>`;
+    
+    // 总是先从服务器端验证登录状态
+    fetch('/api/check-auth', {
+        method: 'GET',
+        credentials: 'include',
+        // 避免缓存影响
+        headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0'
         }
-    }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.authenticated) {
+            // 服务器确认用户已登录
+            isUserLoggedIn = true;
+            currentUser = data.user;
+            // 更新UI
+            loginBtn.innerHTML = `<span class="material-icons">person</span><span>${data.user.username}</span>`;
+            userMenu.querySelector('.user-name').textContent = data.user.username;
+            // 更新本地存储
+            localStorage.setItem('user', JSON.stringify(data.user));
+            console.log('用户已登录:', data.user.username);
+        } else {
+            // 服务器认为用户未登录
+            isUserLoggedIn = false;
+            currentUser = null;
+            localStorage.removeItem('user');
+            loginBtn.innerHTML = `<span class="material-icons">person</span><span>登录</span>`;
+            console.log('用户未登录');
+        }
+    })
+    .catch(error => {
+        console.error('验证登录状态失败:', error);
+        // 出错时，检查本地存储
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            try {
+                const user = JSON.parse(storedUser);
+                // 暂时以本地存储为准，但在下次点击时会再次检查
+                isUserLoggedIn = true;
+                currentUser = user;
+                loginBtn.innerHTML = `<span class="material-icons">person</span><span>${user.username}</span>`;
+            } catch (e) {
+                console.error('解析用户数据失败:', e);
+                localStorage.removeItem('user');
+                loginBtn.innerHTML = `<span class="material-icons">person</span><span>登录</span>`;
+            }
+        } else {
+            loginBtn.innerHTML = `<span class="material-icons">person</span><span>登录</span>`;
+        }
+    });
 }
