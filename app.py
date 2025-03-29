@@ -887,6 +887,44 @@ def handle_pdf_extract_callback(task_id):
     except Exception as e:
         logging.error(f"处理PDF提取回调时出错: {str(e)}")
         return jsonify({"status": "error", "message": str(e)}), 500
+    
+@app.route('/api/user-profile', methods=['GET'])
+def get_user_profile():
+    """获取当前登录用户的资料信息"""
+    try:
+        # 检查用户是否已登录
+        if not current_user.is_authenticated:
+            return jsonify({
+                'success': False,
+                'message': '用户未登录'
+            }), 401
+            
+        # 获取用户对象
+        user = User.query.get(current_user.id)
+        if not user:
+            return jsonify({
+                'success': False,
+                'message': '用户不存在'
+            }), 404
+            
+        # 格式化注册时间
+        register_time = user.created_at.strftime('%Y-%m-%d %H:%M:%S') if user.created_at else None
+            
+        # 返回用户资料
+        return jsonify({
+            'success': True,
+            'user': {
+                'username': user.username,
+                'email': user.email,
+                'register_time': register_time
+            }
+        })
+    except Exception as e:
+        logging.error(f"获取用户资料时发生错误: {str(e)}", exc_info=True)
+        return jsonify({
+            'success': False,
+            'message': f'服务器错误: {str(e)}'
+        }), 500
 
 @app.route('/api/check-auth', methods=['GET'])
 def check_auth():

@@ -1,6 +1,12 @@
+// 全局变量声明
+let loginBtn;
+let userMenu;
+let isUserLoggedIn = false;
+let currentUser = null;
+
 document.addEventListener('DOMContentLoaded', function() {
     // 获取DOM元素
-    const loginBtn = document.getElementById('loginBtn');
+    loginBtn = document.getElementById('loginBtn');
     const loginModalOverlay = document.getElementById('loginModalOverlay');
     const loginModalClose = document.getElementById('loginModalClose');
     const loginCancel = document.getElementById('loginCancel');
@@ -14,12 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const registerForm = document.getElementById('registerForm');
     const backToLoginLink = document.getElementById('backToLoginLink');
 
-    // 用户是否已登录的标志
-    let isUserLoggedIn = false;
-    let currentUser = null;
-
     // 创建用户菜单元素
-    const userMenu = document.createElement('div');
+    userMenu = document.createElement('div');
     userMenu.className = 'user-menu';
     userMenu.style.display = 'none';
     userMenu.innerHTML = `
@@ -97,8 +99,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // 用户菜单项点击事件
     document.getElementById('viewProfileBtn').addEventListener('click', function() {
         userMenu.style.display = 'none';
-        // 显示用户资料，可以根据需要实现
-        showToast('用户资料功能开发中...');
+        // 获取并显示用户资料
+        fetchUserProfile();
     });
 
     document.getElementById('logoutBtn').addEventListener('click', function() {
@@ -352,6 +354,88 @@ document.addEventListener('DOMContentLoaded', function() {
     // 检查登录状态
     checkLoginStatus();
 });
+
+// 获取用户资料
+function fetchUserProfile() {
+    // 显示加载状态
+    document.getElementById('loadingOverlay').classList.remove('hidden');
+    document.getElementById('loadingText').textContent = '获取用户资料中...';
+    
+    fetch('/api/user-profile', {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        // 隐藏加载状态
+        document.getElementById('loadingOverlay').classList.add('hidden');
+        
+        if (data.success) {
+            // 显示用户资料
+            showUserProfile(data.user);
+        } else {
+            showToast('获取用户资料失败: ' + data.message);
+        }
+    })
+    .catch(error => {
+        // 隐藏加载状态
+        document.getElementById('loadingOverlay').classList.add('hidden');
+        showToast('获取用户资料请求错误');
+        console.error('获取用户资料错误:', error);
+    });
+}
+
+// 显示用户资料模态框
+function showUserProfile(user) {
+    // 更新用户资料信息
+    document.getElementById('profileUsername').textContent = user.username || '未设置';
+    document.getElementById('profileEmail').textContent = user.email || '未设置';
+    
+    // 格式化注册时间
+    let registerTime = '未知';
+    if (user.register_time) {
+        const date = new Date(user.register_time);
+        registerTime = date.toLocaleString('zh-CN', { 
+            year: 'numeric', 
+            month: '2-digit', 
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+    }
+    document.getElementById('profileRegisterTime').textContent = registerTime;
+    
+    // 显示模态框
+    const profileModalOverlay = document.getElementById('profileModalOverlay');
+    profileModalOverlay.style.display = 'flex';
+    
+    // 绑定关闭事件
+    const profileModalClose = document.getElementById('profileModalClose');
+    const profileClose = document.getElementById('profileClose');
+    
+    profileModalClose.onclick = closeUserProfile;
+    profileClose.onclick = closeUserProfile;
+    
+    // 点击模态框外部关闭
+    profileModalOverlay.onclick = function(e) {
+        if (e.target === profileModalOverlay) {
+            closeUserProfile();
+        }
+    };
+}
+
+// 关闭用户资料模态框
+function closeUserProfile() {
+    const profileModalOverlay = document.getElementById('profileModalOverlay');
+    profileModalOverlay.style.display = 'none';
+}
+
 // 检查登录状态
 function checkLoginStatus() {
     // 显示微小的加载状态

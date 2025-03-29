@@ -217,3 +217,63 @@
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* 用户资料模态框样式 */
+.profile-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.profile-modal-dialog {
+    width: 400px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile-modal-content {
+    padding: 20px;
+    position: relative;
+}
+
+.profile-modal-content h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.profile-info {
+    margin-bottom: 20px;
+}
+
+.profile-item {
+    margin-bottom: 12px;
+    padding: 8px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.profile-item label {
+    font-weight: 500;
+    color: #666;
+    display: inline-block;
+    width: 100px;
+}
+
+.profile-item span {
+    color: #333;
+    font-weight: 400;
+}
+
+.profile-modal-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

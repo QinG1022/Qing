@@ -125,9 +125,9 @@
                 </section>
             </div>
 
-            <div class="tab-pane" id="tab1"><!--不再是激活的标签页-->
+            <div class="tab-pane" id="tab1">
                 <!-- 文本编辑区 -->
-                <section class="text-section"><!--文本处理区-->
+                <section class="text-section">
                     <h2><span class="material-icons">文本处理</span></h2>
                     <div class="form-group">
                         <label for="content">输入内容：</label>
@@ -149,16 +149,16 @@
 
                     <div class="image-options"><!--图片选项-->
                         <label>
-                            <input type="checkbox" id="enableOCR" checked><!--启用OCR-->
+                            <input type="checkbox" id="enableOCR" checked>
                             对图片进行文字识别
                         </label>
                     </div>
 
                     <!-- OCR识别结果区域，默认隐藏 -->
-                    <div class="ocr-results hidden"><!--OCR识别结果区域，默认隐藏-->
-                        <div class="ocr-header"><!--OCR识别结果头部-->  
+                    <div class="ocr-results hidden">
+                        <div class="ocr-header">
                             <h3><span class="material-icons">识别结果</span></h3>
-                            <button class="merge-all-btn" disabled><!--合并全部按钮-->
+                            <button class="merge-all-btn" disabled>
                                 <span class="material-icons">merge_type</span> 
                                 <span>合并全部</span>
                             </button>
@@ -177,9 +177,9 @@
                     </button>
                 </div>
                 
-                <!-- 历史记录部分，移动到文档生成标签页 -->
+                <!-- 历史记录 -->
                 <div class="history-section">
-                    <div class="history-header"><!--历史记录头部--> 
+                    <div class="history-header">
                         <h2><span class="material-icons">历史记录</span>  <span class="history-count" id="historyCount">(共0/6条内容)</span></h2>
                         <div class="history-actions-header">
                             <button id="clearHistoryBtn" class="clear-btn">
@@ -253,7 +253,7 @@
                 <section class="chat-section">
                     <h2><span class="material-icons">AI对话</span></h2>
                     
-                    <!-- 新增文件上传区域 -->
+                    <!-- 文件上传区域 -->
                     <div class="file-upload-container">
                         <label for="chat-file" class="file-upload-btn">
                             <span class="material-icons">attach_file</span>
@@ -268,7 +268,7 @@
                         <select id="model-select" class="model-select">
                             <!-- 模型选项将通过JavaScript动态加载 -->
                         </select>
-                        <!-- 添加重置按钮 -->
+                        <!-- 重置按钮 -->
                         <button id="resetChatBtn" class="reset-btn" title="清除对话历史">
                             <span class="material-icons">delete</span>
                             <span>重置对话</span>
@@ -277,7 +277,7 @@
                     
                     <div class="chat-container">
                         <div class="chat-messages" id="chatMessages">
-                            <!-- 新增文件上传状态提示 -->
+                            <!-- 文件上传状态提示 -->
                             <div class="message-system hidden" id="uploadStatus">
                                 <span class="material-icons">info</span>
                                 <span>文件已上传，请输入分析指令...</span>
@@ -285,7 +285,6 @@
                             <!-- 消息内容将通过JS动态加载 -->
                         </div>
                         <div class="chat-input-container">
-                            <!-- 在输入区域添加上传图标 -->
                             <button class="file-upload-mini" id="triggerUpload">
                                 <span class="material-icons">attach_file</span>
                             </button>
@@ -391,6 +390,33 @@
         <footer class="app-footer">
             <p>© 2025 智能文档处理与AI交互系统 - 提高您的文档处理效率</p>
         </footer>
+    </div>
+
+    <!-- 用户资料模态框 -->
+    <div class="profile-modal-overlay" id="profileModalOverlay">
+        <div class="profile-modal-dialog">
+            <div class="profile-modal-content">
+                <button class="modal-close" id="profileModalClose">×</button>
+                <h2>个人资料</h2>
+                <div class="profile-info">
+                    <div class="profile-item">
+                        <label>用户名：</label>
+                        <span id="profileUsername"></span>
+                    </div>
+                    <div class="profile-item">
+                        <label>注册邮箱：</label>
+                        <span id="profileEmail"></span>
+                    </div>
+                    <div class="profile-item">
+                        <label>注册时间：</label>
+                        <span id="profileRegisterTime"></span>
+                    </div>
+                </div>
+                <div class="profile-modal-buttons">
+                    <button class="modal-btn primary" id="profileClose">关闭</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="toast hidden" id="toast"></div>
