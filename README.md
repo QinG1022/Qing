@@ -10,6 +10,7 @@
 - 🤖 **多模型支持**：同时接入DeepSeek API和本地部署的Qwen1.5/DeepSeek-R1模型
 - 📄 **自动化流程**：实现从图像预处理→OCR识别→PDF生成的完整流水线
 - 📊 **智能历史管理**：数据库存储用户历史操作，保持记录持久化
+- 🔄 **文件分析功能**：支持上传TXT/PDF文件进行AI分析和提问
 
 ## 🚀 核心功能
 
@@ -17,17 +18,20 @@
 - 📄 PDF 文档生成与下载
 - 📝 PDF 文本内容提取
 - 📜 历史记录持久化存储与管理
+- 🔍 文件智能分析与处理
 
 ### 图像处理
 - 🖼️ 图像批量处理与优化
 - 🔍 OCR 图像文字识别
 - 🔄 文字识别结果历史记录
+- 📊 图像质量自动优化
 
 ### 用户系统
 - 👥 用户注册和登录功能
 - 🔐 安全的密码哈希存储
 - 📱 会话持久化，保持登录状态
 - 📋 个人历史记录管理
+- 🔒 用户数据隔离存储
 
 ### AI 对话
 - 🤖 支持多种 AI 模型
@@ -37,6 +41,7 @@
 - 📄 支持文件分析功能
   - 上传TXT/PDF文件进行智能分析
   - 基于文件内容提问
+  - 智能推荐解决方案
 
 ## 🛠️ 技术架构
 
@@ -51,9 +56,9 @@
 - **数据结构**: Collections.deque (用于缓存)
 
 ### AI 模型支持
-- DeepSeek API
-- 本地部署的 DeepSeek-R1 模型
-- 本地部署的 Qwen1.5 模型
+- DeepSeek API (支持硅基流动等平台)
+- 本地部署的 DeepSeek-R1-Distill-1.5B 模型
+- 本地部署的 Qwen1.5-0.5B-Chat 模型
 
 ### 前端架构
 - 模块化 JavaScript 和 CSS
@@ -62,6 +67,7 @@
   - AI 对话模块
   - OCR 处理模块
   - 用户认证模块
+  - 历史记录管理模块
 
 ## 📋 快速开始
 
@@ -86,12 +92,25 @@
    - Redis: [下载地址](https://github.com/microsoftarchive/redis/releases)
    - Tesseract-OCR: [下载地址](https://github.com/UB-Mannheim/tesseract/wiki)
    - 本地 AI 模型（可选）:
-     - [DeepSeek-R1](https://huggingface.co/deepseek-ai/deepseek-coder-1.3b-base)
-     - [Qwen1.5](https://huggingface.co/Qwen/Qwen1.5-0.5B-Chat)
+     - [DeepSeek-R1-Distill-1.5B](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B)
+     - [Qwen1.5-0.5B-Chat](https://huggingface.co/Qwen/Qwen1.5-0.5B-Chat)
 
 3. **创建必要目录**
    ```bash
    mkdir -p uploads pdfs log data session
+   ```
+
+4. **环境配置**
+   创建 .env 文件，配置API密钥和模型路径：
+   ```
+   # DeepSeek API 配置
+   DEEPSEEK_BASE_URL=https://api.siliconflow.cn/v1
+   DEEPSEEK_MODEL=deepseek-ai/DeepSeek-R1-Distill-Qwen-7B
+   DEEPSEEK_API_KEY=你的API密钥
+
+   # 本地模型配置（可选）
+   DEEPSEEK_LOCAL_MODEL_PATH=D:/path/to/DeepSeek-R1-Distill-1.5B
+   QWEN_LOCAL_MODEL_PATH=D:/path/to/Qwen1.5-0.5B-Chat
    ```
 
 ### 启动服务
@@ -119,6 +138,9 @@
 ### 用户功能
 1. 点击右上角"登录"按钮
 2. 新用户选择"注册"，填写用户信息
+   - 用户名：4-20个字符
+   - 密码：至少8位，包含字母和数字
+   - 邮箱：有效的邮箱格式
 3. 已有账户直接登录
 4. 登录后可查看个人历史记录
 
@@ -143,8 +165,9 @@
 
 ### AI 对话
 1. 选择 AI 模型
-2. 输入问题
-3. 等待回复
+2. 输入问题或上传文件
+3. 等待AI回复
+4. 基于文件内容进行提问
 
 ## 🧪 测试
 ```bash
@@ -156,6 +179,11 @@ python -m pytest tests/
 
 # 生成测试报告
 python -m pytest --html=report.html tests/
+
+# 特定测试
+python -m pytest tests/test_image_processor.py -v
+python -m pytest tests/test_pdf_generator.py -v
+python -m pytest tests/test_database.py -v
 ```
 
 ## ❓ 常见问题
@@ -184,12 +212,48 @@ python -m pytest --html=report.html tests/
    - 检查环境变量TESSDATA_PREFIX
    - 验证tesseract.exe路径
    - 确认中文语言包chi_sim已安装
+   - 测试命令：`tesseract --version`和`tesseract --list-langs`
 
 6. **AI 模型问题**
    - 验证模型路径
    - 检查 CUDA 配置
    - 确认系统资源充足
+   - 检查.env文件配置是否正确
 
 ## 🛑 关闭服务
 1. 停止 Flask 和 Celery（Ctrl+C）
 2. 关闭 Redis：`net stop Redis`
+
+## 🔄 项目结构
+```
+./
+├── ai_module/                # AI模型目录
+│   ├── DeepSeek-R1-Distill-Qwen-1.5B/
+│   └── Qwen1.5-0.5B-Chat/
+├── config/                   # 配置文件目录
+├── data/                     # 数据库存储目录
+├── fonts/                    # 字体文件目录
+├── log/                      # 日志文件目录
+├── modules/                  # 核心模块目录
+│   ├── ai_chat/              # AI聊天模块
+│   │   ├── ai_routes.py      # AI路由
+│   │   ├── deepseek_client.py # DeepSeek API客户端
+│   │   └── local_model_client.py # 本地模型客户端
+│   ├── database.py           # 数据库模块
+│   ├── image_processor.py    # 图像处理模块
+│   ├── ocr_processor.py      # OCR处理模块
+│   ├── pdf_extractor.py      # PDF提取模块
+│   ├── pdf_generator.py      # PDF生成模块
+│   └── tasks.py              # Celery任务定义
+├── pdfs/                     # PDF文件存储目录
+├── session/                  # 会话文件存储目录
+├── static/                   # 静态资源目录
+│   ├── css/                  # CSS样式文件
+│   └── js/                   # JavaScript文件
+├── templates/                # 模板文件目录
+├── tests/                    # 测试文件目录
+├── uploads/                  # 上传文件存储目录
+├── .env                      # 环境变量配置文件
+├── app.py                    # 主应用程序
+└── requirements.txt          # 依赖项列表
+```

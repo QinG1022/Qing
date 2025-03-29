@@ -32,6 +32,8 @@ class User(db.Model, UserMixin):
     
     # 建立与历史记录的一对多关系
     histories = db.relationship('History', backref='user', lazy=True, cascade="all, delete-orphan")
+    # 建立与聊天历史的一对多关系
+    chat_histories = db.relationship('ChatHistory', backref='user', lazy=True, cascade="all, delete-orphan")
     
     def __repr__(self):
         return f"<User {self.username}>"
@@ -60,6 +62,35 @@ class History(db.Model):
             'content': self.content,
             'source': self.source,
             'timestamp': self.timestamp.strftime('%Y-%m-%d %H:%M:%S'),
+            'user_id': self.user_id
+        }
+
+class ChatHistory(db.Model):
+    """AI对话历史记录模型"""
+    __tablename__ = 'chat_histories'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    role = db.Column(db.String(10), nullable=False)  # 角色：user或assistant
+    content = db.Column(db.Text, nullable=False)     # 消息内容
+    timestamp = db.Column(db.DateTime, default=datetime.now)
+    model = db.Column(db.String(20), nullable=True)  # 使用的AI模型
+    conversation_id = db.Column(db.String(50), nullable=False)  # 对话ID，用于分组同一次对话的消息
+    
+    # 外键关联到用户
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    
+    def __repr__(self):
+        return f"<ChatHistory {self.id} ({self.role})>"
+    
+    def to_dict(self):
+        """将聊天记录转换为字典格式用于JSON响应"""
+        return {
+            'id': self.id,
+            'role': self.role,
+            'content': self.content,
+            'timestamp': self.timestamp.strftime('%Y-%m-%d %H:%M:%S'),
+            'model': self.model,
+            'conversation_id': self.conversation_id,
             'user_id': self.user_id
         }
 
@@ -147,5 +178,54 @@ def clear_user_history(user_id):
         return True
     except Exception as e:
         logger.error(f"清空用户历史记录失败: {str(e)}")
+        db.session.rollback()
+        return False
+
+# 添加聊天历史相关函数
+def get_user_chat_history(user_id, conversation_id=None, limit=100):
+    """获取指定用户的对话历史记录"""
+    try:
+        query = ChatHistory.query.filter_by(user_id=user_id)
+        if conversation_id:
+            query = query.filter_by(conversation_id=conversation_id)
+        
+        chat_histories = query.order_by(ChatHistory.timestamp.asc()).limit(limit).all()
+        return [chat.to_dict() for chat in chat_histories]
+    except Exception as e:
+        logger.error(f"获取用户对话历史记录失败: {str(e)}")
+        return []
+
+def add_chat_message(role, content, model, conversation_id, user_id):
+    """添加新的对话消息记录"""
+    try:
+        new_chat = ChatHistory(
+            role=role,
+            content=content,
+            model=model,
+            conversation_id=conversation_id,
+            user_id=user_id
+        )
+        db.session.add(new_chat)
+        db.session.commit()
+        logger.info(f"添加对话消息成功，用户ID: {user_id}, 角色: {role}")
+        return True
+    except Exception as e:
+        logger.error(f"添加对话消息失败: {str(e)}")
+        db.session.rollback()
+        return False
+
+def clear_user_chat_history(user_id, conversation_id=None):
+    """清空用户的对话历史记录"""
+    try:
+        query = ChatHistory.query.filter_by(user_id=user_id)
+        if conversation_id:
+            query = query.filter_by(conversation_id=conversation_id)
+        
+        query.delete()
+        db.session.commit()
+        logger.info(f"清空用户对话历史记录成功，用户ID: {user_id}")
+        return True
+    except Exception as e:
+        logger.error(f"清空用户对话历史记录失败: {str(e)}")
         db.session.rollback()
         return False 

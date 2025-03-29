@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, Response, stream_with_context
+from flask import Blueprint, request, jsonify, Response, stream_with_context, session
 import os
 from dotenv import load_dotenv
 from .deepseek_client import DeepSeekClient
@@ -7,6 +7,10 @@ import logging
 from werkzeug.exceptions import BadRequest
 import json
 import warnings
+from flask_login import current_user
+from ..database import add_chat_message, get_user_chat_history, clear_user_chat_history
+import uuid
+from datetime import datetime
 
 # 设置更高的日志级别，抑制不必要的日志
 logging.getLogger('accelerate').setLevel(logging.ERROR)  # 将accelerate的日志级别设为ERROR
@@ -124,6 +128,7 @@ def chat():
         - message: 用户消息
         - stream: 是否使用流式输出 (布尔值，默认False)
         - model: 使用的模型 (字符串，可选值: 'deepseek_api', 'deepseek', 'qwen'，默认为'deepseek_api')
+        - conversation_id: 对话ID (字符串，可选，用于区分不同对话)
     返回：
         - 流式模式：SSE格式的流式响应
         - 非流式模式：JSON格式的完整响应
@@ -153,13 +158,26 @@ def chat():
         
         # 检查客户端是否正确初始化
         if client is None:
-            return jsonify({"error": f"{model_name}模型服务未正确配置"}), 500
+            # 尝试使用其他可用的模型作为回退
+            for backup_name, backup_client in ai_clients.items():
+                if backup_client is not None:
+                    client = backup_client
+                    model_name = backup_name
+                    logging.warning(f"模型 {model_name} 不可用，回退到 {backup_name}")
+                    break
+            
+            # 如果没有可用的模型，返回错误
+            if client is None:
+                return jsonify({"error": f"所有AI模型都未正确配置"}), 500
             
         user_input = data.get('message')
         if not user_input or not isinstance(user_input, str):
             return jsonify({"error": "消息不能为空"}), 400
             
         stream_mode = data.get('stream', False)
+        
+        # 获取或生成对话ID
+        conversation_id = data.get('conversation_id', str(uuid.uuid4()))
         
         # 获取可选参数
         params = {}
@@ -170,6 +188,10 @@ def chat():
         # 添加用户消息到对话历史
         client.add_message("user", user_input)
         
+        # 如果用户已登录，保存消息到数据库
+        if current_user.is_authenticated:
+            add_chat_message("user", user_input, model_name, conversation_id, current_user.id)
+        
         # 生成响应
         logging.info(f"处理用户消息，使用模型: {model_name}，流式模式: {stream_mode}")
         response = client.generate_response(stream=stream_mode, **params)
@@ -177,16 +199,42 @@ def chat():
         # 错误处理
         if isinstance(response, dict) and "error" in response:
             logging.error(f"AI响应生成失败: {response['error']}")
-            return jsonify({"error": response["error"]}), 500
+            # 尝试使用简单响应替代
+            backup_response = {"response": f"抱歉，AI生成回复时遇到问题: {response['error']}。请重试或联系管理员。", "conversation_id": conversation_id}
+            return jsonify(backup_response), 200
         
         # 流式输出
         if stream_mode:
             def generate():
                 try:
+                    full_response = ""
+                    # 先发送会话ID，方便前端保存
+                    yield f"data: {json.dumps({'conversation_id': conversation_id})}\n\n"
+                    
                     for data_chunk in client.stream_response(response):
                         yield data_chunk
+                        
+                        # 尝试提取内容以收集完整响应
+                        try:
+                            chunk_data = data_chunk.strip()
+                            if chunk_data.startswith("data: ") and not chunk_data.endswith("[DONE]"):
+                                json_str = chunk_data[5:].strip()
+                                if json_str:
+                                    parsed = json.loads(json_str)
+                                    if "content" in parsed:
+                                        full_response += parsed["content"]
+                        except Exception as e:
+                            logging.warning(f"解析流式响应块失败: {str(e)}")
+                            pass
+                        
+                    # 完成后，如果用户已登录，保存助手回复到数据库
+                    if current_user.is_authenticated and full_response:
+                        add_chat_message("assistant", full_response, model_name, conversation_id, current_user.id)
+                        
+                    yield "data: [DONE]\n\n"
                 except Exception as e:
                     logging.error(f"流式响应处理失败: {str(e)}")
+                    # 发送错误信息，但确保它能被前端正确处理
                     yield f"data: {json.dumps({'content': f'流式输出错误: {str(e)}', 'error': True})}\n\n"
                     yield "data: [DONE]\n\n"
                     
@@ -196,15 +244,32 @@ def chat():
         try:
             assistant_response = client.format_response(response)
             client.add_message("assistant", assistant_response)
+            
+            # 如果用户已登录，保存助手回复到数据库
+            if current_user.is_authenticated:
+                add_chat_message("assistant", assistant_response, model_name, conversation_id, current_user.id)
+                
             logging.info("AI响应生成成功")
-            return jsonify({"response": assistant_response})
+            return jsonify({
+                "response": assistant_response,
+                "conversation_id": conversation_id
+            })
         except Exception as e:
             logging.error(f"格式化AI响应失败: {str(e)}")
-            return jsonify({"error": f"处理AI响应失败: {str(e)}"}), 500
+            # 尝试返回简单的错误响应，而不是HTTP错误
+            return jsonify({
+                "response": f"抱歉，处理AI响应时遇到问题: {str(e)}。请重试或联系管理员。",
+                "conversation_id": conversation_id,
+                "error": str(e)
+            })
         
     except Exception as e:
         logging.error(f"处理AI对话请求失败: {str(e)}", exc_info=True)
-        return jsonify({"error": str(e)}), 500
+        # 尝试返回简单的错误响应，而不是HTTP错误
+        return jsonify({
+            "response": f"抱歉，处理您的请求时遇到问题: {str(e)}。请重试或联系管理员。",
+            "error": str(e)
+        })
 
 @ai_bp.route('/reset', methods=['POST'])
 def reset_conversation():
@@ -219,13 +284,18 @@ def reset_conversation():
         - 失败：错误信息
     """
     try:
-        # 检查请求数据是否为JSON格式
-        if request.is_json:
-            data = request.get_json()
-            # 始终尊重用户的模型选择
-            model_name = data.get('model', default_model)
-        else:
-            model_name = default_model
+        # 默认使用默认模型
+        model_name = default_model
+        
+        # 安全地尝试解析JSON请求体
+        if request.is_json and request.data:
+            try:
+                data = request.get_json(silent=True) or {}
+                if 'model' in data:
+                    model_name = data.get('model')
+            except Exception as e:
+                logging.warning(f"JSON解析失败: {str(e)}")
+                # 继续处理，使用默认值
             
         # 检查模型是否存在
         if model_name not in ai_clients:
@@ -280,12 +350,12 @@ def analyze_file():
             
         try:
             data = request.get_json()
-        except BadRequest:
+            if data is None:
+                return jsonify({"error": "无效的请求数据"}), 400
+        except BadRequest as e:
+            logging.error(f"无效的JSON数据: {str(e)}")
             return jsonify({"error": "无效的请求数据"}), 400
             
-        if not data:
-            return jsonify({"error": "无效的请求数据"}), 400
-        
         # 获取请求的模型名称，始终尊重用户的选择
         model_name = data.get('model', default_model)
         
@@ -298,7 +368,17 @@ def analyze_file():
         
         # 检查客户端是否正确初始化
         if client is None:
-            return jsonify({"error": f"{model_name}模型服务未正确配置"}), 500
+            # 尝试使用其他可用的模型作为回退
+            for backup_name, backup_client in ai_clients.items():
+                if backup_client is not None:
+                    client = backup_client
+                    model_name = backup_name
+                    logging.warning(f"模型 {model_name} 不可用，回退到 {backup_name}")
+                    break
+            
+            # 如果没有可用的模型，返回错误
+            if client is None:
+                return jsonify({"error": f"所有AI模型都未正确配置"}), 500
             
         # 获取用户指令和文件内容
         user_instruction = data.get('content', '')
@@ -316,6 +396,9 @@ def analyze_file():
         # 默认使用流式输出
         stream_mode = data.get('stream', True)
         
+        # 获取或生成对话ID
+        conversation_id = data.get('conversation_id', str(uuid.uuid4()))
+        
         # 获取可选参数
         params = {}
         for param in ['temperature', 'max_tokens', 'top_p', 'frequency_penalty', 'presence_penalty', 'repetition_penalty']:
@@ -325,6 +408,10 @@ def analyze_file():
         # 添加用户消息到对话历史
         client.add_message("user", prompt)
         
+        # 如果用户已登录，保存消息到数据库
+        if current_user.is_authenticated:
+            add_chat_message("user", prompt, model_name, conversation_id, current_user.id)
+        
         # 生成响应
         logging.info(f"处理文件分析请求，使用模型: {model_name}，流式模式: {stream_mode}")
         response = client.generate_response(stream=stream_mode, **params)
@@ -332,16 +419,42 @@ def analyze_file():
         # 错误处理
         if isinstance(response, dict) and "error" in response:
             logging.error(f"AI响应生成失败: {response['error']}")
-            return jsonify({"error": response["error"]}), 500
+            # 尝试使用简单响应替代
+            backup_response = {"response": f"抱歉，AI分析文件时遇到问题: {response['error']}。请重试或联系管理员。", "conversation_id": conversation_id}
+            return jsonify(backup_response), 200
         
         # 流式输出
         if stream_mode:
             def generate():
                 try:
+                    full_response = ""
+                    # 先发送会话ID，方便前端保存
+                    yield f"data: {json.dumps({'conversation_id': conversation_id})}\n\n"
+                    
                     for data_chunk in client.stream_response(response):
                         yield data_chunk
+                        
+                        # 尝试提取内容以收集完整响应
+                        try:
+                            chunk_data = data_chunk.strip()
+                            if chunk_data.startswith("data: ") and not chunk_data.endswith("[DONE]"):
+                                json_str = chunk_data[5:].strip()
+                                if json_str:
+                                    parsed = json.loads(json_str)
+                                    if "content" in parsed:
+                                        full_response += parsed["content"]
+                        except Exception as e:
+                            logging.warning(f"解析流式响应块失败: {str(e)}")
+                            pass
+                        
+                    # 完成后，如果用户已登录，保存助手回复到数据库
+                    if current_user.is_authenticated and full_response:
+                        add_chat_message("assistant", full_response, model_name, conversation_id, current_user.id)
+                        
+                    yield "data: [DONE]\n\n"
                 except Exception as e:
                     logging.error(f"流式响应处理失败: {str(e)}")
+                    # 发送错误信息，但确保它能被前端正确处理
                     yield f"data: {json.dumps({'content': f'流式输出错误: {str(e)}', 'error': True})}\n\n"
                     yield "data: [DONE]\n\n"
                     
@@ -351,12 +464,102 @@ def analyze_file():
         try:
             assistant_response = client.format_response(response)
             client.add_message("assistant", assistant_response)
+            
+            # 如果用户已登录，保存助手回复到数据库
+            if current_user.is_authenticated:
+                add_chat_message("assistant", assistant_response, model_name, conversation_id, current_user.id)
+                
             logging.info("AI文件分析响应生成成功")
-            return jsonify({"response": assistant_response})
+            return jsonify({
+                "response": assistant_response,
+                "conversation_id": conversation_id
+            })
         except Exception as e:
             logging.error(f"格式化AI响应失败: {str(e)}")
-            return jsonify({"error": f"处理AI响应失败: {str(e)}"}), 500
+            # 尝试返回简单的错误响应，而不是HTTP错误
+            return jsonify({
+                "response": f"抱歉，处理AI响应时遇到问题: {str(e)}。请重试或联系管理员。",
+                "conversation_id": conversation_id,
+                "error": str(e)
+            })
         
     except Exception as e:
         logging.error(f"处理文件分析请求失败: {str(e)}", exc_info=True)
+        # 尝试返回简单的错误响应，而不是HTTP错误
+        return jsonify({
+            "response": f"抱歉，处理您的请求时遇到问题: {str(e)}。请重试或联系管理员。",
+            "error": str(e)
+        })
+
+@ai_bp.route('/history', methods=['GET'])
+def get_chat_history():
+    """
+    获取对话历史记录接口
+    功能：获取当前用户的对话历史记录
+    请求方法：GET
+    参数：
+        - conversation_id: 对话ID (字符串，可选，用于获取指定对话的历史记录)
+    返回：
+        - 对话历史记录列表
+    """
+    try:
+        # 检查用户是否已登录
+        if not current_user.is_authenticated:
+            return jsonify({"error": "未登录用户无法获取对话历史"}), 401
+            
+        # 获取请求参数
+        conversation_id = request.args.get('conversation_id')
+        
+        # 获取用户的对话历史记录
+        history = get_user_chat_history(current_user.id, conversation_id)
+        
+        return jsonify({
+            "history": history,
+            "conversation_id": conversation_id or "all"
+        })
+    except Exception as e:
+        logging.error(f"获取对话历史记录失败: {str(e)}", exc_info=True)
+        return jsonify({"error": str(e)}), 500
+
+@ai_bp.route('/history/clear', methods=['POST'])
+def clear_chat_history():
+    """
+    清空对话历史记录接口
+    功能：清空当前用户的对话历史记录
+    请求方法：POST
+    参数：
+        - conversation_id: 对话ID (字符串，可选，用于清空指定对话的历史记录)
+    返回：
+        - 成功：清空成功的消息
+        - 失败：错误信息
+    """
+    try:
+        # 检查用户是否已登录
+        if not current_user.is_authenticated:
+            return jsonify({"error": "未登录用户无法清空对话历史"}), 401
+            
+        # 获取请求参数
+        conversation_id = None
+        
+        # 安全地尝试解析JSON请求体
+        if request.is_json and request.data:
+            try:
+                data = request.get_json(silent=True) or {}
+                conversation_id = data.get('conversation_id')
+            except Exception as e:
+                logging.warning(f"JSON解析失败: {str(e)}")
+                # 继续处理，使用默认值None
+            
+        # 清空用户的对话历史记录
+        success = clear_user_chat_history(current_user.id, conversation_id)
+        
+        if success:
+            return jsonify({
+                "status": "success",
+                "message": "对话历史记录已清空"
+            })
+        else:
+            return jsonify({"error": "清空对话历史记录失败"}), 500
+    except Exception as e:
+        logging.error(f"清空对话历史记录失败: {str(e)}", exc_info=True)
         return jsonify({"error": str(e)}), 500
