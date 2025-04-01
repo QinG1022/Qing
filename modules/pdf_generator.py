@@ -35,7 +35,7 @@ from fontTools.ttLib import TTFont as FontToolsFont
 # 导入PDF处理工具
 from PyPDF2 import PdfReader, PdfWriter
 
-class PDFGenerator: # PDF文档生成器类   
+class PDFGenerator:  
     """
     PDF文档生成器类
     
@@ -60,7 +60,7 @@ class PDFGenerator: # PDF文档生成器类
     # 线程安全控制
     _font_lock = threading.Lock()   # 字体锁定对象        
     _fonts_registered = False       # 字体注册状态    
-     # 验证和初始化字体设置     
+    
     @classmethod
     def _validate_font(cls): 
         """
@@ -221,7 +221,7 @@ class PDFGenerator: # PDF文档生成器类
             # 处理文本内容
             if text_content and text_content.strip():
                 # 创建文本样式
-                normal_style = ParagraphStyle(      # 创建文本样式    
+                normal_style = ParagraphStyle(   
                     'CustomNormal',                 # 样式名称    
                     fontName=cls.REGISTERED_NAME,   # 字体名称    
                     fontSize=cls.FONT_SIZE,         # 字体大小    
@@ -232,14 +232,14 @@ class PDFGenerator: # PDF文档生成器类
                 )
                 
                 # 创建段落对象
-                paragraphs = []                             # 段落列表    
+                paragraphs = []    
                 for line in text_content.split('\n'):       # 遍历文本内容    
                     if line.strip():                        # 如果行不为空    
                         paragraphs.append(Paragraph(line.strip(), normal_style)) # 添加段落    
                         paragraphs.append(Spacer(1, 5))     # 段落间距
                 
                 # 使用临时PDF存储文本内容
-                temp_text_pdf = str(Path(output_dir) / f"temp_text_{timestamp}.pdf")    # 临时文本PDF路径    
+                temp_text_pdf = str(Path(output_dir) / f"temp_text_{timestamp}.pdf")   
                 doc = SimpleDocTemplate(            # 创建文档模板    
                     temp_text_pdf,                  # 临时文本PDF路径    
                     pagesize=A4,                    # 页面尺寸    
@@ -262,7 +262,7 @@ class PDFGenerator: # PDF文档生成器类
                 
                 # 处理图片
                 if image_paths:
-                    # 创建图片PDF
+
                     img_pdf = str(Path(output_dir) / f"temp_img_{timestamp}.pdf")   # 临时图片PDF路径    
                     c_img = canvas.Canvas(img_pdf, pagesize=A4)     # 创建图片PDF    
                     page_width, page_height = A4                    # 页面尺寸    

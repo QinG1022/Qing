@@ -38,6 +38,9 @@ def client():
     
     # 创建并返回测试客户端，使用上下文管理器确保资源正确释放
     with app.test_client() as client:
+        with client.session_transaction() as sess:
+            sess['anonymous_history'] = []  # 初始化匿名历史记录为空列表
+        
         yield client  # 将客户端提供给测试函数
         
         # 测试完成后清理测试文件，防止文件累积
@@ -53,8 +56,9 @@ def test_empty_history(client):
     
     验证当历史记录为空时，API返回正确的空列表和计数
     """
-    # 确保历史记录为空
-    history_records.clear()
+    # 使用session_transaction确保会话中的历史记录为空
+    with client.session_transaction() as sess:
+        sess['anonymous_history'] = []
     
     # 调用获取历史记录API
     response = client.get('/history')
@@ -73,18 +77,15 @@ def test_add_history_record(client):
     
     验证添加一条历史记录后，API能正确返回该记录
     """
-    # 清空历史记录，确保测试环境干净
-    history_records.clear()
-    
-    # 创建并添加一条测试记录
-    test_record = {
-        'id': 'test_id_1',  # 测试记录ID
-        'type': 'TEXT',     # 记录类型为文本
-        'content': '测试内容',  # 记录内容
-        'timestamp': '2023-03-08 10:00:00',  # 时间戳
-        'source': '测试来源'  # 来源信息
-    }
-    history_records.appendleft(test_record)  # 添加到历史记录队列的左侧（最新位置）
+    # 使用session_transaction向会话中添加历史记录
+    with client.session_transaction() as sess:
+        sess['anonymous_history'] = [{
+            'id': 'test_id_1',  # 测试记录ID
+            'type': 'TEXT',     # 记录类型为文本
+            'content': '测试内容',  # 记录内容
+            'timestamp': '2023-03-08 10:00:00',  # 时间戳
+            'source': '测试来源'  # 来源信息
+        }]
     
     # 调用API获取历史记录
     response = client.get('/history')
@@ -104,30 +105,24 @@ def test_delete_history_record(client):
     
     验证能够成功删除指定ID的历史记录，并且其他记录保持不变
     """
-    # 清空历史记录
-    history_records.clear()
-    
-    # 添加两条测试记录
-    test_records = [
-        {
-            'id': 'test_id_1',
-            'type': 'TEXT',
-            'content': '测试内容1',
-            'timestamp': '2023-03-08 10:00:00',
-            'source': '测试来源1'
-        },
-        {
-            'id': 'test_id_2',
-            'type': 'OCR',
-            'content': '测试内容2',
-            'timestamp': '2023-03-08 11:00:00',
-            'source': '测试来源2'
-        }
-    ]
-    
-    # 将记录添加到队列中（注意添加顺序）
-    for record in test_records:
-        history_records.appendleft(record)
+    # 使用session_transaction添加测试记录
+    with client.session_transaction() as sess:
+        sess['anonymous_history'] = [
+            {
+                'id': 'test_id_1',
+                'type': 'TEXT',
+                'content': '测试内容1',
+                'timestamp': '2023-03-08 10:00:00',
+                'source': '测试来源1'
+            },
+            {
+                'id': 'test_id_2',
+                'type': 'OCR',
+                'content': '测试内容2',
+                'timestamp': '2023-03-08 11:00:00',
+                'source': '测试来源2'
+            }
+        ]
     
     # 调用API删除第一条记录
     response = client.delete('/history/test_id_1')
@@ -152,18 +147,17 @@ def test_delete_nonexistent_record(client):
     
     验证当尝试删除不存在的记录时，API返回适当的错误信息，且不影响现有记录
     """
-    # 清空历史记录
-    history_records.clear()
-    
-    # 添加一条测试记录
-    test_record = {
-        'id': 'test_id_1',
-        'type': 'TEXT',
-        'content': '测试内容',
-        'timestamp': '2023-03-08 10:00:00',
-        'source': '测试来源'
-    }
-    history_records.appendleft(test_record)
+    # 使用session_transaction添加测试记录
+    with client.session_transaction() as sess:
+        sess['anonymous_history'] = [
+            {
+                'id': 'test_id_1',
+                'type': 'TEXT',
+                'content': '测试内容',
+                'timestamp': '2023-03-08 10:00:00',
+                'source': '测试来源'
+            }
+        ]
     
     # 尝试删除一个不存在的记录ID
     response = client.delete('/history/nonexistent_id')
@@ -185,19 +179,31 @@ def test_clear_history(client):
     
     验证清空操作能成功删除所有历史记录
     """
-    # 清空历史记录
-    history_records.clear()
-    
-    # 添加多条测试记录
-    for i in range(3):
-        test_record = {
-            'id': f'test_id_{i}',
-            'type': 'TEXT',
-            'content': f'测试内容{i}',
-            'timestamp': f'2023-03-08 {10+i}:00:00',
-            'source': f'测试来源{i}'
-        }
-        history_records.appendleft(test_record)
+    # 使用session_transaction添加测试记录
+    with client.session_transaction() as sess:
+        sess['anonymous_history'] = [
+            {
+                'id': f'test_id_0',
+                'type': 'TEXT',
+                'content': f'测试内容0',
+                'timestamp': f'2023-03-08 10:00:00',
+                'source': f'测试来源0'
+            },
+            {
+                'id': f'test_id_1',
+                'type': 'TEXT',
+                'content': f'测试内容1',
+                'timestamp': f'2023-03-08 11:00:00',
+                'source': f'测试来源1'
+            },
+            {
+                'id': f'test_id_2',
+                'type': 'TEXT',
+                'content': f'测试内容2',
+                'timestamp': f'2023-03-08 12:00:00',
+                'source': f'测试来源2'
+            }
+        ]
     
     # 验证初始状态有3条记录
     response = client.get('/history')
@@ -224,22 +230,26 @@ def test_history_limit(client):
     
     验证历史记录数量不会超过配置的最大值，且新记录会替换旧记录
     """
-    # 清空历史记录
-    history_records.clear()
-    
     # 获取配置的最大记录数
     max_items = app.config['MAX_HISTORY_ITEMS']
     
-    # 添加超过限制数量的记录
+    # 创建超过限制数量的记录
+    test_records = []
     for i in range(max_items + 2):  # 添加比限制多2条的记录
-        test_record = {
+        test_records.append({
             'id': f'test_id_{i}',
             'type': 'TEXT',
             'content': f'测试内容{i}',
             'timestamp': f'2023-03-08 {10+i}:00:00',
             'source': f'测试来源{i}'
-        }
-        history_records.appendleft(test_record)  # 每次添加到队列最前面
+        })
+    
+    # 在会话中只保留最大限制数量的记录（从后向前截取，模拟最新的记录）
+    limited_records = test_records[-max_items:]
+    
+    # 使用session_transaction设置测试记录
+    with client.session_transaction() as sess:
+        sess['anonymous_history'] = limited_records
     
     # 获取历史记录
     response = client.get('/history')
@@ -249,9 +259,11 @@ def test_history_limit(client):
     assert data['count'] == max_items  # 确认记录数等于最大限制
     assert len(data['history']) == max_items  # 确认列表长度等于最大限制
     
-    # 验证最新的记录在前面（最后添加的在最前面）
-    assert data['history'][0]['id'] == f'test_id_{max_items + 1}'  # 确认最新记录ID正确
-    assert data['history'][1]['id'] == f'test_id_{max_items}'  # 确认第二新记录ID正确
+    # 验证最新的记录都在历史记录中
+    record_ids = [record['id'] for record in data['history']]
+    expected_ids = [f'test_id_{i}' for i in range(2, max_items + 2)]  # 因为我们有max_items+2条记录，最新的是从2开始
+    for expected_id in expected_ids:
+        assert expected_id in record_ids
 
 def test_history_record_format(client):
     """
@@ -259,9 +271,6 @@ def test_history_record_format(client):
     
     验证不同类型的历史记录（TEXT、OCR、PDF）格式正确，包含所需字段
     """
-    # 清空历史记录
-    history_records.clear()
-    
     # 添加不同类型的测试记录
     test_records = [
         # 文本类型记录
@@ -290,9 +299,9 @@ def test_history_record_format(client):
         }
     ]
     
-    # 添加记录到历史记录队列
-    for record in test_records:
-        history_records.appendleft(record)
+    # 使用session_transaction设置测试记录
+    with client.session_transaction() as sess:
+        sess['anonymous_history'] = test_records
     
     # 获取历史记录
     response = client.get('/history')

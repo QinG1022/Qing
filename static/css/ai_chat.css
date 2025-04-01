@@ -141,7 +141,7 @@
     text-align: justify;
 }
 
-/* 添加段落间距样式 */
+/* 段落间距样式 */
 .message-content br {
     display: block;
     content: "";
@@ -152,7 +152,7 @@
     margin-top: 10px;
 }
 
-/* 增加中文段落样式 */
+/* 中文段落样式 */
 .ai-message .message-content {
     text-indent: 0;
     letter-spacing: 0.3px;

@@ -11,17 +11,17 @@
     font-size: 14px;
     margin-left: auto;
 }
-
+/* 登录按钮图标样式 */
 .login-btn .material-icons {
     margin-right: 4px;
     font-size: 18px;
 }
-
+/* 登录按钮悬停效果 */
 .login-btn:hover {
     background-color: #45a049;
 }
 
-/* 登录模态框样式 */
+/* 登录模态框背景样式 */
 .login-modal-overlay {
     position: fixed;
     top: 0;
@@ -35,35 +35,35 @@
     z-index: 1000;
     display: none;
 }
-
+/* 登录模态框样式 */
 .login-modal-dialog {
     width: 400px;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
+/* 登录模态框内容样式 */
 .login-modal-content {
     padding: 20px;
     position: relative;
 }
-
+/* 登录模态框标题样式 */
 .login-modal-content h2 {
     text-align: center;
     margin-bottom: 20px;
     color: #333;
 }
-
+/* 登录模态框表单组样式 */
 .login-modal-content .form-group {
     margin-bottom: 16px;
 }
-
+/* 登录模态框表单标签样式 */
 .login-modal-content label {
     display: block;
     margin-bottom: 6px;
     font-weight: 500;
 }
-
+/* 登录模态框表单输入框样式 */
 .login-modal-content input {
     width: 95%;
     padding: 10px;
@@ -71,30 +71,29 @@
     border-radius: 4px;
     font-size: 14px;
 }
-
+/* 登录模态框按钮组样式 */
 .login-modal-buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
-
+/* 登录模态框底部样式 */
 .form-footer {
     margin-top: 16px;
     display: flex;
     justify-content: space-between;
     font-size: 13px;
 }
-
+/* 登录模态框底部链接样式 */
 .form-footer a {
     color: #4caf50;
     text-decoration: none;
 }
-
+/* 登录模态框底部链接悬停效果 */
 .form-footer a:hover {
     text-decoration: underline;
 }
-
-/* 注册模态框样式 */
+/* 注册模态框背景样式 */
 .register-modal-overlay {
     position: fixed;
     top: 0;
@@ -107,47 +106,46 @@
     align-items: center;
     z-index: 1000;
 }
-
+/* 注册模态框样式 */
 .register-modal-dialog {
     width: 400px;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
+/* 注册模态框内容样式 */
 .register-modal-content {
     padding: 20px;
     position: relative;
 }
-
+/* 注册模态框标题样式 */
 .register-modal-content h2 {
     text-align: center;
     margin-bottom: 20px;
     color: #333;
 }
-
+/* 注册模态框提示样式 */
 .form-tip {
     display: block;
     color: #666;
     font-size: 12px;
     margin-top: 4px;
 }
-
+/* 注册模态框按钮组样式 */
 .register-modal-buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
-
 /* 表单验证样式 */
 .form-group input:invalid {
     border-color: #000000;
 }
-
+/* 表单验证成功样式 */
 .form-group input:valid {
     border-color: #4CAF50;
 }
-
+/* 表单验证错误消息样式 */
 .error-message {
     color: #ff4444;
     font-size: 12px;
@@ -166,7 +164,7 @@
     overflow: hidden;
     animation: fadeIn 0.2s ease-in-out;
 }
-
+/* 用户菜单头部样式 */
 .user-menu-header {
     padding: 15px;
     background-color: #f5f8ff;

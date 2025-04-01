@@ -120,14 +120,14 @@
     margin-bottom: 30px;
     box-shadow: inset 0 0 5px var(--shadow-color);
 }
-
+/* PDF预览区域样式 */
 .pdf-preview {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
     margin-top: 20px;
 }
-
+/* PDF预览项样式 */
 .pdf-preview-item {
     background: var(--card-background);
     border: 1px solid var(--border-color);
@@ -138,12 +138,12 @@
     box-shadow: 0 2px 5px var(--shadow-color);
     transition: transform 0.3s;
 }
-
+/* PDF预览项悬停效果 */
 .pdf-preview-item:hover {
     transform: translateY(-3px);
     box-shadow: 0 5px 10px var(--shadow-color);
 }
-
+/* PDF图标样式 */
 .pdf-icon {
     color: #e74c3c;
     font-size: 48px;
@@ -151,7 +151,7 @@
     display: flex;
     justify-content: center;
 }
-
+/* 提取结果容器样式 */
 .extract-results {
     margin-top: 30px;
     background: var(--card-background);
@@ -161,11 +161,11 @@
     display: none;
     animation: slideUp 0.4s;
 }
-
+/* 提取结果容器显示状态 */
 .extract-results.visible {
     display: block;
 }
-
+/* 文本内容容器样式 */
 .pdf-text-content {
     background: #f5f5f5;
     border: 1px solid var(--border-color);
@@ -178,13 +178,13 @@
     line-height: 1.6;
     box-shadow: inset 0 0 5px var(--shadow-color);
 }
-
+/* 文本页面样式 */
 .pdf-text-page {
     margin-bottom: 25px;
     border-bottom: 1px dashed var(--border-color);
     padding-bottom: 20px;
 }
-
+/* 文本页面标题样式 */
 .pdf-text-page h4 {
     margin-top: 0;
     margin-bottom: 15px;

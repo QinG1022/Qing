@@ -6,7 +6,7 @@
     <title>文档生成工具</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap"><!--引入Noto Sans SC字体-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><!--引入Material Icons字体-->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"><!--引入样式表-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/ai_chat.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/image_processor.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/pdf_generator.css') }}">
@@ -16,8 +16,8 @@
     <div class="container">
         <header class="app-header">
             <div class="logo-title">
-                <h1><span class="material-icons">智能文档处理与AI交互系统</span></h1><!--标题-->
-                <div class="header-subtitle">高效处理文档，提取信息，生成报告，ai畅聊</div><!--副标题-->
+                <h1><span class="material-icons">智能文档处理与AI交互系统</span></h1>
+                <div class="header-subtitle">高效处理文档，提取信息，生成报告，ai畅聊</div>
             </div>
             <!-- 登录按钮 -->
             <button id="loginBtn" class="login-btn">
@@ -147,7 +147,7 @@
 
                     <div class="image-preview"></div><!--图片预览-->    
 
-                    <div class="image-options"><!--图片选项-->
+                    <div class="image-options">
                         <label>
                             <input type="checkbox" id="enableOCR" checked>
                             对图片进行文字识别
@@ -163,16 +163,16 @@
                                 <span>合并全部</span>
                             </button>
                         </div>
-                        <div id="ocrContent"></div><!--OCR识别结果-->   
+                        <div id="ocrContent"></div> 
                     </div>
                 </section>
 
                 <!-- 生成文档按钮 -->
                 <div class="action-bar">
-                    <button id="process-images-btn" class="btn secondary" disabled><!--处理图片按钮-->  
+                    <button id="process-images-btn" class="btn secondary" disabled> 
                         <span class="material-icons">处理图片</span> 
                     </button>
-                    <button id="generate-btn" class="btn primary"><!--生成文档按钮-->
+                    <button id="generate-btn" class="btn primary">
                         <span class="material-icons">生成文档(PDF)</span> 
                     </button>
                 </div>
