@@ -1,578 +1,976 @@
 /**
  * 智能文档处理系统 - 主脚本
  * 版本: 1.0
- * 最后更新: 2024-03-06
- * 描述: 提供用户交互处理、表单提交、文件预览和历史记录管理等功能
+ * 描述: 处理主页面逻辑和用户交互
  */
 
-document.addEventListener('DOMContentLoaded', function() {                      
+// DOM 加载完成后执行
+document.addEventListener('DOMContentLoaded', function() {
+    // 检查是否应该显示欢迎页面
+    checkShowWelcome();
+    
+    // 全局变量
+    const state = {
+        theme: localStorage.getItem('theme') || 'light',
+        authenticated: false,
+        username: '',
+        userId: null,
+        uploadedImages: [],
+        uploadedPdfs: [],
+        activeFeature: null,
+        currentTask: null,
+        historyItems: []
+    };
+    
+    // 初始化主题
+    initTheme();
+    
+    // 检查用户登录状态
+    checkAuthentication();
+    
+    // 获取历史记录
+    fetchHistory();
+    
+    // 检查是否是登录成功跳转
+    checkLoginSuccess();
+    
+    // 初始化卡片动画
+    initCardAnimations();
+    
+    // 事件监听器
+    addEventListeners();
+    
     /**
-     * DOM元素引用 - 获取页面中所有需要操作的元素
+     * 检查是否应该显示欢迎页
      */
-    const contentTextarea = document.getElementById('content');                 
-    const generateBtn = document.getElementById('generate-btn');                
-    const loadingOverlay = document.getElementById('loadingOverlay');           
-    const statusMessage = document.getElementById('statusMessage');             
-    const statusSection = document.querySelector('.status-section');            
-    const resultsGrid = document.getElementById('resultsGrid');                 
-    const extractResults = document.querySelector('.extract-results');          
-    const toast = document.getElementById('toast');                             
-    const modalOverlay = document.getElementById('modalOverlay');               
-    const modalMessage = document.getElementById('modalMessage');               
-    const modalConfirm = document.getElementById('modalConfirm');               
-    const modalCancel = document.getElementById('modalCancel');                 
-    const modalClose = document.getElementById('modalClose');                   
-    const historyContainer = document.getElementById('historyContainer');       
-    const refreshHistoryBtn = document.getElementById('refreshHistoryBtn');     
-    const clearHistoryBtn = document.getElementById('clearHistoryBtn');         
-    const historyCount = document.getElementById('historyCount');               
-    const imagesInput = document.getElementById('images'); 
-    let ocrTextAdded = false;                       
-
-    // 页面初始化设置
-    loadingOverlay.classList.add('hidden'); 
-    loadHistory(); 
-
-    /**
-     * 事件监听器设置 - 绑定各个UI元素的事件
-     */
-    if (refreshHistoryBtn) {
-        refreshHistoryBtn.addEventListener('click', loadHistory); 
+    function checkShowWelcome() {
+        // 检查是否是直接访问主页的（不是从欢迎页跳转过来的）
+        const current = window.location.pathname;
+        const referrer = document.referrer;
+        const urlParams = new URLSearchParams(window.location.search);
+        const skipWelcome = urlParams.get('skip_welcome');
+        
+        // 如果当前是主页，且不是从欢迎页或其他内部页面跳转来的，且没有跳过欢迎页参数
+        if (current === '/' && !referrer.includes('/welcome') && !skipWelcome && !sessionStorage.getItem('skipWelcome')) {
+            // 第一次访问，跳转到欢迎页
+            window.location.href = '/welcome';
+        }
+        
+        // 如果是从欢迎页跳转来的，则记录状态防止刷新页面再次跳转
+        if (referrer.includes('/welcome')) {
+            sessionStorage.setItem('skipWelcome', 'true');
+        }
     }
     
-    if (clearHistoryBtn) {
-        clearHistoryBtn.addEventListener('click', clearHistory);    
-    }
-
     /**
-     * 标签页切换功能
-     * 处理不同功能标签页之间的切换
+     * 初始化主题设置
      */
-    const tabButtons = document.querySelectorAll('.tab-button'); 
-    const tabPanes = document.querySelectorAll('.tab-pane'); 
-    
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const tabId = button.getAttribute('data-tab');
-            
-            // 移除所有active类
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabPanes.forEach(pane => pane.classList.remove('active'));
-            
-            // 添加active类到当前标签
-            button.classList.add('active');
-            document.getElementById(tabId).classList.add('active');
-        });
-    });
-
-    // 添加"立即使用"按钮功能
-    const featureButtons = document.querySelectorAll('.feature-btn');
-    const tabContainer = document.getElementById('tabContainer');
-    const backToHomeContainer = document.getElementById('backToHomeContainer');
-    const backToHomeBtn = document.getElementById('backToHomeBtn');
-    
-    // 返回主页功能
-    if (backToHomeBtn) {
-        backToHomeBtn.addEventListener('click', () => {
-            // 隐藏标签栏和返回按钮
-            tabContainer.style.display = 'none';
-            backToHomeContainer.style.display = 'none';
-            
-            // 显示主界面，直接激活tab0（主页）
-            tabPanes.forEach(pane => pane.classList.remove('active'));
-            const homeTab = document.getElementById('tab0');
-            if (homeTab) homeTab.classList.add('active');
-        });
+    function initTheme() {
+        const theme = localStorage.getItem('theme') || 'light';
+        if (theme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.getElementById('themeToggle').querySelector('.material-icons').textContent = 'light_mode';
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+            document.getElementById('themeToggle').querySelector('.material-icons').textContent = 'dark_mode';
+        }
     }
     
-    featureButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const tabId = button.getAttribute('data-tab');
+    /**
+     * 检查是否是登录成功跳转
+     */
+    function checkLoginSuccess() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const loginSuccess = urlParams.get('login_success');
+        
+        if (loginSuccess === 'true') {
+            // 登录成功跳转，显示欢迎消息
+            showToast('欢迎回来！', 'success');
             
-            // 显示标签栏和返回按钮
-            tabContainer.style.display = 'flex';
-            backToHomeContainer.style.display = 'block';
-            
-            // 找到对应的标签按钮并激活
-            const targetTabButton = document.querySelector(`.tab-button[data-tab="${tabId}"]`);
-            if (targetTabButton) {
-                // 移除所有active类
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                tabPanes.forEach(pane => pane.classList.remove('active'));
-                
-                // 添加active类到目标标签
-                targetTabButton.classList.add('active');
-                document.getElementById(tabId).classList.add('active');
-            }
-        });
-    });
-
-    /**
-     * 显示提示消息
-     * 
-     * @param {string} message - 要显示的消息内容
-     * @param {number} duration - 显示持续时间(毫秒)，默认3000ms
-     */
-    function showToast(message, duration = 3000) {
-        toast.textContent = message; 
-        toast.classList.remove('hidden'); 
-        setTimeout(() => {
-            toast.classList.add('hidden'); 
-        }, duration); 
+            // 移除URL参数
+            const newUrl = window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        }
     }
-
+    
     /**
-     * 显示确认对话框
-     * 
-     * @param {string} message - 确认对话框显示的消息内容
-     * @param {Function} onConfirm - 用户确认时执行的回调函数
-     * @param {Function} onCancel - 用户取消时执行的回调函数
+     * 检查用户登录状态
      */
-    function showConfirmDialog(message, onConfirm, onCancel) {
-        modalMessage.innerHTML = message.replace(/\n/g, '<br>'); 
-        modalOverlay.classList.add('visible'); 
-        
-        const handleConfirm = () => {
-            modalOverlay.classList.remove('visible'); 
-            removeEventListeners(); 
-            if (onConfirm) onConfirm(); 
-        };
-        
-        const handleCancel = () => {
-            modalOverlay.classList.remove('visible'); 
-            removeEventListeners(); 
-            if (onCancel) onCancel(); 
-        };
-        
-        const handleClose = () => {
-            modalOverlay.classList.remove('visible'); 
-            removeEventListeners(); 
-        };
-        
-        const removeEventListeners = () => {
-            modalConfirm.removeEventListener('click', handleConfirm); 
-            modalCancel.removeEventListener('click', handleCancel); 
-            modalClose.removeEventListener('click', handleClose); 
-        };
-        
-        modalConfirm.addEventListener('click', handleConfirm); 
-        modalCancel.addEventListener('click', handleCancel); 
-        modalClose.addEventListener('click', handleClose); 
-    }
-
-    /**
-     * 显示加载状态
-     * 
-     * @param {string} message - 加载状态显示的消息
-     */
-    function showLoading(message = '处理中，请稍候...') {
-        document.getElementById('loadingText').textContent = message; 
-        loadingOverlay.classList.remove('hidden'); 
-    }
-
-    /**
-     * 隐藏加载状态
-     */
-    function hideLoading() {
-        loadingOverlay.classList.add('hidden'); 
-    }
-
-    /**
-     * 设置状态消息
-     * 
-     * @param {string} message - 状态消息内容
-     * @param {boolean} isError - 是否为错误消息，影响显示颜色
-     */
-    function setStatusMessage(message, isError = false) {
-        statusMessage.textContent = message; 
-        statusMessage.style.color = isError ? 'var(--error-color)' : 'var(--primary-color)'; 
-        statusSection.classList.add('visible'); 
-    }
-
-    /**
-     * 清除状态消息
-     */
-    function clearStatusMessage() {
-        statusMessage.textContent = ''; 
-        statusSection.classList.remove('visible'); 
-    }
-
-    /**
-     * 轮询任务状态
-     * 
-     * 定期检查后端任务的执行状态，直到任务完成或失败
-     * 
-     * @param {string} taskId - 任务ID
-     */
-    function pollTaskStatus(taskId) {
-        console.log('开始轮询任务状态:', taskId); 
-        showLoading('任务处理中，请稍候...');       
-        
-        const intervalId = setInterval(async () => {
-            try {
-                const response = await fetch(`/tasks/${taskId}`); 
-                const data = await response.json(); 
-                console.log('任务状态:', data); 
-                
-                if (data.status === 'SUCCESS') {
-                    clearInterval(intervalId); 
-                    hideLoading(); 
-                    setStatusMessage('生成成功！'); 
+    function checkAuthentication() {
+        fetch('/api/check-auth')
+            .then(response => response.json())
+            .then(data => {
+                if (data.authenticated) {
+                    state.authenticated = true;
+                    state.username = data.user.username;
+                    state.userId = data.user.id;
                     
-                    if (data.result) {
-                        window.location.href = `/download/${data.result}`; 
+                    // 更新UI
+                    document.getElementById('loginBtn').style.display = 'none';
+                    
+                    // 获取或创建用户信息区域
+                    const userInfo = document.getElementById('userInfo');
+                    userInfo.style.display = 'flex';
+                    
+                    // 显示用户名
+                    let usernameElement = document.getElementById('username');
+                    if (!usernameElement) {
+                        usernameElement = document.createElement('span');
+                        usernameElement.id = 'username';
+                        userInfo.appendChild(usernameElement);
                     }
-                } else if (data.status === 'FAILURE') { 
-                    clearInterval(intervalId); 
-                    hideLoading(); 
-                    setStatusMessage(`生成失败: ${data.error || '未知错误'}`, true); 
-                } else {  
-                    document.getElementById('loadingText').textContent = data.message || '处理中...'; 
+                    usernameElement.textContent = state.username;
+                    
+                    // 创建用户头像元素（如果不存在）
+                    let userAvatar = document.getElementById('userAvatar');
+                    if (!userAvatar) {
+                        userAvatar = document.createElement('div');
+                        userAvatar.id = 'userAvatar';
+                        userAvatar.className = 'user-avatar';
+                        userAvatar.innerHTML = '<span class="material-icons">account_circle</span>';
+                        userInfo.appendChild(userAvatar);
+                    }
+                    
+                    // 初始化用户菜单
+                    initUserMenu();
+                } else {
+                    state.authenticated = false;
                 }
-            } catch (error) {
-                console.error('轮询错误:', error);  
-                clearInterval(intervalId); 
-                hideLoading(); 
-                setStatusMessage('状态查询失败', true); 
-            }
-        }, 1000);   
+            })
+            .catch(error => {
+                console.error('身份验证检查失败:', error);
+                showToast('检查登录状态时出错', 'error');
+            });
     }
-
+    
     /**
-     * 处理表单提交，生成PDF文档
-     * 
-     * @param {boolean} includeImages - 是否包含图片
-     * @returns {Promise<void>}    
+     * 获取历史记录
      */
-    async function handleSubmit(includeImages) {
-        try {
-            const textContent = contentTextarea.value.trim();
-            if (!textContent && (!includeImages || !imagesInput.files.length)) {
-                showToast('请输入文本内容或上传图片');
-                return;
+    function fetchHistory() {
+        fetch('/history')
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success' && data.history && data.history.length > 0) {
+                    state.historyItems = data.history;
+                    renderHistory();
+                } else {
+                    document.getElementById('historyContainer').innerHTML = 
+                        '<p class="empty-history">暂无历史记录</p>';
+                }
+            })
+            .catch(error => {
+                console.error('获取历史记录失败:', error);
+                showToast('获取历史记录失败', 'error');
+            });
+    }
+    
+    /**
+     * 渲染历史记录
+     */
+    function renderHistory() {
+        const container = document.getElementById('historyContainer');
+        
+        if (state.historyItems.length === 0) {
+            container.innerHTML = '<p class="empty-history">暂无历史记录</p>';
+            return;
+        }
+        
+        let html = '';
+        state.historyItems.forEach(item => {
+            const timestamp = item.timestamp;
+            const content = item.content.length > 100 
+                ? item.content.substring(0, 100) + '...' 
+                : item.content;
+            const typeIcon = getTypeIcon(item.type);
+            // 格式化内容，去除多余的空白
+            const formattedContent = content.replace(/\n\s*\n/g, '\n').trim();
+            
+            html += `
+                <div class="history-item" data-id="${item.id}">
+                    <div class="history-item-header">
+                        <span class="material-icons">${typeIcon}</span>
+                        <span class="history-item-source">${item.source || '用户输入'}</span>
+                        <span class="history-item-time">${timestamp}</span>
+                        <button class="delete-history-btn" data-id="${item.id}">
+                            <span class="material-icons">close</span>
+                        </button>
+                    </div>
+                    <div class="history-item-content">${formattedContent}</div>
+                </div>
+            `;
+        });
+        
+        container.innerHTML = html;
+        
+        // 添加删除事件监听器
+        document.querySelectorAll('.delete-history-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const id = this.getAttribute('data-id');
+                deleteHistoryItem(id);
+            });
+        });
+        
+        // 添加点击历史记录项事件
+        document.querySelectorAll('.history-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                const historyItem = state.historyItems.find(h => h.id === id);
+                if (historyItem) {
+                    if (historyItem.type === 'TEXT' || historyItem.type === 'OCR' || historyItem.type === 'PDF') {
+                        openFeature('ocr-pdf');
+                        document.getElementById('textContent').value = historyItem.content;
+                    }
+                }
+            });
+        });
+    }
+    
+    /**
+     * 获取历史记录项类型对应的图标
+     */
+    function getTypeIcon(type) {
+        switch(type) {
+            case 'TEXT': return 'text_fields';
+            case 'OCR': return 'image_search';
+            case 'PDF': return 'picture_as_pdf';
+            case 'AI_CHAT': return 'chat';
+            default: return 'history';
+        }
+    }
+    
+    /**
+     * 删除历史记录项
+     */
+    function deleteHistoryItem(id) {
+        fetch(`/history/${id}`, {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // 从本地状态移除
+                state.historyItems = state.historyItems.filter(item => item.id !== id);
+                // 重新渲染
+                renderHistory();
+                showToast('已删除历史记录', 'success');
+            } else {
+                showToast('删除失败: ' + data.error, 'error');
             }
+        })
+        .catch(error => {
+            console.error('删除历史记录失败:', error);
+            showToast('删除历史记录失败', 'error');
+        });
+    }
+    
+    /**
+     * 清空历史记录
+     */
+    function clearHistory() {
+        fetch('/history', {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                state.historyItems = [];
+                renderHistory();
+                showToast('已清空历史记录', 'success');
+            } else {
+                showToast('清空失败: ' + data.error, 'error');
+            }
+        })
+        .catch(error => {
+            console.error('清空历史记录失败:', error);
+            showToast('清空历史记录失败', 'error');
+        });
+    }
+    
+    /**
+     * 确认清空历史记录
+     */
+    function confirmClearHistory() {
+        if (confirm('确定要清空所有历史记录吗？此操作不可恢复。')) {
+            clearHistory();
+        }
+    }
+    
+    /**
+     * 添加事件监听器
+     */
+    function addEventListeners() {
+        // 登录按钮点击事件
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            const theme = localStorage.getItem('theme') || 'light';
+            window.location.href = `/login?theme=${theme}`;
+        });
+        
+        // 主题切换按钮点击事件
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        
+        // 功能卡片点击事件
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                const feature = this.getAttribute('data-feature');
+                openFeature(feature);
+            });
+        });
+        
+        // 返回按钮点击事件
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', closeFeature);
+        });
+        
+        // 历史记录相关按钮事件
+        document.getElementById('refreshHistoryBtn').addEventListener('click', fetchHistory);
+        document.getElementById('clearHistoryBtn').addEventListener('click', confirmClearHistory);
+        
+        // OCR相关事件
+        const imageUpload = document.getElementById('imageUpload');
+        if (imageUpload) {
+            imageUpload.addEventListener('change', handleImageUpload);
             
-            showLoading('生成文档中...');
-            const formData = new FormData();
-            formData.append('content', textContent); 
-            
-            if (includeImages) {
-                Array.from(imagesInput.files).forEach(file => {
-                    formData.append('images', file); 
+            // 拖放事件
+            const imageUploadArea = document.getElementById('imageUploadArea');
+            if (imageUploadArea) {
+                imageUploadArea.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.classList.add('drag-over');
+                });
+                
+                imageUploadArea.addEventListener('dragleave', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.classList.remove('drag-over');
+                });
+                
+                imageUploadArea.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.classList.remove('drag-over');
+                    
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        imageUpload.files = files;
+                        handleImageUpload({target: imageUpload});
+                    }
+                });
+                
+                imageUploadArea.addEventListener('click', function() {
+                    imageUpload.click();
                 });
             }
+        }
+        
+        // OCR按钮点击事件
+        const ocrBtn = document.getElementById('ocrBtn');
+        if (ocrBtn) {
+            ocrBtn.addEventListener('click', performOCR);
+        }
+        
+        // 生成PDF按钮点击事件
+        const generatePdfBtn = document.getElementById('generatePdfBtn');
+        if (generatePdfBtn) {
+            generatePdfBtn.addEventListener('click', generatePDF);
+        }
+        
+        // PDF上传事件
+        const pdfUpload = document.getElementById('pdfUpload');
+        if (pdfUpload) {
+            pdfUpload.addEventListener('change', handlePdfUpload);
             
-            const response = await fetch('/generate', {
-                method: 'POST',
-                body: formData
+            // PDF拖放事件
+            const pdfUploadArea = document.getElementById('pdfUploadArea');
+            if (pdfUploadArea) {
+                pdfUploadArea.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.classList.add('drag-over');
+                });
+                
+                pdfUploadArea.addEventListener('dragleave', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.classList.remove('drag-over');
+                });
+                
+                pdfUploadArea.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.classList.remove('drag-over');
+                    
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0 && files[0].type === 'application/pdf') {
+                        pdfUpload.files = files;
+                        handlePdfUpload({target: pdfUpload});
+                    } else {
+                        showToast('请上传PDF文件', 'error');
+                    }
+                });
+                
+                pdfUploadArea.addEventListener('click', function() {
+                    pdfUpload.click();
+                });
+            }
+        }
+        
+        // 提取文本按钮点击事件
+        const extractBtn = document.getElementById('extractBtn');
+        if (extractBtn) {
+            extractBtn.addEventListener('click', extractText);
+        }
+        
+        // 模态框关闭按钮
+        document.querySelector('.modal .close').addEventListener('click', closeModal);
+        
+        // 标签切换
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tabName = this.getAttribute('data-tab');
+                switchTab(tabName);
             });
-
-            const data = await response.json();
-            if (!response.ok) {
-                throw new Error(data.error || '请求失败');
-            }
-
-            if (data.task_id) {
-                if (textContent) {
-                    console.log("文本内容已提交，刷新历史记录");
-                    setTimeout(loadHistory, 500); 
-                }
-                pollTaskStatus(data.task_id); 
-            } else {
-                throw new Error('未收到任务ID');
-            }
-
-        } catch (error) {
-            console.error('Error:', error); 
-            hideLoading(); 
-            showConfirmDialog(`生成失败: ${error.message}`); 
+        });
+        
+        // 登录表单
+        document.getElementById('loginForm').addEventListener('submit', handleLogin);
+        
+        // 注册表单
+        document.getElementById('registerForm').addEventListener('submit', handleRegister);
+        
+        // 文档上传区域
+        if (typeof initDocUpload === 'function') {
+            initDocUpload();
+        }
+        
+        // AI聊天功能
+        if (typeof initAiChat === 'function') {
+            initAiChat();
         }
     }
-
+    
     /**
-     * 生成文档按钮点击事件
-     * 处理不同场景下的文档生成逻辑，根据内容和OCR状态显示不同的确认对话框
+     * 初始化卡片动画
      */
-    if (generateBtn) {
-        generateBtn.addEventListener('click', async function() {
-            const content = contentTextarea.value.trim();
-            const hasImages = imagesInput.files.length > 0;
-            const hasOCRResults = document.querySelector('.ocr-item') !== null;
+    function initCardAnimations() {
+        // 为每张卡片设置动画延迟
+        document.querySelectorAll('.card').forEach((card, index) => {
+            card.style.setProperty('--card-index', index);
             
-            if (!content && !hasImages) {
-                showConfirmDialog('请至少输入文本或选择图片');
-                return;
-            }
-
-            // 情况1: 只有图片，且没有文本和OCR结果，直接生成
-            if (hasImages && !content && !hasOCRResults) {
-                await handleSubmit(true);
-                return;
-            }
-
-            // 情况2: 文本和图片都有，没有OCR结果，直接生成
-            if (content && hasImages && !hasOCRResults) {
-                await handleSubmit(true);
-                return;
-            }
-
-            // 情况3: 有文本、OCR结果和图片，且用户点击了"添加到文本"或"全部合并到文本"按钮，显示询问对话框
-            if (hasImages && content && hasOCRResults && ocrTextAdded) {
-                showConfirmDialog(
-                    '检测到将OCR结果放入文本区，是否将图片一起放入文档？\n\n选择"是"：将图片和文字一起生成文档\n选择"否"：仅使用文本生成文档',
-                    async () => await handleSubmit(true),  // 确认回调
-                    async () => await handleSubmit(false)  // 取消回调
-                );
-                return;
-            }
-
-            // 情况4: 有图片和OCR结果，但没有文本，显示询问对话框
-            if (hasImages && hasOCRResults && !content) {
-                showConfirmDialog(
-                    '检测到存在OCR结果，是否将OCR结果和图片一起生成文档？\n\n选择"是"：将OCR结果和图片一起生成文档\n选择"否"：直接将图片生成文档',
-                    async () => {
-                        // 将OCR结果添加到文本区
-                        const ocrItems = document.querySelectorAll('.ocr-item .ocr-text');
-                        const texts = Array.from(ocrItems).map(item => item.textContent);
-                        contentTextarea.value = texts.join('\n');
-                        
-                        // 直接调用情况3的处理逻辑
-                        await handleSubmit(true);
-                    },  // 确认回调
-                    async () => await handleSubmit(true)  // 取消回调
-                );
-                return;
-            }
-
-            // 情况5: 有图片、文本和OCR结果，显示询问对话框
-            if (hasImages && content && hasOCRResults) {
-                showConfirmDialog(
-                    '检测到已识别OCR结果，是否将图片一起放入文档？\n\n选择"是"：将图片和文字一起生成文档\n选择"否"：仅使用文本生成文档',
-                    async () => await handleSubmit(true),  // 确认回调
-                    async () => await handleSubmit(false)  // 取消回调
-                );
-                return;
-            }
-
-            // 情况6: 只有文本，直接生成不含图片的文档
-            await handleSubmit(false);
+            // 鼠标移动效果
+            card.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                this.style.setProperty('--x', x + 'px');
+                this.style.setProperty('--y', y + 'px');
+            });
+        });
+        
+        // 设置标签随机颜色
+        document.querySelectorAll('.tag').forEach(tag => {
+            // 生成随机颜色，但基于主色调变化
+            const hue = Math.floor(Math.random() * 60) + 160; // 160-220色相范围（绿色-青色）
+            const saturation = Math.floor(Math.random() * 30) + 70; // 70-100%饱和度
+            const lightness = Math.floor(Math.random() * 20) + 30; // 30-50%亮度
+            
+            tag.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
         });
     }
     
     /**
-     * 复制文本到剪贴板
-     * 临时创建一个文本区域元素来实现复制功能
-     * 
-     * @param {string} text - 要复制到剪贴板的文本
+     * 切换主题模式
      */
-    function copyToClipboard(text) {
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        textarea.style.position = 'fixed'; // 避免影响页面布局
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);  
+    function toggleTheme() {
+        const theme = localStorage.getItem('theme') || 'light';
+        
+        if (theme === 'light') {
+            localStorage.setItem('theme', 'dark');
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.getElementById('themeToggle').querySelector('.material-icons').textContent = 'light_mode';
+        } else {
+            localStorage.setItem('theme', 'light');
+            document.documentElement.removeAttribute('data-theme');
+            document.getElementById('themeToggle').querySelector('.material-icons').textContent = 'dark_mode';
+        }
     }
-
+    
     /**
-     * 加载历史记录
-     * 从服务器获取并显示用户的历史操作记录
-     * 
-     * @returns {Promise<void>}
+     * 显示登录模态框
      */
-    async function loadHistory() {
-        try {
-            console.log("正在获取历史记录...");
-            const response = await fetch('/history');
+    function showLoginModal() {
+        const modal = document.getElementById('authModal');
+        modal.classList.add('show');
+        // 确保模态框应用当前主题
+        const theme = localStorage.getItem('theme') || 'light';
+        if (theme === 'dark') {
+            modal.setAttribute('data-theme', 'dark');
+        } else {
+            modal.removeAttribute('data-theme');
+        }
+    }
+    
+    /**
+     * 关闭模态框
+     */
+    function closeModal() {
+        const modal = document.getElementById('authModal');
+        modal.classList.remove('show');
+        // 不移除data-theme属性，保持主题一致性
+    }
+    
+    /**
+     * 切换标签页
+     */
+    function switchTab(tabName) {
+        // 移除所有标签按钮的active类
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // 隐藏所有标签内容
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.style.display = 'none';
+        });
+        
+        // 添加active类到当前标签按钮
+        document.querySelector(`.tab-btn[data-tab="${tabName}"]`).classList.add('active');
+        
+        // 显示当前标签内容
+        document.getElementById(`${tabName}Tab`).style.display = 'block';
+    }
+    
+    /**
+     * 处理登录表单提交
+     */
+    function handleLogin(e) {
+        e.preventDefault();
+        
+        const username = document.getElementById('loginUsername').value;
+        const password = document.getElementById('loginPassword').value;
+        const remember = document.getElementById('rememberMe').checked;
+        
+        if (!username || !password) {
+            showToast('请输入用户名和密码', 'error');
+            return;
+        }
+        
+        showLoading('正在登录...');
+        
+        fetch('/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username,
+                password,
+                remember
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            hideLoading();
             
-            if (!response.ok) {
-                throw new Error('获取历史记录失败，状态码: ' + response.status);
-            }
-            
-            const data = await response.json();
-            console.log("历史记录数据:", data);
-            
-            if (historyCount) {
-                historyCount.textContent = `(共${data.count}/${data.max_count}条内容)`;
-            }
-            
-            if (data.status === 'success' && historyContainer) {
-                historyContainer.innerHTML = '';
+            if (data.success) {
+                state.authenticated = true;
+                state.username = data.user.username;
+                state.userId = data.user.id;
                 
-                if (data.history && data.history.length > 0) {
-                    console.log(`加载 ${data.history.length} 条历史记录`);
+                // 更新UI
+                document.getElementById('loginBtn').style.display = 'none';
+                document.getElementById('userInfo').style.display = 'flex';
+                document.getElementById('username').textContent = state.username;
+                
+                // 关闭模态框
+                closeModal();
+                
+                // 重新获取历史记录
+                fetchHistory();
+                
+                showToast('登录成功', 'success');
+            } else {
+                showToast(data.message || '登录失败', 'error');
+            }
+        })
+        .catch(error => {
+            hideLoading();
+            console.error('登录请求失败:', error);
+            showToast('登录请求失败', 'error');
+        });
+    }
+    
+    /**
+     * 处理注册表单提交
+     */
+    function handleRegister(e) {
+        e.preventDefault();
+        
+        const username = document.getElementById('registerUsername').value;
+        const email = document.getElementById('registerEmail').value;
+        const password = document.getElementById('registerPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        
+        // 表单验证
+        if (!username || !email || !password || !confirmPassword) {
+            showToast('请填写所有必填字段', 'error');
+            return;
+        }
+        
+        if (username.length < 4 || username.length > 20) {
+            showToast('用户名长度必须在4-20个字符之间', 'error');
+            return;
+        }
+        
+        if (password.length < 8) {
+            showToast('密码长度必须至少为8个字符', 'error');
+            return;
+        }
+        
+        if (password !== confirmPassword) {
+            showToast('两次输入的密码不一致', 'error');
+            return;
+        }
+        
+        // 邮箱格式验证
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            showToast('请输入有效的邮箱地址', 'error');
+            return;
+        }
+        
+        showLoading('正在注册...');
+        
+        fetch('/api/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username,
+                email,
+                password
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            hideLoading();
+            
+            if (data.success) {
+                showToast('注册成功，请登录', 'success');
+                
+                // 切换到登录标签
+                switchTab('login');
+                
+                // 清空注册表单
+                document.getElementById('registerForm').reset();
+            } else {
+                showToast(data.message || '注册失败', 'error');
+            }
+        })
+        .catch(error => {
+            hideLoading();
+            console.error('注册请求失败:', error);
+            showToast('注册请求失败', 'error');
+        });
+    }
+        
+    /**
+     * 处理退出登录
+     */
+    function logout() {
+        fetch('/api/logout', {
+            method: 'POST'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                state.authenticated = false;
+                state.username = '';
+                state.userId = null;
+                
+                // 更新UI
+                document.getElementById('loginBtn').style.display = 'block';
+                document.getElementById('userInfo').style.display = 'none';
+                
+                // 隐藏用户菜单
+                const userMenu = document.getElementById('userMenu');
+                if (userMenu) {
+                    userMenu.style.display = 'none';
+                }
+                
+                // 重新获取历史记录
+                fetchHistory();
+                
+                showToast('已成功登出', 'success');
+            } else {
+                showToast('登出失败', 'error');
+            }
+        })
+        .catch(error => {
+            console.error('登出请求失败:', error);
+            showToast('登出请求失败', 'error');
+        });
+    }
+    
+    /**
+     * 显示提示消息
+     */
+    function showToast(message, type = 'info') {
+        const container = document.getElementById('toastContainer');
+        const id = 'toast-' + Date.now();
+        
+        let icon = 'info';
+        if (type === 'success') icon = 'check_circle';
+        if (type === 'error') icon = 'error';
+        
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.id = id;
+        toast.innerHTML = `
+            <span class="material-icons">${icon}</span>
+            <span>${message}</span>
+        `;
+        
+        container.appendChild(toast);
+        
+        // 3秒后自动移除
+        setTimeout(() => {
+            const toastElement = document.getElementById(id);
+            if (toastElement) {
+                toastElement.remove();
+            }
+        }, 3000);
+    }
+    
+    /**
+     * 显示加载中遮罩
+     */
+    function showLoading(message = '处理中，请稍候...') {
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        document.getElementById('loadingMessage').textContent = message;
+        loadingOverlay.classList.add('show');
+    }
+    
+    /**
+     * 隐藏加载中遮罩
+     */
+    function hideLoading() {
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        loadingOverlay.classList.remove('show');
+    }
+    
+    /**
+     * 打开功能界面
+     */
+    function openFeature(feature) {
+        state.activeFeature = feature;
+        
+        // 显示功能容器
+        const featureContainer = document.getElementById('featureContainer');
+        featureContainer.style.display = 'block';
+        
+        // 隐藏所有功能内容
+        document.querySelectorAll('.feature-content').forEach(content => {
+            content.classList.remove('active');
+        });
+        
+        // 显示对应功能内容
+        let featureId;
+        switch (feature) {
+            case 'ocr-pdf':
+                featureId = 'ocrPdfFeature';
+                break;
+            case 'pdf-extract':
+                featureId = 'pdfExtractFeature';
+                break;
+            case 'ai-chat':
+                featureId = 'aiChatFeature';
+                break;
+        }
+        
+        if (featureId) {
+            document.getElementById(featureId).classList.add('active');
+        }
+    }
+    
+    /**
+     * 关闭功能界面
+     */
+    function closeFeature() {
+        state.activeFeature = null;
+        
+        // 隐藏功能容器
+        const featureContainer = document.getElementById('featureContainer');
+        featureContainer.style.display = 'none';
+        
+        // 隐藏所有功能内容
+        document.querySelectorAll('.feature-content').forEach(content => {
+            content.classList.remove('active');
+        });
+    }
+    
+    /**
+     * 用户菜单功能
+     * 初始化用户头像点击事件及菜单显示
+     */
+    function initUserMenu() {
+        // 确保已添加用户头像和用户菜单元素
+        const userInfo = document.getElementById('userInfo');
+        let userAvatar = document.getElementById('userAvatar');
+        let userMenu = document.getElementById('userMenu');
+        
+        // 如果用户菜单不存在，动态创建
+        if (!userMenu) {
+            userMenu = document.createElement('div');
+            userMenu.id = 'userMenu';
+            userMenu.className = 'user-menu';
+            userMenu.style.display = 'none';
+            userMenu.innerHTML = `
+                <div class="user-menu-header">
+                    <span class="material-icons">account_circle</span>
+                    <span id="menuUsername">${state.username}</span>
+                </div>
+                <div class="user-menu-items">
+                    <div class="menu-item" id="viewProfileBtn">
+                        <span class="material-icons">person</span>
+                        <span>用户信息</span>
+                    </div>
+                    <div class="menu-item" id="logoutMenuBtn">
+                        <span class="material-icons">logout</span>
+                        <span>退出登录</span>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(userMenu);
+        }
+        
+        // 添加用户头像点击事件
+        userAvatar.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            // 获取头像位置，将菜单定位在头像下方
+            const rect = userAvatar.getBoundingClientRect();
+            userMenu.style.top = (rect.bottom + 5) + 'px';
+            // 调整菜单右侧对齐位置为头像右侧
+            userMenu.style.right = (window.innerWidth - rect.right) + 'px';
+            
+            // 切换菜单显示状态
+            userMenu.style.display = userMenu.style.display === 'none' ? 'block' : 'none';
+            
+            // 更新菜单中的用户名
+            document.getElementById('menuUsername').textContent = state.username;
+        });
+        
+        // 点击页面其他区域关闭菜单
+        document.addEventListener('click', function() {
+            if (userMenu) {
+                userMenu.style.display = 'none';
+            }
+        });
+        
+        // 防止菜单点击事件冒泡
+        userMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+        
+        // 绑定用户信息按钮点击事件
+        document.getElementById('viewProfileBtn').addEventListener('click', function() {
+            showUserProfile();
+        });
+        
+        // 绑定退出登录按钮点击事件
+        document.getElementById('logoutMenuBtn').addEventListener('click', function() {
+            logout();
+        });
+    }
+    
+    /**
+     * 显示用户资料信息
+     */
+    function showUserProfile() {
+        // 显示加载状态
+        showLoading('加载用户信息...');
+        
+        // 获取用户资料
+        fetch('/api/user-profile')
+            .then(response => response.json())
+            .then(data => {
+                hideLoading();
+                
+                if (data.success) {
+                    // 创建用户资料弹窗
+                    const profileModal = document.createElement('div');
+                    profileModal.className = 'modal';
+                    profileModal.id = 'profileModal';
                     
-                    data.history.forEach(item => {
-                        const historyItem = document.createElement('div');
-                        historyItem.className = 'history-item';
-                        historyItem.dataset.id = item.id;
-                        
-                        let typeName = '';
-                        
-                        switch(item.type) {
-                            case 'OCR':
-                                typeName = '图片OCR识别';
-                                break;
-                            case 'PDF':
-                                typeName = 'PDF文本提取';
-                                break;
-                            case 'TEXT':
-                                typeName = '用户输入文本';
-                                break;
-                            default:
-                                typeName = '未知类型';
-                        }
-                        
-                        historyItem.innerHTML = `
-                            <button class="delete-history-btn" title="删除此记录">
-                                <span class="material-icons">删除</span>
-                            </button>
-                            <div class="history-item-header">
-                                <div class="history-type">
-                                    <span class="material-icons">${typeName}</span>
+                    // 格式化时间
+                    const registerTime = data.user.register_time || '未知';
+
+                    
+                    // 用户资料弹窗内容
+                    profileModal.innerHTML = `
+                        <div class="modal-content profile-modal">
+                            <button class="close-modal-top"><span class="material-icons">close</span></button>
+                            <div class="modal-header">
+                                <h2>用户信息</h2>
+                            </div>
+                            <div class="modal-body">
+                                <div class="profile-avatar">
+                                    <span class="material-icons">account_circle</span>
                                 </div>
-                                <div class="history-timestamp">${item.timestamp}</div>
+                                <div class="profile-info">
+                                    <div class="info-item">
+                                        <span class="info-label">用户名：</span>
+                                        <span class="info-value">${data.user.username}</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">邮箱：</span>
+                                        <span class="info-value">${data.user.email}</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">注册时间：</span>
+                                        <span class="info-value">${registerTime}</span>
+                                    </div>
+
+                                </div>
                             </div>
-                            <div class="history-source">${item.source || typeName}</div>
-                            <div class="history-content">${item.content || '(无内容)'}</div>
-                            <div class="history-actions">
-                                <button class="copy-history-btn">
-                                    <span class="material-icons">复制</span> 
-                                </button>
-                                <button class="insert-history-btn">
-                                    <span class="material-icons">插入</span> 
-                                </button>
-                            </div>
-                        `;
-                        
-                        const deleteBtn = historyItem.querySelector('.delete-history-btn');
-                        deleteBtn.addEventListener('click', () => {
-                            deleteHistoryRecord(item.id);
-                        });
-                        
-                        const copyBtn = historyItem.querySelector('.copy-history-btn');
-                        copyBtn.addEventListener('click', () => {
-                            copyToClipboard(item.content || '(无内容)');
-                            showToast('已复制到剪贴板');
-                        });
-                        
-                        const insertBtn = historyItem.querySelector('.insert-history-btn');
-                        insertBtn.addEventListener('click', () => {
-                            if (contentTextarea) {
-                                const currentText = contentTextarea.value;
-                                if (currentText) {
-                                    contentTextarea.value = currentText + '\n\n' + (item.content || '(无内容)');
-                                } else {
-                                    contentTextarea.value = item.content || '(无内容)';
-                                }
-                                showToast('文本已插入到编辑器');
-                                
-                                const firstTabBtn = document.querySelector('.tab-button[data-tab="tab1"]');
-                                if (firstTabBtn) {
-                                    firstTabBtn.click();
-                                    contentTextarea.scrollIntoView({ behavior: 'smooth' });
-                                    setTimeout(() => {
-                                        contentTextarea.focus();
-                                    }, 300);
-                                }
-                            }
-                        });
-                        
-                        historyContainer.appendChild(historyItem);
+                        </div>
+                    `;
+                    
+                    document.body.appendChild(profileModal);
+                    
+                    // 显示模态框
+                    setTimeout(() => {
+                        profileModal.classList.add('show');
+                    }, 10);
+                    
+                    // 添加关闭按钮事件
+                    profileModal.querySelector('.close-modal-top').addEventListener('click', function() {
+                        profileModal.classList.remove('show');
+                        setTimeout(() => {
+                            document.body.removeChild(profileModal);
+                        }, 300);
+                    });
+                    
+                    // 点击弹窗外部区域关闭
+                    profileModal.addEventListener('click', function(e) {
+                        if (e.target === profileModal) {
+                            profileModal.classList.remove('show');
+                            setTimeout(() => {
+                                document.body.removeChild(profileModal);
+                            }, 300);
+                        }
                     });
                 } else {
-                    console.log("没有历史记录");
-                    historyContainer.innerHTML = '<div class="empty-history">暂无历史记录</div>';
+                    showToast(data.message || '获取用户信息失败', 'error');
                 }
-                
-                document.dispatchEvent(new Event('historyLoaded'));
-            }
-        } catch (error) {
-            console.error('获取历史记录出错:', error);
-            if (historyContainer) {
-                historyContainer.innerHTML = `<div class="empty-history error">获取历史记录失败: ${error.message}</div>`;
-            }
-            showToast('获取历史记录失败: ' + error.message);
-        }
-    }
-    
-    /**
-     * 删除单条历史记录
-     * 向服务器发送删除请求并刷新历史记录显示
-     * 
-     * @param {string} recordId - 要删除的历史记录ID
-     * @returns {Promise<void>}   
-     */
-    async function deleteHistoryRecord(recordId) {
-        try {
-            showLoading('删除中...');
-            const response = await fetch(`/history/${recordId}`, {
-                method: 'DELETE'
+            })
+            .catch(error => {
+                hideLoading();
+                console.error('获取用户资料失败:', error);
+                showToast('获取用户资料失败，请稍后再试', 'error');
             });
-            
-            const data = await response.json();
-            
-            if (response.ok) {
-                await loadHistory();
-                showToast('历史记录已删除');
-            } else {
-                throw new Error(data.error || '删除失败');
-            }
-            
-            hideLoading();
-        } catch (error) {
-            console.error('删除历史记录失败:', error);
-            hideLoading();
-            showToast('删除历史记录失败: ' + error.message);
-        }
     }
-    
-    /**
-     * 清空所有历史记录
-     * 显示确认对话框并在用户确认后发送清空请求
-     * 
-     * @returns {Promise<void>}
-     */
-    async function clearHistory() {
-        try {
-            showConfirmDialog('确定要清空所有历史记录吗？此操作不可撤销。', async () => {
-                try {
-                    showLoading('清空中...');
-                    const response = await fetch('/history', {
-                        method: 'DELETE'
-                    });
-                    
-                    const data = await response.json();
-                    
-                    if (response.ok) {
-                        await loadHistory();
-                        showToast('所有历史记录已清空');  
-                    } else {
-                        throw new Error(data.error || '清空失败');
-                    }
-                    
-                    hideLoading();
-                } catch (error) {
-                    console.error('清空历史记录失败:', error);
-                    hideLoading();
-                    showToast('清空历史记录失败: ' + error.message);
-                }
-            });
-        } catch (error) {
-            console.error('清空历史记录错误:', error);
-            showToast('操作失败: ' + error.message);
-        }
-    }
-    
-    // 导出全局函数以供其他模块使用
-    window.showToast = showToast;
-    window.showLoading = showLoading;
-    window.hideLoading = hideLoading;
-    window.setStatusMessage = setStatusMessage;
-    window.clearStatusMessage = clearStatusMessage;
-    window.showConfirmDialog = showConfirmDialog;
-    window.copyToClipboard = copyToClipboard;
-    window.loadHistory = loadHistory;
-    window.pollTaskStatus = pollTaskStatus;
-});
+}); 

@@ -1,496 +1,249 @@
-// 全局变量声明
-let loginBtn;
-let userMenu;
-let isUserLoggedIn = false;
-let currentUser = null;
+/**
+ * 登录与注册页面脚本
+ * 版本: 1.0
+ * 描述: 处理用户登录和注册功能
+ */
 
+// DOM 加载完成后执行
 document.addEventListener('DOMContentLoaded', function() {
-    // 获取DOM元素
-    loginBtn = document.getElementById('loginBtn');
-    const loginModalOverlay = document.getElementById('loginModalOverlay');
-    const loginModalClose = document.getElementById('loginModalClose');
-    const loginCancel = document.getElementById('loginCancel');
-    const loginForm = document.getElementById('loginForm');
-    const registerLink = document.getElementById('registerLink');
-    const forgotPasswordLink = document.getElementById('forgotPasswordLink');
-      // 注册相关元素
-    const registerModalOverlay = document.getElementById('registerModalOverlay');
-    const registerModalClose = document.getElementById('registerModalClose');
-    const registerCancel = document.getElementById('registerCancel');
-    const registerForm = document.getElementById('registerForm');
-    const backToLoginLink = document.getElementById('backToLoginLink');
-
-    // 创建用户菜单元素
-    userMenu = document.createElement('div');
-    userMenu.className = 'user-menu';
-    userMenu.style.display = 'none';
-    userMenu.innerHTML = `
-        <div class="user-menu-header">
-            <span class="material-icons">account_circle</span>
-            <span class="user-name">用户名</span>
-        </div>
-        <div class="user-menu-item" id="viewProfileBtn">
-            <span class="material-icons">person</span>
-            <span>个人信息</span>
-        </div>
-        <div class="user-menu-item" id="logoutBtn">
-            <span class="material-icons">logout</span>
-            <span>退出登录</span>
-        </div>
-    `;
-    document.body.appendChild(userMenu);
-
-    // 打开登录模态框或用户菜单
-    loginBtn.addEventListener('click', function(e) {
-        e.stopPropagation(); // 阻止事件冒泡
-        
-        // 先检查服务器端登录状态，再决定显示登录窗口还是用户菜单
-        fetch('/api/check-auth', {
-            method: 'GET',
-            credentials: 'include'
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.authenticated) {
-                // 服务器确认用户已登录，显示用户菜单
-                if (!isUserLoggedIn) {
-                    // 更新本地状态
-                    isUserLoggedIn = true;
-                    currentUser = data.user;
-                    loginBtn.innerHTML = `<span class="material-icons">person</span><span>${data.user.username}</span>`;
-                    userMenu.querySelector('.user-name').textContent = data.user.username;
-                    localStorage.setItem('user', JSON.stringify(data.user));
-                }
-                
-                // 显示用户菜单
-                const btnRect = loginBtn.getBoundingClientRect();
-                userMenu.style.position = 'absolute';
-                userMenu.style.top = (btnRect.bottom + window.scrollY) + 'px';
-                userMenu.style.right = (window.innerWidth - btnRect.right) + 'px';
-                userMenu.style.display = 'block';
-            } else {
-                // 服务器认为用户未登录，显示登录对话框
-                if (isUserLoggedIn) {
-                    // 清除本地状态
-                    isUserLoggedIn = false;
-                    currentUser = null;
-                    localStorage.removeItem('user');
-                    loginBtn.innerHTML = `<span class="material-icons">person</span><span>登录</span>`;
-                }
-                
-                // 显示登录对话框
-                loginModalOverlay.style.display = 'flex';
-            }
-        })
-        .catch(error => {
-            console.error('验证登录状态失败:', error);
-            // 出错时，假设未登录
-            loginModalOverlay.style.display = 'flex';
-        });
-    });
-
-    // 点击页面其他区域关闭用户菜单
-    document.addEventListener('click', function(e) {
-        if (userMenu.style.display === 'block' && !userMenu.contains(e.target) && e.target !== loginBtn) {
-            userMenu.style.display = 'none';
-        }
-    });
-
-    // 用户菜单项点击事件
-    document.getElementById('viewProfileBtn').addEventListener('click', function() {
-        userMenu.style.display = 'none';
-        // 获取并显示用户资料
-        fetchUserProfile();
-    });
-
-    document.getElementById('logoutBtn').addEventListener('click', function() {
-        userMenu.style.display = 'none';
-        // 登出操作
-        logout();
-    });
-
-    // 登出函数
-    function logout() {
-        // 显示加载状态
-        document.getElementById('loadingOverlay').classList.remove('hidden');
-        document.getElementById('loadingText').textContent = '退出登录中...';
-        
-        fetch('/api/logout', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            // 隐藏加载状态
-            document.getElementById('loadingOverlay').classList.add('hidden');
-            if (data.success) {
-                isUserLoggedIn = false;
-                currentUser = null;
-                localStorage.removeItem('user');
-                // 恢复登录按钮状态
-                loginBtn.innerHTML = `<span class="material-icons">person</span><span>登录</span>`;
-                showToast('已成功退出登录');
-            } else {
-                showToast('退出登录失败: ' + data.message);
-            }
-        })
-        .catch(error => {
-            // 隐藏加载状态
-            document.getElementById('loadingOverlay').classList.add('hidden');
-            showToast('退出登录请求错误');
-            console.error('退出登录错误:', error);
-        });
-    }
-
-    // 关闭登录模态框
-    function closeLoginModal() {
-        loginModalOverlay.style.display = 'none';
-        loginForm.reset(); // 重置表单
-    }
-
-    loginModalClose.addEventListener('click', closeLoginModal);
-    loginCancel.addEventListener('click', closeLoginModal);
-
-    // 点击模态框外部关闭
-    loginModalOverlay.addEventListener('click', function(e) {
-        if (e.target === loginModalOverlay) {
-            closeLoginModal();
-        }
-    });
-
-    // 表单提交
-    loginForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-
-        // 显示加载状态
-        document.getElementById('loadingOverlay').classList.remove('hidden');
-        document.getElementById('loadingText').textContent = '登录中...';
-        // 模拟登录请求
-        fetch('/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            // 隐藏加载状态
-            document.getElementById('loadingOverlay').classList.add('hidden');
-            if (data.success) {
-                // 登录成功
-                showToast('登录成功');
-                closeLoginModal();
-                // 更新登录状态
-                isUserLoggedIn = true;
-                currentUser = data.user;
-                // 将用户信息存储到localStorage
-                localStorage.setItem('user', JSON.stringify(data.user || {username: username}));
-                // 更新UI显示已登录状态
-                loginBtn.innerHTML = `<span class="material-icons">person</span><span>${username}</span>`;
-                // 更新用户菜单中的用户名
-                userMenu.querySelector('.user-name').textContent = username;
-            } else {
-                // 登录失败
-                showToast('登录失败：' + data.message);
-            }
-        })
-        .catch(error => {
-             // 隐藏加载状态
-            document.getElementById('loadingOverlay').classList.add('hidden');
-            showToast('登录请求出错');
-            console.error('登录错误:', error);
-        });
-    });
-
-    // 显示提示消息
-    function showToast(message) {
-        const toast = document.getElementById('toast');
-        toast.textContent = message;
-        toast.classList.remove('hidden');
-        
-        setTimeout(() => {
-            toast.classList.add('hidden');
-        }, 3000);
-    }
-
-    // 注册链接和忘记密码链接的点击事件
-
-    forgotPasswordLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        // the login page
-        alert('忘记密码功能开发中...');
-    });
-
-    // 打开注册模态框
-    registerLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        loginModalOverlay.style.display = 'none';
-        registerModalOverlay.style.display = 'flex';
-    });
-
-    // 关闭注册模态框
-    function closeRegisterModal() {
-        registerModalOverlay.style.display = 'none';
-        registerForm.reset();
-    }
-
-    registerModalClose.addEventListener('click', closeRegisterModal);
-    registerCancel.addEventListener('click', closeRegisterModal);
-
-    // 返回登录界面
-    backToLoginLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        registerModalOverlay.style.display = 'none';
-        loginModalOverlay.style.display = 'flex';
-    });
-
-    // 点击模态框外部关闭
-    registerModalOverlay.addEventListener('click', function(e) {
-        if (e.target === registerModalOverlay) {
-            closeRegisterModal();
-        }
-    });
-
-    // 表单验证
-    const registerUsername = document.getElementById('registerUsername');
-    const registerEmail = document.getElementById('registerEmail');
-    const registerPassword = document.getElementById('registerPassword');
-    const confirmPassword = document.getElementById('confirmPassword');
-
-    function validatePassword() {
-        const password = registerPassword.value;
-        const confirm = confirmPassword.value;
-        
-        if (password !== confirm) {
-            confirmPassword.setCustomValidity('密码不匹配');
-        } else {
-            confirmPassword.setCustomValidity('');
-        }
-    }
-
-    registerPassword.addEventListener('change', validatePassword);
-    confirmPassword.addEventListener('keyup', validatePassword);
-
-    // 注册表单提交
-    registerForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // 表单验证
-        if (!registerForm.checkValidity()) {
-            // 显示验证信息
-            Array.from(registerForm.elements).forEach(input => {
-                if (input.nodeName === 'INPUT' && !input.validity.valid) {
-                    input.classList.add('invalid');
-                }
-            });
-            return;
-        }
-
-        const formData = {
-            username: registerUsername.value,
-            email: registerEmail.value,
-            password: registerPassword.value
-        };
-
-        // 显示加载状态
-    document.getElementById('loadingOverlay').classList.remove('hidden');
-    document.getElementById('loadingText').textContent = '注册中...';
-
-
-        // 发送注册请求
-        fetch('/api/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        })
-        .then(response => response.json())
-        .then(data => {
-            // 隐藏加载状态
-            document.getElementById('loadingOverlay').classList.add('hidden');
-            if (data.success) {
-                showToast('注册成功！请登录');
-                closeRegisterModal();
-                loginModalOverlay.style.display = 'flex';
-            } else {
-                showToast('注册失败：' + data.message);
-            }
-        })
-        .catch(error => {
-            // 隐藏加载状态
-            document.getElementById('loadingOverlay').classList.add('hidden');
-            showToast('注册请求出错');
-            console.error('注册错误:', error);
-        });
-    });
-
-    // 实时用户名验证
-    registerUsername.addEventListener('input', function() {
-        if (this.value.length < 4 || this.value.length > 20) {
-            this.setCustomValidity('用户名长度必须在4-20个字符之间');
-        } else {
-            this.setCustomValidity('');
-        }
-    });
-
-    // 实时密码验证
-    registerPassword.addEventListener('input', function() {
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-        if (!passwordRegex.test(this.value)) {
-            this.setCustomValidity('密码必须至少8位，包含字母和数字');
-        } else {
-            this.setCustomValidity('');
-        }
-    });
-    // 检查登录状态
-    checkLoginStatus();
+    // 初始化主题
+    initTheme();
+    
+    // 初始化标签切换
+    initTabs();
+    
+    // 添加表单提交事件
+    document.getElementById('loginForm').addEventListener('submit', handleLogin);
+    document.getElementById('registerForm').addEventListener('submit', handleRegister);
 });
 
-// 获取用户资料
-function fetchUserProfile() {
-    // 显示加载状态
-    document.getElementById('loadingOverlay').classList.remove('hidden');
-    document.getElementById('loadingText').textContent = '获取用户资料中...';
+/**
+ * 初始化主题设置
+ */
+function initTheme() {
+    // 先尝试从URL参数中获取主题设置
+    const urlParams = new URLSearchParams(window.location.search);
+    const themeParam = urlParams.get('theme');
     
-    fetch('/api/user-profile', {
-        method: 'GET',
-        credentials: 'include',
+    // 如果URL参数中有主题设置，则使用它并保存到localStorage
+    if (themeParam) {
+        localStorage.setItem('theme', themeParam);
+    }
+    
+    // 从localStorage中获取主题设置
+    const theme = localStorage.getItem('theme') || 'light';
+    if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+        document.documentElement.removeAttribute('data-theme');
+    }
+}
+
+/**
+ * 初始化标签切换功能
+ */
+function initTabs() {
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // 移除所有标签按钮的活动状态
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // 添加当前按钮的活动状态
+            this.classList.add('active');
+            
+            // 获取目标标签
+            const targetTab = this.getAttribute('data-tab');
+            
+            // 隐藏所有标签内容
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            
+            // 显示目标标签内容
+            if (targetTab === 'login') {
+                document.getElementById('loginTab').style.display = 'block';
+            } else {
+                document.getElementById('registerTab').style.display = 'block';
+            }
+        });
+    });
+}
+
+/**
+ * 处理登录表单提交
+ * @param {Event} e - 表单提交事件
+ */
+function handleLogin(e) {
+    e.preventDefault();
+    
+    // 获取表单数据
+    const username = document.getElementById('loginUsername').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
+    const rememberMe = document.getElementById('rememberMe').checked;
+    
+    // 验证表单数据
+    if (!username || !password) {
+        showToast('用户名和密码不能为空', 'error');
+        return;
+    }
+    
+    // 显示加载状态
+    showLoading('登录中，请稍候...');
+    
+    // 发送登录请求
+    fetch('/api/login', {
+        method: 'POST',
         headers: {
-            'Cache-Control': 'no-cache, no-store, must-revalidate',
-            'Pragma': 'no-cache',
-            'Expires': '0'
-        }
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username,
+            password,
+            remember: rememberMe
+        })
     })
     .then(response => response.json())
     .then(data => {
-        // 隐藏加载状态
-        document.getElementById('loadingOverlay').classList.add('hidden');
+        hideLoading();
         
         if (data.success) {
-            // 显示用户资料
-            showUserProfile(data.user);
+            showToast('登录成功，正在跳转...', 'success');
+            
+            // 延迟跳转到主页
+            setTimeout(() => {
+                window.location.href = '/?login_success=true';
+            }, 1000);
         } else {
-            showToast('获取用户资料失败: ' + data.message);
+            showToast(data.message || '登录失败，请检查用户名和密码', 'error');
         }
     })
     .catch(error => {
-        // 隐藏加载状态
-        document.getElementById('loadingOverlay').classList.add('hidden');
-        showToast('获取用户资料请求错误');
-        console.error('获取用户资料错误:', error);
+        hideLoading();
+        console.error('登录请求失败:', error);
+        showToast('登录请求失败，请稍后再试', 'error');
     });
 }
 
-// 显示用户资料模态框
-function showUserProfile(user) {
-    // 更新用户资料信息
-    document.getElementById('profileUsername').textContent = user.username || '未设置';
-    document.getElementById('profileEmail').textContent = user.email || '未设置';
+/**
+ * 处理注册表单提交
+ * @param {Event} e - 表单提交事件
+ */
+function handleRegister(e) {
+    e.preventDefault();
     
-    // 格式化注册时间
-    let registerTime = '未知';
-    if (user.register_time) {
-        const date = new Date(user.register_time);
-        registerTime = date.toLocaleString('zh-CN', { 
-            year: 'numeric', 
-            month: '2-digit', 
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        });
+    // 获取表单数据
+    const username = document.getElementById('registerUsername').value.trim();
+    const email = document.getElementById('registerEmail').value.trim();
+    const password = document.getElementById('registerPassword').value.trim();
+    const confirmPassword = document.getElementById('confirmPassword').value.trim();
+    
+    // 验证表单数据
+    if (!username || !email || !password || !confirmPassword) {
+        showToast('所有字段都必须填写', 'error');
+        return;
     }
-    document.getElementById('profileRegisterTime').textContent = registerTime;
     
-    // 显示模态框
-    const profileModalOverlay = document.getElementById('profileModalOverlay');
-    profileModalOverlay.style.display = 'flex';
+    // 验证邮箱格式
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        showToast('请输入有效的电子邮箱地址', 'error');
+        return;
+    }
     
-    // 绑定关闭事件
-    const profileModalClose = document.getElementById('profileModalClose');
-    const profileClose = document.getElementById('profileClose');
+    // 验证密码一致性
+    if (password !== confirmPassword) {
+        showToast('两次输入的密码不一致', 'error');
+        return;
+    }
     
-    profileModalClose.onclick = closeUserProfile;
-    profileClose.onclick = closeUserProfile;
+    // 验证密码强度
+    if (password.length < 6) {
+        showToast('密码长度至少为6个字符', 'error');
+        return;
+    }
     
-    // 点击模态框外部关闭
-    profileModalOverlay.onclick = function(e) {
-        if (e.target === profileModalOverlay) {
-            closeUserProfile();
-        }
-    };
-}
-
-// 关闭用户资料模态框
-function closeUserProfile() {
-    const profileModalOverlay = document.getElementById('profileModalOverlay');
-    profileModalOverlay.style.display = 'none';
-}
-
-// 检查登录状态
-function checkLoginStatus() {
-    // 显示微小的加载状态
-    loginBtn.innerHTML = `<span class="material-icons">hourglass_empty</span><span>加载中</span>`;
+    // 显示加载状态
+    showLoading('注册中，请稍候...');
     
-    // 总是先从服务器端验证登录状态
-    fetch('/api/check-auth', {
-        method: 'GET',
-        credentials: 'include',
-        // 避免缓存影响
+    // 发送注册请求
+    fetch('/api/register', {
+        method: 'POST',
         headers: {
-            'Cache-Control': 'no-cache, no-store, must-revalidate',
-            'Pragma': 'no-cache',
-            'Expires': '0'
-        }
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username,
+            email,
+            password
+        })
     })
     .then(response => response.json())
     .then(data => {
-        if (data.authenticated) {
-            // 服务器确认用户已登录
-            isUserLoggedIn = true;
-            currentUser = data.user;
-            // 更新UI
-            loginBtn.innerHTML = `<span class="material-icons">person</span><span>${data.user.username}</span>`;
-            userMenu.querySelector('.user-name').textContent = data.user.username;
-            // 更新本地存储
-            localStorage.setItem('user', JSON.stringify(data.user));
-            console.log('用户已登录:', data.user.username);
+        hideLoading();
+        
+        if (data.success) {
+            showToast('注册成功，请登录', 'success');
+            
+            // 切换到登录标签
+            document.querySelector('.tab-btn[data-tab="login"]').click();
+            
+            // 自动填充用户名
+            document.getElementById('loginUsername').value = username;
         } else {
-            // 服务器认为用户未登录
-            isUserLoggedIn = false;
-            currentUser = null;
-            localStorage.removeItem('user');
-            loginBtn.innerHTML = `<span class="material-icons">person</span><span>登录</span>`;
-            console.log('用户未登录');
+            showToast(data.message || '注册失败，请稍后再试', 'error');
         }
     })
     .catch(error => {
-        console.error('验证登录状态失败:', error);
-        // 出错时，检查本地存储
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            try {
-                const user = JSON.parse(storedUser);
-                // 暂时以本地存储为准，但在下次点击时会再次检查
-                isUserLoggedIn = true;
-                currentUser = user;
-                loginBtn.innerHTML = `<span class="material-icons">person</span><span>${user.username}</span>`;
-            } catch (e) {
-                console.error('解析用户数据失败:', e);
-                localStorage.removeItem('user');
-                loginBtn.innerHTML = `<span class="material-icons">person</span><span>登录</span>`;
-            }
-        } else {
-            loginBtn.innerHTML = `<span class="material-icons">person</span><span>登录</span>`;
-        }
+        hideLoading();
+        console.error('注册请求失败:', error);
+        showToast('注册请求失败，请稍后再试', 'error');
     });
 }
+
+/**
+ * 显示提示消息
+ * @param {string} message - 消息内容
+ * @param {string} type - 消息类型 (success, error, info)
+ */
+function showToast(message, type = 'info') {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+    
+    container.appendChild(toast);
+    
+    // 显示提示
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 10);
+    
+    // 3秒后隐藏
+    setTimeout(() => {
+        toast.classList.remove('show');
+        
+        // 动画结束后移除元素
+        setTimeout(() => {
+            container.removeChild(toast);
+        }, 300);
+    }, 3000);
+}
+
+/**
+ * 显示加载遮罩
+ * @param {string} message - 加载提示消息
+ */
+function showLoading(message = '处理中，请稍候...') {
+    document.getElementById('loadingMessage').textContent = message;
+    document.getElementById('loadingOverlay').classList.add('active');
+}
+
+/**
+ * 隐藏加载遮罩
+ */
+function hideLoading() {
+    document.getElementById('loadingOverlay').classList.remove('active');
+} 

@@ -6,16 +6,16 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-    const chatInput = document.getElementById('chatInput');
+    const chatInput = document.getElementById('userMessage');
     const sendMessageBtn = document.getElementById('sendMessageBtn');
     const chatMessages = document.getElementById('chatMessages');
-    const modelSelect = document.getElementById('model-select');
-    const resetChatBtn = document.getElementById('resetChatBtn');
+    const modelSelect = document.getElementById('modelSelect');
+    const resetChatBtn = document.getElementById('clearChatBtn');
     // 新增文件上传相关元素
-    const chatFileInput = document.getElementById('chat-file');
+    const chatFileInput = document.getElementById('docUpload');
     const fileInfoElement = document.getElementById('fileInfo');
     const uploadStatusElement = document.getElementById('uploadStatus');
-    const triggerUploadBtn = document.getElementById('triggerUpload');
+    const triggerUploadBtn = document.getElementById('docUploadArea');
     
     let controller = null;
     let currentModel = 'deepseek';  // 默认模型，将在初始化时更新
@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 如果是401未授权，说明用户未登录，显示欢迎消息即可
             if (response.status === 401) {
                 appendMessage('您好，我是AI助手，有什么可以帮助您的吗？', false, true);
+                // 不需要将401视为错误，是预期行为
                 return;
             }
             
@@ -484,7 +485,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // 显示加载状态
             document.getElementById('loadingOverlay').classList.remove('hidden');
-            document.getElementById('loadingText').textContent = '文件处理中...';
+            document.getElementById('loadingMessage').textContent = '文件处理中...';
             
             // 处理不同类型的文件
             if (file.name.toLowerCase().endsWith('.pdf')) {
@@ -617,6 +618,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 绑定重置按钮事件
     resetChatBtn.addEventListener('click', handleResetChat);
+    
+    // 绑定新对话按钮事件
+    const newChatBtn = document.getElementById('newChatBtn');
+    if (newChatBtn) {
+        newChatBtn.addEventListener('click', handleResetChat);
+    }
     
     //文件上传事件
     if (chatFileInput) {

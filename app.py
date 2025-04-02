@@ -102,6 +102,28 @@ def load_user(user_id):
     """加载用户，供Flask-Login使用"""
     return User.query.get(int(user_id))
 
+@app.route('/')
+def index():
+    """
+    主页路由
+    功能：根据用户访问情况决定是否显示欢迎页
+    返回：index.html或welcome.html模板渲染结果
+    """
+    # 检查是否是首次访问
+    if not session.get('has_visited') and not request.args.get('skip_welcome'):
+        session['has_visited'] = True
+        return render_template('welcome.html')
+    return render_template('index.html')
+
+@app.route('/welcome')
+def welcome():
+    """
+    欢迎页面路由
+    功能：显示系统欢迎页面
+    返回：welcome.html模板渲染结果
+    """
+    return render_template('welcome.html')
+
 @app.before_request
 def security_check():
     """
@@ -135,15 +157,6 @@ def security_check():
     # 显式类型检查，避免NoneType错误
     if request.content_length is not None and request.content_length > max_limit: # 检查请求大小是否超过限制  
         abort(413, f"请求过大（最大允许 {max_limit//1024//1024}MB）") # 抛出413错误     
-
-@app.route('/')
-def index():
-    """
-    主页路由
-    功能：渲染应用程序主页面
-    返回：index.html模板渲染结果
-    """
-    return render_template('index.html')
 
 @app.route('/login')
 def login_page():

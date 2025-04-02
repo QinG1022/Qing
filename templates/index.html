@@ -2,435 +2,284 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--设置视口宽度为设备宽度，初始缩放比例为1.0-->
-    <title>文档生成工具</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap"><!--引入Noto Sans SC字体-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><!--引入Material Icons字体-->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/ai_chat.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/image_processor.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/pdf_generator.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能文档处理系统</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- 引入Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <header class="app-header">
-            <div class="logo-title">
-                <h1><span class="material-icons">智能文档处理与AI交互系统</span></h1>
-                <div class="header-subtitle">高效处理文档，提取信息，生成报告，ai畅聊</div>
+    <div class="app-container">
+        <!-- 顶部导航栏 -->
+        <header class="navbar">
+            <div class="nav-logo">
+                <span class="material-icons">description</span>
+                <h1>智能文档系统</h1>
             </div>
-            <!-- 登录按钮 -->
-            <button id="loginBtn" class="login-btn">
-                <span class="material-icons">person</span>
-                <span>登录</span>
-            </button>
+            <div class="nav-links">
+                <button id="themeToggle" class="theme-toggle">
+                    <span class="material-icons">dark_mode</span>
+                </button>
+                <div class="user-section">
+                    <button id="loginBtn" class="btn">登录</button>
+                    <div id="userInfo" class="user-info" style="display: none;">
+                        <span id="username">用户名</span>
+                    </div>
+                </div>
+            </div>
         </header>
-
-        <div class="main-content"><!--主内容区域-->
-            <div class="tab-container" id="tabContainer" style="display: none;"><!--标签容器，默认隐藏-->
-                <button class="tab-button" data-tab="tab1">
-                    <span class="material-icons">description</span>
-                    <span>文档生成与图片处理</span>
-                </button>
-                <button class="tab-button" data-tab="tab2">
-                    <span class="material-icons">picture_as_pdf</span>
-                    <span>提取PDF文本</span>
-                </button>
-                <button class="tab-button" data-tab="tab3">
-                    <span class="material-icons">chat</span>
-                    <span>AI聊天</span>
-                </button>
-            </div>
+        
+        <!-- 主要内容区域 -->
+        <main class="main-content">
+            <!-- 欢迎区域 -->
+            <section class="welcome-section">
+                <h2>欢迎使用智能文档处理系统</h2>
+                <p>选择下方功能卡片，开始您的文档处理之旅</p>
+            </section>
             
-            <!-- 返回主页按钮，默认隐藏 -->
-            <div id="backToHomeContainer" class="back-to-home-container" style="display: none;">
-                <button id="backToHomeBtn" class="back-to-home-btn">
-                    <span class="material-icons">arrow_back</span>
-                    <span>返回主页</span>
-                </button>
-            </div>
-
-            <div class="tab-pane active" id="tab0">
-                <section class="home-section fullscreen">
-                    <div class="welcome-container">
-                        <div class="welcome-header">
-                            <div class="welcome-icon">
-                                <span class="material-icons">auto_awesome</span>
-                            </div>
-                            <h2>欢迎使用智能文档处理与AI交互系统</h2>
-                            <p class="welcome-subtitle">一站式解决您的文档处理、信息提取和AI交互需求</p>
-                        </div>
-                        
-                        <div class="features-grid">
-                            <div class="feature-card">
-                                <div class="feature-icon">
-                                    <span class="material-icons">description</span>
-                                </div>
-                                <h3>文档生成</h3>
-                                <p>从文本和图片快速生成格式统一的PDF文档，提高工作效率</p>
-                                <button class="feature-btn" data-tab="tab1">
-                                    <span>立即使用</span>
-                                    <span class="material-icons">arrow_forward</span>
-                                </button>
-                            </div>
-                            
-                            <div class="feature-card">
-                                <div class="feature-icon">
-                                    <span class="material-icons">image</span>
-                                </div>
-                                <h3>图片处理</h3>
-                                <p>智能识别图片文字，批量处理图片内容，自动合并提取信息</p>
-                                <button class="feature-btn" data-tab="tab1">
-                                    <span>立即使用</span>
-                                    <span class="material-icons">arrow_forward</span>
-                                </button>
-                            </div>
-                            
-                            <div class="feature-card">
-                                <div class="feature-icon">
-                                    <span class="material-icons">picture_as_pdf</span>
-                                </div>
-                                <h3>PDF文本提取</h3>
-                                <p>一键提取PDF文档中的所有文字内容，支持复制</p>
-                                <button class="feature-btn" data-tab="tab2">
-                                    <span>立即使用</span>
-                                    <span class="material-icons">arrow_forward</span>
-                                </button>
-                            </div>
-                            
-                            <div class="feature-card">
-                                <div class="feature-icon">
-                                    <span class="material-icons">chat</span>
-                                </div>
-                                <h3>AI智能对话</h3>
-                                <p>与先进的AI模型交流，获取信息分析、文本处理和创意建议</p>
-                                <button class="feature-btn" data-tab="tab3">
-                                    <span>立即使用</span>
-                                    <span class="material-icons">arrow_forward</span>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="quick-start">
-                            <h3><span class="material-icons">rocket_launch</span> 快速开始</h3>
-                            <ol class="start-steps">
-                                <li>点击上方任意功能卡片的"立即使用"按钮</li>
-                                <li>根据界面提示上传文件或输入文本</li>
-                                <li>配置处理选项并点击相应按钮</li>
-                                <li>获取处理结果，可一键下载或分享</li>
-                                <li>随时可以点击左上角的"返回主页"回到此界面</li>
-                            </ol>
+            <!-- 功能卡片区域 -->
+            <section class="feature-cards">
+                <!-- OCR与PDF生成卡片 -->
+                <div class="card" data-feature="ocr-pdf">
+                    <div class="card-header">
+                        <span class="material-icons">image</span>
+                        <h3>OCR识别与PDF生成</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>上传图片进行OCR文字识别，或输入文本生成PDF文档</p>
+                        <div class="tags">
+                            <span class="tag">图像处理</span>
+                            <span class="tag">OCR识别</span>
+                            <span class="tag">PDF生成</span>
                         </div>
                     </div>
-                </section>
-            </div>
-
-            <div class="tab-pane" id="tab1">
-                <!-- 文本编辑区 -->
-                <section class="text-section">
-                    <h2><span class="material-icons">文本处理</span></h2>
-                    <div class="form-group">
-                        <label for="content">输入内容：</label>
-                        <textarea id="content" placeholder="请在此输入您需要处理的文本内容，&#13;也可以通过图片识别后添加文字..."></textarea>
-                    </div>
-                </section>
-
-                <!-- 图片处理区 -->
-                <section class="image-section">
-                    <h2><span class="material-icons">图片处理</span></h2>
-                    <label for="images" class="file-upload-btn">
-                        <span class="material-icons"></span>
-                        <span class="button-text">选择图片</span>
-                    </label>
-                    <input type="file" id="images" multiple accept="image/*"><!--上传图片文件-->    
-                    <p class="hint">支持JPG, PNG, BMP等常见图片格式的简单处理 <br>若出现识别失败或识别不全，可以将图片直接生成</p>
-
-                    <div class="image-preview"></div><!--图片预览-->    
-
-                    <div class="image-options">
-                        <label>
-                            <input type="checkbox" id="enableOCR" checked>
-                            对图片进行文字识别
-                        </label>
-                    </div>
-
-                    <!-- OCR识别结果区域，默认隐藏 -->
-                    <div class="ocr-results hidden">
-                        <div class="ocr-header">
-                            <h3><span class="material-icons">识别结果</span></h3>
-                            <button class="merge-all-btn" disabled>
-                                <span class="material-icons">merge_type</span> 
-                                <span>合并全部</span>
-                            </button>
-                        </div>
-                        <div id="ocrContent"></div> 
-                    </div>
-                </section>
-
-                <!-- 生成文档按钮 -->
-                <div class="action-bar">
-                    <button id="process-images-btn" class="btn secondary" disabled> 
-                        <span class="material-icons">处理图片</span> 
-                    </button>
-                    <button id="generate-btn" class="btn primary">
-                        <span class="material-icons">生成文档(PDF)</span> 
-                    </button>
                 </div>
                 
-                <!-- 历史记录 -->
-                <div class="history-section">
-                    <div class="history-header">
-                        <h2><span class="material-icons">历史记录</span>  <span class="history-count" id="historyCount">(共0/6条内容)</span></h2>
-                        <div class="history-actions-header">
-                            <button id="clearHistoryBtn" class="clear-btn">
-                                <span class="material-icons">清空</span> 
-                            </button>
-                            <button id="refreshHistoryBtn" class="refresh-btn">
-                                <span class="material-icons">刷新</span> 
-                            </button>
-                        </div>
+                <!-- PDF文本提取卡片 -->
+                <div class="card" data-feature="pdf-extract">
+                    <div class="card-header">
+                        <span class="material-icons">find_in_page</span>
+                        <h3>PDF文本提取</h3>
                     </div>
-                    <div class="history-container" id="historyContainer">
-                        <!-- 历史记录内容将通过JS动态加载 -->
-                        <div class="loading-history">
-                            <div class="mini-spinner"></div>
-                            <div>加载中...</div>
+                    <div class="card-content">
+                        <p>从PDF文件中智能提取文本内容，支持多种格式</p>
+                        <div class="tags">
+                            <span class="tag">PDF处理</span>
+                            <span class="tag">文本提取</span>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- 提取PDF文本 -->    
-            <div class="tab-pane" id="tab2">
-                <section class="pdf-section">
-                    <h2><span class="material-icons">PDF上传</span></h2>
-                    <label for="pdf-file" class="file-upload-btn">
-                        <span class="material-icons"></span>
-                        <span class="button-text">选择PDF文件</span>
-                    </label>
-                    <input type="file" id="pdf-file" accept=".pdf">
-                    <p class="hint">支持单个PDF文件，大小不超过20MB</p>
-                    <!-- PDF预览 -->        
-                    <div class="pdf-preview"></div>
-
-                    <div class="action-bar"><!--操作栏-->   
-                        <button id="extract-pdf-btn" class="btn primary" disabled><!--提取文本按钮-->   
-                            <span class="material-icons">提取文本</span> 
-                        </button>
+                
+                <!-- AI聊天卡片 -->
+                <div class="card" data-feature="ai-chat">
+                    <div class="card-header">
+                        <span class="material-icons">chat</span>
+                        <h3>AI智能对话</h3>
                     </div>
-                </section>
-
-                <!-- 提取结果 -->    
-                <div class="extract-results">
-                    <h3><span class="material-icons">提取结果</span></h3>
-                    
-                    <div class="file-info"><!--文件信息-->  
-                        <div class="info-item">
-                            <span class="material-icons"></span>
-                            <span id="pdf-file-name">文件名: </span>
-                        </div>
-                        <div class="info-item">
-                            <span class="material-icons"></span>
-                            <span id="pdf-page-count">总页数: </span>
-                        </div>
-                        <div class="info-item">
-                            <span class="material-icons"></span>
-                            <span id="pdf-word-count">总字数: </span>
+                    <div class="card-content">
+                        <p>上传文档与AI助手进行智能对话，解答您的各类问题</p>
+                        <div class="tags">
+                            <span class="tag">AI助手</span>
+                            <span class="tag">智能对话</span>
+                            <span class="tag">文档分析</span>
                         </div>
                     </div>
-
-                    <!-- 提取文本内容 -->    
-                    <div class="pdf-text-content" id="pdf-text-content"></div>
-                    <!-- 复制全部文本 -->       
-                    <button id="copy-all-btn" class="copy-btn">
-                        <span class="material-icons">复制全部文本</span> 
-                    </button>
                 </div>
-            </div>
+            </section>
             
-            <!-- AI对话窗口 -->
-            <div class="tab-pane" id="tab3">
-                <section class="chat-section">
-                    <h2><span class="material-icons">AI对话</span></h2>
-                    
-                    <!-- 文件上传区域 -->
-                    <div class="file-upload-container">
-                        <label for="chat-file" class="file-upload-btn">
-                            <span class="material-icons">attach_file</span>
-                            <span class="button-text">上传文件（TXT/PDF）</span>
-                        </label>
-                        <input type="file" id="chat-file" accept=".txt,.pdf">
-                        <span class="file-info" id="fileInfo"></span>
-                    </div>
-
-                    <div class="model-selector">
-                        <label for="model-select">选择AI模型：</label>
-                        <select id="model-select" class="model-select">
-                            <!-- 模型选项将通过JavaScript动态加载 -->
-                        </select>
-                        <!-- 重置按钮 -->
-                        <button id="resetChatBtn" class="reset-btn" title="清除对话历史">
-                            <span class="material-icons">delete</span>
-                            <span>重置对话</span>
+            <!-- 历史记录区域 -->
+            <section class="history-section">
+                <div class="section-header">
+                    <h2>历史记录</h2>
+                    <div class="history-actions">
+                        <button id="refreshHistoryBtn" class="btn btn-small">
+                            <span class="material-icons">refresh</span>
+                            刷新
                         </button>
+                        <button id="clearHistoryBtn" class="btn btn-small">清空历史</button>
                     </div>
-                    
-                    <div class="chat-container">
-                        <div class="chat-messages" id="chatMessages">
-                            <!-- 文件上传状态提示 -->
-                            <div class="message-system hidden" id="uploadStatus">
-                                <span class="material-icons">info</span>
-                                <span>文件已上传，请输入分析指令...</span>
+                </div>
+                <div id="historyContainer" class="history-container">
+                    <p class="empty-history">暂无历史记录</p>
+                </div>
+            </section>
+        </main>
+        
+        <!-- 功能界面容器 -->
+        <div id="featureContainer" class="feature-container" style="display: none;">
+            <!-- OCR与PDF生成界面 -->
+            <div id="ocrPdfFeature" class="feature-content">
+                <div class="feature-header">
+                    <button class="back-btn"><span class="material-icons">arrow_back</span> 返回</button>
+                    <h2>OCR识别与PDF生成</h2>
+                </div>
+                <div class="feature-body">
+                    <div class="input-section">
+                        <div class="text-input">
+                            <h3>文本内容</h3>
+                            <textarea id="textContent" placeholder="请输入要生成PDF的文本内容..."></textarea>
+                        </div>
+                        <div class="image-upload">
+                            <h3>图片上传</h3>
+                            <div class="upload-area" id="imageUploadArea">
+                                <span class="material-icons">cloud_upload</span>
+                                <p>拖放图片到此处或点击上传</p>
+                                <input type="file" id="imageUpload" multiple accept=".jpg,.jpeg,.png,.webp">
                             </div>
-                            <!-- 消息内容将通过JS动态加载 -->
+                            <div id="imagePreview" class="image-preview"></div>
                         </div>
-                        <div class="chat-input-container">
-                            <button class="file-upload-mini" id="triggerUpload">
-                                <span class="material-icons">attach_file</span>
-                            </button>
-                            <textarea id="chatInput" placeholder="请输入您的问题或分析指令..."></textarea>
-                            <button id="sendMessageBtn" class="btn primary">
-                                <span class="material-icons">发送</span>
-                            </button>
+                        <div class="action-buttons-right">
+                            <button id="ocrBtn" class="btn primary-btn"><span class="material-icons">image_search</span>OCR识别</button>
+                            <button id="generatePdfBtn" class="btn primary-btn"><span class="material-icons">picture_as_pdf</span>生成PDF</button>
                         </div>
                     </div>
-                </section>
+                    <div class="result-section">
+                        <h3>处理结果</h3>
+                        <div id="ocrResult" class="result-content"></div>
+                        <div id="generateResult" class="result-content"></div>
+                    </div>
+                </div>
             </div>
-
-        </div>
-
-        <!-- 状态区域 -->    
-        <div class="status-section">
-            <div class="status-message" id="statusMessage"></div>
-        </div>
-
-        <!-- 结果网格 -->    
-        <div class="results-grid" id="resultsGrid"></div>
-
-        <!-- 模态框 -->    
-        <div class="modal-overlay" id="modalOverlay">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <button class="modal-close" id="modalClose">×</button><!--关闭按钮-->
-                    <div class="modal-message" id="modalMessage"></div><!--提示消息 -->
-                    <div class="modal-buttons">
-                        <button class="modal-btn secondary" id="modalCancel">否</button>
-                        <button class="modal-btn primary" id="modalConfirm">是</button>
+            
+            <!-- PDF文本提取界面 -->
+            <div id="pdfExtractFeature" class="feature-content">
+                <div class="feature-header">
+                    <button class="back-btn"><span class="material-icons">arrow_back</span> 返回</button>
+                    <h2>PDF文本提取</h2>
+                </div>
+                <div class="feature-body">
+                    <div class="input-section">
+                        <div class="pdf-upload">
+                            <h3>PDF上传</h3>
+                            <div class="upload-area" id="pdfUploadArea">
+                                <span class="material-icons">upload_file</span>
+                                <p>拖放PDF到此处或点击上传</p>
+                                <input type="file" id="pdfUpload" accept=".pdf">
+                            </div>
+                            <div id="pdfPreview" class="pdf-preview"></div>
+                        </div>
+                        <div class="action-buttons-right">
+                            <button id="extractBtn" class="btn primary-btn"><span class="material-icons">text_snippet</span>提取文本</button>
+                        </div>
+                    </div>
+                    <div class="result-section">
+                        <h3>提取结果</h3>
+                        <div id="extractResult" class="result-content"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI聊天界面 -->
+            <div id="aiChatFeature" class="feature-content">
+                <div class="feature-header">
+                    <button class="back-btn"><span class="material-icons">arrow_back</span> 返回</button>
+                    <h2>AI智能对话</h2>
+                </div>
+                <div class="feature-body">
+                    <div class="chat-container">
+                        <div class="chat-sidebar">
+                            <div class="model-selection">
+                                <h3>选择模型</h3>
+                                <select id="modelSelect">
+                                    <option value="deepseek_api">DeepSeek API</option>
+                                    <option value="deepseek">DeepSeek 本地</option>
+                                    <option value="qwen">通义千问</option>
+                                </select>
+                            </div>
+                            <div class="file-upload">
+                                <h3>上传文档</h3>
+                                <div class="upload-area" id="docUploadArea">
+                                    <span class="material-icons">upload_file</span>
+                                    <p>上传TXT或PDF</p>
+                                    <input type="file" id="docUpload" accept=".txt,.pdf">
+                                </div>
+                                <div id="uploadStatus" class="upload-status hidden">
+                                    <p id="fileInfo">文件名</p>
+                                </div>
+                            </div>
+                            <div class="chat-actions">
+                                <button id="newChatBtn" class="btn"><span class="material-icons">add</span>新对话</button>
+                                <button id="clearChatBtn" class="btn"><span class="material-icons">clear_all</span>清空对话</button>
+                            </div>
+                        </div>
+                        <div class="chat-main">
+                            <div id="chatMessages" class="chat-messages"></div>
+                            <div class="chat-input">
+                                <textarea id="userMessage" placeholder="输入您的问题..."></textarea>
+                                <button id="sendMessageBtn" class="btn primary-btn"><span class="material-icons">send</span></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-            <!-- 登录模态框 -->
-        <div class="login-modal-overlay" id="loginModalOverlay">
-            <div class="login-modal-dialog">
-                <div class="login-modal-content">
-                    <button class="modal-close" id="loginModalClose">×</button>
+        
+        <!-- 登录注册模态框 -->
+        <div id="authModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="login">登录</button>
+                    <button class="tab-btn" data-tab="register">注册</button>
+                </div>
+                <div id="loginTab" class="tab-content">
                     <h2>用户登录</h2>
                     <form id="loginForm">
                         <div class="form-group">
-                            <label for="username">用户名：</label>
-                            <input type="text" id="username" name="username" required>
+                            <label for="loginUsername">用户名</label>
+                            <input type="text" id="loginUsername" required>
                         </div>
                         <div class="form-group">
-                            <label for="password">密码：</label>
-                            <input type="password" id="password" name="password" required>
+                            <label for="loginPassword">密码</label>
+                            <input type="password" id="loginPassword" required>
                         </div>
-                        <div class="login-modal-buttons">
-                            <button type="button" class="modal-btn secondary" id="loginCancel">取消</button>
-                            <button type="submit" class="modal-btn primary" id="loginSubmit">登录</button>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="rememberMe" checked>
+                                记住我
+                            </label>
                         </div>
-                        <div class="form-footer">
-                            <a href="#" id="registerLink">没有账号？立即注册</a>
-                        <a href="#" id="forgotPasswordLink">忘记密码？</a>
-                        </div>
+                        <button type="submit" class="btn primary-btn">登录</button>
                     </form>
                 </div>
-            </div>
-        </div>
-
-        <!-- 注册模态框 -->
-        <div class="register-modal-overlay" id="registerModalOverlay">
-            <div class="register-modal-dialog">
-                <div class="register-modal-content">
-                    <button class="modal-close" id="registerModalClose">×</button>
+                <div id="registerTab" class="tab-content" style="display: none;">
                     <h2>用户注册</h2>
                     <form id="registerForm">
                         <div class="form-group">
-                            <label for="registerUsername">用户名：</label>
-                            <input type="text" id="registerUsername" name="username" required>
-                            <small class="form-tip">用户名长度为4-20个字符</small>
+                            <label for="registerUsername">用户名</label>
+                            <input type="text" id="registerUsername" required>
                         </div>
                         <div class="form-group">
-                            <label for="registerEmail">邮箱：</label>
-                            <input type="email" id="registerEmail" name="email" required>
-                            <small class="form-tip">请输入有效的邮箱地址</small>
+                            <label for="registerEmail">邮箱</label>
+                            <input type="email" id="registerEmail" required>
                         </div>
                         <div class="form-group">
-                            <label for="registerPassword">密码：</label>
-                            <input type="password" id="registerPassword" name="password" required>
-                            <small class="form-tip">密码长度至少8位，包含字母和数字</small>
+                            <label for="registerPassword">密码</label>
+                            <input type="password" id="registerPassword" required>
                         </div>
                         <div class="form-group">
-                            <label for="confirmPassword">确认密码：</label>
-                            <input type="password" id="confirmPassword" name="confirmPassword" required>
+                            <label for="confirmPassword">确认密码</label>
+                            <input type="password" id="confirmPassword" required>
                         </div>
-                        <div class="register-modal-buttons">
-                            <button type="button" class="modal-btn secondary" id="registerCancel">取消</button>
-                            <button type="submit" class="modal-btn primary" id="registerSubmit">注册</button>
-                        </div>
-                            <div class="form-footer">
-                            <a href="#" id="backToLoginLink">已有账号？返回登录</a>
-                        </div>
+                        <button type="submit" class="btn primary-btn">注册</button>
                     </form>
                 </div>
             </div>
         </div>
-        <!-- 底部 -->    
-        <footer class="app-footer">
-            <p>© 2025 智能文档处理与AI交互系统 - 提高您的文档处理效率</p>
-        </footer>
-    </div>
-
-    <!-- 用户资料模态框 -->
-    <div class="profile-modal-overlay" id="profileModalOverlay">
-        <div class="profile-modal-dialog">
-            <div class="profile-modal-content">
-                <button class="modal-close" id="profileModalClose">×</button>
-                <h2>个人资料</h2>
-                <div class="profile-info">
-                    <div class="profile-item">
-                        <label>用户名：</label>
-                        <span id="profileUsername"></span>
-                    </div>
-                    <div class="profile-item">
-                        <label>注册邮箱：</label>
-                        <span id="profileEmail"></span>
-                    </div>
-                    <div class="profile-item">
-                        <label>注册时间：</label>
-                        <span id="profileRegisterTime"></span>
-                    </div>
-                </div>
-                <div class="profile-modal-buttons">
-                    <button class="modal-btn primary" id="profileClose">关闭</button>
-                </div>
-            </div>
+        
+        <!-- 加载遮罩 -->
+        <div id="loadingOverlay" class="loading-overlay">
+            <div class="loader"></div>
+            <p id="loadingMessage">正在处理，请稍候...</p>
         </div>
+        
+        <!-- 提示消息 -->
+        <div id="toastContainer" class="toast-container"></div>
     </div>
-
-    <div class="toast hidden" id="toast"></div>
-
-    <!-- 加载状态 -->       
-    <div class="loading hidden" id="loadingOverlay">
-        <div class="spinner"></div>
-        <div id="loadingText">处理中，请稍候...</div>
-    </div>
-
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/ai_chat.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/image_processor.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/pdf_extractor.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+    
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/pdf-ocr.js"></script>
+    <script src="/static/js/pdf-extractor.js"></script>
+    <script src="/static/js/ai-chat.js"></script>
 </body>
 </html>
