@@ -17,6 +17,7 @@
                 <h1>智能文档系统</h1>
             </div>
             <div class="nav-links">
+                <!--深色按钮-->
                 <button id="themeToggle" class="theme-toggle">
                     <span class="material-icons">dark_mode</span>
                 </button>
@@ -90,7 +91,7 @@
             <!-- 历史记录区域 -->
             <section class="history-section">
                 <div class="section-header">
-                    <h2>历史记录</h2>
+                    <h2>历史记录<span id="historyCounter" class="history-counter">(0)</span></h2>
                     <div class="history-actions">
                         <button id="refreshHistoryBtn" class="btn btn-small">
                             <span class="material-icons">refresh</span>
@@ -154,7 +155,7 @@
                             <div class="upload-area" id="pdfUploadArea">
                                 <span class="material-icons">upload_file</span>
                                 <p>拖放PDF到此处或点击上传</p>
-                                <input type="file" id="pdfUpload" accept=".pdf">
+                                <input type="file" id="pdfUpload" accept=".pdf" multiple>
                             </div>
                             <div id="pdfPreview" class="pdf-preview"></div>
                         </div>
@@ -206,6 +207,7 @@
                             <div id="chatMessages" class="chat-messages"></div>
                             <div class="chat-input">
                                 <textarea id="userMessage" placeholder="输入您的问题..."></textarea>
+                                <button id="stopGenerationBtn" class="btn cancel-btn"><span class="material-icons">stop</span></button>
                                 <button id="sendMessageBtn" class="btn primary-btn"><span class="material-icons">send</span></button>
                             </div>
                         </div>

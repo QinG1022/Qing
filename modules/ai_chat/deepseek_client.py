@@ -23,6 +23,10 @@ class DeepSeekClient:
         self.messages.append({"role": role, "content": content
         })
     
+    def clear_history(self):
+        """清空对话历史"""
+        self.messages = [{"role": "system", "content": "You are a helpful assistant."}]
+    
     def generate_response(self, stream=False, **kwargs):
         """生成响应（支持流式/非流式）"""
         try:

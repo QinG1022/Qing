@@ -11,17 +11,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const chatMessages = document.getElementById('chatMessages');
     const modelSelect = document.getElementById('modelSelect');
     const resetChatBtn = document.getElementById('clearChatBtn');
-    // 新增文件上传相关元素
+    // 文件上传相关元素
     const chatFileInput = document.getElementById('docUpload');
     const fileInfoElement = document.getElementById('fileInfo');
     const uploadStatusElement = document.getElementById('uploadStatus');
     const triggerUploadBtn = document.getElementById('docUploadArea');
+    // 停止生成按钮
+    const stopGenerationBtn = document.getElementById('stopGenerationBtn');
     
     let controller = null;
     let currentModel = 'deepseek';  // 默认模型，将在初始化时更新
-    // 新增文件内容变量
+    // 文件内容变量
     let currentFileContent = null;  // 存储上传文件的内容
     let currentConversationId = null; // 当前对话ID
+    let previousModel = null; // 跟踪上一次使用的模型
     
     // 页面加载时，存储页面会话ID
     const sessionId = Date.now().toString();
@@ -164,6 +167,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // 禁用输入和发送按钮
         chatInput.disabled = true;
         sendMessageBtn.disabled = true;
+        
+        // 显示停止按钮 - 只使用display属性
+        stopGenerationBtn.style.display = 'flex';
 
         // 显示用户消息
         appendMessage(message, true);
@@ -413,7 +419,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
         } catch (error) {
             if (error.name === 'AbortError') {
-                appendMessage('消息已取消发送', false);
+                appendMessage('已停止生成', false, true);
             } else if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
                 appendMessage('无法连接到服务器，请检查网络连接或稍后重试', false);
             } else {
@@ -425,6 +431,10 @@ document.addEventListener('DOMContentLoaded', function() {
             chatInput.value = '';
             chatInput.disabled = false;
             sendMessageBtn.disabled = false;
+            
+            // 隐藏停止按钮 - 只使用display属性
+            stopGenerationBtn.style.display = 'none';
+            
             controller = null;
         }
     }
@@ -460,6 +470,18 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // 显示欢迎消息
             appendMessage('对话已重置。您好，我是AI助手，有什么可以帮助您的吗？', false, true);
+            
+            // 重置文件内容
+            currentFileContent = null;
+            if (uploadStatusElement) {
+                uploadStatusElement.classList.add('hidden');
+            }
+            if (chatFileInput) {
+                chatFileInput.value = '';
+            }
+            
+            // 更新上一次使用的模型
+            previousModel = currentModel;
             
         } catch (error) {
             console.error('重置对话失败:', error);
@@ -536,6 +558,12 @@ document.addEventListener('DOMContentLoaded', function() {
             uploadStatusElement.classList.remove('hidden');
             appendMessage(`文件 ${file.name} 已上传，请输入分析指令...`, false);
             
+            // 确保文件上传后，之前的请求已被取消
+            if (controller) {
+                controller.abort();
+                controller = null;
+            }
+            
         } catch (error) {
             // 隐藏加载状态
             document.getElementById('loadingOverlay').classList.add('hidden');
@@ -600,6 +628,16 @@ document.addEventListener('DOMContentLoaded', function() {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
+    // 处理停止生成
+    function handleStopGeneration() {
+        if (controller) {
+            console.log('用户中止了AI响应生成');
+            controller.abort();
+            // 立即隐藏停止按钮
+            stopGenerationBtn.style.display = 'none';
+        }
+    }
+
     // 在页面卸载前取消所有进行中的请求
     window.addEventListener('beforeunload', () => {
         if (controller) {
@@ -615,6 +653,9 @@ document.addEventListener('DOMContentLoaded', function() {
             handleSendMessage();
         }
     });
+    
+    // 绑定停止按钮事件
+    stopGenerationBtn.addEventListener('click', handleStopGeneration);
     
     // 绑定重置按钮事件
     resetChatBtn.addEventListener('click', handleResetChat);

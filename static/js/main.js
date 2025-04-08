@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
         uploadedPdfs: [],
         activeFeature: null,
         currentTask: null,
-        historyItems: []
+        historyItems: [],
+        maxHistoryItems: 10 // 默认最大历史记录数
     };
     
     // 初始化主题
@@ -150,17 +151,35 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch('/history')
             .then(response => response.json())
             .then(data => {
-                if (data.status === 'success' && data.history && data.history.length > 0) {
-                    state.historyItems = data.history;
-                    renderHistory();
+                if (data.status === 'success') {
+                    // 保存最大记录数
+                    if (data.max_count) {
+                        state.maxHistoryItems = data.max_count;
+                    }
+                    
+                    if (data.history && data.history.length > 0) {
+                        state.historyItems = data.history;
+                        renderHistory();
+                    } else {
+                        state.historyItems = [];
+                        document.getElementById('historyContainer').innerHTML = 
+                            '<p class="empty-history">暂无历史记录</p>';
+                        // 更新历史记录计数器为0
+                        document.getElementById('historyCounter').textContent = `(0/${state.maxHistoryItems})`;
+                    }
                 } else {
+                    state.historyItems = [];
                     document.getElementById('historyContainer').innerHTML = 
                         '<p class="empty-history">暂无历史记录</p>';
+                    // 更新历史记录计数器为0
+                    document.getElementById('historyCounter').textContent = `(0/${state.maxHistoryItems})`;
                 }
             })
             .catch(error => {
                 console.error('获取历史记录失败:', error);
                 showToast('获取历史记录失败', 'error');
+                // 出错时也要更新计数器为0
+                document.getElementById('historyCounter').textContent = `(0/${state.maxHistoryItems})`;
             });
     }
     
@@ -169,6 +188,10 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     function renderHistory() {
         const container = document.getElementById('historyContainer');
+        const counter = document.getElementById('historyCounter');
+        
+        // 更新历史记录计数器
+        counter.textContent = `(${state.historyItems.length}/${state.maxHistoryItems})`;
         
         if (state.historyItems.length === 0) {
             container.innerHTML = '<p class="empty-history">暂无历史记录</p>';
@@ -249,13 +272,27 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
-                // 从本地状态移除
+                // 从状态中移除
                 state.historyItems = state.historyItems.filter(item => item.id !== id);
-                // 重新渲染
-                renderHistory();
+                
+                // 从DOM中移除
+                const item = document.querySelector(`.history-item[data-id="${id}"]`);
+                if (item) {
+                    item.remove();
+                }
+                
+                // 如果没有记录，显示空状态
+                if (state.historyItems.length === 0) {
+                    document.getElementById('historyContainer').innerHTML = 
+                        '<p class="empty-history">暂无历史记录</p>';
+                }
+                
+                // 更新计数器
+                document.getElementById('historyCounter').textContent = `(${state.historyItems.length}/${state.maxHistoryItems})`;
+                
                 showToast('已删除历史记录', 'success');
             } else {
-                showToast('删除失败: ' + data.error, 'error');
+                showToast(data.error || '删除失败', 'error');
             }
         })
         .catch(error => {
@@ -275,10 +312,15 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             if (data.status === 'success') {
                 state.historyItems = [];
-                renderHistory();
+                document.getElementById('historyContainer').innerHTML = 
+                    '<p class="empty-history">暂无历史记录</p>';
+                
+                // 更新计数器为0
+                document.getElementById('historyCounter').textContent = `(0/${state.maxHistoryItems})`;
+                
                 showToast('已清空历史记录', 'success');
             } else {
-                showToast('清空失败: ' + data.error, 'error');
+                showToast(data.error || '清空失败', 'error');
             }
         })
         .catch(error => {
@@ -357,10 +399,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         handleImageUpload({target: imageUpload});
                     }
                 });
-                
-                imageUploadArea.addEventListener('click', function() {
-                    imageUpload.click();
-                });
             }
         }
         
@@ -408,10 +446,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else {
                         showToast('请上传PDF文件', 'error');
                     }
-                });
-                
-                pdfUploadArea.addEventListener('click', function() {
-                    pdfUpload.click();
                 });
             }
         }

@@ -67,7 +67,7 @@ app.config.update(
     ALLOWED_EXTENSIONS={'png', 'jpg', 'jpeg', 'webp', 'pdf'},  # 允许的文件格式
     CELERY_BROKER_URL='redis://localhost:6379/0',  # Celery消息队列（Redis）
     CELERY_RESULT_BACKEND='redis://localhost:6379/0',  # Celery结果存储（Redis）
-    MAX_HISTORY_ITEMS=6  # 历史记录最大保存条数
+    MAX_HISTORY_ITEMS=10  # 历史记录最大保存条数
 )
 
 # 创建一个双端队列用于存储历史记录，maxlen参数限制队列最大长度
@@ -1002,11 +1002,11 @@ if __name__ == '__main__':
         os.chmod(str(data_dir), 0o755)
 
         # 添加服务器启动提示信息
-        host = '127.0.0.1'
+        host = '0.0.0.0'
         port = 5000
         print("\n" + "="*50)
         print(" 智能文档生成系统服务已启动")
-        print(f" 请在浏览器中访问: http://{host}:{port}")
+        print(f" 请在浏览器中访问: http://localhost:{port} 或 http://127.0.0.1:{port}")
         print("="*50 + "\n")
         
         # 开发环境：使用普通HTTP

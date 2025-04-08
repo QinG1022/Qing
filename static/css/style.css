@@ -8,10 +8,10 @@
 /* ---------- 1. 基础样式 ---------- */
 :root {
   /* 主要颜色 */
-  --primary-color: #1976D2;
+  --primary-color: #2196f3;
   --primary-dark: #0D47A1;
   --primary-light: #64B5F6;
-  --primary-rgb: 25, 118, 210;
+  --primary-rgb: 33, 150, 243;
   
   /* 辅助颜色 */
   --secondary-color: #26A69A;
@@ -50,7 +50,7 @@
   --text-primary: #333333;
   --text-secondary: #666666;
   --text-light: #ffffff;
-  --text-muted: #999999;
+  --text-muted: #757575;
   
   /* 背景颜色 */
   --bg-primary: #ffffff;
@@ -83,6 +83,16 @@
   --font-size-lg: 1.25rem;
   --font-size-xl: 1.5rem;
   --font-size-xxl: 2rem;
+  
+  /* 添加新的CSS变量 */
+  --message-bg-color: #f1f1f1;
+  --system-message-bg: #f5f5f5;
+  --primary-color-rgb: 33, 150, 243;
+  
+  /* 确保已有的变量 */
+  --background-color: #ffffff;
+  --background-light: #f8f9fa;
+  --input-background: #ffffff;
 }
 
 /* 深色主题变量 */
@@ -119,6 +129,12 @@
   --shadow-1: 0 2px 5px rgba(0, 0, 0, 0.2);
   --shadow-2: 0 5px 15px rgba(0, 0, 0, 0.3);
   --shadow-3: 0 10px 25px rgba(0, 0, 0, 0.4);
+  
+  /* 添加暗色主题下新的变量值 */
+  --message-bg-color: #2d2d2d;
+  --system-message-bg: #1e1e1e;
+  --background-light: #1e1e1e;
+  --input-background: #2d2d2d;
 }
 
 /* 基础重置 */
@@ -285,6 +301,13 @@ p {
   padding: var(--spacing-lg);
   box-shadow: var(--shadow-1);
   margin-top: var(--spacing-xl);
+}
+
+.history-counter {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: normal;
+  margin-left: 0.5rem;
 }
 
 .section-header {
@@ -973,55 +996,80 @@ textarea {
 
 .chat-container {
   display: flex;
-  height: 100%;
-  gap: var(--spacing-lg);
+  height: calc(100vh - 170px);
+  min-height: 500px;
+  background-color: var(--background-color);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
 }
 
 .chat-sidebar {
-  width: 250px;
-  background-color: var(--bg-light);
-  border-radius: var(--border-radius-md);
-  padding: var(--spacing-md);
+  width: 280px;
+  padding: 20px;
+  background-color: var(--background-light);
+  border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  transition: all 0.3s ease;
 }
 
 .chat-main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  position: relative;
+  background-color: var(--background-color);
 }
 
 .chat-messages {
   flex: 1;
   overflow-y: auto;
-  padding: var(--spacing-md);
-  background-color: var(--bg-light);
-  border-radius: var(--border-radius-md);
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: 16px;
+  scroll-behavior: smooth;
 }
 
+/* 改进消息样式 */
 .message {
   max-width: 85%;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--border-radius-md);
-  box-shadow: var(--shadow-1);
-  animation: fadeIn 0.3s ease forwards;
+  padding: 15px;
+  border-radius: 18px;
+  margin-bottom: 4px;
+  animation: fadeIn 0.3s ease;
+  position: relative;
+  line-height: 1.5;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .user-message {
+  background-color: var(--primary-color);
+  color: white;
   align-self: flex-end;
-  background-color: var(--accent-light);
-  color: var(--text-light);
+  border-bottom-right-radius: 5px;
 }
 
-.bot-message {
+.ai-message {
+  background-color: var(--message-bg-color);
+  color: var(--text-color);
   align-self: flex-start;
-  background-color: var(--bg-primary);
+  border-bottom-left-radius: 5px;
+}
+
+.system-message {
+  background-color: var(--system-message-bg);
+  color: var(--text-muted);
+  max-width: 100%;
+  font-size: 14px;
+  padding: 10px 15px;
+  align-self: center;
+  border-radius: 10px;
+  opacity: 0.8;
+  text-align: center;
+  box-shadow: none;
+  margin: 10px 0;
 }
 
 .chat-input {
@@ -1045,6 +1093,26 @@ textarea {
   flex-direction: column;
   gap: var(--spacing-sm);
   margin-top: auto;
+}
+
+/* 暗色主题下的消息样式调整 */
+[data-theme="dark"] .ai-message {
+  background-color: var(--message-bg-color);
+  color: var(--text-light);
+}
+
+[data-theme="dark"] .system-message {
+  background-color: var(--system-message-bg);
+  color: #aaaaaa;
+}
+
+[data-theme="dark"] .chat-container {
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .chat-input {
+  background-color: var(--background-color);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* ---------- 6. 响应式设计 ---------- */
@@ -1088,6 +1156,11 @@ textarea {
   .input-section, .result-section {
     width: 100%;
   }
+
+  .theme-toggle {
+    width: 40px;
+    height: 40px;
+}
 }
 
 @media (max-width: 576px) {
@@ -1174,15 +1247,29 @@ textarea {
 
 /* 主题切换动画 */
 .theme-toggle {
-  background: transparent;
-  border: none;
+  background: var(--card-bg);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  color: var(--text-light);
-  transition: transform var(--transition-medium);
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease-in-out, box-shadow 0.3s ease;
+  margin-left: auto;
 }
 
 .theme-toggle:hover {
-  transform: rotate(180deg);
+  transform: translateY(-2px) rotate(180deg) scale(1.1); 
+    box-shadow: var(--shadow-lg);
+}
+
+.theme-toggle .material-icons {
+  color: var(--text-color);
+  font-size: 1.4rem;
+  transition: color 0.3s ease;
 }
 
 /* 卡片悬停效果 */
@@ -1395,4 +1482,126 @@ textarea {
 
 .back-btn:hover {
     background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 改进聊天输入区域样式 */
+.chat-input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    background-color: var(--background-light);
+    border-top: 1px solid var(--border-color);
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.chat-input textarea {
+    flex: 1;
+    height: 44px;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 22px;
+    resize: none;
+    background-color: var(--input-background);
+    color: var(--text-color);
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-right: 8px;
+}
+
+.chat-input button {
+    height: 44px;
+    width: 44px;
+    min-width: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.chat-input button .material-icons {
+    margin: 0;
+    font-size: 20px;
+    transition: transform 0.2s ease;
+}
+
+.chat-input button:hover .material-icons {
+    transform: scale(1.1);
+}
+
+.chat-input button:active {
+    transform: scale(0.95);
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+    .chat-input {
+        padding: 10px;
+    }
+    
+    .chat-input textarea {
+        height: 40px;
+        padding: 10px;
+        font-size: 15px;
+    }
+    
+    .chat-input button {
+        height: 40px;
+        width: 40px;
+        min-width: 40px; /* 确保按钮不会被压缩 */
+    }
+}
+
+@media (max-width: 576px) {
+    .chat-input button .material-icons {
+        font-size: 18px;
+    }
+}
+
+/* 停止按钮样式 */
+.chat-input .cancel-btn {
+    background-color: #f44336;
+    color: white;
+    display: none; /* 默认隐藏 */
+    margin-left: 10px;
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    box-shadow: 0 2px 5px rgba(244, 67, 54, 0.3);
+    z-index: 10;
+}
+
+.chat-input .cancel-btn:hover {
+    background-color: #d32f2f;
+    box-shadow: 0 3px 8px rgba(211, 47, 47, 0.5);
+    transform: scale(1.05);
+}
+
+.chat-input .cancel-btn:active {
+    transform: scale(0.95);
+}
+
+.chat-input .cancel-btn .material-icons {
+    margin: 0;
+    font-size: 20px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 } 
