@@ -8,7 +8,7 @@ from werkzeug.exceptions import BadRequest
 import json
 import warnings
 from flask_login import current_user
-from ..database import add_chat_message, get_user_chat_history, clear_user_chat_history
+from ..database import add_chat_message, get_user_chat_history, clear_user_chat_history, get_user_conversations
 import uuid
 from datetime import datetime
 
@@ -32,69 +32,70 @@ if not api_key:
 
 # 创建AI客户端实例字典
 ai_clients = {}
-
-# 初始化DeepSeek在线客户端
-try:
-    ai_clients['deepseek_api'] = DeepSeekClient()
-    logging.info("DeepSeek API客户端初始化成功")
-except ValueError as e:
-    logging.error(f"DeepSeek API客户端初始化失败: {str(e)}")
-    ai_clients['deepseek_api'] = None
-
-# 初始化本地模型客户端
-base_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-# 检查本地DeepSeek模型
-deepseek_model_path = os.getenv("DEEPSEEK_LOCAL_MODEL_PATH", os.path.join(base_path, "ai_module", "DeepSeek-R1-Distill-Qwen-1.5B"))
-if os.path.exists(deepseek_model_path):
+# 测试时跳过模型加载
+if os.getenv("SKIP_MODEL_LOADING") != "True":
+    # 初始化DeepSeek在线客户端
     try:
-        ai_clients['deepseek'] = LocalModelClient(model_type="deepseek", model_path=deepseek_model_path)
-        logging.info(f"本地DeepSeek模型初始化成功: {deepseek_model_path}")
-    except Exception as e:
-        logging.error(f"本地DeepSeek模型初始化失败: {str(e)}")
+        ai_clients['deepseek_api'] = DeepSeekClient()
+        logging.warning("DeepSeek API客户端初始化成功")
+    except ValueError as e:
+        logging.error(f"DeepSeek API客户端初始化失败: {str(e)}")
+        ai_clients['deepseek_api'] = None
+
+    # 初始化本地模型客户端
+    base_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+    # 检查本地DeepSeek模型
+    deepseek_model_path = os.getenv("DEEPSEEK_LOCAL_MODEL_PATH", os.path.join(base_path, "ai_module", "DeepSeek-R1-Distill-Qwen-1.5B"))
+    if os.path.exists(deepseek_model_path):
+        try:
+            ai_clients['deepseek'] = LocalModelClient(model_type="deepseek", model_path=deepseek_model_path)
+            logging.info(f"本地DeepSeek模型初始化成功: {deepseek_model_path}")
+        except Exception as e:
+            logging.error(f"本地DeepSeek模型初始化失败: {str(e)}")
+            ai_clients['deepseek'] = None
+    else:
+        logging.error(f"本地DeepSeek模型路径不存在: {deepseek_model_path}")
         ai_clients['deepseek'] = None
-else:
-    logging.error(f"本地DeepSeek模型路径不存在: {deepseek_model_path}")
-    ai_clients['deepseek'] = None
 
-# 检查本地Qwen模型
-qwen_model_path = os.getenv("QWEN_LOCAL_MODEL_PATH", os.path.join(base_path, "ai_module", "Qwen1.5-0.5B-Chat"))
-if os.path.exists(qwen_model_path):
-    try:
-        ai_clients['qwen'] = LocalModelClient(model_type="qwen", model_path=qwen_model_path)
-        logging.info(f"本地Qwen模型初始化成功: {qwen_model_path}")
-    except Exception as e:
-        logging.error(f"本地Qwen模型初始化失败: {str(e)}")
+    # 检查本地Qwen模型
+    qwen_model_path = os.getenv("QWEN_LOCAL_MODEL_PATH", os.path.join(base_path, "ai_module", "Qwen1.5-0.5B-Chat"))
+    if os.path.exists(qwen_model_path):
+        try:
+            ai_clients['qwen'] = LocalModelClient(model_type="qwen", model_path=qwen_model_path)
+            logging.info(f"本地Qwen模型初始化成功: {qwen_model_path}")
+        except Exception as e:
+            logging.error(f"本地Qwen模型初始化失败: {str(e)}")
+            ai_clients['qwen'] = None
+    else:
+        logging.error(f"本地Qwen模型路径不存在: {qwen_model_path}")
         ai_clients['qwen'] = None
-else:
-    logging.error(f"本地Qwen模型路径不存在: {qwen_model_path}")
-    ai_clients['qwen'] = None
 
-# 检查网络连接状态，决定默认模型
-import socket
+    # 检查网络连接状态，决定默认模型
+    import socket
 
-def check_internet_connection():
-    try:
-        # 尝试连接到一个常用的网站，超时设为1秒
-        socket.create_connection(("www.baidu.com", 443), timeout=1)
-        return True
-    except (socket.timeout, socket.error):
-        return False
+    def check_internet_connection():
+        try:
+            # 尝试连接到一个常用的网站，超时设为1秒
+            socket.create_connection(("www.baidu.com", 443), timeout=1)
+            return True
+        except (socket.timeout, socket.error):
+            return False
 
-# 根据网络状态和可用模型设置默认模型
-if check_internet_connection() and ai_clients['deepseek_api'] is not None:
-    default_model = 'deepseek_api'
-    logging.info("网络连接正常，默认使用DeepSeek API模型")
-elif ai_clients['deepseek'] is not None:
-    default_model = 'deepseek'
-    logging.info("使用本地DeepSeek模型作为默认模型")
-elif ai_clients['qwen'] is not None:
-    default_model = 'qwen'
-    logging.info("使用本地Qwen模型作为默认模型")
-else:
-    # 如果所有模型都不可用，则提供明确的错误信息
-    logging.error("所有AI模型都未正确配置，无法提供AI对话服务")
-    default_model = None
+    # 根据网络状态和可用模型设置默认模型
+    if check_internet_connection() and ai_clients['deepseek_api'] is not None:
+        default_model = 'deepseek_api'
+        logging.info("网络连接正常，默认使用DeepSeek API模型")
+    elif ai_clients['deepseek'] is not None:
+        default_model = 'deepseek'
+        logging.info("使用本地DeepSeek模型作为默认模型")
+    elif ai_clients['qwen'] is not None:
+        default_model = 'qwen'
+        logging.info("使用本地Qwen模型作为默认模型")
+    else:
+        # 如果所有模型都不可用，则提供明确的错误信息
+        logging.error("所有AI模型都未正确配置，无法提供AI对话服务")
+        default_model = None
 
 @ai_bp.route('/models', methods=['GET'])
 def get_available_models():
@@ -281,7 +282,7 @@ def chat():
                             logging.debug(f"已将助手响应保存到数据库 (会话: {conversation_id})")
                     elif stream_interrupted:
                         logging.info(f"流式响应被中断，未添加助手消息到历史或数据库 (会话: {conversation_id})")
-                    else: # Not interrupted, but empty response
+                    else:
                         logging.info(f"流式响应为空，未添加助手消息到历史或数据库 (会话: {conversation_id})")
                         
                     yield "data: [DONE]\n\n"
@@ -630,6 +631,30 @@ def analyze_file():
             "error": str(e)
         }), 500
 
+@ai_bp.route('/conversations', methods=['GET'])
+def get_conversations():
+    """
+    获取用户对话列表接口
+    功能：获取当前用户的所有对话列表
+    请求方法：GET
+    返回：
+        - 对话列表，包含每个对话的ID、开始时间和消息数量
+    """
+    try:
+        # 检查用户是否已登录
+        if not current_user.is_authenticated:
+            return jsonify({"error": "未登录用户无法获取对话列表"}), 401
+            
+        # 获取用户的对话列表
+        conversations = get_user_conversations(current_user.id)
+        
+        return jsonify({
+            "conversations": conversations
+        })
+    except Exception as e:
+        logging.error(f"获取对话列表失败: {str(e)}", exc_info=True)
+        return jsonify({"error": str(e)}), 500
+
 @ai_bp.route('/history', methods=['GET'])
 def get_chat_history():
     """
@@ -654,7 +679,7 @@ def get_chat_history():
         
         return jsonify({
             "history": history,
-            "conversation_id": conversation_id or "all"
+            "conversation_id": conversation_id
         })
     except Exception as e:
         logging.error(f"获取对话历史记录失败: {str(e)}", exc_info=True)

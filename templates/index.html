@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>智能文档处理系统</title>
+    <title>智能文档处理与AI交互系统</title>
     <link rel="stylesheet" href="/static/css/style.css">
     <!-- 引入Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -14,7 +14,7 @@
         <header class="navbar">
             <div class="nav-logo">
                 <span class="material-icons">description</span>
-                <h1>智能文档系统</h1>
+                <h1>AI智能文档系统</h1>
             </div>
             <div class="nav-links">
                 <!--深色按钮-->
@@ -34,7 +34,7 @@
         <main class="main-content">
             <!-- 欢迎区域 -->
             <section class="welcome-section">
-                <h2>欢迎使用智能文档处理系统</h2>
+                <h2>欢迎使用智能文档处理与AI交互系统</h2>
                 <p>选择下方功能卡片，开始您的文档处理之旅</p>
             </section>
             
@@ -187,6 +187,12 @@
                                     <option value="qwen">通义千问</option>
                                 </select>
                             </div>
+                            <div class="conversation-history">
+                                <h3>历史对话</h3>
+                                <div id="conversationHistoryList" class="conversation-list">
+                                    <ul id="historyListContainer"></ul>
+                                </div>
+                            </div>
                             <div class="file-upload">
                                 <h3>上传文档</h3>
                                 <div class="upload-area" id="docUploadArea">
@@ -277,6 +283,25 @@
         
         <!-- 提示消息 -->
         <div id="toastContainer" class="toast-container"></div>
+        
+        <!-- 确认对话框模态框 -->
+        <div id="confirmModal" class="confirm-modal">
+            <div class="confirm-modal-content">
+                <div class="confirm-modal-header">
+                    <h4>确认操作</h4>
+                    <button class="close-confirm-modal">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <div class="confirm-modal-body">
+                    <p id="confirmMessage">确定要执行此操作吗？</p>
+                </div>
+                <div class="confirm-modal-footer">
+                    <button id="cancelBtn" class="btn text-btn">取消</button>
+                    <button id="confirmBtn" class="btn primary-btn">确认</button>
+                </div>
+            </div>
+        </div>
     </div>
     
     <script src="/static/js/main.js"></script>

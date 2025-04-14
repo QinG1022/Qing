@@ -13,7 +13,7 @@ from flask_login import UserMixin
 from pathlib import Path
 
 # 配置日志系统
-logging.basicConfig(level=logging.INFO)
+#logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # 创建SQLAlchemy实例
@@ -228,4 +228,29 @@ def clear_user_chat_history(user_id, conversation_id=None):
     except Exception as e:
         logger.error(f"清空用户对话历史记录失败: {str(e)}")
         db.session.rollback()
-        return False 
+        return False
+
+def get_user_conversations(user_id):
+    """获取指定用户的所有对话列表"""
+    try:
+        # 使用distinct获取唯一的conversation_id
+        conversations = db.session.query(
+            ChatHistory.conversation_id,
+            db.func.min(ChatHistory.timestamp).label('start_time'),
+            db.func.count(ChatHistory.id).label('message_count')
+        ).filter_by(
+            user_id=user_id
+        ).group_by(
+            ChatHistory.conversation_id
+        ).order_by(
+            db.func.min(ChatHistory.timestamp).desc()
+        ).all()
+        
+        return [{
+            'conversation_id': conv.conversation_id,
+            'start_time': conv.start_time.strftime('%Y-%m-%d %H:%M:%S'),
+            'message_count': conv.message_count
+        } for conv in conversations]
+    except Exception as e:
+        logger.error(f"获取用户对话列表失败: {str(e)}")
+        return [] 

@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const chatMessages = document.getElementById('chatMessages');
     const modelSelect = document.getElementById('modelSelect');
     const resetChatBtn = document.getElementById('clearChatBtn');
+    const newChatBtn = document.getElementById('newChatBtn');
+    const conversationHistoryList = document.getElementById('conversationHistoryList');
+    const historyListContainer = document.getElementById('historyListContainer');
     // 文件上传相关元素
     const chatFileInput = document.getElementById('docUpload');
     const fileInfoElement = document.getElementById('fileInfo');
@@ -25,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentFileContent = null;  // 存储上传文件的内容
     let currentConversationId = null; // 当前对话ID
     let previousModel = null; // 跟踪上一次使用的模型
+    let userLoggedIn = false; // 用户登录状态
     
     // 页面加载时，存储页面会话ID
     const sessionId = Date.now().toString();
@@ -34,11 +38,241 @@ document.addEventListener('DOMContentLoaded', function() {
     let availableModels = {};
     let defaultModel = null;
 
+    // 检查用户登录状态
+    async function checkLoginStatus() {
+        try {
+            const response = await fetch('/api/check-auth');
+            const data = await response.json();
+            userLoggedIn = data.authenticated;
+            
+            // 根据登录状态更新UI
+            if (userLoggedIn) {
+                conversationHistoryList.style.display = 'block';
+                newChatBtn.style.display = 'block';
+                // 加载对话列表
+                await loadConversationList();
+            } else {
+                conversationHistoryList.style.display = 'none';
+                newChatBtn.style.display = 'none';
+            }
+        } catch (error) {
+            console.error('检查登录状态失败:', error);
+        }
+    }
+
+    // 加载对话列表
+    async function loadConversationList() {
+        try {
+            const response = await fetch('/ai/conversations');
+            if (!response.ok) {
+                throw new Error(`获取对话列表失败：${response.status}`);
+            }
+            
+            const data = await response.json();
+            const conversations = data.conversations;
+            
+            // 清空列表容器
+            historyListContainer.innerHTML = '';
+            
+            if (conversations.length === 0) {
+                // 显示空列表提示
+                const emptyMessage = document.createElement('div');
+                emptyMessage.className = 'no-history';
+                emptyMessage.textContent = '暂无历史对话';
+                historyListContainer.appendChild(emptyMessage);
+                return;
+            }
+            
+            // 渲染对话列表
+            conversations.forEach(conv => {
+                const li = document.createElement('li');
+                li.setAttribute('data-conversation-id', conv.conversation_id);
+                
+                // 格式化时间
+                const date = new Date(conv.start_time);
+                const timeStr = date.toLocaleString();
+                
+                // 创建对话信息容器
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'conversation-info';
+                infoDiv.innerHTML = `
+                    <div>对话 ${timeStr}</div>
+                    <div class="conversation-time">${timeStr}</div>
+                `;
+                
+                // 创建消息数量标签
+                const countSpan = document.createElement('span');
+                countSpan.className = 'message-count';
+                countSpan.textContent = conv.message_count;
+                
+                // 创建删除按钮
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'delete-conv-btn';
+                deleteBtn.setAttribute('data-conversation-id', conv.conversation_id);
+                deleteBtn.innerHTML = '<span class="material-icons">delete_outline</span>';
+                
+                // 添加删除按钮事件监听器
+                deleteBtn.addEventListener('click', async (e) => {
+                    e.stopPropagation(); // 阻止事件冒泡
+                    const conversationId = e.currentTarget.getAttribute('data-conversation-id');
+                    const listItem = li;
+                    
+                    // 使用全局确认对话框
+                    window.showConfirmDialog('确定要删除这个对话吗？此操作不可恢复。', async (confirmed) => {
+                        if (confirmed) {
+                            await deleteConversation(conversationId, listItem);
+                        }
+                    });
+                });
+                
+                // 组装列表项
+                li.appendChild(infoDiv);
+                li.appendChild(countSpan);
+                li.appendChild(deleteBtn);
+                
+                // 添加点击事件加载对话历史
+                li.addEventListener('click', () => {
+                    loadSpecificChatHistory(conv.conversation_id);
+                });
+                
+                // 如果是当前对话，添加active类
+                if (conv.conversation_id === currentConversationId) {
+                    li.classList.add('active');
+                }
+                
+                historyListContainer.appendChild(li);
+            });
+        } catch (error) {
+            console.error('加载对话列表失败:', error);
+            showToast('加载对话列表失败: ' + error.message, 'error');
+        }
+    }
+
+    async function deleteConversation(conversationId, listItemElement) {
+        try {
+            showLoading('正在删除对话...');
+            
+            const response = await fetch('/ai/history/clear', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ conversation_id: conversationId })
+            });
+            
+            if (!response.ok) {
+                throw new Error(`删除对话失败：${response.status}`);
+            }
+            
+            // 从界面移除列表项
+            listItemElement.remove();
+            
+            // 检查是否删除了当前对话
+            if (conversationId === currentConversationId) {
+                currentConversationId = null;
+                chatMessages.innerHTML = '';
+                appendMessage('您好，我是AI助手，有什么可以帮助您的吗？', false, true);
+            }
+            
+            // 检查列表是否为空
+            if (historyListContainer.children.length === 0) {
+                const emptyMessage = document.createElement('div');
+                emptyMessage.className = 'no-history';
+                emptyMessage.textContent = '暂无历史对话';
+                historyListContainer.appendChild(emptyMessage);
+            }
+            
+            showToast('对话已删除', 'success');
+        } catch (error) {
+            console.error('删除对话失败:', error);
+            showToast('删除对话失败: ' + error.message, 'error');
+        } finally {
+            hideLoading();
+        }
+    }
+
+    // 加载特定对话的历史记录
+    async function loadSpecificChatHistory(conversationId) {
+        try {
+            // 更新当前对话ID
+            currentConversationId = conversationId;
+            
+            // 更新列表项的高亮状态
+            document.querySelectorAll('#historyListContainer li').forEach(li => {
+                li.classList.remove('active');
+                if (li.getAttribute('data-conversation-id') === conversationId) {
+                    li.classList.add('active');
+                }
+            });
+            
+            // 清空聊天区域
+            chatMessages.innerHTML = '';
+            
+            // 获取对话历史
+            const response = await fetch(`/ai/history?conversation_id=${conversationId}`);
+            if (!response.ok) {
+                throw new Error(`获取对话历史失败：${response.status}`);
+            }
+            
+            const data = await response.json();
+            const history = data.history;
+            
+            if (history && history.length > 0) {
+                history.forEach(msg => {
+                    appendMessage(msg.content, msg.role === 'user', false);
+                });
+            } else {
+                appendMessage('没有找到对话记录', false, true);
+            }
+        } catch (error) {
+            console.error('加载对话历史失败:', error);
+            appendMessage('加载对话历史失败: ' + error.message, false, true);
+        }
+    }
+
+    // 处理新对话
+    async function handleNewChat() {
+        try {
+            // 清空聊天区域
+            chatMessages.innerHTML = '';
+            
+            // 重置当前对话ID
+            currentConversationId = null;
+            
+            // 移除列表项的高亮状态
+            document.querySelectorAll('#historyListContainer li').forEach(li => {
+                li.classList.remove('active');
+            });
+            
+            // 显示欢迎消息
+            appendMessage('您好，我是AI助手，有什么可以帮助您的吗？', false, true);
+            
+            // 重置文件内容
+            currentFileContent = null;
+            if (uploadStatusElement) {
+                uploadStatusElement.classList.add('hidden');
+            }
+            if (chatFileInput) {
+                chatFileInput.value = '';
+            }
+            
+            // 更新上一次使用的模型
+            previousModel = currentModel;
+            
+        } catch (error) {
+            console.error('开始新对话失败:', error);
+            appendMessage('开始新对话失败: ' + error.message, false, true);
+        }
+    }
+
     // 初始化 - 获取可用模型信息和历史对话记录
     async function initializeModels() {
         try {
             // 显示加载提示
             appendMessage('正在初始化AI模型，请稍候...', false, true);
+            
+            // 检查登录状态
+            await checkLoginStatus();
             
             const response = await fetch('/ai/models');
             if (!response.ok) {
@@ -119,7 +353,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // 如果是401未授权，说明用户未登录，显示欢迎消息即可
             if (response.status === 401) {
                 appendMessage('您好，我是AI助手，有什么可以帮助您的吗？', false, true);
-                // 不需要将401视为错误，是预期行为
                 return;
             }
             
@@ -149,6 +382,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         displayedMessages.add(messageKey);
                     }
                 });
+                
+                // 更新对话列表的高亮状态
+                if (userLoggedIn) {
+                    await loadConversationList();
+                }
             } else {
                 // 没有历史记录，显示欢迎消息
                 appendMessage('您好，我是AI助手，有什么可以帮助您的吗？', false, true);
@@ -168,7 +406,7 @@ document.addEventListener('DOMContentLoaded', function() {
         chatInput.disabled = true;
         sendMessageBtn.disabled = true;
         
-        // 显示停止按钮 - 只使用display属性
+        // 显示停止按钮
         stopGenerationBtn.style.display = 'flex';
 
         // 显示用户消息
@@ -282,6 +520,12 @@ document.addEventListener('DOMContentLoaded', function() {
                                 if (parsed.conversation_id) {
                                     currentConversationId = parsed.conversation_id;
                                     console.log('获取到会话ID:', currentConversationId);
+                                    
+                                    // 如果是新对话，刷新对话列表
+                                    if (userLoggedIn) {
+                                        await loadConversationList();
+                                    }
+                                    
                                     continue; // 继续处理下一行
                                 }
                                 
@@ -295,11 +539,9 @@ document.addEventListener('DOMContentLoaded', function() {
                                         content += parsed.content || '';
                                     }
                                     
-                                    // 将内容按段落分割并格式化显示，使用与AI回复相同的格式化逻辑
+                                    // 将内容按段落分割并格式化显示
                                     const formattedContent = content
-                                        // 智能段落划分：通过函数处理，根据句子长度决定是否分段
                                         .replace(/([.!?。！？])([^.!?。！？\s<])/g, function(match, p1, p2, offset, string) {
-                                            // 获取当前句子，向前查找上一个句号等标点或字符串开头
                                             let sentenceStart = offset;
                                             for (let i = offset - 1; i >= 0; i--) {
                                                 if (/[.!?。！？]/.test(string[i])) {
@@ -309,19 +551,17 @@ document.addEventListener('DOMContentLoaded', function() {
                                             }
                                             const sentenceLength = offset - sentenceStart;
                                             
-                                            // 只有句子长度超过15个字符才添加段落分隔
                                             if (sentenceLength > 15) {
                                                 return p1 + "<br><br>" + p2;
                                             } else {
-                                                return match; // 返回原始匹配，不添加换行
+                                                return match;
                                             }
                                         })
-                                        // 处理冒号后跟列表的情况，确保列表项正确分段，但排除小数点情况
-                                        .replace(/([:：])\s*((?<!\d)\d+\.(?!\d)\s*)/g, "$1<br><br>$2") // 冒号后跟列表项，排除小数点
-                                        .replace(/([.!?。！？])\s*((?<!\d)\d+\.(?!\d)\s*)/g, "$1<br><br>$2") // 句号等后跟列表项，排除小数点
-                                        .replace(/([,，:：；;])\s*/g, "$1 ")  // 在逗号、冒号、分号后添加空格
-                                        .replace(/\n\s*\n/g, "<br><br>")  // 连续的换行符替换为HTML换行
-                                        .replace(/\n/g, "<br>");  // 单个换行符替换为HTML换行
+                                        .replace(/([:：])\s*((?<!\d)\d+\.(?!\d)\s*)/g, "$1<br><br>$2")
+                                        .replace(/([.!?。！？])\s*((?<!\d)\d+\.(?!\d)\s*)/g, "$1<br><br>$2")
+                                        .replace(/([,，:：；;])\s*/g, "$1 ")
+                                        .replace(/\n\s*\n/g, "<br><br>")
+                                        .replace(/\n/g, "<br>");
                                     
                                     contentDiv.innerHTML = formattedContent;
                                     chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -338,22 +578,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     }
                 }
-                
-                // 流式响应结束，如果得到了conversation_id，保存它
-                if (!currentConversationId) {
-                    try {
-                        // 尝试获取会话ID
-                        const historyResponse = await fetch('/ai/history');
-                        if (historyResponse.ok) {
-                            const historyData = await historyResponse.json();
-                            if (historyData.history && historyData.history.length > 0) {
-                                currentConversationId = historyData.history[0].conversation_id;
-                            }
-                        }
-                    } catch (e) {
-                        console.error('获取会话ID失败:', e);
-                    }
-                }
             } else {
                 // 处理非流式响应 (application/json)
                 console.log('检测到JSON响应');
@@ -363,10 +587,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     if (responseData.conversation_id) {
                         currentConversationId = responseData.conversation_id;
+                        
+                        // 如果是新对话，刷新对话列表
+                        if (userLoggedIn) {
+                            await loadConversationList();
+                        }
                     }
                     
                     if (responseData.response) {
-                        // 对于非流式响应，直接显示完整回复，使用与AI回复相同的格式化逻辑
+                        // 对于非流式响应，直接显示完整回复
                         let formattedContent = responseData.response
                             // 智能段落划分：通过函数处理，根据句子长度决定是否分段
                             .replace(/([.!?。！？])([^.!?。！？\s<])/g, function(match, p1, p2, offset, string) {
@@ -432,60 +661,10 @@ document.addEventListener('DOMContentLoaded', function() {
             chatInput.disabled = false;
             sendMessageBtn.disabled = false;
             
-            // 隐藏停止按钮 - 只使用display属性
+            // 隐藏停止按钮
             stopGenerationBtn.style.display = 'none';
             
             controller = null;
-        }
-    }
-
-    // 处理重置对话
-    async function handleResetChat() {
-        try {
-            // 先清空本地对话显示
-            chatMessages.innerHTML = '';
-            
-            // 重置会话ID
-            currentConversationId = null;
-            
-            // 重置本地模型对话历史
-            await fetch('/ai/reset', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    model: currentModel
-                })
-            });
-            
-            // 如果用户已登录，也清除服务器上的对话历史
-            await fetch('/ai/history/clear', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({})  // 添加空对象作为请求体
-            }).catch(err => console.error('清除对话历史失败:', err));
-            
-            // 显示欢迎消息
-            appendMessage('对话已重置。您好，我是AI助手，有什么可以帮助您的吗？', false, true);
-            
-            // 重置文件内容
-            currentFileContent = null;
-            if (uploadStatusElement) {
-                uploadStatusElement.classList.add('hidden');
-            }
-            if (chatFileInput) {
-                chatFileInput.value = '';
-            }
-            
-            // 更新上一次使用的模型
-            previousModel = currentModel;
-            
-        } catch (error) {
-            console.error('重置对话失败:', error);
-            appendMessage('重置对话失败: ' + error.message, false, true);
         }
     }
 
@@ -657,21 +836,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // 绑定停止按钮事件
     stopGenerationBtn.addEventListener('click', handleStopGeneration);
     
-    // 绑定重置按钮事件
-    resetChatBtn.addEventListener('click', handleResetChat);
-    
     // 绑定新对话按钮事件
-    const newChatBtn = document.getElementById('newChatBtn');
-    if (newChatBtn) {
-        newChatBtn.addEventListener('click', handleResetChat);
-    }
+    newChatBtn.addEventListener('click', handleNewChat);
     
-    //文件上传事件
+    // 绑定清空对话按钮事件
+    resetChatBtn.addEventListener('click', handleNewChat);
+    
+    // 文件上传事件
     if (chatFileInput) {
         chatFileInput.addEventListener('change', handleFileUpload);
     }
     
-    //触发文件上传按钮
+    // 触发文件上传按钮
     if (triggerUploadBtn) {
         triggerUploadBtn.addEventListener('click', () => {
             chatFileInput.click();

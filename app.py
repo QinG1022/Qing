@@ -1,10 +1,7 @@
 """
 Flask 主程序
 功能: 提供Web服务、文件处理和API接口
-作者: [您的名字]
-版本: 2.0
-最后更新: 2024-03-08
-描述: 该程序是一个智能文档处理系统，提供PDF生成、OCR识别和PDF文本提取功能
+描述: 提供PDF生成、OCR识别和PDF文本提取功能
 """
 import os
 import logging
@@ -431,7 +428,7 @@ def get_task(task_id):
                     'message': '处理失败'
                 })
             
-        logging.info(f"任务 {task_id} 状态: {response}")
+        logging.info(f"任务 {task_id} 状态: {response.get('status')}, 消息: {response.get('message', '无消息')}")
         return jsonify(response)
         
     except Exception as e:
@@ -1005,7 +1002,7 @@ if __name__ == '__main__':
         host = '0.0.0.0'
         port = 5000
         print("\n" + "="*50)
-        print(" 智能文档生成系统服务已启动")
+        print(" AI智能文档系统已启动")
         print(f" 请在浏览器中访问: http://localhost:{port} 或 http://127.0.0.1:{port}")
         print("="*50 + "\n")
         

@@ -49,7 +49,3 @@ ai_module/
 # 会话文件
 /session/
 *.db
-
-# 其他配置
-/.cursor/
-

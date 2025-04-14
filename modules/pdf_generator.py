@@ -118,7 +118,7 @@ class PDFGenerator:
             return font_path    # 返回字体文件路径     
         # 处理异常    
         except Exception as e:
-            logging.error(f"字体初始化失败: {str(e)}", exc_info=True)   # 打印字体初始化失败信息        
+            logging.error(f"字体初始化失败: {str(e)}", exc_info=True)        
             # 尝试使用系统默认字体
             try:
                 from reportlab.pdfbase._fontdata import _fonts      # 导入字体数据    

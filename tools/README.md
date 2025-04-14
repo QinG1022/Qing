@@ -50,7 +50,7 @@ python tools/clean_test_reports.py
 
 ### 后端模块结构图生成工具 (generate_module_structure.py)
 
-该工具用于生成项目后端模块结构的可视化图表，帮助开发人员理解模块之间的依赖关系和整体架构。
+该工具用于生成项目后端模块结构的可视化图表。
 
 **功能**:
 - 扫描项目中的Python模块

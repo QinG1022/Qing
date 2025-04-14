@@ -1,6 +1,5 @@
 /**
- * 智能文档处理系统 - 主样式表
- * 版本: 1.0
+ * 主样式表
  * 描述: 基于Material Design设计语言的现代风格UI
  * 主色调: #1a1a2e + 辅助色: #21bf73
  */
@@ -1604,4 +1603,231 @@ textarea {
     0% { transform: scale(1); }
     50% { transform: scale(1.1); }
     100% { transform: scale(1); }
+}
+
+/* 对话列表样式 */
+.conversation-history {
+    margin: 20px 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.conversation-list {
+    flex: 1;
+    overflow-y: auto;
+    margin-top: 10px;
+    padding-right: 5px;
+}
+
+.conversation-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.conversation-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+}
+
+.conversation-list li:hover {
+    background-color: var(--hover-color);
+}
+
+.conversation-list li.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.conversation-list .conversation-info {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.conversation-list .conversation-time {
+    font-size: 0.8em;
+    color: var(--text-secondary);
+}
+
+.conversation-list li.active .conversation-time {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.conversation-list .message-count {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    margin-right: 10px;
+}
+
+.conversation-list li.active .message-count {
+    background-color: white;
+    color: var(--primary-color);
+}
+
+/* 删除对话按钮样式 */
+.delete-conv-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0.5;
+}
+
+.conversation-list li:hover .delete-conv-btn {
+    opacity: 1;
+}
+
+.delete-conv-btn:hover {
+    color: #f44336;
+    background-color: rgba(244, 67, 54, 0.1);
+    transform: scale(1.1);
+}
+
+.conversation-list li.active .delete-conv-btn {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.conversation-list li.active .delete-conv-btn:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* 空列表提示样式 */
+.no-history {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* 确认对话框样式 */
+.confirm-modal {
+    display: none;
+    position: fixed;
+    z-index: 1500;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    visibility: hidden;
+}
+
+.confirm-modal.show {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+}
+
+.confirm-modal-content {
+    background-color: var(--bg-primary);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-3);
+    width: 100%;
+    max-width: 380px;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+}
+
+.confirm-modal.show .confirm-modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.confirm-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-md);
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.confirm-modal-header h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.close-confirm-modal {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-confirm-modal:hover {
+    opacity: 1;
+}
+
+.confirm-modal-body {
+    padding: var(--spacing-lg);
+}
+
+.confirm-modal-body p {
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.confirm-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+}
+
+/* 深色主题适配 */
+[data-theme="dark"] .confirm-modal-content {
+    background-color: var(--bg-secondary);
+}
+
+[data-theme="dark"] .confirm-modal-body p {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .confirm-modal-footer {
+    border-color: var(--border-color);
+}
+
+/* 响应式适配 */
+@media (max-width: 576px) {
+    .confirm-modal-content {
+        max-width: 90%;
+    }
+    
+    .confirm-modal-body {
+        padding: var(--spacing-md);
+    }
 } 

@@ -1,8 +1,12 @@
 /**
- * 智能文档处理系统 - 主脚本
+ * 主脚本
  * 版本: 1.0
  * 描述: 处理主页面逻辑和用户交互
  */
+
+// 暴露给全局的确认对话框函数
+window.showConfirmDialog = null;
+window.hideConfirmDialog = null;
 
 // DOM 加载完成后执行
 document.addEventListener('DOMContentLoaded', function() {
@@ -23,6 +27,16 @@ document.addEventListener('DOMContentLoaded', function() {
         maxHistoryItems: 10 // 默认最大历史记录数
     };
     
+    // 确认对话框元素
+    const confirmModal = document.getElementById('confirmModal');
+    const confirmMessage = document.getElementById('confirmMessage');
+    const confirmBtn = document.getElementById('confirmBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const closeConfirmModal = document.querySelector('.close-confirm-modal');
+    
+    // 确认对话框回调函数
+    let confirmCallback = null;
+    
     // 初始化主题
     initTheme();
     
@@ -37,6 +51,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 初始化卡片动画
     initCardAnimations();
+    
+    // 初始化确认对话框
+    initConfirmDialog();
     
     // 事件监听器
     addEventListeners();
@@ -263,41 +280,110 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     /**
-     * 删除历史记录项
+     * 初始化确认对话框
+     */
+    function initConfirmDialog() {
+        // 确认按钮事件
+        confirmBtn.addEventListener('click', () => {
+            if (confirmCallback) {
+                confirmCallback(true);
+            }
+            hideConfirmDialog();
+        });
+        
+        // 取消按钮事件
+        cancelBtn.addEventListener('click', () => {
+            if (confirmCallback) {
+                confirmCallback(false);
+            }
+            hideConfirmDialog();
+        });
+        
+        // 关闭按钮事件
+        closeConfirmModal.addEventListener('click', hideConfirmDialog);
+        
+        // 点击遮罩层关闭
+        confirmModal.addEventListener('click', (e) => {
+            if (e.target === confirmModal) {
+                hideConfirmDialog();
+            }
+        });
+        
+        // ESC键关闭
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && confirmModal.classList.contains('show')) {
+                hideConfirmDialog();
+            }
+        });
+    }
+    
+    /**
+     * 显示确认对话框
+     * @param {string} message - 要显示的消息
+     * @param {Function} callback - 回调函数，带有一个布尔参数表示用户的选择
+     */
+    function showConfirmDialog(message, callback) {
+        confirmMessage.textContent = message;
+        confirmCallback = callback;
+        confirmModal.classList.add('show');
+        setTimeout(() => {
+            document.querySelector('.confirm-modal-content').style.opacity = '1';
+            document.querySelector('.confirm-modal-content').style.transform = 'translateY(0)';
+        }, 10);
+    }
+    
+    /**
+     * 隐藏确认对话框
+     */
+    function hideConfirmDialog() {
+        document.querySelector('.confirm-modal-content').style.opacity = '0';
+        document.querySelector('.confirm-modal-content').style.transform = 'translateY(-20px)';
+        setTimeout(() => {
+            confirmModal.classList.remove('show');
+            confirmCallback = null;
+        }, 300);
+    }
+    
+    /**
+     * 删除单条历史记录
      */
     function deleteHistoryItem(id) {
-        fetch(`/history/${id}`, {
-            method: 'DELETE'
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                // 从状态中移除
-                state.historyItems = state.historyItems.filter(item => item.id !== id);
-                
-                // 从DOM中移除
-                const item = document.querySelector(`.history-item[data-id="${id}"]`);
-                if (item) {
-                    item.remove();
-                }
-                
-                // 如果没有记录，显示空状态
-                if (state.historyItems.length === 0) {
-                    document.getElementById('historyContainer').innerHTML = 
-                        '<p class="empty-history">暂无历史记录</p>';
-                }
-                
-                // 更新计数器
-                document.getElementById('historyCounter').textContent = `(${state.historyItems.length}/${state.maxHistoryItems})`;
-                
-                showToast('已删除历史记录', 'success');
-            } else {
-                showToast(data.error || '删除失败', 'error');
+        showConfirmDialog('确定要删除这条历史记录吗？此操作不可恢复。', (confirmed) => {
+            if (confirmed) {
+                fetch(`/history/${id}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        // 从状态中移除
+                        state.historyItems = state.historyItems.filter(item => item.id !== id);
+                        
+                        // 从DOM中移除
+                        const item = document.querySelector(`.history-item[data-id="${id}"]`);
+                        if (item) {
+                            item.remove();
+                        }
+                        
+                        // 如果没有记录，显示空状态
+                        if (state.historyItems.length === 0) {
+                            document.getElementById('historyContainer').innerHTML = 
+                                '<p class="empty-history">暂无历史记录</p>';
+                        }
+                        
+                        // 更新计数器
+                        document.getElementById('historyCounter').textContent = `(${state.historyItems.length}/${state.maxHistoryItems})`;
+                        
+                        showToast('已删除历史记录', 'success');
+                    } else {
+                        showToast(data.error || '删除失败', 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('删除历史记录失败:', error);
+                    showToast('删除历史记录失败', 'error');
+                });
             }
-        })
-        .catch(error => {
-            console.error('删除历史记录失败:', error);
-            showToast('删除历史记录失败', 'error');
         });
     }
     
@@ -333,9 +419,11 @@ document.addEventListener('DOMContentLoaded', function() {
      * 确认清空历史记录
      */
     function confirmClearHistory() {
-        if (confirm('确定要清空所有历史记录吗？此操作不可恢复。')) {
-            clearHistory();
-        }
+        showConfirmDialog('确定要清空所有历史记录吗？此操作不可恢复。', (confirmed) => {
+            if (confirmed) {
+                clearHistory();
+            }
+        });
     }
     
     /**
@@ -368,93 +456,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('refreshHistoryBtn').addEventListener('click', fetchHistory);
         document.getElementById('clearHistoryBtn').addEventListener('click', confirmClearHistory);
         
-        // OCR相关事件
-        const imageUpload = document.getElementById('imageUpload');
-        if (imageUpload) {
-            imageUpload.addEventListener('change', handleImageUpload);
-            
-            // 拖放事件
-            const imageUploadArea = document.getElementById('imageUploadArea');
-            if (imageUploadArea) {
-                imageUploadArea.addEventListener('dragover', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    this.classList.add('drag-over');
-                });
-                
-                imageUploadArea.addEventListener('dragleave', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    this.classList.remove('drag-over');
-                });
-                
-                imageUploadArea.addEventListener('drop', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    this.classList.remove('drag-over');
-                    
-                    const files = e.dataTransfer.files;
-                    if (files.length > 0) {
-                        imageUpload.files = files;
-                        handleImageUpload({target: imageUpload});
-                    }
-                });
-            }
-        }
-        
-        // OCR按钮点击事件
-        const ocrBtn = document.getElementById('ocrBtn');
-        if (ocrBtn) {
-            ocrBtn.addEventListener('click', performOCR);
-        }
-        
-        // 生成PDF按钮点击事件
-        const generatePdfBtn = document.getElementById('generatePdfBtn');
-        if (generatePdfBtn) {
-            generatePdfBtn.addEventListener('click', generatePDF);
-        }
-        
-        // PDF上传事件
-        const pdfUpload = document.getElementById('pdfUpload');
-        if (pdfUpload) {
-            pdfUpload.addEventListener('change', handlePdfUpload);
-            
-            // PDF拖放事件
-            const pdfUploadArea = document.getElementById('pdfUploadArea');
-            if (pdfUploadArea) {
-                pdfUploadArea.addEventListener('dragover', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    this.classList.add('drag-over');
-                });
-                
-                pdfUploadArea.addEventListener('dragleave', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    this.classList.remove('drag-over');
-                });
-                
-                pdfUploadArea.addEventListener('drop', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    this.classList.remove('drag-over');
-                    
-                    const files = e.dataTransfer.files;
-                    if (files.length > 0 && files[0].type === 'application/pdf') {
-                        pdfUpload.files = files;
-                        handlePdfUpload({target: pdfUpload});
-                    } else {
-                        showToast('请上传PDF文件', 'error');
-                    }
-                });
-            }
-        }
-        
-        // 提取文本按钮点击事件
-        const extractBtn = document.getElementById('extractBtn');
-        if (extractBtn) {
-            extractBtn.addEventListener('click', extractText);
-        }
         
         // 模态框关闭按钮
         document.querySelector('.modal .close').addEventListener('click', closeModal);
@@ -711,40 +712,44 @@ document.addEventListener('DOMContentLoaded', function() {
     }
         
     /**
-     * 处理退出登录
+     * 用户退出登录
      */
     function logout() {
-        fetch('/api/logout', {
-            method: 'POST'
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                state.authenticated = false;
-                state.username = '';
-                state.userId = null;
-                
-                // 更新UI
-                document.getElementById('loginBtn').style.display = 'block';
-                document.getElementById('userInfo').style.display = 'none';
-                
-                // 隐藏用户菜单
-                const userMenu = document.getElementById('userMenu');
-                if (userMenu) {
-                    userMenu.style.display = 'none';
-                }
-                
-                // 重新获取历史记录
-                fetchHistory();
-                
-                showToast('已成功登出', 'success');
-            } else {
-                showToast('登出失败', 'error');
+        showConfirmDialog('确定要退出登录吗？', (confirmed) => {
+            if (confirmed) {
+                fetch('/api/logout', {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        state.authenticated = false;
+                        state.username = '';
+                        state.userId = null;
+                        
+                        // 更新UI
+                        document.getElementById('loginBtn').style.display = 'block';
+                        document.getElementById('userInfo').style.display = 'none';
+                        
+                        // 隐藏用户菜单
+                        const userMenu = document.getElementById('userMenu');
+                        if (userMenu) {
+                            userMenu.style.display = 'none';
+                        }
+                        
+                        // 重新获取历史记录
+                        fetchHistory();
+                        
+                        showToast('已成功登出', 'success');
+                    } else {
+                        showToast('登出失败', 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('登出请求失败:', error);
+                    showToast('登出请求失败', 'error');
+                });
             }
-        })
-        .catch(error => {
-            console.error('登出请求失败:', error);
-            showToast('登出请求失败', 'error');
         });
     }
     
@@ -1007,4 +1012,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 showToast('获取用户资料失败，请稍后再试', 'error');
             });
     }
+    
+    // 暴露确认对话框函数给全局
+    window.showConfirmDialog = showConfirmDialog;
+    window.hideConfirmDialog = hideConfirmDialog;
 }); 

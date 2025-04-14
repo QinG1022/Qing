@@ -625,7 +625,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     
-        // 更新“复制全部”按钮的逻辑 (如果保留该按钮)
+        // 复制全部按钮
         if (ui.copyAllBtn) {
             ui.copyAllBtn.onclick = () => {
                 // 用清晰的分隔符连接所有文件的文本
@@ -639,7 +639,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ui.copyAllBtn.style.display = allExtractedText.length > 0 ? 'block' : 'none';
         }
     
-        // 为所有新创建的复制按钮添加事件监听器 (使用事件委托可能更高效，但这里直接查询)
+        // 为所有新创建的复制按钮添加事件监听器 
         ui.pdfTextContent.querySelectorAll('.copy-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const targetSelector = this.getAttribute('data-target');

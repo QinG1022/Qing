@@ -6,12 +6,8 @@ from typing import Generator, List, Dict, Literal, Optional
 import re
 import json # 引入json用于stream_response
 
-# 配置日志记录器
-# 您可以在 app.py 中统一配置日志，这里只是一个示例
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-
 class LocalModelClient:
-    """支持DeepSeek-R1和Qwen1.5双模型的本地对话客户端（优化版）"""
+    """支持DeepSeek-R1和Qwen1.5-0.5B双模型的本地对话客户端）"""
 
     def __init__(
         self,
@@ -35,7 +31,7 @@ class LocalModelClient:
         elif torch.cuda.is_available():
             self.device = "cuda:0"
             try:
-                # 尝试打印显卡信息
+                # 打印显卡信息
                 props = torch.cuda.get_device_properties(0)
                 self.logger.info(f"检测到 CUDA 设备: {props.name}")
                 self.logger.info(f"可用显存: {props.total_memory / 1024**3:.2f} GB")
@@ -56,7 +52,6 @@ class LocalModelClient:
             self.logger.info(f"模型 '{model_path}' 加载成功。")
         except Exception as e:
             self.logger.error(f"模型加载失败: {str(e)}", exc_info=True)
-            # 抛出运行时错误，以便上层应用可以捕获并处理
             raise RuntimeError(f"模型 '{model_path}' 初始化失败: {str(e)}")
 
     def _load_model(self, model_path: str):
@@ -147,13 +142,12 @@ class LocalModelClient:
         """清空当前对话历史，并添加默认的系统提示"""
         # 设置默认的系统消息，指导模型的行为
         self.conversation_history = [
-            {"role": "system", "content": "You are a helpful assistant."} # 你可以修改这里的系统提示
+            {"role": "system", "content": "You are a helpful assistant."}
         ]
         self.logger.info("对话历史已重置，并添加了默认系统提示。")
 
     def generate_stream(
         self,
-        # 注意：query 参数现在是可选的，因为推荐在调用此方法前就使用 add_message 添加用户消息
         query: Optional[str] = None,
         max_new_tokens: int = 1024, # 生成的最大新 token 数量
         temperature: float = 0.6,   # 控制生成文本的随机性，较低值更保守，较高值更多样
