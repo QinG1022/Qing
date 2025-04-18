@@ -64,7 +64,7 @@
 
 - **在线模型**: DeepSeek API
 - **本地模型**:
-  - DeepSeek-R1-Distill-1.5B (轻量级版本)
+  - DeepSeek-R1-Distill-Qwen-1.5B (轻量级版本)
   - Qwen1.5-0.5B-Chat (超轻量级版本)
 - **自动模型选择机制**:
   - 网络状态感知
