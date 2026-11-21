@@ -1,0 +1,36 @@
+# Web框架
+Flask==3.0.2
+Flask-Talisman==1.1.0
+Flask-SQLAlchemy==3.1.0
+Werkzeug>=2.0.0
+pyOpenSSL==24.0.0
+
+# 异步任务
+# celery / redis 已移除：改用 modules/task_runner.py 的进程内线程池，
+# 单进程运行，不再需要 Redis 服务和独立的 worker 进程。
+
+# 图像处理
+Pillow==11.1.0
+pytesseract==0.3.10
+
+# PDF处理
+reportlab==4.1.0
+fonttools>=4.28.0
+PyPDF2>=3.0.0
+PyMuPDF>=1.18.0
+
+# AI对话（只走在线 API；本地模型的 torch / transformers / accelerate /
+# bitsandbytes / sentencepiece / einops 已移除，安装体积从约 2 GB 降到 200 MB 左右）
+openai>=1.0.0
+
+# 工具类
+python-dateutil>=2.8.0
+python-dotenv>=1.0.0
+# python-magic 已移除：代码里没有用到，而且它在 Windows 上还需要额外的 libmagic DLL
+
+# 开发工具
+pytest==8.0.0
+pytest-html==4.1.1
+
+# 系统依赖
+pywin32>=308; sys_platform == 'win32'

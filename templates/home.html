@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qing · 智能文档助手</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+<body>
+<!-- 动态背景（与对话页同一套） -->
+<div class="bg-decor" id="bgDecor" aria-hidden="true">
+    <div class="aurora aurora-1"></div>
+    <div class="aurora aurora-2"></div>
+    <div class="bg-grid"></div>
+    <canvas class="bg-canvas" id="bgCanvas"></canvas>
+    <div class="spotlight"></div>
+</div>
+
+<div class="home">
+    <header class="home-top">
+        <div class="brand">
+            <span class="mark"><span class="material-icons">auto_awesome</span></span>
+            <span class="name">Qing</span>
+            <span class="tag">本地优先</span>
+        </div>
+        <div class="spacer"></div>
+        <button class="icon-btn" id="themeBtn" title="切换深色模式">
+            <span class="material-icons">dark_mode</span>
+        </button>
+        <a class="btn" href="{{ url_for('index') }}">
+            <span class="material-icons">forum</span>进入对话
+        </a>
+    </header>
+
+    <main class="home-main">
+        <section class="hero">
+            <div class="glyph"><span class="material-icons">auto_awesome</span></div>
+            <h1>今天想处理什么？</h1>
+            <p>拖入 PDF 或图片，或者直接提问。文档解析与对话都在同一个界面里。</p>
+        </section>
+
+        <div class="composer" id="composer">
+            <textarea id="input" rows="1" placeholder="输入问题，或把文件拖进来…"></textarea>
+            <div class="composer-actions">
+                <button class="attach-btn" id="attachBtn">
+                    <span class="material-icons">attach_file</span>添加文件
+                </button>
+                <button class="send-btn" id="sendBtn" title="开始对话" disabled>
+                    <span class="material-icons">arrow_upward</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="quick-grid" id="quickGrid"></div>
+
+        <div class="home-foot">
+            <span><span class="material-icons">lock</span>API Key 只保存在本机</span>
+            <span><span class="material-icons">bolt</span>支持 PDF / 图片 / 文本</span>
+            <span><span class="material-icons">history</span>历史对话自动保存</span>
+        </div>
+    </main>
+
+    <div class="home-bottom">Qing · 单用户本地部署 · 回车开始，Shift + 回车换行</div>
+</div>
+
+<script src="{{ url_for('static', filename='js/home.js') }}"></script>
+</body>
+</html>

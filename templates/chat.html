@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qing · 智能文档助手</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+</head>
+<body>
+<div class="bg-decor" id="bgDecor" aria-hidden="true">
+    <div class="aurora aurora-1"></div>
+    <div class="aurora aurora-2"></div>
+    <div class="bg-grid"></div>
+    <canvas class="bg-canvas" id="bgCanvas"></canvas>
+    <div class="spotlight"></div>
+</div>
+
+<div class="app">
+    <!-- ================= 侧栏 ================= -->
+    <aside class="sidebar collapsed" id="sidebar">
+        <div class="sidebar-head">
+            <button class="btn-new" id="newChatBtn">
+                <span class="material-icons">add</span>新建对话
+            </button>
+        </div>
+        <nav class="conv-list" id="convList"></nav>
+        <div class="sidebar-foot">
+            <button class="foot-item" id="settingsBtn">
+                <span class="material-icons">settings</span><span>模型与 API 设置</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- ================= 主区 ================= -->
+    <main class="main">
+        <header class="topbar">
+            <button class="icon-btn" id="sidebarToggle" title="显示/隐藏对话列表">
+                <span class="material-icons">menu</span>
+            </button>
+            <a class="icon-btn" id="homeBtn" href="{{ url_for('home_page') }}" title="返回主界面">
+                <span class="material-icons">home</span>
+            </a>
+            <div class="topbar-title" id="convTitle">新对话</div>
+            <div class="topbar-right">
+                <button class="icon-btn" id="themeBtn" title="切换深色模式">
+                    <span class="material-icons">dark_mode</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="messages" id="messages">
+            <div class="messages-inner" id="messagesInner"></div>
+        </div>
+
+        <div class="composer-wrap">
+            <div class="composer" id="composer">
+                <div class="staged" id="staged"></div>
+                <textarea id="input" rows="1" placeholder="给 AI 发送消息，或拖入 PDF / 图片…"></textarea>
+                <div class="composer-actions">
+                    <button class="attach-btn" id="attachBtn" title="添加文件">
+                        <span class="material-icons">attach_file</span>添加文件
+                    </button>
+                    <button class="model-chip compact" id="modelChip" title="切换模型 / 修改配置">
+                        <span class="dot"></span>
+                        <span id="modelChipLabel">未配置模型</span>
+                        <span class="material-icons">unfold_more</span>
+                    </button>
+                    <button class="send-btn" id="sendBtn" title="发送" disabled>
+                        <span class="material-icons">arrow_upward</span>
+                    </button>
+                </div>
+            </div>
+            <div class="composer-hint">Enter 发送 · Shift + Enter 换行 · 支持 PDF / 图片</div>
+        </div>
+
+        <input type="file" id="fileInput" multiple accept=".pdf,.txt,.md,.csv,.json,image/*" style="display:none">
+    </main>
+</div>
+
+<!-- ================= 设置弹窗 ================= -->
+<div class="modal" id="settingsModal">
+    <div class="modal-card">
+        <div class="modal-head">
+            <h3>模型与 API 设置</h3>
+            <button class="icon-btn" id="closeSettings" title="关闭">
+                <span class="material-icons">close</span>
+            </button>
+        </div>
+        <p class="modal-sub">配置保存在本机 <code>config.json</code>，浏览器不直接接触 API Key。</p>
+
+        <div class="field">
+            <label for="provider">服务商</label>
+            <input type="text" id="provider" list="providerOptions" autocomplete="off"
+                   placeholder="siliconflow / deepseek / custom，也可以自己填">
+            <datalist id="providerOptions">
+                <option value="siliconflow">硅基流动 SiliconFlow</option>
+                <option value="deepseek">DeepSeek 官方</option>
+                <option value="custom">自定义（OpenAI 兼容）</option>
+            </datalist>
+            <div class="hint">选预设会自动填下面的地址和模型；你随时可以改</div>
+        </div>
+
+        <div class="field">
+            <label for="baseUrl">接口地址 Base URL</label>
+            <input type="text" id="baseUrl" placeholder="https://api.siliconflow.cn/v1">
+        </div>
+
+        <div class="field">
+            <label for="apiKey">API Key</label>
+            <input type="password" id="apiKey" placeholder="sk-…">
+            <div class="hint" id="keyHint">仅保存在本机</div>
+        </div>
+
+        <div class="field">
+            <label for="modelName">模型名称</label>
+            <div class="input-row">
+                <div class="combo" id="modelCombo">
+                    <input type="text" id="modelName" autocomplete="off"
+                           placeholder="deepseek-ai/DeepSeek-V3">
+                    <div class="combo-list" id="modelList"></div>
+                </div>
+                <button class="btn" id="fetchModelsBtn" title="从服务商拉取可用模型">
+                    <span class="material-icons">refresh</span>获取列表
+                </button>
+            </div>
+            <div class="hint" id="modelHint">点「获取列表」可拉取当前账号实际可用的模型</div>
+        </div>
+
+        <div class="modal-foot">
+            <button class="btn" id="probeVisionBtn" title="用一张 1x1 图片测试当前模型是否支持图像输入">
+                <span class="material-icons">visibility</span>检测看图
+            </button>
+            <button class="btn" id="testBtn">
+                <span class="material-icons">network_check</span>测试连接
+            </button>
+            <span class="test-status" id="testStatus"></span>
+            <button class="btn primary" id="saveBtn" style="margin-left:auto">
+                <span class="material-icons">check</span>保存
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="drop-veil" id="dropVeil">
+    <div class="drop-veil-inner">
+        <span class="material-icons">upload_file</span>
+        <p>松开即可添加文件</p>
+        <small>PDF / 图片 / 文本</small>
+    </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>

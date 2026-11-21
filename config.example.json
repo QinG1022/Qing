@@ -1,0 +1,6 @@
+{
+  "provider": "siliconflow",
+  "base_url": "https://api.siliconflow.cn/v1",
+  "model": "deepseek-ai/DeepSeek-V3",
+  "api_key": ""
+}
