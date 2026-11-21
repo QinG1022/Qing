@@ -17,6 +17,7 @@ if hasattr(sys.stdout, 'reconfigure'):
 
 FAILS = []
 PASSES = []
+SKIPPED = []
 
 
 def check(name, fn):
@@ -27,6 +28,11 @@ def check(name, fn):
     except Exception as e:
         FAILS.append((name, e))
         print(f'  [FAIL] {name}  {type(e).__name__}: {e}')
+
+
+def skip(name, reason):
+    SKIPPED.append((name, reason))
+    print(f'  [SKIP] {name}  {reason}')
 
 
 def main():
@@ -71,8 +77,14 @@ def main():
     # 否则会覆盖用户已经保存好的 base_url / model
     check('POST /api/settings 拒绝非法 Base URL', lambda: _expect_400(
         client, 'POST', '/api/settings', {'base_url': 'ftp://invalid'}))
-    check('POST /api/settings/test 缺 Key 时拒绝', lambda: _expect_400(
-        client, 'POST', '/api/settings/test', {'api_key': ''}))
+
+    # 已保存 Key 时，空的 api_key 会回退到已存的 Key，请求会真的打到服务商，
+    # 既慢又依赖网络，所以只在「尚未配置」时验证拒绝逻辑
+    if _key_is_set(client):
+        skip('POST /api/settings/test 缺 Key 时拒绝', '已保存 Key，空值会回退到已存 Key')
+    else:
+        check('POST /api/settings/test 缺 Key 时拒绝', lambda: _expect_400(
+            client, 'POST', '/api/settings/test', {'api_key': ''}))
 
     print('\n[8] 任务执行器（进程内，替代 Celery + Redis）')
     check('delay + 状态流转', _task_runner_selftest)
@@ -85,7 +97,8 @@ def main():
             print(f'   - {name}: {type(e).__name__}: {e}')
         print('=' * 62)
         return 1
-    print(f' ALL OK（{len(PASSES)} 项）')
+    extra = f'，{len(SKIPPED)} 项跳过' if SKIPPED else ''
+    print(f' ALL OK（{len(PASSES)} 项{extra}）')
     print('=' * 62)
     return 0
 
@@ -160,6 +173,13 @@ def _settings(client):
     if 'configured' not in data or 'settings' not in data:
         raise AssertionError(f'字段缺失: {list(data)}')
     return f"configured={data['configured']}, key_set={data['settings'].get('api_key_set')}"
+
+
+def _key_is_set(client):
+    """是否已经保存过 API Key（保存后空 Key 会回退到它）。"""
+    r = client.get('/api/settings')
+    data = r.get_json() or {}
+    return bool((data.get('settings') or {}).get('api_key_set'))
 
 
 def _expect_400(client, method, path, body):

@@ -33,7 +33,12 @@ from reportlab.platypus.flowables import KeepTogether
 from fontTools.ttLib import TTFont as FontToolsFont
 
 # 导入PDF处理工具
-from PyPDF2 import PdfReader, PdfWriter
+# PyPDF2 已停止维护（最后版本 3.0.1 有未修复漏洞），改用同作者的 pypdf；
+# 接口一致，保留 PyPDF2 分支只为兼容没升级的旧环境。
+try:
+    from pypdf import PdfReader, PdfWriter
+except ImportError:  # pragma: no cover
+    from PyPDF2 import PdfReader, PdfWriter
 
 class PDFGenerator:  
     """
