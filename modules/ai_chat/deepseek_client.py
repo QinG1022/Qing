@@ -41,6 +41,11 @@ class DeepSeekClient:
             if not self.messages:
                 raise ValueError("对话历史为空")
 
+            # 流式请求要求服务端在最后一个 chunk 里回传 token 用量，
+            # 前端用它显示消耗。服务端不支持时该参数会被忽略，不影响正常输出。
+            if stream and 'stream_options' not in kwargs:
+                kwargs['stream_options'] = {'include_usage': True}
+
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=self.messages,
@@ -67,10 +72,21 @@ class DeepSeekClient:
             
         try:
             for chunk in response:
+                # usage 只在最后一个 chunk 出现（此时 choices 通常为空）
+                usage = getattr(chunk, 'usage', None)
+                if usage:
+                    yield "data: " + json.dumps({
+                        'usage': {
+                            'prompt_tokens': getattr(usage, 'prompt_tokens', 0),
+                            'completion_tokens': getattr(usage, 'completion_tokens', 0),
+                            'total_tokens': getattr(usage, 'total_tokens', 0),
+                        }
+                    }) + "\n\n"
+
                 if chunk.choices:
                     content = chunk.choices[0].delta.content or ""
                     yield f"data: {json.dumps({'content': content})}\n\n"
-            yield "data: [DONE]\n\n"
+            yield "data: [DONE]\n\n" 
         except Exception as e:
             yield f"data: {json.dumps({'content': f'流式输出错误: {str(e)}', 'error': True})}\n\n"
             yield "data: [DONE]\n\n"

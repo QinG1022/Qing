@@ -31,6 +31,8 @@ DEFAULTS = {
     'ocr_api_key': '',
     # deepseek 用：text_recognition 纯文本 / rich_layout_recognition 保留版面
     'ocr_purpose': 'text_recognition',
+    # 实测过的模型能力缓存：{"模型id": {"chat": true, "vision": false, "at": 时间戳}}
+    'model_caps': {},
 }
 
 # 环境变量到配置项的映射（兼容旧的 .env 用法）
@@ -107,6 +109,26 @@ def is_configured():
     return bool(load_config().get('api_key'))
 
 
+def record_cap(model_id, **caps):
+    """记录一次实测结果（如 chat=True / vision=False），供界面显示。"""
+    if not model_id:
+        return
+    import time as _time
+    cfg = load_config()
+    table = dict(cfg.get('model_caps') or {})
+    entry = dict(table.get(model_id) or {})
+    entry.update(caps)
+    entry['at'] = int(_time.time())
+    table[model_id] = entry
+
+    payload = {k: cfg.get(k) for k in DEFAULTS}
+    payload['model_caps'] = table
+    tmp = CONFIG_FILE.with_suffix('.json.tmp')
+    with open(tmp, 'w', encoding='utf-8') as f:
+        json.dump(payload, f, ensure_ascii=False, indent=2)
+    os.replace(tmp, CONFIG_FILE)
+
+
 def public_config():
     """给前端看的配置：Key 打码，只回显是否已设置。"""
     cfg = load_config()
@@ -132,4 +154,5 @@ def public_config():
         'ocr_purpose': cfg.get('ocr_purpose', ''),
         'ocr_api_key_set': bool(ocr_key),
         'ocr_api_key_masked': ocr_masked,
+        'model_caps': cfg.get('model_caps') or {},
     }

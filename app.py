@@ -19,7 +19,8 @@ from modules.tasks import celery, generate_pdf, process_images_task, extract_pdf
 import time
 from collections import deque
 from modules.ai_chat.ai_routes import ai_bp, reset_client
-from modules.settings_store import load_config, save_config, public_config, is_configured
+from modules.settings_store import (load_config, save_config, public_config, is_configured,
+                                      record_cap)
 import re
 import json
 import uuid
@@ -905,8 +906,10 @@ def test_settings():
             messages=[{'role': 'user', 'content': 'ping'}],
             max_tokens=1
         )
+        record_cap(model, chat=True)
         return jsonify({'success': True, 'message': '连接成功', 'model': model})
     except Exception as e:
+        record_cap(model, chat=False)
         return jsonify({'success': False, 'message': f'连接失败：{str(e)[:200]}'}), 400
 
 
@@ -917,6 +920,7 @@ def test_settings():
 MODEL_KINDS = {
     'text': '纯文本',
     'vision': '识图',
+    'ocr': 'OCR',
     'audio': '语音',
     'embedding': '向量',
     'rerank': '重排',
@@ -929,9 +933,13 @@ _KIND_RULES = [
     ('rerank', ('rerank',)),
     ('embedding', ('embed', 'bge-', 'gte-', 'm3e', 'text2vec')),
     ('audio', ('audio', 'whisper', 'tts', 'speech', 'asr', 'sensevoice', 'cosyvoice')),
-    ('image', ('flux', 'stable-diffusion', 'sd3', 'kolors', 'seedream', 'dall-e', 'imagen')),
-    ('video', ('video', 'cogvideo', 'hunyuanvideo', 'wan2', 'seedance')),
-    ('vision', ('vl', 'vision', '4v', 'internvl', 'llava', 'minicpm-v', 'qvq', 'omni', 'gpt-4o', 'gemini')),
+    # OCR 专用模型：图片/文档 -> 文字
+    ('ocr', ('ocr',)),
+    ('image', ('flux', 'stable-diffusion', 'sd3', 'kolors', 'seedream', 'dall-e', 'imagen',
+               'z-image', 'qwen-image', 'moss-image', 'hunyuan-image', 'seededit')),
+    ('video', ('video', 'cogvideo', 'hunyuanvideo', 'wan2', 'seedance', 'kling')),
+    ('vision', ('vl', 'vision', '4v', 'internvl', 'llava', 'minicpm-v', 'qvq', 'omni',
+                'gpt-4o', 'gemini', 'glm-4.5v', 'step-1v')),
 ]
 
 
@@ -1022,6 +1030,7 @@ def probe_vision():
             }],
             max_tokens=4,
         )
+        record_cap(model, vision=True)
         return jsonify({
             'success': True, 'supported': True, 'model': model,
             'message': '支持图像输入（多模态）',
@@ -1030,6 +1039,8 @@ def probe_vision():
         detail = str(e)[:200]
         low = detail.lower()
         looks_like_no_vision = any(marker in low for marker in _VISION_MARKERS)
+        if looks_like_no_vision:
+            record_cap(model, vision=False)
         return jsonify({
             'success': True,
             'supported': False,
@@ -1039,11 +1050,25 @@ def probe_vision():
         })
 
 
+@app.context_processor
+def inject_asset_version():
+    """模板里用 asset_ver('css/chat.css') 拿到文件的修改时间，作为缓存版本号。"""
+    def asset_ver(rel_path):
+        try:
+            f = Path(app.static_folder) / rel_path
+            return int(f.stat().st_mtime)
+        except Exception:
+            return 0
+    return {'asset_ver': asset_ver}
+
+
 @app.after_request
 def add_cache_control(response):
     """添加缓存控制头"""
-    # 阻止浏览器缓存登录状态相关的请求
-    if request.path.startswith('/api/'):
+    # API 和 HTML 页面都不缓存：
+    # - API 带登录态，必须 no-store
+    # - HTML 里内嵌了 ?v= 版本号和模板结构，缓存住会导致改动看不到
+    if request.path.startswith('/api/') or (response.mimetype or '').startswith('text/html'):
         response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
         response.headers['Pragma'] = 'no-cache'
         response.headers['Expires'] = '0'

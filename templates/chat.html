@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qing · 智能文档助手</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/icons.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/icons.css') }}?v={{ asset_ver('css/icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}?v={{ asset_ver('css/chat.css') }}">
 </head>
 <body>
 <div class="bg-decor" id="bgDecor" aria-hidden="true">
@@ -53,11 +53,24 @@
             <div class="messages-inner" id="messagesInner"></div>
         </div>
 
+        <button class="jump-bottom" id="jumpBottom" title="回到最新消息">
+            <span class="material-icons">arrow_downward</span>
+        </button>
+
         <div class="composer-wrap">
             <div class="composer" id="composer">
                 <div class="staged" id="staged"></div>
                 <textarea id="input" rows="1" placeholder="给 AI 发送消息，或拖入 PDF / 图片…"></textarea>
-                <div class="composer-actions">
+                <div class="model-menu" id="modelMenu">
+                <div class="mm-head">
+                    <span class="mm-title">切换模型</span>
+                    <button class="mm-more" id="modelMenuMore" title="打开完整设置">
+                        <span class="material-icons">tune</span>设置
+                    </button>
+                </div>
+                <div class="mm-list" id="modelMenuList"></div>
+            </div>
+            <div class="composer-actions">
                     <button class="attach-btn" id="attachBtn" title="添加文件">
                         <span class="material-icons">attach_file</span>添加文件
                     </button>
@@ -71,7 +84,7 @@
                     </button>
                 </div>
             </div>
-            <div class="composer-hint">Enter 发送 · Shift + Enter 换行 · 支持 PDF / 图片</div>
+            <div class="composer-hint">Enter 发送 · Shift + Enter 换行 · 支持 PDF / 图片<span class="token-meter" id="tokenMeter"></span></div>
         </div>
 
         <input type="file" id="fileInput" multiple accept=".pdf,.txt,.md,.csv,.json,image/*" style="display:none">
@@ -89,7 +102,10 @@
         </div>
         <p class="modal-sub">配置保存在本机 <code>config.json</code>，浏览器不直接接触 API Key。</p>
 
-        <div class="field">
+        <div class="settings-grid">
+            <div class="settings-col">
+
+            <div class="field">
             <label for="provider">服务商</label>
             <input type="text" id="provider" list="providerOptions" autocomplete="off"
                    placeholder="siliconflow / deepseek / custom，也可以自己填">
@@ -124,7 +140,49 @@
                     <span class="material-icons">refresh</span>获取列表
                 </button>
             </div>
-            <div class="hint" id="modelHint">点「获取列表」可拉取当前账号实际可用的模型</div>
+            <div class="hint" id="modelHint">点「获取列表」可拉取当前账号实际可用的模型（右侧类别按模型名推断，仅供参考）</div>
+        </div>
+
+            </div>
+
+            <div class="settings-col">
+        <div class="settings-section">
+            <h4>图片识别（OCR）</h4>
+
+                <div class="field">
+                <label for="ocrProvider">识别方式</label>
+                <select id="ocrProvider">
+                    <option value="vision">视觉模型看图（复用上面的 Key）</option>
+                    <option value="deepseek">DeepSeek 官方 OCR（按页计费）</option>
+                    <option value="tesseract">本地 Tesseract（需自行安装）</option>
+                </select>
+                <div class="hint" id="ocrHint">视觉模型会直接读取图片，适合截图、表格、拍照文档</div>
+            </div>
+
+            <div class="field" id="ocrModelField">
+                <label for="ocrModel">视觉模型</label>
+                <div class="combo" id="ocrCombo">
+                    <input type="text" id="ocrModel" autocomplete="off"
+                           placeholder="Qwen/Qwen3-VL-8B-Instruct">
+                    <span class="combo-arrow" aria-hidden="true" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);display:flex;align-items:center;pointer-events:none;color:var(--text-muted)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                    <div class="combo-list" id="ocrModelList"></div>
+                </div>
+                <div class="hint">点上方「获取列表」后列出可看图的模型；名字推断可能有误，可用「检测看图」实测</div>
+            </div>
+
+            <div class="field ocr-deepseek-only">
+                <label for="ocrBaseUrl">OCR 接口地址</label>
+                <input type="text" id="ocrBaseUrl" placeholder="https://api.deepseek.com">
+            </div>
+
+            <div class="field ocr-deepseek-only">
+                <label for="ocrApiKey">OCR API Key</label>
+                <input type="password" id="ocrApiKey" placeholder="sk-…">
+                <div class="hint" id="ocrKeyHint">留空则复用对话的 Key（同域名时）</div>
+            </div>
+        </div>
+
+            </div>
         </div>
 
         <div class="modal-foot">
@@ -150,8 +208,15 @@
     </div>
 </div>
 
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" title="关闭">
+        <span class="material-icons">close</span>
+    </button>
+    <img id="lightboxImg" alt="预览">
+</div>
+
 <div class="toast-wrap" id="toastWrap"></div>
 
-<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+<script src="{{ url_for('static', filename='js/chat.js') }}?v={{ asset_ver('js/chat.js') }}"></script>
 </body>
 </html>

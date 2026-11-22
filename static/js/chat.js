@@ -142,8 +142,21 @@
         return html;
     }
 
-    function scrollBottom() {
+    // 只在用户本来就贴着底部时才自动跟到底。
+    // 之前每来一段流式内容就强制 scrollTop，用户往上翻看历史会被立刻拽回去。
+    var stickBottom = true;
+    var STICK_THRESHOLD = 80;   // 距底部多少像素内算"贴底"
+
+    function nearBottom() {
         var box = $('messages');
+        if (!box) return true;
+        return box.scrollHeight - box.scrollTop - box.clientHeight < STICK_THRESHOLD;
+    }
+
+    function scrollBottom(force) {
+        var box = $('messages');
+        if (!box) return;
+        if (!force && !stickBottom) return;   // 用户在读历史，别打扰
         box.scrollTop = box.scrollHeight;
     }
 
@@ -224,16 +237,121 @@
     }
 
     /* ---------------- 消息渲染 ---------------- */
-    function addUserMessage(text) {
+    function initLightbox() {
+        document.addEventListener('click', function (e) {
+            var el2 = e.target;
+            if (!el2 || el2.tagName !== 'IMG') return;
+            if (el2.classList.contains('msg-thumb') || el2.classList.contains('result-thumb')) {
+                openLightbox(el2.src);
+            }
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    }
+
+    /** 图片文件 → 预览地址；非图片返回 undefined */
+    function thumbOf(file) {
+        if (!file || !file.type || file.type.indexOf('image/') !== 0) return undefined;
+        return trackUrl(URL.createObjectURL(file));
+    }
+
+    function openLightbox(src) {
+        var box = $('lightbox');
+        if (!box) {
+            // 模板里没有就现场建一个，保证一定能打开
+            box = document.createElement('div');
+            box.id = 'lightbox';
+            box.className = 'lightbox';
+            var close = document.createElement('button');
+            close.className = 'lightbox-close';
+            close.textContent = '\u00d7';
+            close.addEventListener('click', closeLightbox);
+            var big = document.createElement('img');
+            big.id = 'lightboxImg';
+            box.appendChild(close);
+            box.appendChild(big);
+            box.addEventListener('click', function (e) {
+                if (e.target === box) closeLightbox();
+            });
+            document.body.appendChild(box);
+        }
+        var img = document.getElementById('lightboxImg');
+        if (img) img.src = src;
+
+        // 内联样式兜底：即使 CSS 没加载也能显示
+        box.style.position = 'fixed';
+        box.style.inset = '0';
+        box.style.zIndex = '99999';
+        box.style.display = 'flex';
+        box.style.alignItems = 'center';
+        box.style.justifyContent = 'center';
+        box.style.background = 'rgba(8, 12, 20, .86)';
+        box.style.cursor = 'zoom-out';
+    }
+
+    function closeLightbox() {
+        var box = document.getElementById('lightbox');
+        if (!box) return;
+        box.style.display = 'none';
+        box.classList.remove('show');
+        var img = document.getElementById('lightboxImg');
+        if (img) img.removeAttribute('src');
+    }
+
+    function addUserMessage(text, files) {
         clearEmpty();
         var msg = el('div', 'msg user');
         msg.innerHTML =
             '<div class="avatar user">' + icon('person') + '</div>' +
-            '<div class="bubble-wrap"><div class="bubble"></div></div>';
-        var bubble = msg.querySelector('.bubble');
-        bubble.textContent = text;
+            '<div class="bubble-wrap"></div>';
         var wrap = msg.querySelector('.bubble-wrap');
-        wrap.appendChild(buildMeta(text, false));
+
+        // 附件预览：图片显示缩略图，其他类型显示文件名条
+        var images = (files || []).filter(function (f) {
+            return f.type && f.type.indexOf('image/') === 0;
+        });
+        var others = (files || []).filter(function (f) {
+            return !(f.type && f.type.indexOf('image/') === 0);
+        });
+
+        if (images.length) {
+            var strip = el('div', 'msg-images');
+            images.slice(0, 4).forEach(function (f) {
+                var img = document.createElement('img');
+                img.className = 'msg-thumb';
+                img.src = trackUrl(URL.createObjectURL(f));
+                img.alt = f.name;
+                img.title = f.name + '（点击放大）';
+                strip.appendChild(img);
+            });
+            if (images.length > 4) {
+                var more = el('span', 'msg-thumb-more', '+' + (images.length - 4));
+                strip.appendChild(more);
+            }
+            wrap.appendChild(strip);
+        }
+
+        if (others.length) {
+            var chips = el('div', 'msg-filechips');
+            others.forEach(function (f) {
+                var chip = el('span', 'msg-filechip', icon('description'));
+                var label = document.createElement('span');
+                label.textContent = f.name;   // 用 textContent，文件名不可信
+                chip.appendChild(label);
+                chips.appendChild(chip);
+            });
+            wrap.appendChild(chips);
+        }
+
+        // 只有真的有文字才加气泡：纯图片消息不该再出现「（附件 ×1）」
+        if (text && String(text).trim()) {
+            var bubble = el('div', 'bubble');
+            bubble.textContent = text;
+            wrap.appendChild(bubble);
+            wrap.appendChild(buildMeta(text, false));
+        }
+
         msgBox().appendChild(msg);
         scrollBottom();
     }
@@ -271,6 +389,30 @@
     }
 
     var lastUserText = '';
+    var lastExtracted = '';
+
+    var lastUsage = null;
+    state.switching = false;          // 本轮请求的 token 用量
+    var sessionTokens = { prompt: 0, completion: 0 };   // 本次会话累计
+
+    function fmtNum(n) {
+        n = Number(n) || 0;
+        if (n >= 10000) return (n / 1000).toFixed(1) + 'k';
+        return String(n);
+    }
+
+    function addSessionTokens(usage) {
+        sessionTokens.prompt += Number(usage.prompt_tokens) || 0;
+        sessionTokens.completion += Number(usage.completion_tokens) || 0;
+        var meter = $('tokenMeter');
+        if (!meter) return;
+        var total = sessionTokens.prompt + sessionTokens.completion;
+        meter.textContent = total > 0
+            ? '本会话 ↑' + fmtNum(sessionTokens.prompt) + ' ↓' + fmtNum(sessionTokens.completion)
+            : '';
+        meter.title = '输入 ' + sessionTokens.prompt + ' / 输出 ' + sessionTokens.completion + ' tokens';
+    }
+   // 最近一次提取出来的附件正文
 
     function regenerate() {
         if (state.streaming || !lastUserText) return;
@@ -336,6 +478,7 @@
         state.conversationId = id;
         $('convTitle').textContent = titleOf(id);
         renderConversations();
+        revokeUrls();
         msgBox().innerHTML = '';
 
         api('/ai/history?conversation_id=' + encodeURIComponent(id)).then(function (data) {
@@ -386,7 +529,8 @@
         }).then(function () {
             if (state.conversationId === id) {
                 state.conversationId = null;
-                msgBox().innerHTML = '';
+                revokeUrls();
+        msgBox().innerHTML = '';
                 msgBox().appendChild(buildEmptyState());
                 $('convTitle').textContent = '新对话';
             }
@@ -403,6 +547,7 @@
         state.conversationId = null;
         state.pendingTitle = '新对话';
         $('convTitle').textContent = '新对话';
+        revokeUrls();
         msgBox().innerHTML = '';
         msgBox().appendChild(buildEmptyState());
         renderConversations();
@@ -411,6 +556,14 @@
 
     /* ---------------- 附件暂存 ---------------- */
     var stagedFiles = [];
+    var objectUrls = [];   // 消息里的缩略图地址，切会话时统一释放
+
+    function trackUrl(url) { objectUrls.push(url); return url; }
+
+    function revokeUrls() {
+        objectUrls.forEach(function (u) { try { URL.revokeObjectURL(u); } catch (e) {} });
+        objectUrls = [];
+    }
 
     function humanSize(bytes) {
         if (bytes < 1024) return bytes + ' B';
@@ -505,13 +658,21 @@
         }
 
         lastUserText = text || '请阅读这些文件并总结要点';
-        addUserMessage(text || ('（附件 ×' + files.length + '）'));
+        stickBottom = true;
+        addUserMessage(text, files);
         processFiles(files, function (contextText) {
-            if (!contextText && !text) {
+            if (!contextText) {
                 toast('文件没能解析出内容，换个文件或直接把文字贴进来');
                 return;
             }
-            sendChat(text || '请阅读这些文件并总结要点', contextText);
+            lastExtracted = contextText;
+            if (!text) {
+                // 只上传了文件、没提问：只提取，不调用模型。
+                // 想总结就点结果卡片上的「让 AI 总结」，避免白白消耗 token。
+                toast('已提取内容，可直接复制，或点卡片上的「让 AI 总结」', true);
+                return;
+            }
+            sendChat(text, contextText);
         });
     }
 
@@ -530,12 +691,13 @@
 
             runFileTask(file).then(function (text) {
                 progress.remove();
-                addResultCard(file.name, text);
+                addResultCard(file.name, text,
+                              undefined, thumbOf(file));
                 if (text) collected.push('【' + file.name + '】\n' + text);
                 next();
             }).catch(function (e) {
                 progress.remove();
-                addResultCard(file.name, '', e.message);
+                addResultCard(file.name, '', e.message, thumbOf(file));
                 next();
             });
         }
@@ -647,7 +809,7 @@
         };
     }
 
-    function addResultCard(name, text, error) {
+    function addResultCard(name, text, error, thumbUrl) {
         clearEmpty();
         var msg = el('div', 'msg assistant');
         msg.innerHTML = '<div class="avatar">' + icon('description') + '</div>' +
@@ -655,36 +817,66 @@
         var wrap = msg.querySelector('.bubble-wrap');
         var card = el('div', 'result-card');
 
-        if (error) {
-            card.innerHTML =
-                '<div class="result-head">' + icon('error') + '<span class="result-title"></span></div>' +
-                '<div class="result-body"><span class="error-message"></span></div>';
-            card.querySelector('.result-title').textContent = name + ' 处理失败';
-            card.querySelector('.error-message').textContent = error;
+        // 头部：小缩略图（或图标）+ 标题
+        var head = el('div', 'result-head');
+        if (thumbUrl) {
+            var th = document.createElement('img');
+            th.className = 'result-thumb-sm';
+            th.src = thumbUrl;
+            th.alt = name;
+            th.title = '点击查看原图';
+            head.appendChild(th);
         } else {
-            var body = (text || '').slice(0, 1500);
-            card.innerHTML =
-                '<div class="result-head">' + icon('text_snippet') + '<span class="result-title"></span></div>' +
-                '<div class="result-body clamped"></div><div class="result-foot"></div>';
-            card.querySelector('.result-title').textContent =
-                name + ' · ' + (text || '').length + ' 字';
-            card.querySelector('.result-body').textContent = body || '（没有提取到文本）';
+            head.appendChild(el('span', 'result-icon', icon(error ? 'error' : 'text_snippet')));
+        }
+        var title = el('span', 'result-title');
+        title.textContent = error ? (name + ' 处理失败') : (name + ' · ' + (text || '').length + ' 字');
+        head.appendChild(title);
+        card.appendChild(head);
 
-            var foot = card.querySelector('.result-foot');
+        if (error) {
+            var errBody = el('div', 'result-body');
+            var em = el('span', 'error-message');
+            em.textContent = error;
+            errBody.appendChild(em);
+            card.appendChild(errBody);
+        } else {
+            var bodyText = text || '（没有提取到文本）';
+            var body = el('div', 'result-body clamped');
+            body.textContent = bodyText;
+            card.appendChild(body);
+
+            var foot = el('div', 'result-foot');
+
             var expand = el('button', 'chip', icon('unfold_more') + '<span>展开全文</span>');
             expand.addEventListener('click', function () {
-                card.querySelector('.result-body').classList.toggle('clamped');
+                body.classList.toggle('clamped');
+                expand.querySelector('span').textContent =
+                    body.classList.contains('clamped') ? '展开全文' : '收起';
             });
+            foot.appendChild(expand);
+
             var copy = el('button', 'chip', icon('content_copy') + '<span>复制</span>');
             copy.addEventListener('click', function () {
                 if (navigator.clipboard) {
-                    navigator.clipboard.writeText(text || '').then(function () {
-                        toast('已复制', true);
+                    navigator.clipboard.writeText(bodyText).then(function () {
+                        toast('已复制全部内容', true);
                     }).catch(function () { /* 忽略 */ });
                 }
             });
-            foot.appendChild(expand);
             foot.appendChild(copy);
+
+            // 需要模型参与时才调用，不再是"上传即总结"
+            if (text) {
+                var summarize = el('button', 'chip primary', icon('auto_awesome') + '<span>让 AI 总结</span>');
+                summarize.addEventListener('click', function () {
+                    if (state.streaming) return;
+                    sendChat('请总结这些内容的要点', '【' + name + '】\n' + text);
+                });
+                foot.appendChild(summarize);
+            }
+
+            card.appendChild(foot);
         }
 
         wrap.appendChild(card);
@@ -717,6 +909,7 @@
         $('sendBtn').disabled = false;
 
         var full = '';
+        lastUsage = null;
 
         fetch('/ai/chat', {
             method: 'POST',
@@ -762,6 +955,10 @@
                                     state.conversationId = obj.conversation_id;
                                     $('convTitle').textContent = titleOf(obj.conversation_id);
                                 }
+                                if (obj.usage) {
+                                    lastUsage = obj.usage;
+                                    addSessionTokens(obj.usage);
+                                }
                                 if (obj.content) {
                                     full += obj.content;
                                     bubble.innerHTML = formatMessage(full);
@@ -790,6 +987,14 @@
                 var wrap = shell.querySelector('.bubble-wrap');
                 if (wrap && !wrap.querySelector('.msg-meta')) {
                     wrap.appendChild(buildMeta(full, true));
+                }
+                if (lastUsage && wrap) {
+                    var u = el('div', 'msg-usage');
+                    u.textContent = '↑ ' + fmtNum(lastUsage.prompt_tokens) +
+                        ' · ↓ ' + fmtNum(lastUsage.completion_tokens) + ' tokens';
+                    u.title = '本次请求消耗：输入 ' + lastUsage.prompt_tokens +
+                        ' / 输出 ' + lastUsage.completion_tokens;
+                    wrap.appendChild(u);
                 }
             }
             state.streaming = false;
@@ -828,6 +1033,129 @@
         $('modelChip').title = model;
     }
 
+    /* ---------------- 快速切换模型 ---------------- */
+    function toggleModelMenu() {
+        var menu = $('modelMenu');
+        if (!menu) { openSettings(); return; }
+        if (menu.classList.contains('open')) { menu.classList.remove('open'); return; }
+        openModelMenu();
+    }
+
+    function openModelMenu() {
+        var menu = $('modelMenu');
+        var list = $('modelMenuList');
+        if (!menu || !list) return;
+
+        var models = state.models || [];
+        if (!models.length) {
+            list.innerHTML = '<div class="mm-empty">还没有模型列表，先拉取一次…</div>';
+            menu.classList.add('open');
+            fetchModelsForMenu();
+            return;
+        }
+        renderModelMenu();
+        menu.classList.add('open');
+    }
+
+    /** 菜单里只放能对话的模型（纯文本 + 识图） */
+    function renderModelMenu() {
+        var list = $('modelMenuList');
+        // 对话只用纯文本模型；识图模型在「设置 → 图片识别」里单独选
+        var items = (state.models || []).filter(function (m) {
+            return m.kind === 'text' || m.id === state.settings.model;
+        });
+        if (!items.length) {
+            list.innerHTML = '<div class="mm-empty">列表里没有可对话的纯文本模型</div>';
+            return;
+        }
+        list.innerHTML = '';
+        items.forEach(function (m) {
+            var row = el('div', 'mm-item' + (m.id === state.settings.model ? ' active' : ''),
+                '<span class="mm-name"></span>');
+            row.title = m.id;
+            row.querySelector('.mm-name').textContent = m.id;
+
+            var cap = chatCap(m.id);
+            if (cap !== null) {
+                var mark = el('span', 'mm-cap' + (cap ? ' ok' : ' bad'), cap ? '\u2713' : '\u2715');
+                mark.title = cap ? '已验证可以对话' : '已验证无法对话';
+                row.appendChild(mark);
+            }
+            // 纯文本是绝大多数，没必要每行都标；只有特殊能力才显示标签
+            if (m.kind && m.kind !== 'text') {
+                var tag = el('span', 'model-kind kind-' + m.kind);
+                tag.textContent = m.label || m.kind;
+                row.appendChild(tag);
+            }
+            row.addEventListener('click', function () {
+                switchModel(m.id);
+            });
+            list.appendChild(row);
+        });
+    }
+
+    function fetchModelsForMenu() {
+        var list = $('modelMenuList');
+        api('/api/settings/models', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' })
+            .then(function (res) {
+                state.models = res.models || [];
+                fillVisionModels();
+                renderModelMenu();
+            })
+            .catch(function (e) {
+                if (list) list.innerHTML = '<div class="mm-empty">拉取失败：' + escapeHtml(e.message) + '</div>';
+            });
+    }
+
+    function switchModel(id) {
+        if (!id) return;
+        if (state.switching) return;
+
+        var menu = $('modelMenu');
+        if (menu) menu.classList.remove('open');
+        state.switching = true;
+        toast('正在验证 ' + id.split('/').pop() + ' …');
+
+        // 先发一个 1 token 的请求：能用才切换，不能用就保持原状
+        api('/api/settings/test', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ model: id })
+        }).then(function () {
+            return api('/api/settings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ model: id })
+            });
+        }).then(function () {
+            state.settings.model = id;
+            setCap(id, 'chat', true);
+            paintModelLabel();
+            toast('已切换到 ' + id.split('/').pop(), true);
+        }).catch(function (e) {
+            setCap(id, 'chat', false);
+            toast('这个模型不能用来对话，已保持原模型：' + e.message);
+        }).then(function () {
+            state.switching = false;
+        });
+    }
+
+    /** 本地记录一次实测结果，并刷新界面标记 */
+    function setCap(id, key, ok) {
+        if (!state.settings.model_caps) state.settings.model_caps = {};
+        var entry = state.settings.model_caps[id] || {};
+        entry[key] = ok;
+        state.settings.model_caps[id] = entry;
+    }
+
+    /** 该模型是否已验证过对话能力 */
+    function chatCap(id) {
+        var caps = (state.settings && state.settings.model_caps) || {};
+        var entry = caps[id];
+        if (!entry || typeof entry.chat !== 'boolean') return null;
+        return entry.chat;
+    }
+
     function openSettings() {
         $('provider').value = state.settings.provider || 'siliconflow';
         $('baseUrl').value = state.settings.base_url || '';
@@ -838,7 +1166,37 @@
             : '仅保存在本机 config.json';
         $('testStatus').textContent = '';
         $('testStatus').className = 'test-status';
+
+        // OCR 区块
+        var s = state.settings || {};
+        if ($('ocrProvider')) {
+            $('ocrProvider').value = s.ocr_provider || 'vision';
+            $('ocrModel').value = s.ocr_model || '';
+            $('ocrBaseUrl').value = s.ocr_base_url || 'https://api.deepseek.com';
+            $('ocrApiKey').value = '';
+            $('ocrKeyHint').textContent = s.ocr_api_key_set
+                ? ('已配置：' + (s.ocr_api_key_masked || '') + '，留空表示不修改')
+                : '留空则复用对话的 Key（同域名时）';
+            syncOcrProvider();
+        }
+
         $('settingsModal').classList.add('open');
+    }
+
+    /** 根据识别方式显示/隐藏 DeepSeek 专属字段 */
+    function syncOcrProvider() {
+        var sel = $('ocrProvider');
+        if (!sel) return;
+        var section = sel.closest('.settings-section');
+        if (section) section.classList.toggle('deepseek', sel.value === 'deepseek');
+        var hint = $('ocrHint');
+        if (hint) {
+            hint.textContent = {
+                vision: '视觉模型直接读取图片，适合截图、表格、拍照文档',
+                deepseek: 'DeepSeek 官方 OCR，按页计费（约 ¥0.0016/页），需要单独的 Key',
+                tesseract: '本地引擎，需要先安装 Tesseract 与中文语言包'
+            }[sel.value] || '';
+        }
     }
 
     function closeSettings() {
@@ -846,12 +1204,80 @@
     }
 
     function payload() {
-        return {
+        var data = {
             provider: $('provider').value,
             base_url: $('baseUrl').value.trim(),
             model: $('modelName').value.trim(),
             api_key: $('apiKey').value.trim()
         };
+        // OCR 配置（旧版模板没有这些字段时跳过）
+        if ($('ocrProvider')) {
+            data.ocr_provider = $('ocrProvider').value;
+            data.ocr_model = $('ocrModel').value.trim();
+            data.ocr_base_url = $('ocrBaseUrl').value.trim();
+            var ocrKey = $('ocrApiKey').value.trim();
+            if (ocrKey) data.ocr_api_key = ocrKey;   // 留空表示不修改
+        }
+        return data;
+    }
+
+    /** 拉取列表后刷新 OCR 下拉的候选 */
+    function fillVisionModels() {
+        if ($('ocrModelList')) renderOcrModelList();
+        if ($('modelMenu') && $('modelMenu').classList.contains('open')) renderModelMenu();
+    }
+
+    /* ---------------- OCR 模型下拉（只列可看图的模型） ---------------- */
+    var ocrTyped = false;
+
+    /** 箭头随展开状态翻转（内联 transform，不依赖 CSS） */
+    function rotateArrow(open) {
+        var combo = document.getElementById('ocrCombo');
+        if (!combo) return;
+        var arrow = combo.querySelector('.combo-arrow');
+        if (!arrow) return;
+        arrow.style.transform = 'translateY(-50%) rotate(' + (open ? 180 : 0) + 'deg)';
+        arrow.style.color = open ? 'var(--primary-color)' : 'var(--text-muted)';
+    }
+
+    function closeOcrList() {
+        var list = $('ocrModelList');
+        if (list) list.classList.remove('open');
+        var combo = $('ocrCombo');
+        if (combo) combo.classList.remove('active');
+        rotateArrow(false);
+    }
+
+    function renderOcrModelList() {
+        var list = $('ocrModelList');
+        if (!list) return;
+        var keyword = ocrTyped ? ($('ocrModel').value || '').trim().toLowerCase() : '';
+        // 识图（VL）和 OCR 专用模型都能处理图片
+        var items = (state.models || []).filter(function (m) {
+            if (m.kind !== 'vision' && m.kind !== 'ocr') return false;
+            return !keyword || m.id.toLowerCase().indexOf(keyword) !== -1;
+        });
+        if (!items.length) {
+            list.innerHTML = '<div class="combo-empty">' +
+                (state.models.length ? '没有可看图的模型，先点「获取列表」' : '先点「获取列表」拉取模型') +
+                '</div>';
+            return;
+        }
+        list.innerHTML = '';
+        items.forEach(function (m) {
+            var row = el('div', 'combo-item' + (m.id === $('ocrModel').value ? ' active' : ''),
+                '<span class="model-name"></span><span class="model-kind kind-' + m.kind + '"></span>');
+            row.querySelector('.model-name').textContent = m.id;
+            row.querySelector('.model-kind').textContent = m.label || '';
+            row.addEventListener('mousedown', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $('ocrModel').value = m.id;
+                ocrTyped = false;
+                closeOcrList();
+            });
+            list.appendChild(row);
+        });
     }
 
     /* ---------------- 主题 ---------------- */
@@ -1141,8 +1567,83 @@
             }
         });
 
+        if ($('lightboxClose')) {
+            $('lightboxClose').addEventListener('click', closeLightbox);
+        }
+        if ($('lightbox')) {
+            $('lightbox').addEventListener('click', function (e) {
+                if (e.target === $('lightbox')) closeLightbox();
+            });
+        }
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        if ($('ocrProvider')) {
+            $('ocrProvider').addEventListener('change', syncOcrProvider);
+        }
+
+        if ($('ocrModel')) {
+            function openOcrList() {
+                ocrTyped = false;
+                closeModelList();
+                $('ocrCombo').classList.add('active');
+                rotateArrow(true);
+                renderOcrModelList();
+
+                // 弹窗底部空间不足时向上展开，否则列表会被 modal 的 overflow 裁掉
+                var list = $('ocrModelList');
+                var rect = $('ocrModel').getBoundingClientRect();
+                // 优先向下展开，用 max-height 适配剩余空间；
+                // 只有下方几乎没有空间时才向上弹，避免盖住上面的字段
+                var list = $('ocrModelList');
+                var rect = $('ocrModel').getBoundingClientRect();
+                var spaceBelow = window.innerHeight - rect.bottom;
+                var roomAbove = rect.top - 60;
+
+                if (spaceBelow >= 220) {
+                    list.classList.remove('up');
+                    list.style.maxHeight = Math.min(280, spaceBelow - 20) + 'px';
+                } else if (roomAbove >= 220) {
+                    list.classList.add('up');
+                    list.style.maxHeight = '240px';
+                } else {
+                    list.classList.remove('up');
+                    list.style.maxHeight = '180px';
+                }
+                list.classList.add('open');
+            }
+            $('ocrModel').addEventListener('focus', openOcrList);
+            // 点箭头或输入框空白处也能展开（箭头本身 pointer-events:none，事件落在 combo 上）
+            $('ocrCombo').addEventListener('click', function (e) {
+                if (e.target.tagName !== 'INPUT' || e.target.value === '') {
+                    openOcrList();
+                }
+            });
+            $('ocrModel').addEventListener('input', function () {
+                ocrTyped = true;
+                renderOcrModelList();
+                $('ocrModelList').classList.add('open');
+            });
+            document.addEventListener('mousedown', function (e) {
+                if (!e.target.closest('#ocrCombo')) closeOcrList();
+            });
+        }
+        if ($('modelMenuMore')) {
+            $('modelMenuMore').addEventListener('click', function () {
+                $('modelMenu').classList.remove('open');
+                openSettings();
+            });
+        }
+        document.addEventListener('mousedown', function (e) {
+            if (!e.target.closest('#modelMenu') && !e.target.closest('#modelChip')) {
+                var m = $('modelMenu');
+                if (m) m.classList.remove('open');
+            }
+        });
+
         $('settingsBtn').addEventListener('click', openSettings);
-        $('modelChip').addEventListener('click', openSettings);
+        $('modelChip').addEventListener('click', toggleModelMenu);
         $('closeSettings').addEventListener('click', closeSettings);
 
         $('settingsModal').addEventListener('click', function (e) {
@@ -1238,6 +1739,7 @@
                 body: JSON.stringify(data)
             }).then(function (res) {
                 state.models = res.models || [];
+                fillVisionModels();
                 hint.textContent = '共 ' + res.count + ' 个可用模型，点输入框选择';
                 toast('拉到 ' + res.count + ' 个模型', true);
                 renderModelList();
@@ -1333,6 +1835,9 @@
         }
 
         function openModelList() {
+            closeOcrList();
+            var combo = $('modelCombo');
+            if (combo) combo.classList.add('active');
             renderModelList();
             var list = $('modelList');
             // 下方空间不足时向上展开，避免被弹窗底部裁掉
@@ -1344,6 +1849,8 @@
 
         function closeModelList() {
             $('modelList').classList.remove('open');
+            var combo = $('modelCombo');
+            if (combo) combo.classList.remove('active');
         }
 
         $('modelName').addEventListener('focus', function () {
@@ -1385,7 +1892,25 @@
             });
         });
 
+
+        var msgBoxEl = $('messages');
+        var jumpBtn = $('jumpBottom');
+        msgBoxEl.addEventListener('scroll', function () {
+            stickBottom = nearBottom();
+            if (jumpBtn) {
+                jumpBtn.classList.toggle('show', !stickBottom && !!state.streaming);
+            }
+        });
+        if (jumpBtn) {
+            jumpBtn.addEventListener('click', function () {
+                stickBottom = true;
+                scrollBottom(true);
+                jumpBtn.classList.remove('show');
+            });
+        }
+
         initBackdrop();
+        initLightbox();
         msgBox().appendChild(buildEmptyState());
         // 等配置加载完再处理 URL 参数，否则自动发送会因为"未配置"而丢内容
         loadSettings().then(function () {

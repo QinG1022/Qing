@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qing · 智能文档助手</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/icons.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/icons.css') }}?v={{ asset_ver('css/icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}?v={{ asset_ver('css/chat.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}?v={{ asset_ver('css/home.css') }}">
 </head>
 <body>
 <!-- 动态背景（与对话页同一套） -->
@@ -65,6 +65,6 @@
     <div class="home-bottom">Qing · 单用户本地部署 · 回车开始，Shift + 回车换行</div>
 </div>
 
-<script src="{{ url_for('static', filename='js/home.js') }}"></script>
+<script src="{{ url_for('static', filename='js/home.js') }}?v={{ asset_ver('js/home.js') }}"></script>
 </body>
 </html>

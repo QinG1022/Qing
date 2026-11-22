@@ -1256,3 +1256,348 @@ html[data-theme="dark"] .sidebar {
 .composer {
     background: var(--card-bg);
 }
+
+/* ---------- 消息内图片预览 ---------- */
+.msg-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: flex-end;
+    margin-bottom: 6px;
+}
+.msg-thumb {
+    width: 108px;
+    height: 108px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    cursor: zoom-in;
+    transition: transform .15s ease, box-shadow .15s ease;
+    background: var(--input-bg);
+}
+.msg-thumb:hover {
+    transform: scale(1.03);
+    box-shadow: var(--shadow-md);
+}
+.msg-thumb-more {
+    width: 108px;
+    height: 108px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    border: 1px dashed var(--border-color);
+    color: var(--text-muted);
+    font-size: 13px;
+}
+.msg-filechips { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; margin-bottom: 6px; }
+.msg-filechip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    font-size: 12px;
+    color: var(--text-color-secondary);
+    max-width: 260px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.msg-filechip .material-icons { font-size: 15px; }
+
+/* 结果卡片里的原图缩略 */
+.result-thumb {
+    width: 100%;
+    max-height: 220px;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    margin-bottom: 10px;
+    cursor: zoom-in;
+    background: var(--input-bg);
+}
+
+/* 灯箱 */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(8, 12, 20, .86);
+    backdrop-filter: blur(4px);
+    cursor: zoom-out;
+}
+.lightbox.show { display: flex; }
+.lightbox img {
+    max-width: 92vw;
+    max-height: 88vh;
+    border-radius: 10px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .5);
+}
+.lightbox-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, .14);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lightbox-close:hover { background: rgba(255, 255, 255, .26); }
+
+/* ---------- 流式输出时"回到底部" ---------- */
+.jump-bottom {
+    position: absolute;
+    left: 50%;
+    bottom: 118px;
+    transform: translateX(-50%) scale(.92);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-color-secondary);
+    box-shadow: var(--shadow-md);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 30;
+    transition: opacity .15s ease, transform .15s ease;
+}
+.jump-bottom.show { display: flex; transform: translateX(-50%) scale(1); }
+.jump-bottom:hover { color: var(--primary-color); border-color: var(--primary-color); }
+
+/* 按钮的定位容器：.main 需要成为 positioned ancestor */
+.main { position: relative; }
+
+/* ---------- 结果卡片新布局 ---------- */
+.result-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.result-icon { display: inline-flex; }
+.result-icon .material-icons { font-size: 18px; color: var(--primary-color); }
+.result-thumb-sm {
+    width: 46px;
+    height: 46px;
+    flex: 0 0 auto;
+    object-fit: cover;
+    border-radius: 9px;
+    border: 1px solid var(--border-color);
+    cursor: zoom-in;
+    background: var(--input-bg);
+}
+.result-title {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.result-body {
+    max-height: 220px;
+    overflow-y: auto;
+    line-height: 1.7;
+    font-size: 13px;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+.result-body.clamped {
+    max-height: 120px;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent);
+    mask-image: linear-gradient(to bottom, #000 70%, transparent);
+}
+.result-foot { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.result-foot .chip.primary {
+    color: var(--primary-color);
+    border-color: rgba(var(--primary-rgb), .4);
+    background: rgba(var(--primary-rgb), .08);
+}
+
+/* ---------- token 用量 ---------- */
+.token-meter {
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+}
+.msg-usage {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 设置弹窗里的分组 ---------- */
+.settings-section {
+    margin: 18px 0 6px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color);
+}
+.settings-section h4 {
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-weight: 650;
+    color: var(--text-color-secondary);
+    letter-spacing: .2px;
+}
+.settings-section select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    background: var(--input-bg);
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 13.5px;
+}
+.ocr-deepseek-only { display: none; }
+.settings-section.deepseek .ocr-deepseek-only { display: block; }
+
+/* OCR 的 combo 没有右侧按钮，下拉不要多出 104px */
+#ocrCombo .combo-list { width: 100%; }
+
+/* ---------- 菜单头部：弱化按钮感 ---------- */
+.model-menu .mm-head {
+    gap: 8px;
+    padding: 11px 14px;
+}
+.model-menu .mm-title {
+    flex: 1;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-color-secondary);
+    letter-spacing: .2px;
+}
+.model-menu .mm-more,
+.model-menu .mm-more:hover,
+.model-menu .mm-more:focus {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 3px 6px;
+    margin: -3px -6px -3px 0;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    box-shadow: none;
+    outline: none;
+    color: var(--text-muted);
+    font-family: inherit;
+    font-size: 11.5px;
+    line-height: 1;
+    cursor: pointer;
+    transition: color .15s ease, background .15s ease;
+}
+.model-menu .mm-more .material-icons {
+    font-size: 14px;
+    opacity: .8;
+}
+.model-menu .mm-more:hover {
+    color: var(--primary-color);
+    background: rgba(var(--primary-rgb), .08);
+}
+
+/* ---------- 模型名不再截断 ---------- */
+.model-menu { width: 420px; }
+.model-menu .mm-item {
+    align-items: flex-start;
+    line-height: 1.45;
+}
+.model-menu .mm-name {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+.model-menu .mm-item .model-kind {
+    margin-top: 1px;
+    flex: 0 0 auto;
+}
+
+/* ---------- 模型验证标记 ---------- */
+.mm-cap {
+    flex: 0 0 auto;
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 10px;
+    margin-top: 2px;
+}
+.mm-cap.ok { color: #0f9d5c; background: rgba(33, 191, 115, .14); }
+.mm-cap.bad { color: #e53935; background: rgba(229, 57, 53, .12); }
+
+/* ---------- 下拉层级：同一时刻只有一个在下拉，展开的升到最高 ---------- */
+.combo { z-index: 10; }
+.combo-list { z-index: 50; }
+.combo.active { z-index: 80; }
+.settings-section { position: relative; z-index: 0; }
+
+/* ---------- 自建下拉的箭头 ---------- */
+.combo-arrow {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: transform .18s ease, color .18s ease;
+}
+.combo.active .combo-arrow {
+    transform: translateY(-50%) rotate(180deg);
+    color: var(--primary-color);
+}
+#ocrModel { padding-right: 34px; cursor: pointer; }
+
+/* ---------- 设置弹窗：两栏横版 ---------- */
+#settingsModal .modal-card {
+    max-width: 900px;
+    width: 100%;
+}
+.settings-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 26px;
+    align-items: start;
+    margin-top: 4px;
+}
+.settings-col { min-width: 0; }
+/* 两栏里左列不需要额外的间距，右列的分组线也去掉 */
+.settings-grid .settings-section {
+    margin: 0;
+    padding-top: 0;
+    border-top: none;
+}
+.settings-grid .settings-col > .field:last-child { margin-bottom: 0; }
+
+/* 窄屏自动回退单列 */
+@media (max-width: 860px) {
+    #settingsModal .modal-card { max-width: 460px; }
+    .settings-grid { grid-template-columns: 1fr; gap: 0; }
+    .settings-grid .settings-section {
+        margin: 18px 0 6px;
+        padding-top: 16px;
+        border-top: 1px solid var(--border-color);
+    }
+}
