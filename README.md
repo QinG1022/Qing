@@ -57,6 +57,12 @@ python -m pip install --target pydeps -r requirements.txt -i https://pypi.tuna.t
 }
 ```
 
+字段说明：
+
+- `ocr_provider` 三选一：`vision`（默认，用视觉模型）/ `deepseek` / `tesseract`
+- `ocr_base_url`、`ocr_api_key` **只有 `ocr_provider=deepseek` 时才需要**填
+- `model_caps` 由程序自动维护（记录哪些模型实测可用），不要手改
+
 也可以不手动改——首次启动会跳到 `/setup` 页面，在界面里填；
 之后所有配置都能在对话页的「模型与 API 设置」里改。
 

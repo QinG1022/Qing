@@ -2,5 +2,11 @@
   "provider": "siliconflow",
   "base_url": "https://api.siliconflow.cn/v1",
   "model": "deepseek-ai/DeepSeek-V3",
-  "api_key": ""
+  "api_key": "",
+  "ocr_provider": "vision",
+  "ocr_model": "Qwen/Qwen3-VL-8B-Instruct",
+  "ocr_base_url": "https://api.deepseek.com",
+  "ocr_api_key": "",
+  "ocr_purpose": "text_recognition",
+  "model_caps": {}
 }
