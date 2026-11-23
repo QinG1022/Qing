@@ -73,6 +73,28 @@
         .status.ok { color: #11af63; }
         .status.err { color: #e53935; }
         .status.busy { color: var(--muted); }
+
+        /* ---------- 深色主题（跟随对话页的 localStorage 设置）---------- */
+        html[data-theme="dark"] {
+            --bg: #12121a;
+            --card: #1c1c28;
+            --text: #e6e8ef;
+            --muted: #9aa2b1;
+            --border: #2b2b3a;
+        }
+        html[data-theme="dark"] body {
+            background:
+                radial-gradient(900px 420px at 10% -10%, rgba(33,150,243,.16), transparent 60%),
+                radial-gradient(700px 380px at 95% 105%, rgba(33,191,115,.14), transparent 60%),
+                var(--bg);
+        }
+        html[data-theme="dark"] input,
+        html[data-theme="dark"] select { background: #23232f; color: var(--text); }
+        html[data-theme="dark"] input:focus,
+        html[data-theme="dark"] select:focus { background: #262633; }
+        html[data-theme="dark"] button { background: #23232f; }
+        html[data-theme="dark"] button.primary { background: var(--primary); }
+        html[data-theme="dark"] button.primary:hover { background: #1565c0; }
     </style>
 <script>
 (function () {
