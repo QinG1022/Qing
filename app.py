@@ -90,20 +90,22 @@ history_records = deque(maxlen=app.config['MAX_HISTORY_ITEMS'])
 # 注意：FileHandler 不会自动建目录，log/ 不存在会直接抛 FileNotFoundError
 Path('log').mkdir(parents=True, exist_ok=True)
 
-logging.basicConfig(
-    level=logging.WARNING,  # 日志级别：INFO，记录所有信息、警告和错误，WARNING，记录警告和错误
-    format='%(asctime)s [%(levelname)s] %(message)s',  # 日志格式：时间 [级别] 消息
-    handlers=[
-        logging.FileHandler('log/app_audit.log'),  # 文件处理器：记录到log/app_audit.log
-        logging.StreamHandler()  # 流处理器：同时输出到控制台
-    ]
-)
+# 控制台只显示时间和消息，文件里保留完整级别与时间戳
+_console_handler = logging.StreamHandler()
+_console_handler.setLevel(logging.INFO)
+_console_handler.setFormatter(logging.Formatter('%(asctime)s  %(message)s', datefmt='%H:%M:%S'))
+
+_file_handler = logging.FileHandler('log/app_audit.log', encoding='utf-8')
+_file_handler.setLevel(logging.INFO)
+_file_handler.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s] %(message)s'))
+
+logging.basicConfig(level=logging.INFO, handlers=[_console_handler, _file_handler])
 
 # 修改Werkzeug日志级别，减少不必要的请求日志
 logging.getLogger('werkzeug').setLevel(logging.ERROR)
 
 # 程序启动日志
-logging.warning("应用程序启动 - 历史记录容量: %d", app.config['MAX_HISTORY_ITEMS'])
+logging.debug("历史记录容量 %d 条", app.config['MAX_HISTORY_ITEMS'])
 
 # 单用户模式：不再初始化 Flask-Login，current_user 由 modules.database 提供替身。
 # 初始化SQLite数据库（内部会确保 id=1 的本地用户存在）
@@ -1107,13 +1109,38 @@ if __name__ == '__main__':
 
     cleanup_old_files(7)
 
-    print('=' * 56)
-    print(' Qing 已启动')
-    print(f'   本机访问 : http://127.0.0.1:{port}')
+    # 启动横幅：只留一条，信息集中
+    cfg = load_config()
+    chat_model = cfg.get('model') or '（未配置）'
+    ocr_mode = cfg.get('ocr_provider') or 'vision'
+    ocr_model = cfg.get('ocr_model') or '-'
+    ocr_desc = {
+        'vision': f'视觉模型 · {ocr_model}',
+        'deepseek': 'DeepSeek OCR 接口',
+        'tesseract': '本地 Tesseract',
+    }.get(ocr_mode, ocr_mode)
+
+    url = f'http://127.0.0.1:{port}'
+    print()
+    print('  ╭─ Qing · 本地 AI 文档助手')
+    print(f'  │  访问    {url}')
+    print(f'  │  对话    {chat_model}')
+    print(f'  │  识图    {ocr_desc}')
+    print(f'  │  数据    data/app.db')
+    print('  ╰─ Ctrl + C 停止')
+    if not is_configured():
+        print()
+        print(f'  → 还没配置 API Key，请在浏览器打开 {url}/setup')
     if host == '0.0.0.0':
-        print(f'   局域网   : http://<本机IP>:{port}')
-    print('   Ctrl+C   : 停止服务')
-    print('=' * 56, flush=True)
+        print(f'  · 已监听所有网卡，局域网可通过本机 IP 访问')
+    print(flush=True)
+
+    # 关掉 Flask 自带的 "* Serving Flask app" / "* Debug mode" 两行，横幅已经说清楚了
+    try:
+        import flask.cli
+        flask.cli.show_server_banner = lambda *args, **kwargs: None
+    except Exception:
+        pass
 
     try:
         app.run(host=host, port=port, debug=False, use_reloader=False, threaded=True)

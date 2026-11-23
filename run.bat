@@ -9,12 +9,6 @@ set "PYTHONUTF8=1"
 set "PYTHONIOENCODING=utf-8"
 if "%QING_PORT%"=="" set "QING_PORT=5000"
 
-echo ============================================================
-echo  Qing starting...
-echo    python : %PY%
-echo    deps   : %~dp0pydeps
-echo    open   : http://127.0.0.1:%QING_PORT%
-echo ============================================================
 echo.
 
 if not exist "%PY%" goto nopython

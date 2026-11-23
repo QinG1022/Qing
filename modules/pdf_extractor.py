@@ -8,7 +8,10 @@ PDF文本提取器模块
 import os
 import logging
 from pathlib import Path
-import fitz  # PyMuPDF库
+try:
+    import pymupdf as fitz  # PyMuPDF 2.x 的新包名，避免 fitz 的弃用警告
+except ImportError:  # 兼容旧版本
+    import fitz
 
 logger = logging.getLogger(__name__)
 

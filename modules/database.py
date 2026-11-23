@@ -148,7 +148,7 @@ def init_db(app):
         app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_file}'
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
         
-        logger.info(f"数据库路径: {db_file}")
+        logger.debug(f"数据库路径: {db_file}")
         
         # 初始化数据库与应用
         db.init_app(app)
@@ -157,7 +157,7 @@ def init_db(app):
         with app.app_context():
             db.create_all()
             ensure_local_user()
-            logger.info("数据库初始化成功")
+            logger.debug("数据库初始化成功")
         return True
     except Exception as e:
         logger.error(f"数据库初始化失败: {str(e)}")
