@@ -74,6 +74,16 @@
         .status.err { color: #e53935; }
         .status.busy { color: var(--muted); }
     </style>
+<script>
+(function () {
+    try {
+        if (localStorage.getItem('qing-theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    } catch (e) { /* 忽略 */ }
+})();
+</script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%232196f3%22/><text x=%2216%22 y=%2223%22 font-size=%2218%22 text-anchor=%22middle%22 fill=%22white%22>Q</text></svg>">
 </head>
 <body>
 <div class="card">
@@ -138,6 +148,8 @@
         s.className = 'status' + (cls ? ' ' + cls : '');
     }
 
+    var apiKeyConfigured = false;
+
     function payload() {
         return {
             provider: $('provider').value,
@@ -155,7 +167,7 @@
 
     $('testBtn').addEventListener('click', function () {
         var data = payload();
-        if (!data.api_key) { setStatus('请先填写 API Key', 'err'); $('api_key').focus(); return; }
+        if (!data.api_key && !apiKeyConfigured) { setStatus('请先填写 API Key', 'err'); $('api_key').focus(); return; }
         setStatus('正在测试…', 'busy');
         fetch('/api/settings/test', {
             method: 'POST',
@@ -170,7 +182,7 @@
 
     $('saveBtn').addEventListener('click', function () {
         var data = payload();
-        if (!data.api_key) { setStatus('请先填写 API Key', 'err'); $('api_key').focus(); return; }
+        if (!data.api_key && !apiKeyConfigured) { setStatus('请先填写 API Key', 'err'); $('api_key').focus(); return; }
         setStatus('正在保存…', 'busy');
         fetch('/api/settings', {
             method: 'POST',
@@ -195,6 +207,7 @@
         if (s.provider) $('provider').value = s.provider;
         if (s.base_url) $('base_url').value = s.base_url;
         if (s.model) $('model').value = s.model;
+        apiKeyConfigured = !!s.api_key_set;
         if (s.api_key_set) {
             $('api_key').placeholder = s.api_key_masked + '（留空则不修改）';
             $('keyState').textContent = '已配置：' + s.api_key_masked + '，留空表示不修改';

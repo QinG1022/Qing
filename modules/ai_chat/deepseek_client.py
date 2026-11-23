@@ -71,21 +71,26 @@ class DeepSeekClient:
             return
             
         try:
+            final_usage = None
             for chunk in response:
-                # usage 只在最后一个 chunk 出现（此时 choices 通常为空）
+                # 注意：SiliconFlow 等兼容实现在**每个** chunk 都携带累计 usage，
+                # 这里只记住最后一个，循环结束后统一发一次，否则前端会重复累加。
                 usage = getattr(chunk, 'usage', None)
                 if usage:
-                    yield "data: " + json.dumps({
-                        'usage': {
-                            'prompt_tokens': getattr(usage, 'prompt_tokens', 0),
-                            'completion_tokens': getattr(usage, 'completion_tokens', 0),
-                            'total_tokens': getattr(usage, 'total_tokens', 0),
-                        }
-                    }) + "\n\n"
+                    final_usage = usage
 
                 if chunk.choices:
                     content = chunk.choices[0].delta.content or ""
                     yield f"data: {json.dumps({'content': content})}\n\n"
+
+            if final_usage is not None:
+                yield "data: " + json.dumps({
+                    'usage': {
+                        'prompt_tokens': getattr(final_usage, 'prompt_tokens', 0),
+                        'completion_tokens': getattr(final_usage, 'completion_tokens', 0),
+                        'total_tokens': getattr(final_usage, 'total_tokens', 0),
+                    }
+                }) + "\n\n"
             yield "data: [DONE]\n\n" 
         except Exception as e:
             yield f"data: {json.dumps({'content': f'流式输出错误: {str(e)}', 'error': True})}\n\n"

@@ -91,9 +91,14 @@ def save_config(patch):
     """合并写入 config.json，返回写入后的完整配置。"""
     cfg = load_config()
     for field, caster in EDITABLE.items():
-        if field in patch:
-            value = patch[field]
-            cfg[field] = caster(value).strip() if isinstance(value, str) else caster(value)
+        if field not in patch:
+            continue
+        value = patch[field]
+        text = caster(value).strip() if isinstance(value, str) else caster(value)
+        # 密钥类字段收到空字符串时视为「不修改」，否则一次普通保存就会把 Key 清空
+        if field.endswith('api_key') and not text:
+            continue
+        cfg[field] = text
 
     payload = {k: cfg[k] for k in DEFAULTS}
     tmp = CONFIG_FILE.with_suffix('.json.tmp')

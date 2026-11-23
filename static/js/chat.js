@@ -426,6 +426,11 @@
         return api('/ai/conversations').then(function (data) {
             state.conversations = (data && data.conversations) || [];
             renderConversations();
+            // 会话刚创建时标题还是 UUID；列表拿到真实标题后同步到顶栏
+            if (state.conversationId) {
+                var t = titleOf(state.conversationId);
+                if (t && t !== state.conversationId) document.getElementById('convTitle').textContent = t;
+            }
         }).catch(function () {
             state.conversations = [];
             renderConversations();
@@ -956,8 +961,7 @@
                                     $('convTitle').textContent = titleOf(obj.conversation_id);
                                 }
                                 if (obj.usage) {
-                                    lastUsage = obj.usage;
-                                    addSessionTokens(obj.usage);
+                                    lastUsage = obj.usage;   // 只记录，累加放到 finish
                                 }
                                 if (obj.content) {
                                     full += obj.content;
@@ -983,17 +987,22 @@
 
         function finish() {
             cursor.remove();
+            var usageSnapshot = lastUsage;
+            if (lastUsage) {
+                addSessionTokens(lastUsage);
+                lastUsage = null;
+            }
             if (full) {
                 var wrap = shell.querySelector('.bubble-wrap');
                 if (wrap && !wrap.querySelector('.msg-meta')) {
                     wrap.appendChild(buildMeta(full, true));
                 }
-                if (lastUsage && wrap) {
+                if (usageSnapshot && wrap) {
                     var u = el('div', 'msg-usage');
-                    u.textContent = '↑ ' + fmtNum(lastUsage.prompt_tokens) +
-                        ' · ↓ ' + fmtNum(lastUsage.completion_tokens) + ' tokens';
-                    u.title = '本次请求消耗：输入 ' + lastUsage.prompt_tokens +
-                        ' / 输出 ' + lastUsage.completion_tokens;
+                    u.textContent = '↑ ' + fmtNum(usageSnapshot.prompt_tokens) +
+                        ' · ↓ ' + fmtNum(usageSnapshot.completion_tokens) + ' tokens';
+                    u.title = '本次请求消耗：输入 ' + usageSnapshot.prompt_tokens +
+                        ' / 输出 ' + usageSnapshot.completion_tokens;
                     wrap.appendChild(u);
                 }
             }
