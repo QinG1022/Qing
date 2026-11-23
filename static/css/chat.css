@@ -1601,3 +1601,9 @@ html[data-theme="dark"] .sidebar {
         border-top: 1px solid var(--border-color);
     }
 }
+
+/* OCR 下拉用 fixed 定位，宽度由 JS 设置 */
+#ocrCombo .combo-list {
+    position: fixed;
+    width: auto;
+}

@@ -1242,7 +1242,14 @@
 
     function closeOcrList() {
         var list = $('ocrModelList');
-        if (list) list.classList.remove('open');
+        if (list) {
+            list.classList.remove('open');
+            list.style.top = '';
+            list.style.bottom = '';
+            list.style.left = '';
+            list.style.width = '';
+            list.style.maxHeight = '';
+        }
         var combo = $('ocrCombo');
         if (combo) combo.classList.remove('active');
         rotateArrow(false);
@@ -1259,7 +1266,7 @@
         });
         if (!items.length) {
             list.innerHTML = '<div class="combo-empty">' +
-                (state.models.length ? '没有可看图的模型，先点「获取列表」' : '先点「获取列表」拉取模型') +
+                ((state.models || []).length ? '没有可看图的模型，先点「获取列表」' : '先点「获取列表」拉取模型') +
                 '</div>';
             return;
         }
@@ -1596,20 +1603,28 @@
                 var rect = $('ocrModel').getBoundingClientRect();
                 // 优先向下展开，用 max-height 适配剩余空间；
                 // 只有下方几乎没有空间时才向上弹，避免盖住上面的字段
+                // 弹窗自身是 overflow:auto，绝对定位会被裁掉。
+                // 改成 fixed 定位到输入框下方，空间不足时向上翻。
                 var list = $('ocrModelList');
                 var rect = $('ocrModel').getBoundingClientRect();
-                var spaceBelow = window.innerHeight - rect.bottom;
-                var roomAbove = rect.top - 60;
+                var spaceBelow = window.innerHeight - rect.bottom - 16;
+                var spaceAbove = rect.top - 16;
+                var want = 300;
 
-                if (spaceBelow >= 220) {
+                list.style.position = 'fixed';
+                list.style.left = rect.left + 'px';
+                list.style.width = rect.width + 'px';
+
+                if (spaceBelow >= Math.min(want, 200) || spaceBelow >= spaceAbove) {
                     list.classList.remove('up');
-                    list.style.maxHeight = Math.min(280, spaceBelow - 20) + 'px';
-                } else if (roomAbove >= 220) {
-                    list.classList.add('up');
-                    list.style.maxHeight = '240px';
+                    list.style.top = (rect.bottom + 6) + 'px';
+                    list.style.bottom = 'auto';
+                    list.style.maxHeight = Math.min(want, spaceBelow) + 'px';
                 } else {
-                    list.classList.remove('up');
-                    list.style.maxHeight = '180px';
+                    list.classList.add('up');
+                    list.style.bottom = (window.innerHeight - rect.top + 6) + 'px';
+                    list.style.top = 'auto';
+                    list.style.maxHeight = Math.min(want, spaceAbove) + 'px';
                 }
                 list.classList.add('open');
             }
@@ -1642,6 +1657,10 @@
             }
         });
 
+        var modalCard = document.querySelector('#settingsModal .modal-card');
+        if (modalCard) {
+            modalCard.addEventListener('scroll', function () { closeOcrList(); });
+        }
         $('settingsBtn').addEventListener('click', openSettings);
         $('modelChip').addEventListener('click', toggleModelMenu);
         $('closeSettings').addEventListener('click', closeSettings);
