@@ -51,7 +51,7 @@ def main():
     client = app_module.app.test_client()
 
     print('\n[2] 页面路由')
-    for path in ['/', '/welcome', '/legacy']:
+    for path in ['/', '/home', '/setup']:
         check(f'GET {path}', lambda p=path: _status(client, 'GET', p))
     check('渲染 chat.html', lambda: _render_chat(app_module))
 
@@ -64,7 +64,7 @@ def main():
     check('GET /history', lambda: _json(client, 'GET', '/history'))
 
     print('\n[5] 已移除的接口（应返回 404/405）')
-    for path in ['/api/login', '/api/register', '/login']:
+    for path in ['/api/login', '/api/register', '/login', '/legacy', '/welcome']:
         check(f'{path} 已移除', lambda p=path: _expect_gone(client, p))
 
     print('\n[6] AI 配置状态')

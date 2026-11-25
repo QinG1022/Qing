@@ -115,7 +115,6 @@ init_db(app)
 def index():
     """
     主页：未配置 API Key 时先去 /setup，配置好之后进聊天界面。
-    旧的三个面板界面保留在 /legacy，方便对照。
     """
     if not is_configured():
         return redirect(url_for('setup_page'))
@@ -127,20 +126,6 @@ def home_page():
     """入口页（主界面）：品牌 + 大输入框 + 快捷入口。"""
     return render_template('home.html')
 
-
-@app.route('/legacy')
-def legacy_index():
-    """旧界面（三面板），暂留作对照。"""
-    return render_template('index.html')
-
-@app.route('/welcome')
-def welcome():
-    """
-    欢迎页面路由
-    功能：显示系统欢迎页面
-    返回：welcome.html模板渲染结果
-    """
-    return render_template('welcome.html')
 
 @app.before_request
 def security_check():
